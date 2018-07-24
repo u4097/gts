@@ -11,6 +11,7 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.main.MainActivity;
+import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
 
 public class LoginActivity extends BaseActivity implements LoginMvpView {
 
@@ -45,7 +46,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     @Override
     protected void initViews() {
         buttonEnter.setOnClickListener(
-                view -> loginPresenter.enter(editTextUserName.getText().toString(), editTextPassword.getText().toString())
+                view -> {
+                    loginPresenter.enter(editTextUserName.getText().toString(), editTextPassword.getText().toString());
+                    startActivity(TradePointActivity.getStartIntent(this));
+                }
+
         );
     }
 

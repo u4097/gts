@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="@color/white_smoke_80"
+    android:orientation="vertical"
+    android:paddingTop="110dp">
 
-</LinearLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/avatarImageNavigationView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/ic_blue_circle"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        tools:text="me" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/nameTextNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/avatarImageNavigationView"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="18dp"
+        android:layout_toEndOf="@+id/avatarImageNavigationView"
+        android:layout_toRightOf="@+id/avatarImageNavigationView"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        tools:text="Генадий Викторович" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/statusTextNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/nameTextNavigationView"
+        android:layout_alignStart="@+id/nameTextNavigationView"
+        android:layout_below="@+id/nameTextNavigationView"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        tools:text="Мерчендайзер" />
+</RelativeLayout>

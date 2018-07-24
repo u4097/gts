@@ -12,5 +12,10 @@
     <string name="internet_error_message">Пожалуйста, попробуйте ещё раз</string>
     <string name="unknown_server_error_title">Неизвестная ошибка сервера</string>
     <string name="action_search">Поиск</string>
+    <string name="merchandiser_text_name">me</string>
+    <string name="supervisor_text_name">sv</string>
+    <string name="ru_text_tag">ru</string>
+    <string name="en_text_tag">en</string>
+    <string name="exit_text_tag">Выйти</string>
 
 </resources>
