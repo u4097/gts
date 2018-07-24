@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fmtAuthRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_primary">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/editTextUserName"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@+id/editTextPassword"
+        android:text="Лименько"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:text="123456"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/buttonEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Войти"/>
+
+</android.support.v7.widget.LinearLayoutCompat>
