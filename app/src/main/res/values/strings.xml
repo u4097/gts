@@ -17,5 +17,12 @@
     <string name="ru_text_tag">ru</string>
     <string name="en_text_tag">en</string>
     <string name="exit_text_tag">Выйти</string>
+    <string name="title_activity_trade_point">TradePointActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -70,6 +70,7 @@ dependencies {
 
     //== multidex ==//
     implementation "com.android.support:multidex:${multidexVersion}"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     androidTestImplementation "com.android.support:multidex:${multidexVersion}"
     androidTestImplementation "com.android.support:multidex-instrumentation:${multidexVersion}"
 
