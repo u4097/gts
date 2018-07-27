@@ -11,6 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.widget.Adapter;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -86,7 +88,7 @@ public class TradePointActivity
         PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-       /* viewPager.getOffscreenPageLimit()=viewPager.setAdapter(adapter);*/
+        viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());
     }
 
     private void initNavigationDrawer() {

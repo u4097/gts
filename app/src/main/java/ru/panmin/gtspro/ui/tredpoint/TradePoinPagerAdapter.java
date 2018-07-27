@@ -9,6 +9,7 @@ class TradePoinPagerAdapter extends FragmentPagerAdapter {
 
     private int COUNT = 2;
 
+
     TradePoinPagerAdapter(FragmentManager supportFragmentManager) {
         super(supportFragmentManager);
     }
@@ -16,7 +17,9 @@ class TradePoinPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
+        String tiele;
+        tiele = position == 0 ? "Торговые точки" : "Карта";
+        return tiele;
 
     }
 
