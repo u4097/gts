@@ -7,7 +7,9 @@ import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.main.MainActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
+import ru.panmin.gtspro.ui.tredpoint.map.MapFragment;
 import ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point.MeTradePointFragment;
+import ru.panmin.gtspro.ui.tredpoint.supervision_trade_point.SwTradePointFragment;
 
 @PerActivity
 @Subcomponent(modules = ActivityModule.class)
@@ -21,5 +23,7 @@ public interface ActivityComponent {
 
     //fragment
     void inject(MeTradePointFragment meTradePointFragment);
+    void inject(MapFragment mapFragment);
+    void inject(SwTradePointFragment swTradePointFragment);
 
 }

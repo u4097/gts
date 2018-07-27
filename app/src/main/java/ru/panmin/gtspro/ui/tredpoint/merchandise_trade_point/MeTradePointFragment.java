@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.injection.component.ActivityComponent;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
