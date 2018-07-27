@@ -13,6 +13,10 @@ public class MeTradePointFragment
         extends ToolbarFragment
         implements MeTradePointMvpView {
 
+    public static MeTradePointFragment createInstance() {
+        return new MeTradePointFragment();
+    }
+
 
     @Inject
     MeTradePointPresenter presenter;

@@ -7,6 +7,7 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 
 public class MeTradePointPresenter
         extends ToolbarPresenter<MeTradePointMvpView> {
+
     private final DataManager dataManager;
 
     @Inject

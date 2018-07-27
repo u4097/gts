@@ -85,7 +85,8 @@ public class TradePointActivity
     }
 
     private void initViewPager() {
-        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager());
+        boolean b = true;
+        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), true);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());

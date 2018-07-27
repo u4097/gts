@@ -9,9 +9,14 @@ import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
 
+
 public class MapFragment
         extends ToolbarFragment
         implements MapMvpView {
+
+    public static MapFragment createInstance() {
+        return new MapFragment();
+    }
 
     @Inject
     MapPresenter presenter;

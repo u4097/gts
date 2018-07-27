@@ -6,11 +6,16 @@ import javax.inject.Inject;
 
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
+
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
 
 
 public class SwTradePointFragment extends ToolbarFragment implements SwTradePointMvpView{
+
+    public static SwTradePointFragment createInstance() {
+        return new SwTradePointFragment();
+    }
 
     @Inject
     SwTradePointPresenter presenter;
