@@ -1,14 +1,18 @@
 package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
 
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
 import java.util.Objects;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
-import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
 
 public class MeTradePointFragment
         extends ProgressFragment
@@ -18,9 +22,16 @@ public class MeTradePointFragment
         return new MeTradePointFragment();
     }
 
-
     @Inject
     MeTradePointPresenter presenter;
+
+    @Inject
+    MeAdapter adapter;
+
+    @BindView(R.id.recycler_trade_point)
+    RecyclerView recyclerView;
+    @BindView(R.id.floating_filter)
+    FloatingActionButton filter;
 
     @Override
     protected int getDataView() {
@@ -55,6 +66,24 @@ public class MeTradePointFragment
     @Override
     protected void initViews() {
         setStateData();
+        initRecycler();
+    }
+
+    private void initRecycler() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    filter.hide();
+                } else {
+                    filter.show();
+                }
+            }
+        });
+
     }
 
     @Override
