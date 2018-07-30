@@ -1,4 +1,3 @@
-
 package ru.panmin.gtspro;
 
 import android.content.Context;

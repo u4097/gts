@@ -14,6 +14,7 @@ import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
 import ru.panmin.gtspro.data.remote.ApiService;
+import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.RxEventBus;
 
 @Singleton
@@ -52,8 +53,52 @@ public class DataManager {
         preferencesHelper.setToken(token);
     }
 
+    public String getId() {
+        return preferencesHelper.getId();
+    }
+
+    public void setId(String id) {
+        preferencesHelper.setId(id);
+    }
+
+    public String getUserName() {
+        return preferencesHelper.getUserName();
+    }
+
+    public void setUserName(String userName) {
+        preferencesHelper.setUserName(userName);
+    }
+
+    public String getRole() {
+        return preferencesHelper.getRole();
+    }
+
+    public void setRole(String role) {
+        preferencesHelper.setRole(role);
+    }
+
+    public String getFullNameRu() {
+        return preferencesHelper.getFullNameRu();
+    }
+
+    public void setFullNameRu(String fullNameRu) {
+        preferencesHelper.setFullNameRu(fullNameRu);
+    }
+
+    public String getFullNameEn() {
+        return preferencesHelper.getFullNameEn();
+    }
+
+    public void setFullNameEn(String fullNameEn) {
+        preferencesHelper.setFullNameEn(fullNameEn);
+    }
+
     public boolean isAuth() {
         return !TextUtils.isEmpty(getToken());
+    }
+
+    public boolean isMerchandiser() {
+        return TextUtils.equals(Constants.ROLE_ME, getRole());
     }
 
     /* API */
