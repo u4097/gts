@@ -22,6 +22,21 @@ public class PreferencesHelper {
     private static final String PREF_TOKEN = "token";
     private static final String DEFAULT_PREF_TOKEN = "";
 
+    private static final String PREF_ID = "token";
+    private static final String DEFAULT_PREF_ID = "";
+
+    private static final String PREF_USERNAME = "username";
+    private static final String DEFAULT_PREF_USERNAME = "";
+
+    private static final String PREF_ROLE = "role";
+    private static final String DEFAULT_PREF_ROLE = "";
+
+    private static final String PREF_FULL_NAME_RU = "full.name.ru";
+    private static final String DEFAULT_PREF_FULL_NAME_RU = "";
+
+    private static final String PREF_FULL_NAME_EN = "full.name.en";
+    private static final String DEFAULT_PREF_FULL_NAME_EN = "";
+
     private final SharedPreferences preferencesHelper;
 
     @Inject
@@ -57,6 +72,46 @@ public class PreferencesHelper {
 
     public void setToken(String token) {
         preferencesHelper.edit().putString(PREF_TOKEN, token).apply();
+    }
+
+    public String getId() {
+        return preferencesHelper.getString(PREF_ID, DEFAULT_PREF_ID);
+    }
+
+    public void setId(String id) {
+        preferencesHelper.edit().putString(PREF_ID, id).apply();
+    }
+
+    public String getUserName() {
+        return preferencesHelper.getString(PREF_USERNAME, DEFAULT_PREF_USERNAME);
+    }
+
+    public void setUserName(String userName) {
+        preferencesHelper.edit().putString(PREF_USERNAME, userName).apply();
+    }
+
+    public String getRole() {
+        return preferencesHelper.getString(PREF_ROLE, DEFAULT_PREF_ROLE);
+    }
+
+    public void setRole(String role) {
+        preferencesHelper.edit().putString(PREF_ROLE, role).apply();
+    }
+
+    public String getFullNameRu() {
+        return preferencesHelper.getString(PREF_FULL_NAME_RU, DEFAULT_PREF_FULL_NAME_RU);
+    }
+
+    public void setFullNameRu(String fullNameRu) {
+        preferencesHelper.edit().putString(PREF_FULL_NAME_RU, fullNameRu).apply();
+    }
+
+    public String getFullNameEn() {
+        return preferencesHelper.getString(PREF_FULL_NAME_EN, DEFAULT_PREF_FULL_NAME_EN);
+    }
+
+    public void setFullNameEn(String fullNameEn) {
+        preferencesHelper.edit().putString(PREF_FULL_NAME_EN, fullNameEn).apply();
     }
 
 }

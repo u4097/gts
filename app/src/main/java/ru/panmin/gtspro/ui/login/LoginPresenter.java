@@ -1,7 +1,5 @@
 package ru.panmin.gtspro.ui.login;
 
-import android.text.TextUtils;
-
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,9 +29,12 @@ class LoginPresenter extends BasePresenter<LoginMvpView> {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         authResponse -> {
-                            if (!TextUtils.isEmpty(authResponse.getToken())){
-                                dataManager.setToken(authResponse.getToken());
-                            }
+                            dataManager.setToken(authResponse.getToken());
+                            dataManager.setId(authResponse.getId());
+                            dataManager.setUserName(authResponse.getUsername());
+                            dataManager.setRole(authResponse.getRole());
+                            dataManager.setFullNameRu(authResponse.getFullName().getRu());
+                            dataManager.setFullNameEn(authResponse.getFullName().getEn());
                             getMvpView().openMainActivity();
                             getMvpView().finishActivity();
                         },
