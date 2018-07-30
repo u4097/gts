@@ -152,9 +152,9 @@ public interface ApiService {
                     .create();
 
             OkHttpClient.Builder okBuilder = new OkHttpClient.Builder()
-                    .connectTimeout(1, TimeUnit.MINUTES)
-                    .readTimeout(1, TimeUnit.MINUTES)
-                    .writeTimeout(1, TimeUnit.MINUTES);
+                    .connectTimeout(30, TimeUnit.MINUTES)
+                    .readTimeout(30, TimeUnit.MINUTES)
+                    .writeTimeout(30, TimeUnit.MINUTES);
 
             okBuilder.addInterceptor(chain -> {
                 Request original = chain.request();

@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import ru.panmin.gtspro.data.models.FullName;
+import ru.panmin.gtspro.data.models.Name;
 
 public class AuthResponse extends BaseResponse implements Parcelable {
 
@@ -26,12 +26,12 @@ public class AuthResponse extends BaseResponse implements Parcelable {
     @SerializedName("username") private String username;
     @SerializedName("role") private String role;
     @SerializedName("supervisor_id") private String supervisorId;
-    @SerializedName("full_name") private FullName fullName;
+    @SerializedName("full_name") private Name fullName;
 
     public AuthResponse() {
     }
 
-    public AuthResponse(String token, String id, String username, String role, String supervisorId, FullName fullName) {
+    public AuthResponse(String token, String id, String username, String role, String supervisorId, Name fullName) {
         this.token = token;
         this.id = id;
         this.username = username;
@@ -46,7 +46,7 @@ public class AuthResponse extends BaseResponse implements Parcelable {
         this.username = in.readString();
         this.role = in.readString();
         this.supervisorId = in.readString();
-        this.fullName = in.readParcelable(FullName.class.getClassLoader());
+        this.fullName = in.readParcelable(Name.class.getClassLoader());
     }
 
     public String getToken() {
@@ -89,11 +89,11 @@ public class AuthResponse extends BaseResponse implements Parcelable {
         this.supervisorId = supervisorId;
     }
 
-    public FullName getFullName() {
+    public Name getFullName() {
         return fullName;
     }
 
-    public void setFullName(FullName fullName) {
+    public void setFullName(Name fullName) {
         this.fullName = fullName;
     }
 
