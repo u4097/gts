@@ -3,10 +3,11 @@ package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
+import ru.panmin.gtspro.ui.progress.ProgressPresenter;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 
 public class MeTradePointPresenter
-        extends ToolbarPresenter<MeTradePointMvpView> {
+        extends ProgressPresenter<MeTradePointMvpView> {
 
     private final DataManager dataManager;
 

@@ -3,9 +3,10 @@ package ru.panmin.gtspro.ui.tredpoint.supervision_trade_point;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
+import ru.panmin.gtspro.ui.progress.ProgressPresenter;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 
-public class SwTradePointPresenter extends ToolbarPresenter<SwTradePointMvpView> {
+public class SwTradePointPresenter extends ProgressPresenter<SwTradePointMvpView> {
 
     private final DataManager dataManager;
 

@@ -7,10 +7,11 @@ import javax.inject.Inject;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
+import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
 
 public class MeTradePointFragment
-        extends ToolbarFragment
+        extends ProgressFragment
         implements MeTradePointMvpView {
 
     public static MeTradePointFragment createInstance() {
@@ -22,17 +23,7 @@ public class MeTradePointFragment
     MeTradePointPresenter presenter;
 
     @Override
-    protected void initToolbar() {
-
-    }
-
-    @Override
     protected int getDataView() {
-        return 0;
-    }
-
-    @Override
-    protected int getLayout() {
         return R.layout.fragment_recycler_trade_point;
     }
 

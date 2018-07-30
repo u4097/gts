@@ -1,56 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <FrameLayout
+        android:id="@+id/container_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.ContentFrameLayout
-            android:id="@+id/toolbar_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:fitsSystemWindows="true"
-                android:gravity="center"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-            <com.miguelcatalan.materialsearchview.MaterialSearchView
-                android:id="@+id/materialSearchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3.8dp"
-                android:layout_marginStart="3.8dp"/>
-
-        </android.support.v7.widget.ContentFrameLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="?attr/actionBarSize"
+            app:tabTextColor="@color/white_smoke_80"
+            android:background="?attr/colorPrimary"
+            app:tabSelectedTextColor="@color/white" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/menu_hamburger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            app:srcCompat="@drawable/ic_burger_menu_24px"
+            tools:ignore="RtlSymmetry" />
+    </FrameLayout>
 
     <android.support.v7.widget.ContentFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/container_tab_layout">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <include layout="@layout/view_shadow_bottom"/>
+        <include layout="@layout/view_shadow_bottom" />
 
     </android.support.v7.widget.ContentFrameLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

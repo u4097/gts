@@ -1,6 +1,7 @@
 package ru.panmin.gtspro.ui.tredpoint;
 
-import ru.panmin.gtspro.ui.toolbar.ToolbarMvpView;
+import ru.panmin.gtspro.ui.progress.ProgressMvpView;
 
-interface TradePointMvpView extends ToolbarMvpView {
+
+interface TradePointMvpView extends ProgressMvpView {
 }
