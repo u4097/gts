@@ -5,32 +5,32 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FullName implements Parcelable {
+public class Name implements Parcelable {
 
-    public static final Parcelable.Creator<FullName> CREATOR = new Parcelable.Creator<FullName>() {
+    public static final Parcelable.Creator<Name> CREATOR = new Parcelable.Creator<Name>() {
         @Override
-        public FullName createFromParcel(Parcel source) {
-            return new FullName(source);
+        public Name createFromParcel(Parcel source) {
+            return new Name(source);
         }
 
         @Override
-        public FullName[] newArray(int size) {
-            return new FullName[size];
+        public Name[] newArray(int size) {
+            return new Name[size];
         }
     };
 
     @SerializedName("ru") private String ru;
     @SerializedName("en") private String en;
 
-    public FullName() {
+    public Name() {
     }
 
-    public FullName(String ru, String en) {
+    public Name(String ru, String en) {
         this.ru = ru;
         this.en = en;
     }
 
-    private FullName(Parcel in) {
+    private Name(Parcel in) {
         this.ru = in.readString();
         this.en = in.readString();
     }
