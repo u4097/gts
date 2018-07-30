@@ -77,6 +77,14 @@ public class DataManager {
         preferencesHelper.setRole(role);
     }
 
+    public String getSuoervisorId() {
+        return preferencesHelper.getSuoervisorId();
+    }
+
+    public void setSuoervisorId(String suoervisorId) {
+        preferencesHelper.setSuoervisorId(suoervisorId);
+    }
+
     public String getFullNameRu() {
         return preferencesHelper.getFullNameRu();
     }
@@ -98,7 +106,11 @@ public class DataManager {
     }
 
     public boolean isMerchandiser() {
-        return TextUtils.equals(Constants.ROLE_ME, getRole());
+        return TextUtils.equals(Constants.ROLE_MERCHANDISER, getRole());
+    }
+
+    public boolean isSupervisor() {
+        return TextUtils.equals(Constants.ROLE_SUPERVISOR, getRole());
     }
 
     /* API */

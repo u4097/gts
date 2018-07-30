@@ -31,6 +31,9 @@ public class PreferencesHelper {
     private static final String PREF_ROLE = "role";
     private static final String DEFAULT_PREF_ROLE = "";
 
+    private static final String PREF_SUPERVISOR_ID = "supervisor.id";
+    private static final String DEFAULT_PREF_SUPERVISOR_ID = "";
+
     private static final String PREF_FULL_NAME_RU = "full.name.ru";
     private static final String DEFAULT_PREF_FULL_NAME_RU = "";
 
@@ -96,6 +99,14 @@ public class PreferencesHelper {
 
     public void setRole(String role) {
         preferencesHelper.edit().putString(PREF_ROLE, role).apply();
+    }
+
+    public String getSuoervisorId() {
+        return preferencesHelper.getString(PREF_SUPERVISOR_ID, DEFAULT_PREF_SUPERVISOR_ID);
+    }
+
+    public void setSuoervisorId(String suoervisorId) {
+        preferencesHelper.edit().putString(PREF_SUPERVISOR_ID, suoervisorId).apply();
     }
 
     public String getFullNameRu() {

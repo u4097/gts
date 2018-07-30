@@ -7,7 +7,8 @@ public class Constants {
 
     public static final String DATE_TIME_FORMAT = "yyyy-mm-dd hh:MM:ss";
 
-    public static final String ROLE_ME = "me";
+    public static final String ROLE_MERCHANDISER = "me";
+    public static final String ROLE_SUPERVISOR = "sv";
 
     private Constants() {
     }
