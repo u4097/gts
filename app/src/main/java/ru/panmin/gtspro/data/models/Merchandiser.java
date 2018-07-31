@@ -22,17 +22,14 @@ public class Merchandiser implements Parcelable {
         }
     };
 
-    @SerializedName("name")
-    private String name;
-    @SerializedName("clients")
-    private List<Client> clients = new ArrayList<>();
-    @SerializedName("times")
-    private List<String> times = new ArrayList<>();
+    @SerializedName("name") private String name;
+    @SerializedName("clients") private List<Client> clients = new ArrayList<>();
+    @SerializedName("times") private List<Time> times = new ArrayList<>();
 
     public Merchandiser() {
     }
 
-    public Merchandiser(String name, List<Client> clients, List<String> times) {
+    public Merchandiser(String name, List<Client> clients, List<Time> times) {
         this.name = name;
         this.clients = clients;
         this.times = times;
@@ -41,7 +38,7 @@ public class Merchandiser implements Parcelable {
     private Merchandiser(Parcel in) {
         this.name = in.readString();
         this.clients = in.createTypedArrayList(Client.CREATOR);
-        this.times = in.createStringArrayList();
+        this.times = in.createTypedArrayList(Time.CREATOR);
     }
 
     public String getName() {
@@ -60,11 +57,11 @@ public class Merchandiser implements Parcelable {
         this.clients = clients;
     }
 
-    public List<String> getTimes() {
+    public List<Time> getTimes() {
         return times;
     }
 
-    public void setTimes(List<String> times) {
+    public void setTimes(List<Time> times) {
         this.times = times;
     }
 
@@ -77,7 +74,7 @@ public class Merchandiser implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
         dest.writeTypedList(this.clients);
-        dest.writeStringList(this.times);
+        dest.writeTypedList(this.times);
     }
 
 }
