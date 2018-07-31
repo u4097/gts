@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,26 +16,27 @@
         android:fitsSystemWindows="true"
         android:gravity="center"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textToolbarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            tools:text="Сообщение на ГЛ"/>
-
-    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textToolbarTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        tools:text="Сообщение на ГЛ"/>
 
     <com.miguelcatalan.materialsearchview.MaterialSearchView
         android:id="@+id/materialSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3.8dp"
-        android:layout_marginStart="3.8dp"/>
+        android:layout_marginStart="3.8dp"
+        android:fitsSystemWindows="true"/>
 
 </android.support.v7.widget.ContentFrameLayout>

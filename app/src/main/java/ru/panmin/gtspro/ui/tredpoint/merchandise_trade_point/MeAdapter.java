@@ -22,6 +22,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
 
     private List<TradePoint> tradePoints = new ArrayList<>();
     private InfoClickListener infoClickListener;
+
     @Inject
     MeAdapter() {
     }
@@ -31,7 +32,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void ClickListener(InfoClickListener infoClickListener) {
+    public void setInfoClickListener(InfoClickListener infoClickListener) {
         this.infoClickListener = infoClickListener;
     }
 

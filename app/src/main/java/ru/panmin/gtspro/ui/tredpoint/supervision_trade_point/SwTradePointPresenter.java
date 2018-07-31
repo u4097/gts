@@ -30,7 +30,10 @@ public class SwTradePointPresenter extends ProgressPresenter<SwTradePointMvpView
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         addressProgramResponse -> {
-                            Log.d("aevedv", "devedvde");
+                            getMvpView().setTradePoint(addressProgramResponse.getTradePoints());
+                        },
+                        throwable -> {
+                            parseError(throwable);
                         }
                 );
     }

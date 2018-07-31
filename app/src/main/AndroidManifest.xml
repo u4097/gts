@@ -39,15 +39,15 @@
 
         <activity
             android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/MainTheme"/>
 
         <activity
             android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/MainTheme"/>
 
         <activity
             android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/MainTheme"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

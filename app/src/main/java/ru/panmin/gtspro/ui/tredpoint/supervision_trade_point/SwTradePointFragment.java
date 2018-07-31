@@ -4,27 +4,27 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
+import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
 
 
-public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView {
+public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView, SvAdapter.InfoClickListener {
 
-    @Inject
-    SwTradePointPresenter presenter;
-    @Inject
-    SvAdapter adapter;
-    @BindView(R.id.recycler_trade_point)
-    RecyclerView recyclerView;
-    @BindView(R.id.floating_filter)
-    FloatingActionButton filter;
+    @Inject SwTradePointPresenter presenter;
+    @Inject SvAdapter adapter;
+
+    @BindView(R.id.recycler_trade_point) RecyclerView recyclerView;
+    @BindView(R.id.floating_filter) FloatingActionButton filter;
 
     public static SwTradePointFragment createInstance() {
         return new SwTradePointFragment();
@@ -34,7 +34,6 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
     protected int getDataView() {
         return R.layout.fragment_recycler_trade_point;
     }
-
 
     @Override
     protected EmptyBundle getEmptyBundle() {
@@ -69,6 +68,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter.setInfoClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -87,4 +87,15 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
     protected void detachView() {
         presenter.detachView();
     }
+
+    @Override
+    public void setTradePoint(List<TradePoint> tradePoints) {
+        adapter.setData(tradePoints);
+    }
+
+    @Override
+    public void showInfo(TradePoint tradePoint) {
+        startActivity(TradePointInfoSvActivity.getStartIntent(getActivity(), tradePoint));
+    }
+
 }

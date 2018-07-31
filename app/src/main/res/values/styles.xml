@@ -4,7 +4,7 @@
 
     <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/azure</item>
-        <item name="colorPrimaryDark">@color/azure</item>
+        <item name="colorPrimaryDark">#1578c3</item>
         <item name="colorAccent">@color/azure</item>
     </style>
 

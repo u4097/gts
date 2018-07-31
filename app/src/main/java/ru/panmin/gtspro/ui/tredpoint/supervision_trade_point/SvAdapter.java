@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.tredpoint.supervision_trade_point;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -24,6 +25,7 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
 
     private List<TradePoint> tradePoints = new ArrayList<>();
     private SvAdapter.InfoClickListener infoClickListener;
+
     @Inject
     SvAdapter() {
     }
@@ -33,7 +35,7 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void ClickListener(SvAdapter.InfoClickListener infoClickListener) {
+    public void setInfoClickListener(InfoClickListener infoClickListener) {
         this.infoClickListener = infoClickListener;
     }
 
@@ -74,11 +76,13 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
             ButterKnife.bind(this, itemView);
         }
 
+        @SuppressLint("DefaultLocale")
         public void bind(TradePoint tradePoint) {
             name.setText(tradePoint.getSignboard().toString(itemView.getContext()));
             address.setText(tradePoint.getAddress().toString(itemView.getContext()));
-            claimsQuantity.setText(tradePoint.getClaims().size());
+            claimsQuantity.setText(String.format("%d", tradePoint.getClaims().size()));
             info.setOnClickListener(view -> infoClickListener.showInfo(tradePoint));
         }
+
     }
 }
