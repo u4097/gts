@@ -23,23 +23,35 @@ class LoginPresenter extends BasePresenter<LoginMvpView> {
     }
 
     public void enter(String userName, String password) {
-        RxUtils.dispose(disposable);
-        disposable = dataManager.auth(userName, password)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                        authResponse -> {
-                            dataManager.setToken(authResponse.getToken());
-                            dataManager.setId(authResponse.getId());
-                            dataManager.setUserName(authResponse.getUsername());
-                            dataManager.setRole(authResponse.getRole());
-                            dataManager.setFullNameRu(authResponse.getFullName().getRu());
-                            dataManager.setFullNameEn(authResponse.getFullName().getEn());
-                            getMvpView().openMainActivity();
-                            getMvpView().finishActivity();
-                        },
-                        throwable -> Timber.d(throwable)
-                );
+        getMvpView().hideKeyboard();
+        if (!isLoginValid(userName)) {
+            getMvpView().showLoginValidError();
+        } else if (!isPasswordValid(password)) {
+            getMvpView().showPasswordValidError();
+        } else {
+            getMvpView().showProgressDialog();
+            RxUtils.dispose(disposable);
+            disposable = dataManager.auth(userName, password)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(
+                            authResponse -> {
+                                dataManager.setToken(authResponse.getToken());
+                                dataManager.setId(authResponse.getId());
+                                dataManager.setUserName(authResponse.getUsername());
+                                dataManager.setRole(authResponse.getRole());
+                                dataManager.setFullNameRu(authResponse.getFullName().getRu());
+                                dataManager.setFullNameEn(authResponse.getFullName().getEn());
+                                getMvpView().hideProgressDialog();
+                                getMvpView().openMainActivity();
+                                getMvpView().finishActivity();
+                            },
+                            throwable -> {
+                                parseError(throwable);
+                                getMvpView().hideProgressDialog();
+                            }
+                    );
+        }
     }
 
 }

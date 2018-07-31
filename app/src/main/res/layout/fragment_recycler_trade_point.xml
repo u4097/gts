@@ -20,7 +20,7 @@
         android:layout_marginBottom="50dp"
         android:layout_marginTop="8dp"
         android:scaleType="center"
-        app:backgroundTint="@color/color_primary"
+        app:backgroundTint="?colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.977"

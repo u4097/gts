@@ -3,9 +3,9 @@
 <resources>
 
     <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
+        <item name="colorPrimary">@color/azure</item>
+        <item name="colorPrimaryDark">@color/azure</item>
+        <item name="colorAccent">@color/azure</item>
     </style>
 
     <style name="NoActionBar" parent="MainTheme">

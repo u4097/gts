@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.utils.DialogUtils;
 
 public abstract class BaseFragment extends Fragment implements MvpView {
@@ -100,6 +101,20 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     @Override
     public void finishActivity() {
         baseActivity.finishActivity();
+    }
+
+    @Override
+    public void showError(String error) {
+    }
+
+    @Override
+    public void showUnknownServerError() {
+        showError(getString(R.string.unknown_server_error_title));
+    }
+
+    @Override
+    public void showUnknownError() {
+        showError(getString(R.string.unknown_error_title));
     }
 
     @LayoutRes

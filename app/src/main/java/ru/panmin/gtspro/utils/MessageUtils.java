@@ -4,10 +4,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import ru.panmin.gtspro.R;
 
 public class MessageUtils {
 
@@ -60,9 +63,11 @@ public class MessageUtils {
 
     private static void showToast(Context context, String text, int length) {
         Toast toast = Toast.makeText(context, String.format("\t\t%s\t\t", text), length);
+        toast.getView().setBackgroundResource(R.drawable.toast_background);
         TextView textView = toast.getView().findViewById(android.R.id.message);
         if (text != null) {
             textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(ContextCompat.getColor(context, R.color.white));
         }
         toast.show();
     }

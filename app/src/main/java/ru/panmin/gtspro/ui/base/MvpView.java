@@ -14,4 +14,10 @@ public interface MvpView {
 
     void finishActivity();
 
+    void showError(String error);
+
+    void showUnknownServerError();
+
+    void showUnknownError();
+
 }

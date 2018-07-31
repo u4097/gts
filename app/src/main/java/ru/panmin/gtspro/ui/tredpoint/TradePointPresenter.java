@@ -34,7 +34,7 @@ public class TradePointPresenter extends ProgressPresenter<TradePointMvpView> {
                             Log.d("kxggxv", "exhpehx");
                         },
                         throwable -> {
-                            Timber.d(throwable);
+                            parseError(throwable);
                         }
                 );
     }

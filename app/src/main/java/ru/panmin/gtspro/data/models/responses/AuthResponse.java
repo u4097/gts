@@ -47,6 +47,7 @@ public class AuthResponse extends BaseResponse implements Parcelable {
     }
 
     private AuthResponse(Parcel in) {
+        super(in);
         this.token = in.readString();
         this.id = in.readString();
         this.username = in.readString();
@@ -110,6 +111,7 @@ public class AuthResponse extends BaseResponse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
         dest.writeString(this.token);
         dest.writeString(this.id);
         dest.writeString(this.username);

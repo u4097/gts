@@ -7,23 +7,23 @@ import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.content.res.AppCompatResources;
-import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 
 import ru.panmin.gtspro.R;
 
-public class VectorsSupportTextView extends AppCompatTextView {
+public class VectorsSupportEditText extends AppCompatEditText {
 
-    public VectorsSupportTextView(Context context) {
+    public VectorsSupportEditText(Context context) {
         super(context);
     }
 
-    public VectorsSupportTextView(Context context, AttributeSet attrs) {
+    public VectorsSupportEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttrs(context, attrs);
     }
 
-    public VectorsSupportTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VectorsSupportEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(context, attrs);
     }

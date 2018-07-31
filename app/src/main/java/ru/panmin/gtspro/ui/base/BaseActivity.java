@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.Application;
+import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.injection.component.ActivityComponent;
 import ru.panmin.gtspro.injection.component.ConfigPersistentComponent;
 import ru.panmin.gtspro.injection.component.DaggerConfigPersistentComponent;
@@ -153,6 +154,20 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void showError(String error) {
+    }
+
+    @Override
+    public void showUnknownServerError() {
+        showError(getString(R.string.unknown_server_error_title));
+    }
+
+    @Override
+    public void showUnknownError() {
+        showError(getString(R.string.unknown_error_title));
     }
 
     protected abstract void inject();

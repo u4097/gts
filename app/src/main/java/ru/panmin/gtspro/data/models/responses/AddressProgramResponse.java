@@ -45,6 +45,7 @@ public class AddressProgramResponse extends BaseResponse implements Parcelable {
     }
 
     private AddressProgramResponse(Parcel in) {
+        super(in);
         this.autoCheckoutTime = in.readInt();
         this.tradePointRadius = in.readInt();
         this.hotLine = in.readParcelable(HotLine.class.getClassLoader());
@@ -90,6 +91,7 @@ public class AddressProgramResponse extends BaseResponse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
         dest.writeInt(this.autoCheckoutTime);
         dest.writeInt(this.tradePointRadius);
         dest.writeParcelable(this.hotLine, flags);

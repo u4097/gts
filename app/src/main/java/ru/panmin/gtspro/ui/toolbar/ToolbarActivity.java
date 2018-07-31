@@ -48,7 +48,7 @@ public abstract class ToolbarActivity extends ProgressActivity implements Toolba
 
     @Override
     public void initSearchView() {
-        materialSearchView.setBackgroundColor(ContextCompat.getColor(this, R.color.color_primary));
+        materialSearchView.setBackgroundColor(ContextCompat.getColor(this, R.attr.colorPrimary));
         materialSearchView.setHintTextColor(ContextCompat.getColor(this, R.color.white_50));
         materialSearchView.setCursorDrawable(R.drawable.cursor_search_view);
         materialSearchView.setBackIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_black_24px));

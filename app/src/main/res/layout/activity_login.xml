@@ -1,33 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fmtAuthRoot"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_primary"
+    android:background="?colorPrimary"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/editTextUserName"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:nextFocusForward="@+id/editTextPassword"
-        android:text="Лименько"/>
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="362dp"
+        android:layout_height="724dp"
+        android:layout_gravity="top|start"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_oval"/>
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:text="123456"/>
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/buttonEnter"
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Войти"/>
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-</android.support.v7.widget.LinearLayoutCompat>
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="72dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/invalid_name"/>
+
+        <ru.panmin.gtspro.ui.customviews.VectorsSupportEditText
+            android:id="@+id/editTextUserName"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:drawablePadding="24dp"
+            android:hint="@string/login"
+            android:imeOptions="actionNext"
+            android:nextFocusForward="@+id/editTextPassword"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:singleLine="true"
+            android:text="Лименько"
+            android:textColor="@color/azure"
+            android:textColorHint="@color/azure_60"
+            android:textCursorDrawable="@drawable/cursor_edit_text"
+            app:backgroundTint="@color/azure"
+            app:drawableLeftCompat="@drawable/ic_user"/>
+
+        <ru.panmin.gtspro.ui.customviews.VectorsSupportEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:drawablePadding="24dp"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:singleLine="true"
+            android:text="123456"
+            android:textColor="@color/azure"
+            android:textColorHint="@color/azure_60"
+            android:textCursorDrawable="@drawable/cursor_edit_text"
+            app:backgroundTint="@color/azure"
+            app:drawableLeftCompat="@drawable/ic_padlock"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/buttonEnter"
+            style="@style/AzureButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:minHeight="48dp"
+            android:minWidth="144dp"
+            android:text="@string/login_enter"
+            android:textSize="12sp"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.design.widget.CoordinatorLayout>

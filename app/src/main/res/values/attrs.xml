@@ -2,7 +2,7 @@
 
 <resources>
 
-    <declare-styleable name="VectorsSupportTextView">
+    <declare-styleable name="VectorsSupportView">
         <attr name="drawableLeftCompat" format="reference"/>
         <attr name="drawableRightCompat" format="reference"/>
         <attr name="drawableTopCompat" format="reference"/>
