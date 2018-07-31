@@ -22,23 +22,39 @@ public class TradePoint implements Parcelable {
         }
     };
 
-    @SerializedName("id") private String id;
-    @SerializedName("coordinates") private Coordinates coordinates;
-    @SerializedName("signboard") private Name signboard;
-    @SerializedName("address") private Name address;
-    @SerializedName("trade_network") private Name tradeNetwork;
-    @SerializedName("trade_network_id") private String tradeNetworkId;
-    @SerializedName("regional_office") private Name regionalOffice;
-    @SerializedName("formats") private List<String> formats = new ArrayList<>();
-    @SerializedName("department_id") private String departmentId;
-    @SerializedName("clients") private List<Client> clients = new ArrayList<>();
-    @SerializedName("merchandisers") private List<Merchandiser> merchandisers = new ArrayList<>();
-    @SerializedName("promos") private List<Promo> promos = new ArrayList<>();
-    @SerializedName("reports") private List<Report> reports = new ArrayList<>();
-    @SerializedName("photoreports") private List<PhotoReport> photoreports = new ArrayList<>();
-    @SerializedName("skus") private List<Sku> skus = new ArrayList<>();
-    @SerializedName("standards") private List<Standard> standards = new ArrayList<>();
-    @SerializedName("claims") private List<Claim> claims = new ArrayList<>();
+    @SerializedName("id")
+    private String id;
+    @SerializedName("coordinates")
+    private Coordinates coordinates;
+    @SerializedName("signboard")
+    private Name signboard;
+    @SerializedName("address")
+    private Name address;
+    @SerializedName("trade_network")
+    private Name tradeNetwork;
+    @SerializedName("trade_network_id")
+    private String tradeNetworkId;
+    @SerializedName("regional_office")
+    private Name regionalOffice;
+    @SerializedName("formats")
+    private List<String> formats = new ArrayList<>();
+    @SerializedName("department_id")
+    private String departmentId;
+    @SerializedName("clients")
+    private List<Client> clients = new ArrayList<>();
+    @SerializedName("merchandisers")
+    private List<Merchandiser> merchandisers = new ArrayList<>();
+    @SerializedName("promos")
+    private List<Promo> promos = new ArrayList<>();
+    @SerializedName("reports")
+    private List<Report> reports = new ArrayList<>();
+    @SerializedName("photoreports")
+    private List<PhotoReport> photoreports = new ArrayList<>();
+    //@SerializedName("skus") private List<Sku> skus = new ArrayList<>();
+    @SerializedName("standards")
+    private List<Standard> standards = new ArrayList<>();
+    @SerializedName("claims")
+    private List<Claim> claims = new ArrayList<>();
 
     public TradePoint() {
     }
@@ -61,7 +77,7 @@ public class TradePoint implements Parcelable {
         this.promos = promos;
         this.reports = reports;
         this.photoreports = photoreports;
-        this.skus = skus;
+        //this.skus = skus;
         this.standards = standards;
         this.claims = claims;
     }
@@ -81,7 +97,7 @@ public class TradePoint implements Parcelable {
         this.promos = in.createTypedArrayList(Promo.CREATOR);
         this.reports = in.createTypedArrayList(Report.CREATOR);
         this.photoreports = in.createTypedArrayList(PhotoReport.CREATOR);
-        this.skus = in.createTypedArrayList(Sku.CREATOR);
+        //this.skus = in.createTypedArrayList(Sku.CREATOR);
         this.standards = in.createTypedArrayList(Standard.CREATOR);
         this.claims = in.createTypedArrayList(Claim.CREATOR);
     }
@@ -198,13 +214,13 @@ public class TradePoint implements Parcelable {
         this.photoreports = photoreports;
     }
 
-    public List<Sku> getSkus() {
-        return skus;
-    }
+    //public List<Sku> getSkus() {
+    //    return skus;
+    //}
 
-    public void setSkus(List<Sku> skus) {
-        this.skus = skus;
-    }
+    //public void setSkus(List<Sku> skus) {
+    //    this.skus = skus;
+    //}
 
     public List<Standard> getStandards() {
         return standards;
@@ -243,7 +259,7 @@ public class TradePoint implements Parcelable {
         dest.writeTypedList(this.promos);
         dest.writeTypedList(this.reports);
         dest.writeTypedList(this.photoreports);
-        dest.writeTypedList(this.skus);
+        //dest.writeTypedList(this.skus);
         dest.writeTypedList(this.standards);
         dest.writeTypedList(this.claims);
     }

@@ -19,8 +19,10 @@ public class AuthRequest implements Parcelable {
         }
     };
 
-    @SerializedName("username") private String userName;
-    @SerializedName("password") private String password;
+    @SerializedName("username")
+    private String userName;
+    @SerializedName("password")
+    private String password;
 
     public AuthRequest() {
     }

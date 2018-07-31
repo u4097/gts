@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
-import ru.panmin.gtspro.ui.main.MainActivity;
 import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
 
 public class LoginActivity extends BaseActivity implements LoginMvpView {
@@ -48,9 +47,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         buttonEnter.setOnClickListener(
                 view -> {
                     loginPresenter.enter(editTextUserName.getText().toString(), editTextPassword.getText().toString());
-                    startActivity(TradePointActivity.getStartIntent(this));
                 }
-
         );
     }
 
@@ -61,7 +58,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Override
     public void openMainActivity() {
-        startActivity(MainActivity.getStartIntent(this));
+        startActivity(TradePointActivity.getStartIntent(this));
     }
 
 }

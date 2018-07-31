@@ -21,12 +21,18 @@ public class AuthResponse extends BaseResponse implements Parcelable {
         }
     };
 
-    @SerializedName("token") private String token;
-    @SerializedName("id") private String id;
-    @SerializedName("username") private String username;
-    @SerializedName("role") private String role;
-    @SerializedName("supervisor_id") private String supervisorId;
-    @SerializedName("full_name") private Name fullName;
+    @SerializedName("token")
+    private String token;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("username")
+    private String username;
+    @SerializedName("role")
+    private String role;
+    @SerializedName("supervisor_id")
+    private String supervisorId;
+    @SerializedName("full_name")
+    private Name fullName;
 
     public AuthResponse() {
     }

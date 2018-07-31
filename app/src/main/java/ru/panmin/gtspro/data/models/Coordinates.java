@@ -20,8 +20,10 @@ public class Coordinates implements Parcelable {
         }
     };
 
-    @SerializedName("latitude") private double latitude;
-    @SerializedName("longitude") private double longitude;
+    @SerializedName("latitude")
+    private double latitude;
+    @SerializedName("longitude")
+    private double longitude;
 
     public Coordinates() {
     }

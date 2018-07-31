@@ -25,10 +25,14 @@ public class AddressProgramResponse extends BaseResponse implements Parcelable {
         }
     };
 
-    @SerializedName("auto_checkout_time") private int autoCheckoutTime;
-    @SerializedName("trade_point_radius") private int tradePointRadius;
-    @SerializedName("hot_line") private HotLine hotLine;
-    @SerializedName("trade_points") private List<TradePoint> tradePoints = new ArrayList<>();
+    @SerializedName("auto_checkout_time")
+    private int autoCheckoutTime;
+    @SerializedName("trade_point_radius")
+    private int tradePointRadius;
+    @SerializedName("hot_line")
+    private HotLine hotLine;
+    @SerializedName("trade_points")
+    private List<TradePoint> tradePoints = new ArrayList<>();
 
     public AddressProgramResponse() {
     }

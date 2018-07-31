@@ -22,14 +22,22 @@ public class SkuListElement implements Parcelable {
         }
     };
 
-    @SerializedName("id") private String id;
-    @SerializedName("name") private Name name;
-    @SerializedName("brand") private Brand brand;
-    @SerializedName("category") private Category category;
-    @SerializedName("group") private Group group;
-    @SerializedName("subbrand") private SubBrand subBrand;
-    @SerializedName("ean") private List<String> ean = new ArrayList<>();
-    @SerializedName("plu") private List<String> plu = new ArrayList<>();
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
+    private Name name;
+    @SerializedName("brand")
+    private Brand brand;
+    @SerializedName("category")
+    private Category category;
+    @SerializedName("group")
+    private Group group;
+    @SerializedName("subbrand")
+    private SubBrand subBrand;
+    @SerializedName("ean")
+    private List<String> ean = new ArrayList<>();
+    @SerializedName("plu")
+    private List<String> plu = new ArrayList<>();
 
     public SkuListElement() {
     }

@@ -19,8 +19,10 @@ public class Name implements Parcelable {
         }
     };
 
-    @SerializedName("ru") private String ru;
-    @SerializedName("en") private String en;
+    @SerializedName("ru")
+    private String ru;
+    @SerializedName("en")
+    private String en;
 
     public Name() {
     }

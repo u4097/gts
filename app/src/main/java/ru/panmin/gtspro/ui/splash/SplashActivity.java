@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
-import ru.panmin.gtspro.ui.main.MainActivity;
+import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
 
 public class SplashActivity extends BaseActivity implements SplashMvpView {
 
@@ -65,7 +65,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void openMainActivity() {
-        startActivity(MainActivity.getStartIntent(this));
+        startActivity(TradePointActivity.getStartIntent(this));
     }
 
 }

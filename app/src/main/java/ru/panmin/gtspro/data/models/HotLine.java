@@ -22,8 +22,10 @@ public class HotLine implements Parcelable {
         }
     };
 
-    @SerializedName("causes") private List<Cause> causes = new ArrayList<>();
-    @SerializedName("contexts") private List<HotLineContext> contexts = new ArrayList<>();
+    @SerializedName("causes")
+    private List<Cause> causes = new ArrayList<>();
+    @SerializedName("contexts")
+    private List<HotLineContext> contexts = new ArrayList<>();
 
     public HotLine() {
     }

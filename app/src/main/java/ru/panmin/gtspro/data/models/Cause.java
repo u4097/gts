@@ -19,10 +19,14 @@ public class Cause implements Parcelable {
         }
     };
 
-    @SerializedName("id") private String id;
-    @SerializedName("position") private int position;
-    @SerializedName("without_sku") private boolean withoutSku;
-    @SerializedName("name") private Name name;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("position")
+    private int position;
+    @SerializedName("without_sku")
+    private boolean withoutSku;
+    @SerializedName("name")
+    private Name name;
 
     public Cause() {
     }

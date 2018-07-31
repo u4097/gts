@@ -6,12 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Merchandiser implements Parcelable {
 
-    public static final Parcelable.Creator<Merchandiser> CREATOR = new Parcelable.Creator<Merchandiser>() {
+    public static final Creator<Merchandiser> CREATOR = new Creator<Merchandiser>() {
         @Override
         public Merchandiser createFromParcel(Parcel source) {
             return new Merchandiser(source);
@@ -23,14 +22,17 @@ public class Merchandiser implements Parcelable {
         }
     };
 
-    @SerializedName("name") private String name;
-    @SerializedName("clients") private List<Client> clients = new ArrayList<>();
-    @SerializedName("times") private List<Date> times = new ArrayList<>();
+    @SerializedName("name")
+    private String name;
+    @SerializedName("clients")
+    private List<Client> clients = new ArrayList<>();
+    @SerializedName("times")
+    private List<String> times = new ArrayList<>();
 
     public Merchandiser() {
     }
 
-    public Merchandiser(String name, List<Client> clients, List<Date> times) {
+    public Merchandiser(String name, List<Client> clients, List<String> times) {
         this.name = name;
         this.clients = clients;
         this.times = times;
@@ -39,8 +41,7 @@ public class Merchandiser implements Parcelable {
     private Merchandiser(Parcel in) {
         this.name = in.readString();
         this.clients = in.createTypedArrayList(Client.CREATOR);
-        this.times = new ArrayList<Date>();
-        in.readList(this.times, Date.class.getClassLoader());
+        this.times = in.createStringArrayList();
     }
 
     public String getName() {
@@ -59,11 +60,11 @@ public class Merchandiser implements Parcelable {
         this.clients = clients;
     }
 
-    public List<Date> getTimes() {
+    public List<String> getTimes() {
         return times;
     }
 
-    public void setTimes(List<Date> times) {
+    public void setTimes(List<String> times) {
         this.times = times;
     }
 
@@ -76,7 +77,7 @@ public class Merchandiser implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
         dest.writeTypedList(this.clients);
-        dest.writeList(this.times);
+        dest.writeStringList(this.times);
     }
 
 }

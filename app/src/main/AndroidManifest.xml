@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="ru.panmin.gtspro"
@@ -26,12 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:theme="@style/NoActionBar" />
+
         <activity
             android:name=".ui.tredpoint.TradePointActivity"
             android:theme="@style/NoActionBar" />
@@ -40,8 +40,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"
             tools:replace="android:value" />
-
-
 
     </application>
 

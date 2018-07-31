@@ -19,11 +19,16 @@ public class HotLineContext implements Parcelable {
         }
     };
 
-    @SerializedName("id") private String id;
-    @SerializedName("name") private Name name;
-    @SerializedName("comment_description") private String commentDescription;
-    @SerializedName("hot_line_cause_id") private String hotLineCauseId;
-    @SerializedName("position") private int position;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
+    private Name name;
+    @SerializedName("comment_description")
+    private String commentDescription;
+    @SerializedName("hot_line_cause_id")
+    private String hotLineCauseId;
+    @SerializedName("position")
+    private int position;
 
     public HotLineContext() {
     }

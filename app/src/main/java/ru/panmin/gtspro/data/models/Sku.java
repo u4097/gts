@@ -22,8 +22,10 @@ public class Sku implements Parcelable {
         }
     };
 
-    @SerializedName("client") private Client client;
-    @SerializedName("sku_list") private List<SkuListElement> skuList = new ArrayList<>();
+    @SerializedName("client")
+    private Client client;
+    @SerializedName("sku_list")
+    private List<SkuListElement> skuList = new ArrayList<>();
 
     public Sku() {
     }

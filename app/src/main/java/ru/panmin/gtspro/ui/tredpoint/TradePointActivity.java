@@ -92,6 +92,7 @@ public class TradePointActivity
         initNavigationDrawer();
         initViewPager();
         languageButton();
+        tradePointPresenter.getAddressProgram();
     }
 
     private void languageButton() {

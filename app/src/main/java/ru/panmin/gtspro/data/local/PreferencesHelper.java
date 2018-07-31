@@ -22,7 +22,7 @@ public class PreferencesHelper {
     private static final String PREF_TOKEN = "token";
     private static final String DEFAULT_PREF_TOKEN = "";
 
-    private static final String PREF_ID = "token";
+    private static final String PREF_ID = "id";
     private static final String DEFAULT_PREF_ID = "";
 
     private static final String PREF_USERNAME = "username";

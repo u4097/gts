@@ -22,8 +22,10 @@ public class Standard implements Parcelable {
         }
     };
 
-    @SerializedName("client") private Client client;
-    @SerializedName("standard_list") private List<StandardListElement> standardList = new ArrayList<>();
+    @SerializedName("client")
+    private Client client;
+    @SerializedName("standard_list")
+    private List<StandardListElement> standardList = new ArrayList<>();
 
     public Standard() {
     }

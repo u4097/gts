@@ -19,8 +19,10 @@ public class SubBrand implements Parcelable {
         }
     };
 
-    @SerializedName("id") private String id;
-    @SerializedName("name") private Name name;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
+    private Name name;
 
     public SubBrand() {
     }
