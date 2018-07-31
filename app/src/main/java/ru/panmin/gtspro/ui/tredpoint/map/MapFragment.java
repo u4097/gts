@@ -8,19 +8,18 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
-import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
 
 
 public class MapFragment
         extends ProgressFragment
         implements MapMvpView {
 
+    @Inject
+    MapPresenter presenter;
+
     public static MapFragment createInstance() {
         return new MapFragment();
     }
-
-    @Inject
-    MapPresenter presenter;
 
     @Override
     protected int getDataView() {

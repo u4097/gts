@@ -18,20 +18,18 @@ public class MeTradePointFragment
         extends ProgressFragment
         implements MeTradePointMvpView {
 
-    public static MeTradePointFragment createInstance() {
-        return new MeTradePointFragment();
-    }
-
     @Inject
     MeTradePointPresenter presenter;
-
     @Inject
     MeAdapter adapter;
-
     @BindView(R.id.recycler_trade_point)
     RecyclerView recyclerView;
     @BindView(R.id.floating_filter)
     FloatingActionButton filter;
+
+    public static MeTradePointFragment createInstance() {
+        return new MeTradePointFragment();
+    }
 
     @Override
     protected int getDataView() {

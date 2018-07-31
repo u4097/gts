@@ -45,6 +45,14 @@ public class DataManager {
         preferencesHelper.setWasPermissionDialog(permissions);
     }
 
+    public String getLanguage() {
+        return preferencesHelper.getLanguage();
+    }
+
+    public void setLanguage(String language) {
+        preferencesHelper.setLanguage(language);
+    }
+
     public String getToken() {
         return preferencesHelper.getToken();
     }
@@ -103,6 +111,18 @@ public class DataManager {
 
     public boolean isAuth() {
         return !TextUtils.isEmpty(getToken());
+    }
+
+    public String getFullName() {
+        switch (getLanguage()) {
+            case Constants.LANGUAGE_RUSSIAN:
+                return getFullNameRu();
+            case Constants.LANGUAGE_ENGLISH:
+                return getFullNameEn();
+            default:
+                return "";
+
+        }
     }
 
     public boolean isMerchandiser() {

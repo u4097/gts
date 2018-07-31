@@ -33,11 +33,11 @@ class TradePoinPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                fragment = b ?  MeTradePointFragment.createInstance() :  SwTradePointFragment.createInstance();
+                fragment = b ? MeTradePointFragment.createInstance() : SwTradePointFragment.createInstance();
 
                 return fragment;
             case 1:
-                fragment =  MapFragment.createInstance();
+                fragment = MapFragment.createInstance();
                 return fragment;
         }
         return null;

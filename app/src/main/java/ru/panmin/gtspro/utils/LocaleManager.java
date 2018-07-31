@@ -2,17 +2,15 @@ package ru.panmin.gtspro.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import java.util.Locale;
 
-public class LocaleManager {
+import ru.panmin.gtspro.data.local.PreferencesHelper;
 
-    private static final String LANGUAGE_KEY = "language_key";
+public class LocaleManager {
 
     public static Context setLocale(Context context) {
         return updateResources(context, getLanguage(context));
@@ -24,14 +22,14 @@ public class LocaleManager {
     }
 
     public static String getLanguage(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(LANGUAGE_KEY, Constants.LANGUAGE_RUSSIAN);
+        PreferencesHelper preferencesHelper = new PreferencesHelper(context);
+        return preferencesHelper.getLanguage();
     }
 
     @SuppressLint("ApplySharedPref")
     private static void persistLanguage(Context context, String language) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putString(LANGUAGE_KEY, language).commit();
+        PreferencesHelper preferencesHelper = new PreferencesHelper(context);
+        preferencesHelper.setLanguage(language);
     }
 
     private static Context updateResources(Context context, String language) {

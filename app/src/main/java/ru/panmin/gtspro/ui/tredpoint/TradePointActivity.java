@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -32,7 +33,18 @@ public class TradePointActivity
         implements TradePointMvpView {
 
     private static final String INTENT_KEY_WITH_OPEN_DRAWER = "with.open.drawer";
-
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.view_pager) ViewPager viewPager;
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
+    @BindView(R.id.menu_hamburger) AppCompatImageView hamburger;
+    @BindView(R.id.avatarImageNavigationView) AppCompatTextView avatarImageNavigationView;
+    @BindView(R.id.nameTextNavigationView) AppCompatTextView nameTextNavigationView;
+    @BindView(R.id.statusTextNavigationView) AppCompatTextView statusTextNavigationView;
+    @BindView(R.id.buttonLanguageRu) AppCompatButton buttonLanguageRu;
+    @BindView(R.id.buttonLanguageEn) AppCompatButton buttonLanguageEn;
+    @Inject
+    TradePointPresenter tradePointPresenter;
     public TradePointActivity() {
     }
 
@@ -45,30 +57,6 @@ public class TradePointActivity
         intent.putExtra(INTENT_KEY_WITH_OPEN_DRAWER, withOpenDrawer);
         return intent;
     }
-
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
-
-    @BindView(R.id.nav_view)
-    NavigationView navigationView;
-
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-
-    @BindView(R.id.menu_hamburger)
-    AppCompatImageView hamburger;
-
-    @BindView(R.id.buttonLanguageRu)
-    AppCompatButton buttonLanguageRu;
-
-    @BindView(R.id.buttonLanguageEn)
-    AppCompatButton buttonLanguageEn;
-
-    @Inject
-    TradePointPresenter tradePointPresenter;
 
     @Override
     public void onBackPressed() {
@@ -109,13 +97,12 @@ public class TradePointActivity
     @Override
     protected void initViews() {
         setStateData();
-        initNavigationDrawer();
+        tradePointPresenter.initNavigationDrawer();
         initViewPager();
         tradePointPresenter.getAddressProgram();
     }
 
     private void initViewPager() {
-        boolean b = true;
         PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), true);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -139,36 +126,6 @@ public class TradePointActivity
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
-    }
-
-    private void initNavigationDrawer() {
-        if (getIntent().getBooleanExtra(INTENT_KEY_WITH_OPEN_DRAWER, false)) {
-            drawer.openDrawer(Gravity.END, false);
-        }
-
-        if (TextUtils.equals(Constants.LANGUAGE_RUSSIAN, LocaleManager.getLanguage(this))) {
-            buttonLanguageRu.setBackgroundDrawable(ContextCompat.getDrawable(TradePointActivity.this, R.drawable.blue_background));
-        } else {
-            buttonLanguageRu.setBackgroundDrawable(ContextCompat.getDrawable(TradePointActivity.this, R.drawable.white_background));
-        }
-
-        if (TextUtils.equals(Constants.LANGUAGE_ENGLISH, LocaleManager.getLanguage(this))) {
-            buttonLanguageEn.setBackgroundDrawable(ContextCompat.getDrawable(TradePointActivity.this, R.drawable.blue_background));
-        } else {
-            buttonLanguageEn.setBackgroundDrawable(ContextCompat.getDrawable(TradePointActivity.this, R.drawable.white_background));
-        }
-
-        buttonLanguageRu.setOnClickListener(view -> setNewLanguage(Constants.LANGUAGE_RUSSIAN));
-        buttonLanguageEn.setOnClickListener(view -> setNewLanguage(Constants.LANGUAGE_ENGLISH));
-
-        hamburger.setOnClickListener(view -> {
-            if (drawer.isDrawerOpen(Gravity.END)) {
-                drawer.closeDrawer(Gravity.END);
-            } else {
-                drawer.openDrawer(Gravity.END);
-            }
-
         });
     }
 
@@ -201,6 +158,41 @@ public class TradePointActivity
 
     @Override
     protected void errorButtonClick() {
+    }
+
+    @Override
+    public void initNavigationDrawer(String fullName, String role) {
+        if (getIntent().getBooleanExtra(INTENT_KEY_WITH_OPEN_DRAWER, false)) {
+            drawer.openDrawer(Gravity.END, false);
+        }
+
+        if (TextUtils.equals(Constants.LANGUAGE_RUSSIAN, LocaleManager.getLanguage(this))) {
+            buttonLanguageRu.setBackgroundResource(R.drawable.azure_button_background);
+            buttonLanguageRu.setTextColor(ContextCompat.getColor(this, R.color.white));
+        } else {
+            buttonLanguageRu.setBackgroundResource(R.drawable.white_button_background);
+            buttonLanguageRu.setTextColor(ContextCompat.getColor(this, R.color.azure));
+        }
+
+        if (TextUtils.equals(Constants.LANGUAGE_ENGLISH, LocaleManager.getLanguage(this))) {
+            buttonLanguageEn.setBackgroundResource(R.drawable.azure_button_background);
+            buttonLanguageEn.setTextColor(ContextCompat.getColor(this, R.color.white));
+        } else {
+            buttonLanguageEn.setBackgroundResource(R.drawable.white_button_background);
+            buttonLanguageEn.setTextColor(ContextCompat.getColor(this, R.color.azure));
+        }
+
+        buttonLanguageRu.setOnClickListener(view -> setNewLanguage(Constants.LANGUAGE_RUSSIAN));
+        buttonLanguageEn.setOnClickListener(view -> setNewLanguage(Constants.LANGUAGE_ENGLISH));
+
+        hamburger.setOnClickListener(view -> {
+            if (drawer.isDrawerOpen(Gravity.END)) {
+                drawer.closeDrawer(Gravity.END);
+            } else {
+                drawer.openDrawer(Gravity.END);
+            }
+
+        });
     }
 
 }

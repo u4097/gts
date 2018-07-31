@@ -17,9 +17,9 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:tabTextColor="@color/white_smoke_80"
             android:background="?attr/colorPrimary"
-            app:tabSelectedTextColor="@color/white" />
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/white_smoke_80"/>
 
 
         <android.support.v7.widget.AppCompatImageView
@@ -32,7 +32,7 @@
             android:paddingEnd="15dp"
             android:paddingRight="15dp"
             app:srcCompat="@drawable/ic_burger_menu_24px"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"/>
     </FrameLayout>
 
     <android.support.v7.widget.ContentFrameLayout
@@ -44,9 +44,9 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
-        <include layout="@layout/view_shadow_bottom" />
+        <include layout="@layout/view_shadow_bottom"/>
 
     </android.support.v7.widget.ContentFrameLayout>
 

@@ -6,20 +6,18 @@ import javax.inject.Inject;
 
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
-
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
-import ru.panmin.gtspro.ui.toolbar.ToolbarFragment;
 
 
-public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView{
+public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView {
+
+    @Inject
+    SwTradePointPresenter presenter;
 
     public static SwTradePointFragment createInstance() {
         return new SwTradePointFragment();
     }
-
-    @Inject
-    SwTradePointPresenter presenter;
 
     @Override
     protected int getDataView() {

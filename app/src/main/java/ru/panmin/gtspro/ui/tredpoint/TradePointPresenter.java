@@ -38,5 +38,9 @@ public class TradePointPresenter extends ProgressPresenter<TradePointMvpView> {
                         }
                 );
     }
-}
 
+    public void initNavigationDrawer() {
+        getMvpView().initNavigationDrawer(dataManager.getFullName(), dataManager.getRole());
+    }
+
+}

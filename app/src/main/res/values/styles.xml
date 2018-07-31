@@ -17,8 +17,20 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
-    <style name="MainTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="MainTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="MainTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MainTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AzureButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/azure_button_background</item>
+    </style>
+
+    <style name="WhiteButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/azure</item>
+        <item name="android:background">@drawable/white_button_background</item>
+    </style>
 
 </resources>

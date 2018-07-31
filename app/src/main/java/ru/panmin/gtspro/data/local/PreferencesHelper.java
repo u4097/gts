@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ru.panmin.gtspro.injection.ApplicationContext;
+import ru.panmin.gtspro.utils.Constants;
 
 @Singleton
 public class PreferencesHelper {
@@ -18,6 +19,9 @@ public class PreferencesHelper {
     private static final String PREF_FILE_NAME = "ru.panmin.gtspro.shared.preferences";
 
     private static final String PREF_WAS_PERMISSION_DIALOGS = "ru.panmin.gtspro.was.permission.dialogs";
+
+    private static final String PREF_LANGUAGE = "language";
+    private static final String DEFAULT_PREF_LANGUAGE = Constants.LANGUAGE_RUSSIAN;
 
     private static final String PREF_TOKEN = "token";
     private static final String DEFAULT_PREF_TOKEN = "";
@@ -67,6 +71,14 @@ public class PreferencesHelper {
         Set<String> wasPermissionDialogs = preferencesHelper.getStringSet(PREF_WAS_PERMISSION_DIALOGS, new HashSet<>());
         wasPermissionDialogs.addAll(permissions);
         preferencesHelper.edit().putStringSet(PREF_WAS_PERMISSION_DIALOGS, wasPermissionDialogs).apply();
+    }
+
+    public String getLanguage() {
+        return preferencesHelper.getString(PREF_LANGUAGE, DEFAULT_PREF_LANGUAGE);
+    }
+
+    public void setLanguage(String language) {
+        preferencesHelper.edit().putString(PREF_LANGUAGE, language).apply();
     }
 
     public String getToken() {
