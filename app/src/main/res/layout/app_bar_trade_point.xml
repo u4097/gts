@@ -21,18 +21,18 @@
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/white_smoke_80"/>
 
-
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/menu_hamburger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:paddingEnd="15dp"
-            android:paddingRight="15dp"
+            android:padding="16dp"
             app:srcCompat="@drawable/ic_burger_menu_24px"
             tools:ignore="RtlSymmetry"/>
+
     </FrameLayout>
 
     <android.support.v7.widget.ContentFrameLayout

@@ -23,6 +23,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.ui.customviews.VectorsSupportTextView;
+import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressActivity;
 import ru.panmin.gtspro.utils.Constants;
@@ -33,6 +35,7 @@ public class TradePointActivity
         implements TradePointMvpView {
 
     private static final String INTENT_KEY_WITH_OPEN_DRAWER = "with.open.drawer";
+
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.view_pager) ViewPager viewPager;
@@ -43,8 +46,12 @@ public class TradePointActivity
     @BindView(R.id.statusTextNavigationView) AppCompatTextView statusTextNavigationView;
     @BindView(R.id.buttonLanguageRu) AppCompatButton buttonLanguageRu;
     @BindView(R.id.buttonLanguageEn) AppCompatButton buttonLanguageEn;
+    @BindView(R.id.exitTextBottom)
+    VectorsSupportTextView exitTextBottom;
+
     @Inject
     TradePointPresenter tradePointPresenter;
+
     public TradePointActivity() {
     }
 
@@ -98,10 +105,11 @@ public class TradePointActivity
     @Override
     protected void initViews() {
         tradePointPresenter.checkRole();
+        tradePointPresenter.getAddressProgram();
         setStateData();
         tradePointPresenter.initNavigationDrawer();
         initViewPager();
-        tradePointPresenter.getAddressProgram();
+
     }
 
     private void initViewPager() {
@@ -164,6 +172,25 @@ public class TradePointActivity
 
     @Override
     public void initNavigationDrawer(String fullName, String role) {
+        nameTextNavigationView.setText(fullName);
+
+        switch (role) {
+            case Constants.ROLE_SUPERVISOR:
+                avatarImageNavigationView.setText(R.string.role_supervisor_short);
+                statusTextNavigationView.setText(R.string.role_supervisor);
+                statusTextNavigationView.setVisibility(View.VISIBLE);
+                break;
+            case Constants.ROLE_MERCHANDISER:
+                avatarImageNavigationView.setText(R.string.role_merchandiser_short);
+                statusTextNavigationView.setText(R.string.role_merchandiser);
+                statusTextNavigationView.setVisibility(View.VISIBLE);
+                break;
+            default:
+                avatarImageNavigationView.setText(R.string.role_unknown);
+                statusTextNavigationView.setVisibility(View.GONE);
+                break;
+        }
+
         if (getIntent().getBooleanExtra(INTENT_KEY_WITH_OPEN_DRAWER, false)) {
             drawer.openDrawer(Gravity.END, false);
         }
@@ -195,6 +222,13 @@ public class TradePointActivity
             }
 
         });
+
+        exitTextBottom.setOnClickListener(view -> tradePointPresenter.exit());
+    }
+
+    @Override
+    public void openLoginActivity() {
+        startActivity(LoginActivity.getStartIntent(this));
     }
 
     @Override

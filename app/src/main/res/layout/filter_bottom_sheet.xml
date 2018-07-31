@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_sorting_teg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="29dp"
+        android:text="@string/sorting_teg_text"
+        android:textColor="@color/color_primary"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="24dp" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/close_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="29dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/close_text_teg"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        android:layout_marginRight="17dp"
+        android:layout_marginLeft="8dp" />
+
+
+    <RadioGroup
+        android:id="@+id/radio_group_filter"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="34dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sorting_teg">
+
+        <RadioButton
+            android:id="@+id/rbByVisitTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:layout_marginStart="26dp"
+            android:button="@drawable/radiobutton_selector"
+            android:paddingEnd="0dp"
+            android:paddingStart="16dp"
+            android:text="@string/by_visit_time"
+            android:paddingRight="0dp"
+            android:paddingLeft="16dp"
+            android:layout_marginLeft="26dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:background="@color/white_smoke_80" />
+
+        <RadioButton
+            android:id="@+id/rbByDistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="17dp"
+            android:button="@drawable/radiobutton_selector"
+            android:paddingEnd="0dp"
+            android:paddingStart="16dp"
+            android:text="@string/by_distance"
+            android:layout_marginLeft="26dp"
+            android:paddingRight="0dp"
+            android:paddingLeft="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:background="@color/white_smoke_80" />
+
+        <RadioButton
+            android:id="@+id/rbAlphabetically"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="17dp"
+            android:button="@drawable/radiobutton_selector"
+            android:paddingEnd="0dp"
+            android:paddingStart="16dp"
+            android:text="@string/alphabetically"
+            android:layout_marginLeft="26dp"
+            android:paddingRight="0dp"
+            android:paddingLeft="16dp" />
+
+
+    </RadioGroup>
+</android.support.constraint.ConstraintLayout>

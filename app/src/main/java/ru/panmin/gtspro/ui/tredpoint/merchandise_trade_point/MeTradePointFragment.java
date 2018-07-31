@@ -3,27 +3,33 @@ package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 
 public class MeTradePointFragment
         extends ProgressFragment
-        implements MeTradePointMvpView {
+        implements MeTradePointMvpView, MeAdapter.InfoClickListener {
 
     @Inject
     MeTradePointPresenter presenter;
+
     @Inject
     MeAdapter adapter;
+
     @BindView(R.id.recycler_trade_point)
     RecyclerView recyclerView;
+
     @BindView(R.id.floating_filter)
     FloatingActionButton filter;
 
@@ -69,6 +75,7 @@ public class MeTradePointFragment
 
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter.ClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -87,5 +94,15 @@ public class MeTradePointFragment
     @Override
     protected void detachView() {
         presenter.detachView();
+    }
+
+    @Override
+    public void setTradePoint(List<TradePoint> tradePoints) {
+        adapter.setData(tradePoints);
+    }
+
+    @Override
+    public void showInfo(TradePoint tradePoint) {
+        Toast.makeText(getContext(), tradePoint.getSignboard().getRu(), Toast.LENGTH_SHORT).show();
     }
 }
