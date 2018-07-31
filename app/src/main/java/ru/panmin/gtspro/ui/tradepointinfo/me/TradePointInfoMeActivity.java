@@ -34,7 +34,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected int getDataView() {
-        return R.layout.activity_trade_point_info_sv;
+        return R.layout.activity_trade_point_info_me;
     }
 
     @Override

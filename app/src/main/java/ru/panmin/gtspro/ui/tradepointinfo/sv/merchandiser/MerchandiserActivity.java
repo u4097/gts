@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tradepointinfo.sv;
+package ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,24 +6,24 @@ import android.content.Intent;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
-public class TradePointInfoSvActivity extends ToolbarActivity implements TradePointInfoSvMvpView {
+public class MerchandiserActivity extends ToolbarActivity implements MerchandiserMvpView {
 
-    private static final String INTENT_KEY_TRADE_POINT = "trade.point";
+    private static final String INTENT_KEY_MERCHANDISER = "merchandiser";
 
-    @Inject TradePointInfoSvPresenter tradePointInfoSvPresenter;
+    @Inject MerchandiserPresenter merchandiserPresenter;
 
-    private TradePoint tradePoint = null;
+    private Merchandiser merchandiser = null;
 
-    public TradePointInfoSvActivity() {
+    public MerchandiserActivity() {
     }
 
-    public static Intent getStartIntent(Context context, TradePoint tradePoint) {
-        Intent intent = new Intent(context, TradePointInfoSvActivity.class);
-        intent.putExtra(INTENT_KEY_TRADE_POINT, tradePoint);
+    public static Intent getStartIntent(Context context, Merchandiser merchandiser) {
+        Intent intent = new Intent(context, MerchandiserActivity.class);
+        intent.putExtra(INTENT_KEY_MERCHANDISER, merchandiser);
         return intent;
     }
 
@@ -39,15 +39,15 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void attachView() {
-        tradePointInfoSvPresenter.attachView(this);
+        merchandiserPresenter.attachView(this);
     }
 
     @Override
     protected void initToolbar() {
-        tradePoint = getIntent().getParcelableExtra(INTENT_KEY_TRADE_POINT);
+        merchandiser = getIntent().getParcelableExtra(INTENT_KEY_MERCHANDISER);
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(merchandiser.getName());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void detachView() {
-        tradePointInfoSvPresenter.detachView();
+        merchandiserPresenter.detachView();
     }
 
     @Override
