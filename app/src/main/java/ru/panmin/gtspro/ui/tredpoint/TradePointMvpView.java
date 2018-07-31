@@ -7,4 +7,5 @@ interface TradePointMvpView extends ProgressMvpView {
 
     void initNavigationDrawer(String fullName, String role);
 
+    void setRole(boolean b);
 }

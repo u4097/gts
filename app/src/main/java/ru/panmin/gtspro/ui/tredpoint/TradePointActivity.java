@@ -58,6 +58,8 @@ public class TradePointActivity
         return intent;
     }
 
+    private boolean b;
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.END)) {
@@ -93,9 +95,9 @@ public class TradePointActivity
         tradePointPresenter.detachView();
     }
 
-
     @Override
     protected void initViews() {
+        tradePointPresenter.checkRole();
         setStateData();
         tradePointPresenter.initNavigationDrawer();
         initViewPager();
@@ -103,7 +105,7 @@ public class TradePointActivity
     }
 
     private void initViewPager() {
-        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), true);
+        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), b);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());
@@ -193,6 +195,11 @@ public class TradePointActivity
             }
 
         });
+    }
+
+    @Override
+    public void setRole(boolean b) {
+        this.b =b;
     }
 
 }
