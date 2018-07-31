@@ -6,6 +6,7 @@ import android.support.annotation.MenuRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import ru.panmin.gtspro.ui.progress.ProgressActivity;
 public abstract class ToolbarActivity extends ProgressActivity implements ToolbarMvpView {
 
     @BindView(R.id.toolbar) protected Toolbar toolbar;
+    @BindView(R.id.textToolbarTitle) protected AppCompatTextView textToolbarTitle;
     @BindView(R.id.materialSearchView) protected MaterialSearchView materialSearchView;
     @BindView(R.id.toolbarShadow) View toolbarShadow;
 
@@ -83,12 +85,12 @@ public abstract class ToolbarActivity extends ProgressActivity implements Toolba
 
     @Override
     public void setTitle(String title) {
-        toolbar.setTitle(title);
+        textToolbarTitle.setText(title);
     }
 
     @Override
     public void setTitle(@StringRes int title) {
-        toolbar.setTitle(title);
+        textToolbarTitle.setText(title);
     }
 
     @Override

@@ -37,6 +37,14 @@
             android:name=".ui.tredpoint.TradePointActivity"
             android:theme="@style/NoActionBar"/>
 
+        <activity
+            android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"
+            android:theme="@style/NoActionBar"/>
+
+        <activity
+            android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"
+            android:theme="@style/NoActionBar"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"
