@@ -10,6 +10,9 @@ public class Constants {
     public static final String ROLE_MERCHANDISER = "me";
     public static final String ROLE_SUPERVISOR = "sv";
 
+    public static final String LANGUAGE_RUSSIAN = "ru";
+    public static final String LANGUAGE_ENGLISH = "en";
+
     private Constants() {
     }
 

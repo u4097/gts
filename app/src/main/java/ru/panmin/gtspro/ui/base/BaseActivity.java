@@ -26,6 +26,7 @@ import ru.panmin.gtspro.injection.component.ConfigPersistentComponent;
 import ru.panmin.gtspro.injection.component.DaggerConfigPersistentComponent;
 import ru.panmin.gtspro.injection.module.ActivityModule;
 import ru.panmin.gtspro.utils.DialogUtils;
+import ru.panmin.gtspro.utils.LocaleManager;
 
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
 
@@ -40,6 +41,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     private MaterialDialog materialDialog = null;
 
     public BaseActivity() {
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
     }
 
     @Override

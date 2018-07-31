@@ -1,9 +1,13 @@
 package ru.panmin.gtspro.data.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+
+import ru.panmin.gtspro.utils.Constants;
+import ru.panmin.gtspro.utils.LocaleManager;
 
 public class Name implements Parcelable {
 
@@ -51,6 +55,18 @@ public class Name implements Parcelable {
 
     public void setEn(String en) {
         this.en = en;
+    }
+
+    public String toString(Context context) {
+        switch (LocaleManager.getLanguage(context)) {
+            case Constants.LANGUAGE_RUSSIAN:
+                return ru;
+            case Constants.LANGUAGE_ENGLISH:
+                return en;
+            default:
+                return "";
+
+        }
     }
 
     @Override
