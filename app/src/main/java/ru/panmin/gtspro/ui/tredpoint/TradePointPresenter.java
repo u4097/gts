@@ -43,4 +43,10 @@ public class TradePointPresenter extends ProgressPresenter<TradePointMvpView> {
         getMvpView().initNavigationDrawer(dataManager.getFullName(), dataManager.getRole());
     }
 
+    public void exit() {
+        dataManager.clear();
+        getMvpView().openLoginActivity();
+        getMvpView().finishActivity();
+    }
+
 }

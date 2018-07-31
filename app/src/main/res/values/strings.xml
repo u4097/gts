@@ -4,6 +4,14 @@
 
     <string name="app_name">GTS Pro</string>
 
+    <string name="role_supervisor">"Супервайзер"</string>
+    <string name="role_supervisor_short">"СВ"</string>
+
+    <string name="role_merchandiser">"Мерчендайзер"</string>
+    <string name="role_merchandiser_short">"МЕ"</string>
+
+    <string name="role_unknown">"?"</string>
+
     <string name="empty">""</string>
     <string name="error">"Ошибка"</string>
     <string name="update">Обновить</string>

@@ -16,9 +16,9 @@ public class LocaleManager {
         return updateResources(context, getLanguage(context));
     }
 
-    public static Context setNewLocale(Context context, String language) {
+    public static void setNewLocale(Context context, String language) {
         persistLanguage(context, language);
-        return updateResources(context, language);
+        updateResources(context, language);
     }
 
     public static String getLanguage(Context context) {
