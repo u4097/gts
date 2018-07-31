@@ -1,7 +1,8 @@
-package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
+package ru.panmin.gtspro.ui.tredpoint.supervision_trade_point;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,13 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 
-class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
+
+public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
 
     private List<TradePoint> tradePoints = new ArrayList<>();
-    private InfoClickListener infoClickListener;
+    private SvAdapter.InfoClickListener infoClickListener;
     @Inject
-    MeAdapter() {
+    SvAdapter() {
     }
 
     public void setData(List<TradePoint> tradePoints) {
@@ -31,20 +33,20 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void ClickListener(InfoClickListener infoClickListener) {
+    public void ClickListener(SvAdapter.InfoClickListener infoClickListener) {
         this.infoClickListener = infoClickListener;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MeViewHolder holder, int position) {
-        holder.bind(tradePoints.get(position));
     }
 
     @NonNull
     @Override
-    public MeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.me_item_trade_point, parent, false);
-        return new MeViewHolder(v);
+    public SvAdapter.SvViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sw_item_trade_point, parent, false);
+        return new SvAdapter.SvViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull SvAdapter.SvViewHolder holder, int position) {
+        holder.bind(tradePoints.get(position));
     }
 
     @Override
@@ -56,16 +58,18 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
         void showInfo(TradePoint tradePoint);
     }
 
-    class MeViewHolder extends RecyclerView.ViewHolder {
+    class SvViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.title_card)
         TextView name;
-        @BindView(R.id.adres_card_me)
+        @BindView(R.id.adres_card_sw)
         TextView address;
+        @BindView(R.id.tv_claims_quantity)
+        AppCompatTextView claimsQuantity;
         @BindView(R.id.btn_info)
         AppCompatImageView info;
 
-        public MeViewHolder(View itemView) {
+        public SvViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -73,6 +77,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
         public void bind(TradePoint tradePoint) {
             name.setText(tradePoint.getSignboard().toString(itemView.getContext()));
             address.setText(tradePoint.getAddress().toString(itemView.getContext()));
+            claimsQuantity.setText(tradePoint.getClaims().size());
             info.setOnClickListener(view -> infoClickListener.showInfo(tradePoint));
         }
     }

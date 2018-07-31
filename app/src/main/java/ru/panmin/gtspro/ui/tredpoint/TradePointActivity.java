@@ -36,6 +36,8 @@ public class TradePointActivity
 
     private static final String INTENT_KEY_WITH_OPEN_DRAWER = "with.open.drawer";
 
+    @Inject TradePointPresenter tradePointPresenter;
+
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.view_pager) ViewPager viewPager;
@@ -46,10 +48,11 @@ public class TradePointActivity
     @BindView(R.id.statusTextNavigationView) AppCompatTextView statusTextNavigationView;
     @BindView(R.id.buttonLanguageRu) AppCompatButton buttonLanguageRu;
     @BindView(R.id.buttonLanguageEn) AppCompatButton buttonLanguageEn;
-    @BindView(R.id.exitTextBottom) VectorsSupportTextView exitTextBottom;
+    @BindView(R.id.exitTextBottom)
 
-    @Inject
-    TradePointPresenter tradePointPresenter;
+    VectorsSupportTextView exitTextBottom;
+
+    private boolean b;
 
     public TradePointActivity() {
     }
@@ -88,7 +91,6 @@ public class TradePointActivity
         return R.layout.activity_trade_point;
     }
 
-
     @Override
     protected void attachView() {
         tradePointPresenter.attachView(this);
@@ -99,17 +101,16 @@ public class TradePointActivity
         tradePointPresenter.detachView();
     }
 
-
     @Override
     protected void initViews() {
-        setStateData();
+        tradePointPresenter.checkRole();
         tradePointPresenter.initNavigationDrawer();
         initViewPager();
         tradePointPresenter.getAddressProgram();
     }
 
     private void initViewPager() {
-        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), true);
+        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), b);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());
@@ -225,6 +226,11 @@ public class TradePointActivity
     @Override
     public void openLoginActivity() {
         startActivity(LoginActivity.getStartIntent(this));
+    }
+
+    @Override
+    public void setRole(boolean b) {
+        this.b = b;
     }
 
 }

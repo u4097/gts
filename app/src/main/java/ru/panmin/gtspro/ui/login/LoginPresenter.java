@@ -7,7 +7,6 @@ import io.reactivex.schedulers.Schedulers;
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.base.BasePresenter;
 import ru.panmin.gtspro.utils.RxUtils;
-import timber.log.Timber;
 
 class LoginPresenter extends BasePresenter<LoginMvpView> {
 

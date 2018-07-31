@@ -9,10 +9,20 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="end">
 
-    <include
-        layout="@layout/app_bar_trade_point"
+    <ViewFlipper
+        android:id="@+id/viewFlipperState"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <include layout="@layout/view_state_loading"/>
+
+        <include layout="@layout/app_bar_trade_point"/>
+
+        <include layout="@layout/view_state_empty"/>
+
+        <include layout="@layout/view_state_error"/>
+
+    </ViewFlipper>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
