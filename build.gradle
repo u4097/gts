@@ -43,4 +43,6 @@ ext {
     timberVersion = '4.7.0'
     loggingInterceptorVersion = '2.0.5'
     chuckVersion = '1.1.0'
+    universalAdapterVersion = '0.1.4'
+    constraintVersion = '1.1.2'
 }

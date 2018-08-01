@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginTop="@dimen/spacing_large"
+    android:layout_marginBottom="@dimen/spacing_large"
+    >
+
+    <!-- Claims -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnClaims"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_icon_half_large"
+        app:backgroundTint="@color/btn_selector"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnPromo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_claims_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterClaims"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnClaims"
+        app:layout_constraintLeft_toRightOf="@+id/btnClaims"
+        app:layout_constraintRight_toRightOf="@+id/btnClaims"
+        app:layout_constraintTop_toTopOf="@+id/btnClaims"
+        tools:text="1"
+        />
+
+    <!-- PromoModel -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnPromo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_icon_half_large"
+        app:layout_constraintLeft_toRightOf="@+id/btnClaims"
+        app:layout_constraintRight_toLeftOf="@+id/btnPhotoReport"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_promo_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterPromo"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnPromo"
+        app:layout_constraintEnd_toEndOf="@+id/btnPromo"
+        app:layout_constraintStart_toEndOf="@+id/btnPromo"
+        app:layout_constraintTop_toTopOf="@+id/btnPromo"
+        tools:text="2"
+        />
+
+    <!-- PhotoReport -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnPhotoReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_icon_half_large"
+        app:layout_constraintLeft_toRightOf="@+id/btnPromo"
+        app:layout_constraintRight_toLeftOf="@+id/btnReport"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_photo_report_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterPhotoReport"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnPhotoReport"
+        app:layout_constraintEnd_toEndOf="@+id/btnPhotoReport"
+        app:layout_constraintStart_toEndOf="@+id/btnPhotoReport"
+        app:layout_constraintTop_toTopOf="@+id/btnPhotoReport"
+        tools:text="3"
+        />
+
+    <!-- Report -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_icon_half_large"
+        app:layout_constraintLeft_toRightOf="@+id/btnPhotoReport"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_report_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterReport"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnReport"
+        app:layout_constraintEnd_toEndOf="@+id/btnReport"
+        app:layout_constraintStart_toEndOf="@+id/btnReport"
+        app:layout_constraintTop_toTopOf="@+id/btnReport"
+        tools:text="4"
+        />
+
+    <!-- Sku -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnSku"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnPlanogram"
+        app:layout_constraintTop_toBottomOf="@+id/btnClaims"
+        app:srcCompat="@drawable/btn_sku"
+        />
+
+    <TextView
+        android:id="@+id/tCounterSku"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnSku"
+        app:layout_constraintEnd_toEndOf="@+id/btnSku"
+        app:layout_constraintStart_toEndOf="@+id/btnSku"
+        app:layout_constraintTop_toTopOf="@+id/btnSku"
+        tools:text="96"
+        />
+
+    <!-- Planogram -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnPlanogram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintLeft_toRightOf="@+id/btnSku"
+        app:layout_constraintRight_toLeftOf="@+id/btnHotLine"
+        app:layout_constraintTop_toBottomOf="@+id/btnClaims"
+        app:srcCompat="@drawable/btn_planogram_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterPlanogram"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlanogram"
+        app:layout_constraintEnd_toEndOf="@+id/btnPlanogram"
+        app:layout_constraintStart_toEndOf="@+id/btnPlanogram"
+        app:layout_constraintTop_toTopOf="@+id/btnPlanogram"
+        tools:text="97"
+        />
+
+    <!-- HotLine -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnHotLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintLeft_toRightOf="@+id/btnPlanogram"
+        app:layout_constraintRight_toLeftOf="@+id/btnStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/btnClaims"
+        app:srcCompat="@drawable/btn_hot_line_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterHotLine"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnHotLine"
+        app:layout_constraintEnd_toEndOf="@+id/btnHotLine"
+        app:layout_constraintStart_toEndOf="@+id/btnHotLine"
+        app:layout_constraintTop_toTopOf="@+id/btnHotLine"
+        tools:text="98"
+        />
+
+    <!-- Statistics -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintLeft_toRightOf="@+id/btnHotLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClaims"
+        app:srcCompat="@drawable/btn_statistics_me"
+        />
+
+    <TextView
+        android:id="@+id/tCounterStatistics"
+        style="@style/Gts.TextView.Badge"
+        app:layout_constraintBottom_toTopOf="@+id/btnStatistics"
+        app:layout_constraintEnd_toEndOf="@+id/btnStatistics"
+        app:layout_constraintStart_toEndOf="@+id/btnStatistics"
+        app:layout_constraintTop_toTopOf="@+id/btnStatistics"
+        tools:text="99"
+        />
+</android.support.design.widget.CoordinatorLayout>

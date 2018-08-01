@@ -45,4 +45,15 @@
     <string name="by_distance">Подистанции</string>
     <string name="alphabetically">По алфавиту</string>
 
+
+    <string name="label_claims">Claims</string>
+    <string name="label_promo">Promo</string>
+    <string name="label_photo_report">Photo Report</string>
+    <string name="label_report">Report</string>
+    <string name="label_sku">Sku</string>
+    <string name="label_planogram">Planogram</string>
+    <string name="label_hot_line">Hot Line</string>
+    <string name="label_statistics">Statistics</string>
+    <string name="action_logout">Выход</string>
+
 </resources>

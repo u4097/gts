@@ -123,6 +123,12 @@ dependencies {
     //== keyboard visibility event listener ==//
     implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${keyboardVisibilityEventVersion}"
 
+
+    //== universal rv adapter ==//
+    compileOnly "com.github.lliepmah:annotations:$universalAdapterVersion"
+    implementation "com.github.lliepmah:library:$universalAdapterVersion"
+    annotationProcessor "com.github.lliepmah:compiler:$universalAdapterVersion"
+
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("com.github.ihsanbal:LoggingInterceptor:${loggingInterceptorVersion}") {
