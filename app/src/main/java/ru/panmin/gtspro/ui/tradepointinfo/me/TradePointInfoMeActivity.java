@@ -1,10 +1,13 @@
 package ru.panmin.gtspro.ui.tradepointinfo.me;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.AppCompatTextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
@@ -20,6 +23,27 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     public TradePointInfoMeActivity() {
     }
+
+    @BindView(R.id.address_text_info)
+    AppCompatTextView address;
+
+    @BindView(R.id.schedule_text_info)
+    AppCompatTextView schedule;
+
+    @BindView(R.id.client_text_info)
+    AppCompatTextView client;
+
+    @BindView(R.id.claims_quantity_text)
+    AppCompatTextView claimsQuantity;
+
+    @BindView(R.id.promotions_text)
+    AppCompatTextView promotions;
+
+    @BindView(R.id.photo_report_text)
+    AppCompatTextView photoReport;
+
+    @BindView(R.id.report_text)
+    AppCompatTextView report;
 
     public static Intent getStartIntent(Context context, TradePoint tradePoint) {
         Intent intent = new Intent(context, TradePointInfoMeActivity.class);
@@ -52,6 +76,9 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initViews() {
+        tradePointInfoMePresenter.checkMerch(tradePoint);
+        showInfo();
+        setStateData();
     }
 
     @Override
@@ -72,4 +99,33 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     protected void errorButtonClick() {
     }
 
+
+    @SuppressLint("SetTextI18n")
+    private void showInfo() {
+        address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
+        StringBuilder listClients = new StringBuilder();
+        for (int i = 0; i < tradePoint.getClients().size(); i++) {
+            if (i != tradePoint.getClients().size() - 1) {
+                listClients.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
+            } else {
+                listClients.append(tradePoint.getClients().get(i).getName().toString(this));
+            }
+        }
+         StringBuilder listString = new StringBuilder();
+        for (int i = 0; i < tradePoint.getClients().size(); i++) {
+            if (i != tradePoint.getClients().size() - 1) {
+                listString.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
+            } else {
+                listString.append(tradePoint.getClients().get(i).getName().toString(this));
+            }
+        }
+
+        schedule.setText("Клиенты:" + " " + listString);
+        claimsQuantity.setText(String.valueOf(tradePoint.getClaims().size()));
+        promotions.setText(String.valueOf(tradePoint.getPromos().size()));
+        photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
+        report.setText(String.valueOf(tradePoint.getReports().size()));
+
+
+    }
 }
