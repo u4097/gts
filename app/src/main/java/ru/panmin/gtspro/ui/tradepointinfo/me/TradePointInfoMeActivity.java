@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -12,14 +15,20 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import ru.panmin.gtspro.ui.tradepointinfo.sv.ListMeAdapter;
 
 public class TradePointInfoMeActivity extends ToolbarActivity implements TradePointInfoMeMvpView {
 
     private static final String INTENT_KEY_TRADE_POINT = "trade.point";
 
-    @Inject TradePointInfoMePresenter tradePointInfoMePresenter;
+    @Inject
+    TradePointInfoMePresenter tradePointInfoMePresenter;
+
 
     private TradePoint tradePoint = null;
+
+    private static SimpleDateFormat simpleDateFormat =
+            new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     public TradePointInfoMeActivity() {
     }
@@ -76,7 +85,6 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initViews() {
-        tradePointInfoMePresenter.checkMerch(tradePoint);
         showInfo();
         setStateData();
     }
@@ -99,7 +107,6 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     protected void errorButtonClick() {
     }
 
-
     @SuppressLint("SetTextI18n")
     private void showInfo() {
         address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
@@ -111,12 +118,15 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
                 listClients.append(tradePoint.getClients().get(i).getName().toString(this));
             }
         }
-        StringBuilder listTime = new StringBuilder();
-        for (int i = 0; i < tradePoint.getTimes().size(); i++) {
-            listTime.append(tradePoint.getTimes().get(i).getBegin()).append(", ").append(tradePoint.getTimes().get(i).getEnd());
 
+        StringBuilder listTime = new StringBuilder();
+
+        for (int i = 0; i < tradePoint.getTimes().size(); i++) {
+            if (tradePoint.getTimes().get(i).getBegin()!=null||tradePoint.getTimes().get(i).getEnd()!=null) {
+                listTime.append(simpleDateFormat.format(tradePoint.getTimes().get(i).getBegin())).append(" - ").append(simpleDateFormat.format(tradePoint.getTimes().get(i).getEnd()));
+            }
         }
-        schedule.setText("График Визита" + " " + "" + listTime);
+        schedule.setText("График Визита:" + " " + "" + listTime);
         client.setText("Клиенты:" + " " + listClients);
         claimsQuantity.setText(String.valueOf(tradePoint.getClaims().size()));
         promotions.setText(String.valueOf(tradePoint.getPromos().size()));

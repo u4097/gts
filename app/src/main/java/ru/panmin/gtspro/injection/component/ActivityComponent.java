@@ -9,6 +9,7 @@ import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser.MerchandiserActivity;
 import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
+import ru.panmin.gtspro.ui.tredpoint.filter.BottomSheetFilter;
 import ru.panmin.gtspro.ui.tredpoint.map.MapFragment;
 import ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point.MeTradePointFragment;
 import ru.panmin.gtspro.ui.tredpoint.supervision_trade_point.SwTradePointFragment;
@@ -29,5 +30,5 @@ public interface ActivityComponent {
     void inject(MeTradePointFragment meTradePointFragment);
     void inject(MapFragment mapFragment);
     void inject(SwTradePointFragment swTradePointFragment);
-
+    void inject(BottomSheetFilter bottomSheetFilter);
 }

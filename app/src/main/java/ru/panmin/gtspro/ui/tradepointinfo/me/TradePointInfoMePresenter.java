@@ -29,8 +29,4 @@ class TradePointInfoMePresenter extends ToolbarPresenter<TradePointInfoMeMvpView
     protected void dispose() {
     }
 
-    public void checkMerch(TradePoint tradePoint) {
-        String s  = dataManager.getId();
-
-    }
 }
