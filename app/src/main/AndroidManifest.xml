@@ -50,6 +50,7 @@
             android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"
             android:theme="@style/MainTheme" />
         <activity android:name=".ui.blocks.BlockActivity" />
+        <activity android:name=".ui.promoinfo.PromoInfoActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

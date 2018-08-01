@@ -3,12 +3,14 @@ package ru.panmin.gtspro.ui.blocks;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
+import ru.panmin.gtspro.ui.blocks.holders.BlockPromoVH;
 import ru.panmin.gtspro.ui.blocks.holders.BlocksVH;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
+import ru.panmin.gtspro.ui.blocks.model.PromoModel;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 import timber.log.Timber;
 
-public class BlockPresenter extends ToolbarPresenter<BlockMvpView> implements BlocksVH.OnTradePointBlockClickListener {
+public class BlockPresenter extends ToolbarPresenter<BlockMvpView> implements BlocksVH.OnTradePointBlockClickListener, BlockPromoVH.OnPromoClickListener {
 
     private final DataManager dataManager;
     private BlockType.Type currentBlock = BlockType.Type.PROMO;
@@ -29,5 +31,11 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView> implements Bl
         }
 
         currentBlock = blockType;
+    }
+
+    @Override
+    public void onPromoClick(PromoModel promoModel) {
+      Timber.d("On promo click");
+      getMvpView().showInfo(promoModel);
     }
 }

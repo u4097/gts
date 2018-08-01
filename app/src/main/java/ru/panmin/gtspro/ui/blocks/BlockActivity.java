@@ -10,19 +10,24 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.lliepmah.lib.UniversalAdapter;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.blocks.holders.BlockPromoVHBuilder;
 import ru.panmin.gtspro.ui.blocks.holders.BlockTitleVHBuilder;
 import ru.panmin.gtspro.ui.blocks.holders.BlocksVHBuilder;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
+import ru.panmin.gtspro.ui.blocks.model.PromoModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.PromViewModelStub;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
+import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 
 public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Inject
-    BlockPresenter mainPresenter;
+    BlockPresenter blockPresenter;
 
     @BindView(R.id.rvTradePointBrowse)
     RecyclerView rvTradePointBrowse;
@@ -44,7 +49,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     protected void attachView() {
-        mainPresenter.attachView(this);
+        blockPresenter.attachView(this);
     }
 
     @Override
@@ -54,6 +59,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     protected void initToolbar() {
+        // TODO: 01/08/2018 : Fix title by center toolbar.
         setTitle("                   ОАО Магнит");
         setNavigationIcon(R.drawable.ic_back_arrow);
         inflateMenu(R.menu.logout);
@@ -66,8 +72,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
     }
 
     private void initRvAdapter() {
-        adapter = new UniversalAdapter(new BlocksVHBuilder(mainPresenter), new BlockTitleVHBuilder(),
-                new BlockPromoVHBuilder());
+        adapter = new UniversalAdapter(new BlocksVHBuilder(blockPresenter), new BlockTitleVHBuilder(),
+                new BlockPromoVHBuilder(blockPresenter));
 
         adapter.clear();
 
@@ -89,7 +95,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     protected void detachView() {
-        mainPresenter.detachView();
+        blockPresenter.detachView();
     }
 
     @Override
@@ -103,6 +109,11 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     protected void errorButtonClick() {
+    }
+
+    @Override
+    public void showInfo(PromoModel promoModel) {
+        startActivity(PromoInfoActivity.getStartIntent(this, null));
     }
 
 }
