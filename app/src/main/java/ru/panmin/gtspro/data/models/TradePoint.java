@@ -42,6 +42,8 @@ public class TradePoint implements Parcelable {
     private String departmentId;
     @SerializedName("clients")
     private List<Client> clients = new ArrayList<>();
+    @SerializedName("times")
+    private List<Time> times = new ArrayList<>();
     @SerializedName("merchandisers")
     private List<Merchandiser> merchandisers = new ArrayList<>();
     @SerializedName("promos")
@@ -60,7 +62,7 @@ public class TradePoint implements Parcelable {
     }
 
     public TradePoint(String id, Coordinates coordinates, Name signboard, Name address, Name tradeNetwork, String tradeNetworkId,
-                      Name regionalOffice, List<String> formats, String departmentId, List<Client> clients,
+                      Name regionalOffice, List<String> formats, String departmentId, List<Client> clients, List<Time> times,
                       List<Merchandiser> merchandisers, List<Promo> promos, List<Report> reports, List<PhotoReport> photoreports,
                       List<Sku> skus, List<Standard> standards, List<Claim> claims) {
         this.id = id;
@@ -73,6 +75,7 @@ public class TradePoint implements Parcelable {
         this.formats = formats;
         this.departmentId = departmentId;
         this.clients = clients;
+        this.times = times;
         this.merchandisers = merchandisers;
         this.promos = promos;
         this.reports = reports;
@@ -93,6 +96,7 @@ public class TradePoint implements Parcelable {
         this.formats = in.createStringArrayList();
         this.departmentId = in.readString();
         this.clients = in.createTypedArrayList(Client.CREATOR);
+        this.times = in.createTypedArrayList(Time.CREATOR);
         this.merchandisers = in.createTypedArrayList(Merchandiser.CREATOR);
         this.promos = in.createTypedArrayList(Promo.CREATOR);
         this.reports = in.createTypedArrayList(Report.CREATOR);
@@ -182,6 +186,14 @@ public class TradePoint implements Parcelable {
         this.clients = clients;
     }
 
+    public List<Time> getTimes() {
+        return times;
+    }
+
+    public void setTimes(List<Time> times) {
+        this.times = times;
+    }
+
     public List<Merchandiser> getMerchandisers() {
         return merchandisers;
     }
@@ -255,6 +267,7 @@ public class TradePoint implements Parcelable {
         dest.writeStringList(this.formats);
         dest.writeString(this.departmentId);
         dest.writeTypedList(this.clients);
+        dest.writeTypedList(this.times);
         dest.writeTypedList(this.merchandisers);
         dest.writeTypedList(this.promos);
         dest.writeTypedList(this.reports);
