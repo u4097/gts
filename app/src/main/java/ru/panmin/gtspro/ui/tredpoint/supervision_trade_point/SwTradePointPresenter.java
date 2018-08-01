@@ -28,7 +28,7 @@ public class SwTradePointPresenter extends ProgressPresenter<SwTradePointMvpView
     public void attachView(SwTradePointMvpView mvpView) {
         super.attachView(mvpView);
         RxUtils.dispose(disposable);
-        rxEventBus.filteredObservable(AddressProgramResponse.class)
+        disposable = rxEventBus.filteredObservable(AddressProgramResponse.class)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

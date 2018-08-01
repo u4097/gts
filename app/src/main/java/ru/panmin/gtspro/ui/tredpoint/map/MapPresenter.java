@@ -25,7 +25,7 @@ public class MapPresenter extends ProgressPresenter<MapMvpView> {
         this.rxEventBus = rxEventBus;
 
         RxUtils.dispose(disposable);
-        rxEventBus.filteredObservable(AddressProgramResponse.class)
+        disposable = rxEventBus.filteredObservable(AddressProgramResponse.class)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
