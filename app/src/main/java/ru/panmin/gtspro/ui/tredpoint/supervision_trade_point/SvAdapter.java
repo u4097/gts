@@ -31,7 +31,8 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
     }
 
     public void setData(List<TradePoint> tradePoints) {
-        this.tradePoints = tradePoints;
+        this.tradePoints.clear();
+        this.tradePoints.addAll(tradePoints);
         notifyDataSetChanged();
     }
 

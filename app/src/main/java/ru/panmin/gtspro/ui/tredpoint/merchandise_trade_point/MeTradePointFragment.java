@@ -63,11 +63,6 @@ public class MeTradePointFragment
 
     @Override
     protected void initViews() {
-        setStateData();
-        initRecycler();
-    }
-
-    private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -82,7 +77,6 @@ public class MeTradePointFragment
                 }
             }
         });
-
     }
 
     @Override

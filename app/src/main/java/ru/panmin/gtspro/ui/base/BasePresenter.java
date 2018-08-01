@@ -18,7 +18,7 @@ import timber.log.Timber;
 public abstract class BasePresenter<T extends MvpView> implements Presenter<T> {
 
     protected Disposable disposable;
-    private T mMvpView;
+    private T mMvpView = null;
 
     @Override
     public void attachView(T mvpView) {

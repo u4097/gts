@@ -17,11 +17,16 @@ public class MeTradePointPresenter extends ProgressPresenter<MeTradePointMvpView
     private final DataManager dataManager;
     private final RxEventBus rxEventBus;
 
-    @SuppressLint("CheckResult")
     @Inject
     MeTradePointPresenter(DataManager dataManager, RxEventBus rxEventBus) {
         this.dataManager = dataManager;
         this.rxEventBus = rxEventBus;
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void attachView(MeTradePointMvpView mvpView) {
+        super.attachView(mvpView);
 
         RxUtils.dispose(disposable);
         rxEventBus.filteredObservable(AddressProgramResponse.class)
@@ -30,6 +35,7 @@ public class MeTradePointPresenter extends ProgressPresenter<MeTradePointMvpView
                 .subscribe(
                         addressProgramResponse -> {
                             getMvpView().setTradePoint(addressProgramResponse.getTradePoints());
+                            getMvpView().setStateData();
                         }
                 );
     }

@@ -62,11 +62,6 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     protected void initViews() {
-        setStateData();
-        initRecycler();
-    }
-
-    private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
         recyclerView.setAdapter(adapter);

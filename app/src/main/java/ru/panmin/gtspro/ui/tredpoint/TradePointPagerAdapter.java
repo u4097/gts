@@ -9,15 +9,14 @@ import ru.panmin.gtspro.ui.tredpoint.map.MapFragment;
 import ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point.MeTradePointFragment;
 import ru.panmin.gtspro.ui.tredpoint.supervision_trade_point.SwTradePointFragment;
 
-class TradePoinPagerAdapter extends FragmentPagerAdapter {
+class TradePointPagerAdapter extends FragmentPagerAdapter {
 
-    private int COUNT = 2;
-    private boolean b;
-    private Fragment fragment;
+    private static final int COUNT = 2;
+    private final boolean isSupervisor;
 
-    TradePoinPagerAdapter(FragmentManager supportFragmentManager, boolean b) {
+    TradePointPagerAdapter(FragmentManager supportFragmentManager, boolean isSupervisor) {
         super(supportFragmentManager);
-        this.b = b;
+        this.isSupervisor = isSupervisor;
     }
 
     @Nullable
@@ -26,18 +25,15 @@ class TradePoinPagerAdapter extends FragmentPagerAdapter {
         String tiele;
         tiele = position == 0 ? "Торговые точки" : "Карта";
         return tiele;
-
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                fragment = b ? SwTradePointFragment.createInstance() : MeTradePointFragment.createInstance();
-                return fragment;
+                return isSupervisor ? SwTradePointFragment.createInstance() : MeTradePointFragment.createInstance();
             case 1:
-                fragment = MapFragment.createInstance();
-                return fragment;
+                return MapFragment.createInstance();
         }
         return null;
     }
@@ -46,6 +42,5 @@ class TradePoinPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return COUNT;
     }
-
 
 }

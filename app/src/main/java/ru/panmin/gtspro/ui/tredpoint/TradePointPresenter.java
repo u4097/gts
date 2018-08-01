@@ -42,22 +42,8 @@ public class TradePointPresenter extends ProgressPresenter<TradePointMvpView> {
                 );
     }
 
-    protected void checkRole() {
-        String role = dataManager.getRole();
-        switch (role) {
-            case Constants.ROLE_SUPERVISOR:
-                getMvpView().setRole(true);
-                break;
-            case Constants.ROLE_MERCHANDISER:
-                getMvpView().setRole(false);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void initNavigationDrawer() {
-        getMvpView().initNavigationDrawer(dataManager.getFullName(), dataManager.getRole());
+    public void initViews() {
+        getMvpView().initViews(dataManager.getFullName(), dataManager.getRole());
     }
 
     public void exit() {

@@ -1,7 +1,6 @@
 package ru.panmin.gtspro.ui.tredpoint.supervision_trade_point;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -18,12 +17,16 @@ public class SwTradePointPresenter extends ProgressPresenter<SwTradePointMvpView
     private final DataManager dataManager;
     private final RxEventBus rxEventBus;
 
-    @SuppressLint("CheckResult")
     @Inject
     SwTradePointPresenter(DataManager dataManager, RxEventBus rxEventBus) {
         this.dataManager = dataManager;
         this.rxEventBus = rxEventBus;
+    }
 
+    @SuppressLint("CheckResult")
+    @Override
+    public void attachView(SwTradePointMvpView mvpView) {
+        super.attachView(mvpView);
         RxUtils.dispose(disposable);
         rxEventBus.filteredObservable(AddressProgramResponse.class)
                 .subscribeOn(Schedulers.io())
@@ -31,6 +34,7 @@ public class SwTradePointPresenter extends ProgressPresenter<SwTradePointMvpView
                 .subscribe(
                         addressProgramResponse -> {
                             getMvpView().setTradePoint(addressProgramResponse.getTradePoints());
+                            getMvpView().setStateData();
                         },
                         throwable -> {
                             parseError(throwable);

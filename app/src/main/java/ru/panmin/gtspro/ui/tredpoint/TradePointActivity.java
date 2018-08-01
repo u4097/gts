@@ -7,7 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.AppCompatButton;
@@ -51,8 +50,6 @@ public class TradePointActivity
     @BindView(R.id.exitTextBottom)
 
     VectorsSupportTextView exitTextBottom;
-
-    private boolean b;
 
     public TradePointActivity() {
     }
@@ -103,37 +100,7 @@ public class TradePointActivity
 
     @Override
     protected void initViews() {
-        tradePointPresenter.checkRole();
-        tradePointPresenter.initNavigationDrawer();
-        initViewPager();
-        tradePointPresenter.getAddressProgram();
-    }
-
-    private void initViewPager() {
-        PagerAdapter adapter = new TradePoinPagerAdapter(getSupportFragmentManager(), b);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    showHamburger();
-                } else {
-                    hideHamburger();
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        tradePointPresenter.initViews();
     }
 
     void showHamburger() {
@@ -168,25 +135,51 @@ public class TradePointActivity
     }
 
     @Override
-    public void initNavigationDrawer(String fullName, String role) {
+    public void initViews(String fullName, String role) {
         nameTextNavigationView.setText(fullName);
 
         switch (role) {
             case Constants.ROLE_SUPERVISOR:
+                viewPager.setAdapter(new TradePointPagerAdapter(getSupportFragmentManager(), true));
                 avatarImageNavigationView.setText(R.string.role_supervisor_short);
                 statusTextNavigationView.setText(R.string.role_supervisor);
                 statusTextNavigationView.setVisibility(View.VISIBLE);
                 break;
             case Constants.ROLE_MERCHANDISER:
+                viewPager.setAdapter(new TradePointPagerAdapter(getSupportFragmentManager(), false));
                 avatarImageNavigationView.setText(R.string.role_merchandiser_short);
                 statusTextNavigationView.setText(R.string.role_merchandiser);
                 statusTextNavigationView.setVisibility(View.VISIBLE);
                 break;
             default:
+                viewPager.setAdapter(new TradePointPagerAdapter(getSupportFragmentManager(), false));
                 avatarImageNavigationView.setText(R.string.role_unknown);
                 statusTextNavigationView.setVisibility(View.GONE);
                 break;
         }
+
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    showHamburger();
+                } else {
+                    hideHamburger();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         if (getIntent().getBooleanExtra(INTENT_KEY_WITH_OPEN_DRAWER, false)) {
             drawer.openDrawer(Gravity.END, false);
@@ -221,16 +214,13 @@ public class TradePointActivity
         });
 
         exitTextBottom.setOnClickListener(view -> tradePointPresenter.exit());
+
+        tradePointPresenter.getAddressProgram();
     }
 
     @Override
     public void openLoginActivity() {
         startActivity(LoginActivity.getStartIntent(this));
-    }
-
-    @Override
-    public void setRole(boolean b) {
-        this.b = b;
     }
 
 }

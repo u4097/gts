@@ -5,10 +5,7 @@ import ru.panmin.gtspro.ui.progress.ProgressMvpView;
 
 interface TradePointMvpView extends ProgressMvpView {
 
-    void initNavigationDrawer(String fullName, String role);
-
-
-    void setRole(boolean b);
+    void initViews(String fullName, String role);
 
     void openLoginActivity();
 
