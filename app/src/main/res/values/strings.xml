@@ -51,5 +51,6 @@
     <string name="promotions_text_teg">Промо акции</string>
     <string name="report_text_teg">Отчет</string>
     <string name="error_message_text_info">Чтобы приступить к заданию вы должны быть в периметре 500м</string>
+    <string name="task_list_text_info">Список задач:</string>
 
 </resources>

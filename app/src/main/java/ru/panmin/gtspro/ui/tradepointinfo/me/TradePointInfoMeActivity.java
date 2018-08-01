@@ -111,16 +111,13 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
                 listClients.append(tradePoint.getClients().get(i).getName().toString(this));
             }
         }
-         StringBuilder listString = new StringBuilder();
-        for (int i = 0; i < tradePoint.getClients().size(); i++) {
-            if (i != tradePoint.getClients().size() - 1) {
-                listString.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
-            } else {
-                listString.append(tradePoint.getClients().get(i).getName().toString(this));
-            }
-        }
+        StringBuilder listTime = new StringBuilder();
+        for (int i = 0; i < tradePoint.getTimes().size(); i++) {
+            listTime.append(tradePoint.getTimes().get(i).getBegin()).append(", ").append(tradePoint.getTimes().get(i).getEnd());
 
-        schedule.setText("Клиенты:" + " " + listString);
+        }
+        schedule.setText("График Визита" + " " + "" + listTime);
+        client.setText("Клиенты:" + " " + listClients);
         claimsQuantity.setText(String.valueOf(tradePoint.getClaims().size()));
         promotions.setText(String.valueOf(tradePoint.getPromos().size()));
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
