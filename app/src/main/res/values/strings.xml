@@ -56,6 +56,11 @@
     <string name="label_planogram">Planogram</string>
     <string name="label_hot_line">Hot Line</string>
     <string name="label_statistics">Statistics</string>
-    <string name="action_logout">Выход</string>
+    <string name="action_logout">Logout</string>
+    <string name="label_clients">Clients:</string>
+    <string name="label_author">Author:</string>
+    <string name="label_period">Promo period:</string>
+    <string name="label_promo_description">Promo description:</string>
+    <string name="label_promo_sku">SKU</string>
 
 </resources>
