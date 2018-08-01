@@ -11,18 +11,15 @@ import butterknife.BindView;
 import ru.lliepmah.lib.UniversalAdapter;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
-import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.blocks.holders.BlockPromoVHBuilder;
 import ru.panmin.gtspro.ui.blocks.holders.BlockTitleVHBuilder;
 import ru.panmin.gtspro.ui.blocks.holders.BlocksVHBuilder;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
-import ru.panmin.gtspro.ui.blocks.model.PromoModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
-import ru.panmin.gtspro.ui.blocks.viewmodel.PromViewModelStub;
+import ru.panmin.gtspro.ui.blocks.viewmodel.PromoViewModelStub;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 
 public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
@@ -59,8 +56,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     protected void initToolbar() {
-        // TODO: 01/08/2018 : Fix title by center toolbar.
-        setTitle("                   ОАО Магнит");
+        setTitle("ОАО Магнит");
         setNavigationIcon(R.drawable.ic_back_arrow);
         inflateMenu(R.menu.logout);
     }
@@ -84,7 +80,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
         BlockType blockType =  new BlockType(BlockType.Type.PROMO);
         adapter.add(blockType);
 
-        PromViewModelStub promViewModelStub = new PromViewModelStub();
+        PromoViewModelStub promViewModelStub = new PromoViewModelStub();
 
         promViewModelStub.loadData("0");
         adapter.addAll(promViewModelStub.getData());
@@ -112,8 +108,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
     }
 
     @Override
-    public void showInfo(PromoModel promoModel) {
-        startActivity(PromoInfoActivity.getStartIntent(this, null));
+    public void showPromoInfo(Promo promo) {
+        startActivity(PromoInfoActivity.getStartIntent(this, promo));
     }
 
 }

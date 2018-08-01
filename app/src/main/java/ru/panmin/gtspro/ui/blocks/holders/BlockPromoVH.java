@@ -9,10 +9,10 @@ import android.widget.TextView;
 import ru.lliepmah.HolderBuilder;
 import ru.lliepmah.lib.DefaultViewHolder;
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.ui.blocks.model.PromoModel;
+import ru.panmin.gtspro.data.models.Promo;
 
 @HolderBuilder(R.layout.li_promo)
-public class BlockPromoVH extends DefaultViewHolder<PromoModel> {
+public class BlockPromoVH extends DefaultViewHolder<Promo> {
     private ImageView ivStatus = itemView.findViewById(R.id.ivStatus);
     private TextView tvTitle = itemView.findViewById(R.id.tvTitle);
     private TextView  tvSubtitle  = itemView.findViewById(R.id.tvSubtitle);
@@ -29,19 +29,19 @@ public class BlockPromoVH extends DefaultViewHolder<PromoModel> {
     }
 
     @Override
-    public void bind(PromoModel model) {
+    public void bind(Promo model) {
 
 //      ivStatus.setImageTintList(itemView.getContext(),itemView.getResources().getColorStateList(itemView.getContext(), R.color.orange));
-        tvTitle.setText(model.getName().text(itemView.getResources()));
-        tvSubtitle.setText(model.getSku().text(itemView.getResources()));
-        tvDateFrom.setText(model.getBegin_date().getDateFormatted());
-        tvDateTo.setText(model.getFinish_date().getDateFormatted());
+        tvTitle.setText(model.getName());
+        tvSubtitle.setText(model.getSku());
+        tvDateFrom.setText(model.getBegin_date().toString());
+        tvDateTo.setText(model.getFinish_date().toString());
 
         promoRoot.setOnClickListener(v -> listener.onPromoClick(model));
 
     }
 
     public interface OnPromoClickListener {
-        void onPromoClick(PromoModel promoModel);
+        void onPromoClick(Promo promoModel);
     }
 }

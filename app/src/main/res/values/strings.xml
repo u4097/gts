@@ -46,6 +46,8 @@
     <string name="alphabetically">По алфавиту</string>
 
 
+
+    <string name="label_verbose_info">Details</string>
     <string name="label_claims">Claims</string>
     <string name="label_promo">Promo</string>
     <string name="label_photo_report">Photo Report</string>

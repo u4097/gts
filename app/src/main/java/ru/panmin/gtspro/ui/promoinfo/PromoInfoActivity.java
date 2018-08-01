@@ -6,25 +6,25 @@ import android.content.Intent;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpView {
 
-    private static final String INTENT_KEY_TRADE_POINT = "trade.point";
+    private static final String INTENT_KEY_PROMO = "promo";
 
     @Inject
     PromoInfoPresenter promoInfoPresenter;
 
-    private TradePoint tradePoint = null;
+    private Promo promo = null;
 
     public PromoInfoActivity() {
     }
 
-    public static Intent getStartIntent(Context context, TradePoint tradePoint) {
+    public static Intent getStartIntent(Context context,Promo promo) {
         Intent intent = new Intent(context, PromoInfoActivity.class);
-        intent.putExtra(INTENT_KEY_TRADE_POINT, tradePoint);
+        intent.putExtra(INTENT_KEY_PROMO, promo);
         return intent;
     }
 
@@ -45,14 +45,15 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
 
     @Override
     protected void initToolbar() {
-//        tradePoint = getIntent().getParcelableExtra(INTENT_KEY_TRADE_POINT);
+        promo = getIntent().getParcelableExtra(INTENT_KEY_PROMO);
         setNavigationIcon(R.drawable.ic_back_arrow);
         setNavigationOnClickListener(view -> finishActivity());
-//        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(promo.getName());
     }
 
     @Override
     protected void initViews() {
+        setStateData();
     }
 
     @Override

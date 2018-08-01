@@ -8,4 +8,5 @@
     <string name="label_planogram">Планограмма</string>
     <string name="label_hot_line">Горячая линия</string>
     <string name="label_statistics">Статистика</string>
+    <string name="label_verbose_info">Подробная информация</string>
 </resources>
