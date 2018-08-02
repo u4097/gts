@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
-import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
+import ru.panmin.gtspro.ui.tredpoints.TradePointActivity;
 
 public class SplashActivity extends BaseActivity implements SplashMvpView {
 

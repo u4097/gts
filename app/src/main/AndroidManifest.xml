@@ -34,7 +34,7 @@
             android:theme="@style/NoActionBar"/>
 
         <activity
-            android:name=".ui.tredpoint.TradePointActivity"
+            android:name=".ui.tredpoints.TradePointActivity"
             android:theme="@style/NoActionBar"/>
 
         <activity

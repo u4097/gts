@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint.filter;
+package ru.panmin.gtspro.ui.tredpoints.filter;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatTextView;

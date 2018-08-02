@@ -1,16 +1,16 @@
-package ru.panmin.gtspro.ui.tredpoint.map;
+package ru.panmin.gtspro.ui.tredpoints.me;
 
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.progress.ProgressPresenter;
 
-public class MapPresenter extends ProgressPresenter<MapMvpView> {
+public class MeTradePointPresenter extends ProgressPresenter<MeTradePointMvpView> {
 
     private final DataManager dataManager;
 
     @Inject
-    MapPresenter(DataManager dataManager) {
+    MeTradePointPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
@@ -19,7 +19,7 @@ public class MapPresenter extends ProgressPresenter<MapMvpView> {
     }
 
     public void afterInitViews() {
-        dataManager.getTradePoints();
+        getMvpView().setTradePoint(dataManager.getTradePoints());
         getMvpView().setStateData();
     }
 

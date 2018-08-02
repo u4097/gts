@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint.map;
+package ru.panmin.gtspro.ui.tredpoints.map;
 
 import java.util.Objects;
 

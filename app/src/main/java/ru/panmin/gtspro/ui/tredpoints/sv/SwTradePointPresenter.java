@@ -1,16 +1,16 @@
-package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
+package ru.panmin.gtspro.ui.tredpoints.sv;
 
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.progress.ProgressPresenter;
 
-public class MeTradePointPresenter extends ProgressPresenter<MeTradePointMvpView> {
+public class SwTradePointPresenter extends ProgressPresenter<SwTradePointMvpView> {
 
     private final DataManager dataManager;
 
     @Inject
-    MeTradePointPresenter(DataManager dataManager) {
+    SwTradePointPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
