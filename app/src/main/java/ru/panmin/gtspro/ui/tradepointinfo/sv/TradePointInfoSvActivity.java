@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -14,11 +15,14 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
-public class TradePointInfoSvActivity extends ToolbarActivity implements TradePointInfoSvMvpView {
+public class TradePointInfoSvActivity
+        extends ToolbarActivity
+        implements TradePointInfoSvMvpView,ListMeAdapter.MeClickListener {
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
@@ -74,8 +78,8 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
     private void showInfo() {
         recycler.setLayoutManager(new GridLayoutManager(this, 3));
         adapter.setData(tradePoint.getMerchandisers());
+        adapter.setMeClickListener(this);
         recycler.setAdapter(adapter);
-
         address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
@@ -128,4 +132,8 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
         showInfo();
     }
 
+    @Override
+    public void showInfo(Merchandiser merchandisers) {
+
+    }
 }

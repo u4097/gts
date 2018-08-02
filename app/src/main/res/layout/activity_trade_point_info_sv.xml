@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -262,6 +263,25 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/list_of_attached_merchandisers_text_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_distance"
+            android:layout_marginLeft="@dimen/medium_distance"
+            android:layout_marginRight="@dimen/medium_distance"
+            android:layout_marginStart="@dimen/medium_distance"
+            android:layout_marginTop="@dimen/medium_distance"
+            android:text="@string/list_of_attached_merchandisers_text_tag"
+            android:textColor="@color/black_three"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintVertical_bias="0.0" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_list_me"
             android:layout_width="match_parent"
@@ -276,10 +296,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:layout_constraintVertical_bias="0.0">
-
-        </android.support.v7.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@+id/list_of_attached_merchandisers_text_tag"
+            app:layout_constraintVertical_bias="0.0"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/run_button_me"

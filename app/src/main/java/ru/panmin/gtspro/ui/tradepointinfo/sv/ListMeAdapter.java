@@ -18,16 +18,28 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Merchandiser;
 
+
 public class ListMeAdapter extends RecyclerView.Adapter<ListMeAdapter.ListMeHolder> {
 
     private List<Merchandiser> merchandisers = new ArrayList<>();
+    private MeClickListener meClickListener;
 
     @Inject
     ListMeAdapter() {
     }
 
     public void setData(List<Merchandiser> merchandisers) {
-        this.merchandisers = merchandisers;
+        this.merchandisers.clear();
+        this.merchandisers.addAll(merchandisers);
+        notifyDataSetChanged();
+    }
+
+    public void setMeClickListener(MeClickListener meClickListener) {
+        this.meClickListener = meClickListener;
+    }
+
+    interface MeClickListener {
+        void showInfo(Merchandiser merchandisers);
     }
 
     @NonNull
@@ -66,6 +78,7 @@ public class ListMeAdapter extends RecyclerView.Adapter<ListMeAdapter.ListMeHold
         }
 
         public void bind(Merchandiser merchandiser) {
+            itemView.setOnClickListener(view -> meClickListener.showInfo(merchandiser));
             name.setText(merchandiser.getName());
         }
     }
