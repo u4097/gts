@@ -22,6 +22,7 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.OtherUtils;
+import timber.log.Timber;
 
 class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
 
@@ -92,19 +93,23 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
 
     public void onLocationUpdated(Location location) {
         this.location = location;
-        if (location != null) {
-            for (TradePoint tradePoint : this.tradePoints) {
-                tradePoint.setDistance(OtherUtils.distance(location, tradePoint.getCoordinates()));
-
+        try {
+            if (location != null) {
+                for (TradePoint tradePoint : this.tradePoints) {
+                    tradePoint.setDistance(OtherUtils.distance(location, tradePoint.getCoordinates()));
+                }
             }
+            if (isDistanceSort) {
+                Collections.sort(
+                        tradePoints,
+                        (tradePoint1, tradePoint2) -> Double.compare(tradePoint1.getDistance(), tradePoint2.getDistance())
+                );
+            }
+            notifyDataSetChanged();
+        } catch (Exception e) {
+            Timber.d(e);
         }
-        if (isDistanceSort) {
-            Collections.sort(
-                    tradePoints,
-                    (tradePoint1, tradePoint2) -> Double.compare(tradePoint1.getDistance(), tradePoint2.getDistance())
-            );
-        }
-        notifyDataSetChanged();
+
     }
 
     interface InfoClickListener {

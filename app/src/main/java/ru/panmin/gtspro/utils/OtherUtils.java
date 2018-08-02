@@ -27,7 +27,7 @@ public class OtherUtils {
                     )
             );
         } else {
-            return 0;
+            return 0.0d;
         }
     }
 
