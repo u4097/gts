@@ -10,6 +10,7 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.customviews.VectorsSupportEditText;
+import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.ui.tredpoint.TradePointActivity;
 import ru.panmin.gtspro.utils.MessageUtils;
 
@@ -68,8 +69,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     }
 
     @Override
-    public void openMainActivity() {
-        startActivity(TradePointActivity.getStartIntent(this));
+    public void openSplashActivity() {
+        startActivity(SplashActivity.getStartIntent(this));
     }
 
     @Override

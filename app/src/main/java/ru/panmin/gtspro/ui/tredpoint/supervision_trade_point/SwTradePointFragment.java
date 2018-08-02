@@ -76,6 +76,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
                 }
             }
         });
+        presenter.afterInitViews();
     }
 
     @Override
@@ -90,7 +91,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     public void showInfo(TradePoint tradePoint) {
-        startActivity(TradePointInfoSvActivity.getStartIntent(getActivity(), tradePoint));
+        startActivity(TradePointInfoSvActivity.getStartIntent(getActivity(), tradePoint.getId()));
     }
 
 }

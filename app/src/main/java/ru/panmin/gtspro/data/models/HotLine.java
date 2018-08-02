@@ -1,70 +1,39 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-public class HotLine implements Parcelable {
+import io.realm.RealmList;
+import io.realm.RealmObject;
 
-    public static final Parcelable.Creator<HotLine> CREATOR = new Parcelable.Creator<HotLine>() {
-        @Override
-        public HotLine createFromParcel(Parcel source) {
-            return new HotLine(source);
-        }
+public class HotLine extends RealmObject {
 
-        @Override
-        public HotLine[] newArray(int size) {
-            return new HotLine[size];
-        }
-    };
-
-    @SerializedName("causes")
-    private List<Cause> causes = new ArrayList<>();
-    @SerializedName("contexts")
-    private List<HotLineContext> contexts = new ArrayList<>();
+    @SerializedName("causes") private RealmList<Cause> causes = new RealmList<>();
+    @SerializedName("contexts") private RealmList<HotLineContext> contexts = new RealmList<>();
 
     public HotLine() {
     }
 
-    public HotLine(List<Cause> causes, List<HotLineContext> contexts) {
+    public HotLine(RealmList<Cause> causes, RealmList<HotLineContext> contexts) {
         this.causes = causes;
         this.contexts = contexts;
     }
 
-    private HotLine(Parcel in) {
-        this.causes = in.createTypedArrayList(Cause.CREATOR);
-        this.contexts = in.createTypedArrayList(HotLineContext.CREATOR);
-    }
-
-    public List<Cause> getCauses() {
+    public RealmList<Cause> getCauses() {
         return causes;
     }
 
-    public void setCauses(List<Cause> causes) {
+    public void setCauses(RealmList<Cause> causes) {
         this.causes = causes;
     }
 
-    public List<HotLineContext> getContexts() {
+    public RealmList<HotLineContext> getContexts() {
         return contexts;
     }
 
-    public void setContexts(List<HotLineContext> contexts) {
+    public void setContexts(RealmList<HotLineContext> contexts) {
         this.contexts = contexts;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.causes);
-        dest.writeTypedList(this.contexts);
     }
 
 }

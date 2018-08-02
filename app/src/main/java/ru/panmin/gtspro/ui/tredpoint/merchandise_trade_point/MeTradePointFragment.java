@@ -77,6 +77,7 @@ public class MeTradePointFragment
                 }
             }
         });
+        presenter.afterInitViews();
     }
 
     @Override
@@ -91,7 +92,7 @@ public class MeTradePointFragment
 
     @Override
     public void showInfo(TradePoint tradePoint) {
-        startActivity(TradePointInfoMeActivity.getStartIntent(getActivity(), tradePoint));
+        startActivity(TradePointInfoMeActivity.getStartIntent(getActivity(), tradePoint.getId()));
     }
 
 }

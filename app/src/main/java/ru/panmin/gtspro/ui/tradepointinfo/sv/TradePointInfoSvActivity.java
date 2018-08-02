@@ -12,7 +12,7 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class TradePointInfoSvActivity extends ToolbarActivity implements TradePointInfoSvMvpView {
 
-    private static final String INTENT_KEY_TRADE_POINT = "trade.point";
+    private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
     @Inject TradePointInfoSvPresenter tradePointInfoSvPresenter;
 
@@ -21,9 +21,9 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
     public TradePointInfoSvActivity() {
     }
 
-    public static Intent getStartIntent(Context context, TradePoint tradePoint) {
+    public static Intent getStartIntent(Context context, String tradePointId) {
         Intent intent = new Intent(context, TradePointInfoSvActivity.class);
-        intent.putExtra(INTENT_KEY_TRADE_POINT, tradePoint);
+        intent.putExtra(INTENT_KEY_TRADE_POINT_ID, tradePointId);
         return intent;
     }
 
@@ -44,10 +44,9 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initToolbar() {
-        tradePoint = getIntent().getParcelableExtra(INTENT_KEY_TRADE_POINT);
+        tradePointInfoSvPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(tradePoint.getSignboard().toString(this));
     }
 
     @Override
@@ -70,6 +69,12 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void errorButtonClick() {
+    }
+
+    @Override
+    public void setTradePoint(TradePoint tradePoint) {
+        this.tradePoint = tradePoint;
+        setTitle(tradePoint.getSignboard().toString(this));
     }
 
 }

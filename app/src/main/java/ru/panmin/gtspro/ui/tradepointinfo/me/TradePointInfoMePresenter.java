@@ -18,4 +18,8 @@ class TradePointInfoMePresenter extends ToolbarPresenter<TradePointInfoMeMvpView
     protected void dispose() {
     }
 
+    public void getTradePoint(String tradePointId) {
+        getMvpView().setTradePoint(dataManager.getTradePointById(tradePointId));
+    }
+
 }

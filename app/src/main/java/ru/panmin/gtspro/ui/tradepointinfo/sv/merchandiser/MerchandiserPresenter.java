@@ -18,4 +18,8 @@ class MerchandiserPresenter extends ToolbarPresenter<MerchandiserMvpView> {
     protected void dispose() {
     }
 
+    public void getMerchandiser(String merchandiserName) {
+        getMvpView().setMerchandiser(dataManager.getMerchandiserByName(merchandiserName));
+    }
+
 }

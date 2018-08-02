@@ -1,7 +1,5 @@
 package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
 
-import android.annotation.SuppressLint;
-
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -15,33 +13,19 @@ import ru.panmin.gtspro.utils.RxUtils;
 public class MeTradePointPresenter extends ProgressPresenter<MeTradePointMvpView> {
 
     private final DataManager dataManager;
-    private final RxEventBus rxEventBus;
 
     @Inject
-    MeTradePointPresenter(DataManager dataManager, RxEventBus rxEventBus) {
+    MeTradePointPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
-        this.rxEventBus = rxEventBus;
-    }
-
-    @SuppressLint("CheckResult")
-    @Override
-    public void attachView(MeTradePointMvpView mvpView) {
-        super.attachView(mvpView);
-
-        RxUtils.dispose(disposable);
-        disposable = rxEventBus.filteredObservable(AddressProgramResponse.class)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        addressProgramResponse -> {
-                            getMvpView().setTradePoint(addressProgramResponse.getTradePoints());
-                            getMvpView().setStateData();
-                        }
-                );
     }
 
     @Override
     protected void dispose() {
+    }
+
+    public void afterInitViews() {
+        getMvpView().setTradePoint(dataManager.getTradePoints());
+        getMvpView().setStateData();
     }
 
 }

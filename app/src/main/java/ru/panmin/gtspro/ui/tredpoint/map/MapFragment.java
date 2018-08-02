@@ -53,11 +53,12 @@ public class MapFragment
 
     @Override
     protected void initViews() {
-        setStateData();
+        presenter.afterInitViews();
     }
 
     @Override
     protected void detachView() {
         presenter.detachView();
     }
+
 }

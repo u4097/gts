@@ -1,35 +1,22 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
-public class Promo implements Parcelable {
+import io.realm.RealmObject;
 
-    public static final Parcelable.Creator<Promo> CREATOR = new Parcelable.Creator<Promo>() {
-        @Override
-        public Promo createFromParcel(Parcel source) {
-            return new Promo(source);
-        }
+public class Promo extends RealmObject {
 
-        @Override
-        public Promo[] newArray(int size) {
-            return new Promo[size];
-        }
-    };
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Promo() {
-    }
-
-    private Promo(Parcel in) {
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
     }
 
 }

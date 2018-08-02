@@ -1,26 +1,13 @@
 package ru.panmin.gtspro.data.models.responses;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+import io.realm.RealmObject;
 import ru.panmin.gtspro.data.models.Error;
 
-public class BaseResponse implements Parcelable {
-
-
-    public static final Creator<BaseResponse> CREATOR = new Creator<BaseResponse>() {
-        @Override
-        public BaseResponse createFromParcel(Parcel source) {
-            return new BaseResponse(source);
-        }
-
-        @Override
-        public BaseResponse[] newArray(int size) {
-            return new BaseResponse[size];
-        }
-    };
+public class BaseResponse implements Serializable {
 
     @SerializedName("errors") private Error errors;
     @SerializedName("status_code") private int statusCode;
@@ -33,12 +20,6 @@ public class BaseResponse implements Parcelable {
         this.errors = errors;
         this.statusCode = statusCode;
         this.error = error;
-    }
-
-    BaseResponse(Parcel in) {
-        this.errors = in.readParcelable(Error.class.getClassLoader());
-        this.statusCode = in.readInt();
-        this.error = in.readByte() != 0;
     }
 
     public Error getErrors() {
@@ -63,18 +44,6 @@ public class BaseResponse implements Parcelable {
 
     public void setError(boolean error) {
         this.error = error;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.errors, flags);
-        dest.writeInt(this.statusCode);
-        dest.writeByte(this.error ? (byte) 1 : (byte) 0);
     }
 
 }

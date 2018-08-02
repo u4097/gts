@@ -1,35 +1,22 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
-public class PhotoReport implements Parcelable {
+import io.realm.RealmObject;
 
-    public static final Parcelable.Creator<PhotoReport> CREATOR = new Parcelable.Creator<PhotoReport>() {
-        @Override
-        public PhotoReport createFromParcel(Parcel source) {
-            return new PhotoReport(source);
-        }
+public class PhotoReport extends RealmObject {
 
-        @Override
-        public PhotoReport[] newArray(int size) {
-            return new PhotoReport[size];
-        }
-    };
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public PhotoReport() {
-    }
-
-    private PhotoReport(Parcel in) {
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
     }
 
 }

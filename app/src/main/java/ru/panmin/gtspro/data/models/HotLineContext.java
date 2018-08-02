@@ -1,34 +1,18 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
-public class HotLineContext implements Parcelable {
+import java.io.Serializable;
 
-    public static final Parcelable.Creator<HotLineContext> CREATOR = new Parcelable.Creator<HotLineContext>() {
-        @Override
-        public HotLineContext createFromParcel(Parcel source) {
-            return new HotLineContext(source);
-        }
+import io.realm.RealmObject;
 
-        @Override
-        public HotLineContext[] newArray(int size) {
-            return new HotLineContext[size];
-        }
-    };
+public class HotLineContext extends RealmObject {
 
-    @SerializedName("id")
-    private String id;
-    @SerializedName("name")
-    private Name name;
-    @SerializedName("comment_description")
-    private String commentDescription;
-    @SerializedName("hot_line_cause_id")
-    private String hotLineCauseId;
-    @SerializedName("position")
-    private int position;
+    @SerializedName("id") private String id;
+    @SerializedName("name") private Name name;
+    @SerializedName("comment_description") private String commentDescription;
+    @SerializedName("hot_line_cause_id") private String hotLineCauseId;
+    @SerializedName("position") private int position;
 
     public HotLineContext() {
     }
@@ -39,14 +23,6 @@ public class HotLineContext implements Parcelable {
         this.commentDescription = commentDescription;
         this.hotLineCauseId = hotLineCauseId;
         this.position = position;
-    }
-
-    private HotLineContext(Parcel in) {
-        this.id = in.readString();
-        this.name = in.readParcelable(Name.class.getClassLoader());
-        this.commentDescription = in.readString();
-        this.hotLineCauseId = in.readString();
-        this.position = in.readInt();
     }
 
     public String getId() {
@@ -87,20 +63,6 @@ public class HotLineContext implements Parcelable {
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeParcelable(this.name, flags);
-        dest.writeString(this.commentDescription);
-        dest.writeString(this.hotLineCauseId);
-        dest.writeInt(this.position);
     }
 
 }

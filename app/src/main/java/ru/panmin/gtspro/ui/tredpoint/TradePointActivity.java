@@ -214,8 +214,6 @@ public class TradePointActivity
         });
 
         exitTextBottom.setOnClickListener(view -> tradePointPresenter.exit());
-
-        tradePointPresenter.getAddressProgram();
     }
 
     @Override
