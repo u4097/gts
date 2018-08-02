@@ -74,12 +74,11 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
     @Override
     protected void initViews() {
         setStateData();
-        setValue(tvClients,"Магнит, Пятерочка",R.string.label_clients);
-        setValue(tvAuthor, "Иванов К.В.",R.string.label_author);
+        setValue(tvClients,promo.getClients().toString(),R.string.label_clients);
+        setValue(tvAuthor, promo.getAuthor(),R.string.label_author);
+        setValue(tvDescription, promo.getDescription(),R.string.label_promo_description);
         setValue(tvPeriod, "16-19 сентября",R.string.label_author);
-        setValue(tvDescription, "Ватки «Я сама», «Сто умелых ручек»\n" +
-                "раставлены не по планограмме",R.string.label_promo_description);
-        setValue(tvSku, "Баунти",R.string.label_sku);
+        setValue(tvSku, promo.getSku(),R.string.label_promo_sku);
 
     }
 

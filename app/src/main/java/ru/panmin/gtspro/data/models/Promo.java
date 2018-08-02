@@ -11,28 +11,34 @@ import java.util.List;
 public class Promo implements Parcelable {
     String id;
     String name;
+    String author;
     String description;
     String sku;
     Date begin_date;
     Date finish_date;
     List<String> attachedME;
+    List<String> clients;
     Boolean isActive;
 
     public Promo(String id,
                  String name,
+                 String author,
                  String description,
                  String sku,
                  Date begin_date,
                  Date finish_date,
                  List<String> attachedME,
+                 List<String> clients,
                  Boolean isActive) {
         this.id = id;
         this.name = name;
+        this.author = author;
         this.description = description;
         this.sku = sku;
         this.begin_date = begin_date;
         this.finish_date = finish_date;
         this.attachedME = attachedME;
+        this.clients = clients;
         this.isActive = isActive;
     }
 
@@ -56,12 +62,15 @@ public class Promo implements Parcelable {
     private Promo(Parcel in) {
         id = in.readString();
         name = in.readString();
+        author = in.readString();
         description = in.readString();
         sku = in.readString();
         begin_date = new Date(in.readLong());
         finish_date = new Date(in.readLong());
         attachedME = new ArrayList<String>();
         in.readList(attachedME, String.class.getClassLoader());
+        clients = new ArrayList<String>();
+        in.readList(clients, String.class.getClassLoader());
         isActive = in.readByte() != 0;
     }
 
@@ -74,11 +83,13 @@ public class Promo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(name);
+        dest.writeString(author);
         dest.writeString(description);
         dest.writeString(sku);
         dest.writeLong(begin_date.getTime());
         dest.writeLong(finish_date.getTime());
         dest.writeList(attachedME);
+        dest.writeList(clients);
         dest.writeByte((byte) (isActive ? 1 : 0));
     }
 
@@ -144,5 +155,21 @@ public class Promo implements Parcelable {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public List<String> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<String> clients) {
+        this.clients = clients;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

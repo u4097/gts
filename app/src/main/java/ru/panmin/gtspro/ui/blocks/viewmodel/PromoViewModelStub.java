@@ -15,34 +15,46 @@ public class PromoViewModelStub implements IPromoViewModel {
     @Override
     public void loadData(String tradePointId) {
         List<String> attachedME = new ArrayList<>();
+        List<String> clients = new ArrayList<>();
         attachedME.add("Генадий Иванович");
         attachedME.add("Генадий Иванович");
         attachedME.add("Генадий Иванович");
+        clients.add("Магнит");
+        clients.add("Пятерочка");
         Promo promoModel1 = new Promo("0"
                 , "Промо 1"
-                , "Чай"
+                , "Шаляпин В.Д"
+                , "Ватки «Я сама», «Сто умелых ручек»\n" +
+                "раставлены не по планограмме"
                 , "Чай"
                 , new Date()
                 , new Date()
                 , attachedME
+                ,clients
                 , false);
 
         Promo promoModel2 = new Promo("1"
-                , "Промо 1"
-                , "Чай"
-                , "Чай"
+                , "Промо 2"
+                , "Шаляпин В.Д"
+                , "Ватки «Я сама», «Сто умелых ручек»\n" +
+                "раставлены не по планограмме"
+                , "Кофе"
                 , new Date()
                 , new Date()
                 , attachedME
+                , clients
                 , false);
 
         Promo promoModel3 = new Promo("2"
-                , "Промо 1"
-                , "Чай"
-                , "Чай"
+                , "Промо 3"
+                , "Шаляпин В.Д"
+                , "Ватки «Я сама», «Сто умелых ручек»\n" +
+                "раставлены не по планограмме"
+                , "Сыр"
                 , new Date()
                 , new Date()
                 , attachedME
+                , clients
                 , false);
 
 
