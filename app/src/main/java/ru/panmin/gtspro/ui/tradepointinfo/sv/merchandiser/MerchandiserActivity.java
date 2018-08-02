@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-
-import com.annimon.stream.Stream;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
@@ -25,7 +21,10 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
     @Inject MerchandiserPresenter merchandiserPresenter;
     @Inject
     ClientsMeAdapter clientsMeAdapter;
-
+    @BindView(R.id.client_me_recycler)
+    RecyclerView client_me_recycler;
+    @BindView(R.id.schedule_de_ure_text_data)
+    AppCompatTextView schedule_de_ure_text_data;
     private Merchandiser merchandiser = null;
 
     public MerchandiserActivity() {
@@ -36,12 +35,6 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
         intent.putExtra(INTENT_KEY_MERCHANDISER_NAME, merchandiserName);
         return intent;
     }
-
-    @BindView(R.id.client_me_recycler)
-    RecyclerView client_me_recycler;
-
-    @BindView(R.id.schedule_de_ure_text_data)
-    AppCompatTextView schedule_de_ure_text_data;
 
     @Override
     protected void inject() {

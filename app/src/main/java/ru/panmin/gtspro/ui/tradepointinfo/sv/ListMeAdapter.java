@@ -38,10 +38,6 @@ public class ListMeAdapter extends RecyclerView.Adapter<ListMeAdapter.ListMeHold
         this.meClickListener = meClickListener;
     }
 
-    interface MeClickListener {
-        void showInfo(Merchandiser merchandisers);
-    }
-
     @NonNull
     @Override
     public ListMeAdapter.ListMeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,6 +59,9 @@ public class ListMeAdapter extends RecyclerView.Adapter<ListMeAdapter.ListMeHold
         }
     }
 
+    interface MeClickListener {
+        void showInfo(Merchandiser merchandisers);
+    }
 
     class ListMeHolder extends RecyclerView.ViewHolder {
 

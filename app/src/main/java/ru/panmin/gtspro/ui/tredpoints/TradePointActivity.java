@@ -3,7 +3,6 @@ package ru.panmin.gtspro.ui.tredpoints;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -38,7 +37,6 @@ public class TradePointActivity
     @Inject TradePointPresenter tradePointPresenter;
 
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
-    @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.view_pager) ViewPager viewPager;
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.menu_hamburger) AppCompatImageView hamburger;
@@ -50,6 +48,8 @@ public class TradePointActivity
     @BindView(R.id.exitTextBottom)
 
     VectorsSupportTextView exitTextBottom;
+
+    private TradePointPagerAdapter tradePointPagerAdapter = null;
 
     public TradePointActivity() {
     }
@@ -140,24 +140,25 @@ public class TradePointActivity
 
         switch (role) {
             case Constants.ROLE_SUPERVISOR:
-                viewPager.setAdapter(new TradePointPagerAdapter(getSupportFragmentManager(), true));
+                tradePointPagerAdapter = new TradePointPagerAdapter(getSupportFragmentManager(), true);
                 avatarImageNavigationView.setText(R.string.role_supervisor_short);
                 statusTextNavigationView.setText(R.string.role_supervisor);
                 statusTextNavigationView.setVisibility(View.VISIBLE);
                 break;
             case Constants.ROLE_MERCHANDISER:
-                viewPager.setAdapter(new TradePointPagerAdapter(getSupportFragmentManager(), false));
+                tradePointPagerAdapter = new TradePointPagerAdapter(getSupportFragmentManager(), false);
                 avatarImageNavigationView.setText(R.string.role_merchandiser_short);
                 statusTextNavigationView.setText(R.string.role_merchandiser);
                 statusTextNavigationView.setVisibility(View.VISIBLE);
                 break;
             default:
-                viewPager.setAdapter(new TradePointPagerAdapter(getSupportFragmentManager(), false));
+                tradePointPagerAdapter = new TradePointPagerAdapter(getSupportFragmentManager(), false);
                 avatarImageNavigationView.setText(R.string.role_unknown);
                 statusTextNavigationView.setVisibility(View.GONE);
                 break;
         }
 
+        viewPager.setAdapter(tradePointPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setOffscreenPageLimit(Objects.requireNonNull(viewPager.getAdapter()).getCount());
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -210,7 +211,6 @@ public class TradePointActivity
             } else {
                 drawer.openDrawer(Gravity.END);
             }
-
         });
 
         exitTextBottom.setOnClickListener(view -> tradePointPresenter.exit());
@@ -219,6 +219,11 @@ public class TradePointActivity
     @Override
     public void openLoginActivity() {
         startActivity(LoginActivity.getStartIntent(this));
+    }
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        tradePointPagerAdapter.selectNewSortType(sortType);
     }
 
 }

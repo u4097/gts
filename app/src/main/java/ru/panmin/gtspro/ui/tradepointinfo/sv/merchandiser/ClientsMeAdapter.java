@@ -22,11 +22,11 @@ import ru.panmin.gtspro.data.models.Merchandiser;
 
 public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.ClientsViewHolder> {
 
+    private List<Client> clients = new ArrayList<>();
+
     @Inject
     ClientsMeAdapter() {
     }
-
-    private List<Client> clients = new ArrayList<>();
 
     public void setData(Merchandiser merchandiser, Context context) {
         clients.clear();

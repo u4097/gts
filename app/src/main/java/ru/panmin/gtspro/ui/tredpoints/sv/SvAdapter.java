@@ -1,6 +1,8 @@
 package ru.panmin.gtspro.ui.tredpoints.sv;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,21 +22,30 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.utils.Constants;
+import ru.panmin.gtspro.utils.OtherUtils;
 
 
 public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
 
     private List<TradePoint> tradePoints = new ArrayList<>();
     private SvAdapter.InfoClickListener infoClickListener;
+    private Location location = null;
+    private boolean isDistanceSort = false;
 
     @Inject
     SvAdapter() {
     }
 
-    public void setData(List<TradePoint> tradePoints) {
+    public void setData(Context context, List<TradePoint> tradePoints, String sortType) {
         this.tradePoints.clear();
         this.tradePoints.addAll(tradePoints);
-        notifyDataSetChanged();
+        if (location != null) {
+            for (TradePoint tradePoint : this.tradePoints) {
+                tradePoint.setDistance(OtherUtils.distance(location, tradePoint.getCoordinates()));
+            }
+        }
+        selectNewSortType(context, sortType);
     }
 
     public void setInfoClickListener(InfoClickListener infoClickListener) {
@@ -57,28 +69,64 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
         return (tradePoints == null || tradePoints.isEmpty()) ? 0 : tradePoints.size();
     }
 
+    public void selectNewSortType(Context context, String sortType) {
+        switch (sortType) {
+            case Constants.SORT_TYPE_TIME:
+                isDistanceSort = false;
+                break;
+            case Constants.SORT_TYPE_DISTANCE:
+                isDistanceSort = true;
+                Collections.sort(
+                        tradePoints,
+                        (tradePoint1, tradePoint2) -> Double.compare(tradePoint1.getDistance(), tradePoint2.getDistance())
+                );
+                break;
+            case Constants.SORT_TYPE_ALPHABET:
+                isDistanceSort = false;
+                Collections.sort(
+                        tradePoints,
+                        (tradePoint1, tradePoint2) -> tradePoint1.getSignboard().toString(context)
+                                .compareTo(tradePoint2.getSignboard().toString(context))
+                );
+                break;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void onLocationUpdated(Location location) {
+        this.location = location;
+        if (location != null) {
+            for (TradePoint tradePoint : this.tradePoints) {
+                tradePoint.setDistance(OtherUtils.distance(location, tradePoint.getCoordinates()));
+            }
+        }
+        if (isDistanceSort) {
+            Collections.sort(
+                    tradePoints,
+                    (tradePoint1, tradePoint2) -> Double.compare(tradePoint1.getDistance(), tradePoint2.getDistance())
+            );
+        }
+        notifyDataSetChanged();
+    }
+
     interface InfoClickListener {
         void showInfo(TradePoint tradePoint);
     }
 
     class SvViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title_card)
-        TextView name;
-        @BindView(R.id.adres_card_sw)
-        TextView address;
-        @BindView(R.id.tv_claims_quantity)
-        AppCompatTextView claimsQuantity;
-        @BindView(R.id.btn_info)
-        AppCompatImageView info;
+        @BindView(R.id.title_card) TextView name;
+        @BindView(R.id.adres_card_sw) TextView address;
+        @BindView(R.id.tv_claims_quantity) AppCompatTextView claimsQuantity;
+        @BindView(R.id.btn_info) AppCompatImageView info;
 
-        public SvViewHolder(View itemView) {
+        SvViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         @SuppressLint("DefaultLocale")
-        public void bind(TradePoint tradePoint) {
+        void bind(TradePoint tradePoint) {
             name.setText(tradePoint.getSignboard().toString(itemView.getContext()));
             address.setText(tradePoint.getAddress().toString(itemView.getContext()));
             claimsQuantity.setText(String.format("%d", tradePoint.getClaims().size()));
@@ -86,4 +134,5 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
         }
 
     }
+
 }

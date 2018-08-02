@@ -13,6 +13,10 @@ public class Constants {
     public static final String LANGUAGE_RUSSIAN = "ru";
     public static final String LANGUAGE_ENGLISH = "en";
 
+    public static final String SORT_TYPE_TIME = "sort.type.time";
+    public static final String SORT_TYPE_DISTANCE = "sort.type.distance";
+    public static final String SORT_TYPE_ALPHABET = "sort.type.alphabet";
+
     private Constants() {
     }
 

@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="1" />
+        tools:text="1"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/client_name_text"
@@ -36,5 +36,5 @@
         app:layout_constraintStart_toEndOf="@+id/client_number_text"
         app:layout_constraintTop_toTopOf="@+id/client_number_text"
         app:layout_constraintVertical_bias="1.0"
-        tools:text="ОАО Ринг" />
+        tools:text="ОАО Ринг"/>
 </android.support.constraint.ConstraintLayout>

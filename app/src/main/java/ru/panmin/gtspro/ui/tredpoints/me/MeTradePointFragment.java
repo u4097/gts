@@ -3,7 +3,6 @@ package ru.panmin.gtspro.ui.tredpoints.me;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,9 +19,7 @@ import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tredpoints.filter.BottomSheetFilter;
 
-public class MeTradePointFragment
-        extends ProgressFragment
-        implements MeTradePointMvpView, MeAdapter.InfoClickListener {
+public class MeTradePointFragment extends ProgressFragment implements MeTradePointMvpView, MeAdapter.InfoClickListener {
 
     @Inject MeTradePointPresenter presenter;
     @Inject MeAdapter adapter;
@@ -66,6 +63,7 @@ public class MeTradePointFragment
 
     @Override
     protected void initViews() {
+        initGpsConnect(location -> adapter.onLocationUpdated(location));
         initFilter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
@@ -88,7 +86,6 @@ public class MeTradePointFragment
         filter.setOnClickListener(view -> showDialogFragment(new BottomSheetFilter()));
     }
 
-
     private <T extends BottomSheetFragment> void showDialogFragment(T bottomSheetFilter) {
         String tag = bottomSheetFilter.getClass().getSimpleName();
         if (getChildFragmentManager().findFragmentByTag(tag) == null) {
@@ -103,8 +100,13 @@ public class MeTradePointFragment
     }
 
     @Override
-    public void setTradePoint(List<TradePoint> tradePoints) {
-        adapter.setData(tradePoints);
+    public void setTradePoint(List<TradePoint> tradePoints, String sortType) {
+        adapter.setData(getActivity(), tradePoints, sortType);
+    }
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        adapter.selectNewSortType(getActivity(), sortType);
     }
 
     @Override

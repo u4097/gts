@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -19,12 +18,11 @@ import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser.MerchandiserActivity;
 
 public class TradePointInfoSvActivity
         extends ToolbarActivity
-        implements TradePointInfoSvMvpView,ListMeAdapter.MeClickListener {
+        implements TradePointInfoSvMvpView, ListMeAdapter.MeClickListener {
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";

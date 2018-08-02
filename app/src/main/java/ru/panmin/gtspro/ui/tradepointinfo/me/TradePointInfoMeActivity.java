@@ -66,7 +66,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initViews() {
-setStateData();
+        setStateData();
     }
 
     @Override

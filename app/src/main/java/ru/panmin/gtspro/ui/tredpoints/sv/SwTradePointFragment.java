@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.tredpoints.sv;
 
+import android.location.Location;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
@@ -44,12 +46,10 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     protected void emptyButtonClick() {
-
     }
 
     @Override
     protected void errorButtonClick() {
-
     }
 
     @Override
@@ -64,6 +64,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     protected void initViews() {
+        initGpsConnect(location -> adapter.onLocationUpdated(location));
         initFilter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
@@ -86,7 +87,6 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
         filter.setOnClickListener(view -> showDialogFragment(new BottomSheetFilter()));
     }
 
-
     private <T extends BottomSheetFragment> void showDialogFragment(T bottomSheetFilter) {
         String tag = bottomSheetFilter.getClass().getSimpleName();
         if (getChildFragmentManager().findFragmentByTag(tag) == null) {
@@ -100,8 +100,13 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
     }
 
     @Override
-    public void setTradePoint(List<TradePoint> tradePoints) {
-        adapter.setData(tradePoints);
+    public void setTradePoint(List<TradePoint> tradePoints, String sortType) {
+        adapter.setData(getActivity(), tradePoints, sortType);
+    }
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        adapter.selectNewSortType(getActivity(), sortType);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package ru.panmin.gtspro.ui.base;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -11,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.utils.DialogUtils;
 
@@ -132,5 +137,18 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     protected abstract void initViews();
 
     protected abstract void detachView();
+
+    @SuppressLint("CheckResult")
+    protected void initGpsConnect(OnLocationUpdatedListener onLocationUpdatedListener) {
+        new RxPermissions(this).request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(granted -> {
+                    if (granted) {
+                        SmartLocation.with(getActivity())
+                                .location()
+                                .start(onLocationUpdatedListener);
+                    } else {
+                    }
+                });
+    }
 
 }

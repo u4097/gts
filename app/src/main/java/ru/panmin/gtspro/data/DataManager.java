@@ -69,6 +69,14 @@ public class DataManager {
         preferencesHelper.setLanguage(language);
     }
 
+    public String getSortType() {
+        return preferencesHelper.getSortType();
+    }
+
+    public void setSortType(String sortType) {
+        preferencesHelper.setSortType(sortType);
+    }
+
     public String getToken() {
         return preferencesHelper.getToken();
     }

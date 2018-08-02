@@ -95,7 +95,7 @@ dependencies {
     //== rx ==//
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
-    implementation "com.tbruyelle.rxpermissions2:rxpermissions:${rxPermissionsVersion}"
+    implementation "com.github.tbruyelle:rxpermissions:${rxPermissionsVersion}"
     implementation "com.annimon:stream:${streamVersion}"
 
     //== butter knife ==//
