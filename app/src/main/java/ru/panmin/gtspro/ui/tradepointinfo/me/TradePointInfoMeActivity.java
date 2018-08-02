@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -63,6 +65,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initViews() {
+setStateData();
     }
 
     @Override
@@ -95,19 +98,24 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
-            if (i != tradePoint.getClients().size() - 1) {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
-            } else {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this));
+            if (!TextUtils.isEmpty(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this))) {
+                if (i != tradePoint.getClients().size() - 1) {
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this)).append(", ");
+                } else {
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this));
+                }
             }
         }
 
         StringBuilder listTime = new StringBuilder();
-
         for (int i = 0; i < tradePoint.getTimes().size(); i++) {
-            if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
-                listTime.append(simpleDateFormat.format(tradePoint.getTimes().get(i).getBegin())).append(" - ").append(simpleDateFormat.format(tradePoint.getTimes().get(i).getEnd()));
-            }
+            // if (Objects.requireNonNull(tradePoint.getTimes().get(i)).getBegin() != null || Objects.requireNonNull(tradePoint.getTimes().get(i)).getEnd() != null) {
+            listTime.append(simpleDateFormat.format(
+                    Objects.requireNonNull(tradePoint.getTimes().get(i)).getBegin()))
+                    .append(" - ")
+                    .append(simpleDateFormat.format(
+                            Objects.requireNonNull(tradePoint.getTimes().get(i)).getEnd()));
+
         }
         schedule.setText("График Визита:" + " " + "" + listTime);
         client.setText("Клиенты:" + " " + listClients);

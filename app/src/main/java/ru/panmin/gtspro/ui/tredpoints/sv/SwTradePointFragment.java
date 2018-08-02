@@ -13,9 +13,11 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
+import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
+import ru.panmin.gtspro.ui.tredpoints.filter.BottomSheetFilter;
 
 
 public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView, SvAdapter.InfoClickListener {
@@ -62,6 +64,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     protected void initViews() {
+        initFilter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -77,6 +80,18 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
             }
         });
         presenter.afterInitViews();
+    }
+
+    private void initFilter() {
+        filter.setOnClickListener(view -> showDialogFragment(new BottomSheetFilter()));
+    }
+
+
+    private <T extends BottomSheetFragment> void showDialogFragment(T bottomSheetFilter) {
+        String tag = bottomSheetFilter.getClass().getSimpleName();
+        if (getChildFragmentManager().findFragmentByTag(tag) == null) {
+            bottomSheetFilter.show(getChildFragmentManager(), bottomSheetFilter.getClass().getSimpleName());
+        }
     }
 
     @Override

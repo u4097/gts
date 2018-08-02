@@ -18,13 +18,13 @@ import butterknife.Unbinder;
 import ru.panmin.gtspro.utils.DialogUtils;
 
 
-public abstract class BottomshettFragment extends BottomSheetDialogFragment implements MvpView {
+public abstract class BottomSheetFragment extends BottomSheetDialogFragment implements MvpView {
 
     protected Unbinder unbinder;
     protected MvpView mvpView;
     private MaterialDialog materialDialog = null;
 
-    public BottomshettFragment() {
+    public BottomSheetFragment() {
     }
 
     @Override

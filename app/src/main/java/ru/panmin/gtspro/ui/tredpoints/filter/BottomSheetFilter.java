@@ -13,9 +13,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
-import ru.panmin.gtspro.ui.base.BottomshettFragment;
+import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 
-public class BottomSheetFilter extends BottomshettFragment implements BottomSheetFilterMvpView {
+public class BottomSheetFilter extends BottomSheetFragment implements BottomSheetFilterMvpView {
 
     @Inject
     BottomSheetFilterPresenter presenter;
@@ -25,7 +25,7 @@ public class BottomSheetFilter extends BottomshettFragment implements BottomShee
     RadioGroup radioGroup;
 
     @SuppressLint("ValidFragment")
-    private BottomSheetFilter() {
+    public BottomSheetFilter() {
     }
 
     @Override

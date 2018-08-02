@@ -3,6 +3,7 @@ package ru.panmin.gtspro.ui.tredpoints.me;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,9 +14,11 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
+import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
+import ru.panmin.gtspro.ui.tredpoints.filter.BottomSheetFilter;
 
 public class MeTradePointFragment
         extends ProgressFragment
@@ -63,6 +66,7 @@ public class MeTradePointFragment
 
     @Override
     protected void initViews() {
+        initFilter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -78,6 +82,19 @@ public class MeTradePointFragment
             }
         });
         presenter.afterInitViews();
+    }
+
+    private void initFilter() {
+        filter.setOnClickListener(view -> showDialogFragment(new BottomSheetFilter()));
+    }
+
+
+    private <T extends BottomSheetFragment> void showDialogFragment(T bottomSheetFilter) {
+        String tag = bottomSheetFilter.getClass().getSimpleName();
+        if (getChildFragmentManager().findFragmentByTag(tag) == null) {
+            bottomSheetFilter.show(getChildFragmentManager(), bottomSheetFilter.getClass().getSimpleName());
+        }
+
     }
 
     @Override
