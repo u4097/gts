@@ -2,10 +2,18 @@ package ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+
+import com.annimon.stream.Stream;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
@@ -15,6 +23,8 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
     private static final String INTENT_KEY_MERCHANDISER_NAME = "merchandiser.name";
 
     @Inject MerchandiserPresenter merchandiserPresenter;
+    @Inject
+    ClientsMeAdapter clientsMeAdapter;
 
     private Merchandiser merchandiser = null;
 
@@ -27,6 +37,12 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
         return intent;
     }
 
+    @BindView(R.id.client_me_recycler)
+    RecyclerView client_me_recycler;
+
+    @BindView(R.id.schedule_de_ure_text_data)
+    AppCompatTextView schedule_de_ure_text_data;
+
     @Override
     protected void inject() {
         activityComponent().inject(this);
@@ -34,7 +50,7 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     @Override
     protected int getDataView() {
-        return R.layout.activity_trade_point_info_sv;
+        return R.layout.activity_me_info_trade_point;
     }
 
     @Override
@@ -52,6 +68,7 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     @Override
     protected void initViews() {
+
     }
 
     @Override
@@ -76,6 +93,25 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
     public void setMerchandiser(Merchandiser merchandiser) {
         this.merchandiser = merchandiser;
         setTitle(merchandiser.getName());
+        initTime();
+        initRecycler();
+        setStateData();
+    }
+
+    private void initTime() {
+        StringBuilder listTime = new StringBuilder();
+        for (int i = 0; i < merchandiser.getTimes().size(); i++) {
+            if (merchandiser.getTimes().get(i).getBegin() != null || merchandiser.getTimes().get(i).getEnd() != null) {
+                listTime.append(merchandiser.getTimes().get(i).getBegin()).append(" - ").append(merchandiser.getTimes().get(i).getEnd());
+            }
+        }
+        schedule_de_ure_text_data.setText(listTime);
+    }
+
+    private void initRecycler() {
+        clientsMeAdapter.setData(merchandiser, this);
+        client_me_recycler.setAdapter(clientsMeAdapter);
+        client_me_recycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }

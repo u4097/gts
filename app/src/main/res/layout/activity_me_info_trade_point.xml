@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent">
 
     <TextView
@@ -18,7 +23,7 @@
         android:textColor="@color/black_three"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -34,58 +39,170 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailed_information_text"
         app:layout_constraintVertical_bias="0.0">
 
-       <android.support.v7.widget.RecyclerView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>пше фвв -фдд
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/client_me_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="26dp"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp" />
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/error_message_text_info"
+        android:id="@+id/schedule_de_ure_text_tad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginLeft="86dp"
-        android:layout_marginRight="86dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/error_message_text_info"
-        android:textColor="#222222"
-        android:textSize="12sp"
-        android:visibility="gone"
+        android:layout_marginEnd="@dimen/medium_distance"
+        android:layout_marginLeft="@dimen/medium_distance"
+        android:layout_marginRight="@dimen/medium_distance"
+        android:layout_marginStart="@dimen/medium_distance"
+        android:layout_marginTop="@dimen/medium_distance"
+        android:text="@string/schedule_text_tad"
+        android:textColor="@color/black_three"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/run_button_me"
-        app:layout_constraintStart_toStartOf="@+id/run_button_me"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.0"/>
+        app:layout_constraintVertical_bias="0.0" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/run_button_me"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/schedule_de_ure_text_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginRight="92dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/azure_button_background"
-        android:minHeight="48dp"
-        android:minWidth="144dp"
-        android:text="@string/run_text_teg"
-        android:textColor="@color/white"
-        android:textSize="12sp"
+            android:layout_marginEnd="@dimen/medium_distance"
+            android:layout_marginLeft="@dimen/medium_distance"
+            android:layout_marginRight="@dimen/medium_distance"
+            android:layout_marginStart="@dimen/medium_distance"
+            android:layout_marginTop="14dp"
+            android:drawableLeft="@drawable/bg_not_select"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/bg_not_select"
+            android:textColor="@color/black_three"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/schedule_de_ure_text_tad"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="10:00-11:30" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/schedule_de_facto_text_tad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_distance"
+            android:layout_marginLeft="@dimen/medium_distance"
+            android:layout_marginRight="@dimen/medium_distance"
+            android:layout_marginStart="@dimen/medium_distance"
+            android:layout_marginTop="16dp"
+            android:text="@string/schedule_de_facto_text_tad"
+            android:textColor="@color/black_three"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/schedule_de_ure_text_data"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/time_check_data_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_distance"
+            android:layout_marginLeft="@dimen/medium_distance"
+            android:layout_marginRight="@dimen/medium_distance"
+            android:layout_marginStart="@dimen/medium_distance"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black_three"
+            android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_message_text_info"
-        app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintTop_toBottomOf="@+id/schedule_de_facto_text_tad"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="10:00" />
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/time_check_teg_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:drawableLeft="@drawable/bg_not_select"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/bg_not_select"
+            android:textColor="@color/black_three"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/time_check_data_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/time_check_data_text"
+            app:layout_constraintTop_toTopOf="@+id/time_check_data_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Чекин" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/time_check_aut_data_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_distance"
+            android:layout_marginLeft="@dimen/medium_distance"
+            android:layout_marginRight="@dimen/medium_distance"
+            android:layout_marginStart="@dimen/medium_distance"
+            android:layout_marginTop="44dp"
+            android:textColor="@color/black_three"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_check_data_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="11:00" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/palochka"
+            android:layout_width="2dp"
+            android:layout_height="48dp"
+            android:background="@drawable/blue_gradient"
+            app:layout_constraintBottom_toTopOf="@+id/time_check_aut_teg_text"
+            app:layout_constraintEnd_toEndOf="@+id/time_check_aut_teg_text"
+            app:layout_constraintHorizontal_bias="0.363"
+            app:layout_constraintStart_toStartOf="@+id/time_check_aut_teg_text"
+            app:layout_constraintTop_toBottomOf="@+id/time_check_teg_text"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/time_check_aut_teg_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:drawableLeft="@drawable/bg_not_select"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_circle_blue"
+            android:textColor="@color/black_three"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/time_check_aut_data_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/time_check_aut_data_text"
+            app:layout_constraintTop_toTopOf="@+id/time_check_aut_data_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Чекаут" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

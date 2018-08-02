@@ -19,6 +19,8 @@ import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
+import ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser.MerchandiserActivity;
 
 public class TradePointInfoSvActivity
         extends ToolbarActivity
@@ -103,7 +105,6 @@ public class TradePointInfoSvActivity
         promotions.setText(String.valueOf(tradePoint.getPromos().size()));
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
-
         setStateData();
     }
 
@@ -134,6 +135,6 @@ public class TradePointInfoSvActivity
 
     @Override
     public void showInfo(Merchandiser merchandisers) {
-
+        startActivity(MerchandiserActivity.getStartIntent(this, merchandisers.getName()));
     }
 }
