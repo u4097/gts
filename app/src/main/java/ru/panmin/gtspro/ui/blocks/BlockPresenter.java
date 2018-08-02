@@ -35,7 +35,7 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView> implements Bl
 
     @Override
     public void onPromoClick(Promo promo) {
-      Timber.d("On promo click");
-      getMvpView().showPromoInfo(promo);
+        Timber.d("On promo click");
+        getMvpView().showPromoInfo(promo);
     }
 }

@@ -77,7 +77,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
         blockViewModel.loadData("0");
         adapter.add(blockViewModel.getBlocks());
 
-        BlockType blockType =  new BlockType(BlockType.Type.PROMO);
+        BlockType blockType = new BlockType(BlockType.Type.PROMO);
         adapter.add(blockType);
 
         PromoViewModelStub promViewModelStub = new PromoViewModelStub();

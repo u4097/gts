@@ -10,9 +10,9 @@
         android:id="@+id/textView"
         android:layout_width="302dp"
         android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginBottom="28dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/label_verbose_info"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large"
@@ -21,17 +21,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Подробная информация:" />
+        tools:text="Подробная информация:"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="79dp"
         android:layout_marginEnd="12dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="79dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -47,8 +47,8 @@
                 android:id="@+id/tvClients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:text="Клиенты:"
                 android:textColor="@color/black"
@@ -56,14 +56,14 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Клиенты: Ринг, Hilltop" />
+                tools:text="Клиенты: Ринг, Hilltop"/>
 
             <TextView
                 android:id="@+id/tvAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="Автор:"
                 android:textColor="@color/black"
@@ -71,15 +71,15 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvClients"
-                tools:text="Автор: Шаляпин В.Р." />
+                tools:text="Автор: Шаляпин В.Р."/>
 
 
             <TextView
                 android:id="@+id/tvPeriod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="Период проведения:"
                 android:textColor="@color/black"
@@ -87,14 +87,14 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvAuthor"
-                tools:text="Период проведения: 16-19 сентября" />
+                tools:text="Период проведения: 16-19 сентября"/>
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="Подробное описание:"
                 android:textColor="@color/black"
@@ -102,23 +102,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvPeriod"
                 tools:text="Подробное описание:
 Ватки «Я сама», «Сто умелых ручек»
-раставлены не по планограмме" />
+раставлены не по планограмме"/>
 
 
             <TextView
                 android:id="@+id/tvSku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:text="SKU:"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-                tools:text="SKU: Баунти" />
+                tools:text="SKU: Баунти"/>
 
         </android.support.constraint.ConstraintLayout>
 
@@ -129,18 +129,18 @@
         android:id="@+id/btnResume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
         android:background="@drawable/bg_btn_accent"
-        android:paddingStart="30dp"
         android:paddingEnd="30dp"
+        android:paddingStart="30dp"
         android:text="Приступить"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"/>
 
 </android.support.constraint.ConstraintLayout>

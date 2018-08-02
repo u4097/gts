@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.ContentFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.ContentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewContent"
@@ -20,7 +19,7 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="78dp"
-            tools:layout_editor_absoluteY="177dp" />
+            tools:layout_editor_absoluteY="177dp"/>
 
         <android.support.v4.widget.ContentLoadingProgressBar
             android:id="@+id/vProgressBar"
@@ -33,18 +32,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabFilterPromoMe"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginBottom="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:scaleType="center"
             app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +52,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.986"
-            app:srcCompat="@drawable/ic_filter_promo" />
+            app:srcCompat="@drawable/ic_filter_promo"/>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.ContentFrameLayout>

@@ -10,7 +10,6 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
-import ru.panmin.gtspro.ui.tredpoints.TradePointActivity;
 import ru.panmin.gtspro.utils.DialogUtils;
 
 public class SplashActivity extends BaseActivity implements SplashMvpView {

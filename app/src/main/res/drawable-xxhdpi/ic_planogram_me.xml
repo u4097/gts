@@ -7,22 +7,22 @@
         android:fillType="evenOdd"
         android:pathData="M2.5,0.5L17.3636,0.5A2,2 0,0 1,19.3636 2.5L19.3636,16.3182A2,2 0,0 1,17.3636 18.3182L2.5,18.3182A2,2 0,0 1,0.5 16.3182L0.5,2.5A2,2 0,0 1,2.5 0.5z"
         android:strokeColor="@color/colorPrimary"
-        android:strokeWidth="1" />
+        android:strokeWidth="1"/>
     <path
         android:fillType="evenOdd"
         android:pathData="M0.9091,15.0436l6.9305,-6.8618l3.4239,3.4309"
         android:strokeColor="@color/colorPrimary"
         android:strokeLineCap="square"
-        android:strokeWidth="1" />
+        android:strokeWidth="1"/>
     <path
         android:fillType="evenOdd"
         android:pathData="M9.0909,14.8479l3.8658,-3.9388l6.2536,6.4585"
         android:strokeColor="@color/colorPrimary"
         android:strokeLineCap="square"
-        android:strokeWidth="1" />
+        android:strokeWidth="1"/>
     <path
         android:fillType="evenOdd"
         android:pathData="M14.7955,4.7955m-1.1591,0a1.1591,1.1591 0,1 1,2.3182 0a1.1591,1.1591 0,1 1,-2.3182 0"
         android:strokeColor="@color/colorPrimary"
-        android:strokeWidth="1" />
+        android:strokeWidth="1"/>
 </vector>

@@ -19,26 +19,6 @@ import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 public class BlocksVH extends DefaultViewHolder<BlocksModel> {
 
     private OnTradePointBlockClickListener listener = null;
-
-
-    class Holder{
-        FloatingActionButton btn;
-        TextView tvBadge;
-
-        public Holder(FloatingActionButton btn, TextView tvBadge) {
-            this.btn = btn;
-            this.tvBadge = tvBadge;
-        }
-
-        public FloatingActionButton getBtn() {
-            return btn;
-        }
-
-        public TextView getTvBadge() {
-            return tvBadge;
-        }
-    }
-
     private Map<BlockType.Type, Holder> tradePointBlockViews;
 
     @HolderConstructor
@@ -46,7 +26,7 @@ public class BlocksVH extends DefaultViewHolder<BlocksModel> {
         super(itemView);
         this.listener = listener;
         tradePointBlockViews = new HashMap<>();
-        tradePointBlockViews.put( BlockType.Type.CLAIMS,
+        tradePointBlockViews.put(BlockType.Type.CLAIMS,
                 new BlocksVH.Holder(itemView.findViewById(R.id.btnClaims), itemView.findViewById(R.id.tCounterClaims)));
         tradePointBlockViews.put(BlockType.Type.PROMO,
                 new BlocksVH.Holder(itemView.findViewById(R.id.btnPromo), itemView.findViewById(R.id.tCounterPromo)));
@@ -66,23 +46,16 @@ public class BlocksVH extends DefaultViewHolder<BlocksModel> {
         for (Map.Entry<BlockType.Type, Holder> entry :
                 tradePointBlockViews.entrySet()) {
 
-              entry.getValue().btn.setOnClickListener(view -> listener.onTradePointBlockClick(entry.getKey()));
+            entry.getValue().btn.setOnClickListener(view -> listener.onTradePointBlockClick(entry.getKey()));
 
         }
     }
 
-
-/*    public BlocksVH(View itemView) {
-        super(itemView);
-//        this.listener = null;
-    }*/
-
-
     @Override
     public void bind(BlocksModel model) {
         for (Block block : model.getBlocks()
-             ) {
-             Holder holder =  tradePointBlockViews.get(block.getType());
+                ) {
+            Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
                 TextView tvBadge = holder.getTvBadge();
                 String count = block.getSize().toString();
@@ -104,8 +77,33 @@ public class BlocksVH extends DefaultViewHolder<BlocksModel> {
         }
     }
 
+
+/*    public BlocksVH(View itemView) {
+        super(itemView);
+//        this.listener = null;
+    }*/
+
+
     public interface OnTradePointBlockClickListener {
         void onTradePointBlockClick(BlockType.Type blockType);
+    }
+
+    class Holder {
+        FloatingActionButton btn;
+        TextView tvBadge;
+
+        public Holder(FloatingActionButton btn, TextView tvBadge) {
+            this.btn = btn;
+            this.tvBadge = tvBadge;
+        }
+
+        public FloatingActionButton getBtn() {
+            return btn;
+        }
+
+        public TextView getTvBadge() {
+            return tvBadge;
+        }
     }
 
 }

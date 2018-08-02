@@ -13,18 +13,6 @@ public class BlockType {
     @DrawableRes Integer meIconRes;
 
 
-    public enum Type {
-        CLAIMS,
-        PROMO,
-        PHOTO_REPORT,
-        REPORT,
-        SKU,
-        PLANOGRAM,
-        HOT_LINE,
-        STATISTICS
-    }
-
-
     public BlockType(Type blockType) {
         this.blockType = blockType;
 
@@ -32,15 +20,15 @@ public class BlockType {
         this.meIconRes = R.drawable.btn_claims_me;
 
         switch (blockType) {
-            case CLAIMS:{
+            case CLAIMS: {
                 this.titleRes = R.string.label_claims;
                 break;
             }
-            case PROMO:{
+            case PROMO: {
                 this.titleRes = R.string.label_promo;
                 break;
             }
-            case PHOTO_REPORT:{
+            case PHOTO_REPORT: {
                 this.titleRes = R.string.label_photo_report;
                 break;
             }
@@ -48,7 +36,7 @@ public class BlockType {
                 this.titleRes = R.string.label_report;
                 break;
             }
-            case SKU:{
+            case SKU: {
                 this.titleRes = R.string.label_sku;
                 break;
             }
@@ -64,12 +52,15 @@ public class BlockType {
                 this.titleRes = R.string.label_statistics;
                 break;
             }
-            default: throw new IllegalArgumentException("Invalid trade point block type.");
+            default:
+                throw new IllegalArgumentException("Invalid trade point block type.");
         }
 
     }
 
-    public Type getBlockType() { return blockType;}
+    public Type getBlockType() {
+        return blockType;
+    }
 
     public void setBlockType(Type blockType) {
         this.blockType = blockType;
@@ -97,5 +88,16 @@ public class BlockType {
 
     public void setMeIconRes(Integer meIconRes) {
         this.meIconRes = meIconRes;
+    }
+
+    public enum Type {
+        CLAIMS,
+        PROMO,
+        PHOTO_REPORT,
+        REPORT,
+        SKU,
+        PLANOGRAM,
+        HOT_LINE,
+        STATISTICS
     }
 }

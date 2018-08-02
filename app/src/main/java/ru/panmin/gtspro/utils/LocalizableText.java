@@ -10,7 +10,7 @@ public class LocalizableText {
     String ru = "";
 
     public LocalizableText(String en, String ru) {
-        if (!TextUtils.isEmpty(en)){
+        if (!TextUtils.isEmpty(en)) {
             this.en = en;
         }
         if (!TextUtils.isEmpty(ru)) {
@@ -19,15 +19,18 @@ public class LocalizableText {
     }
 
 
-     public String text(Resources resources) {
-         return text(resources.getConfiguration().locale);
+    public String text(Resources resources) {
+        return text(resources.getConfiguration().locale);
     }
 
     String text(Locale locale) {
         switch (locale.getLanguage()) {
-            case "ru": return ru;
-            case "en": return en;
-            default: return "Invalid locale";
+            case "ru":
+                return ru;
+            case "en":
+                return en;
+            default:
+                return "Invalid locale";
         }
     }
 }

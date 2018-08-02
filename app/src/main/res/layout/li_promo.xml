@@ -5,97 +5,97 @@
     android:id="@+id/promoRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_xsmall"
     android:layout_marginLeft="@dimen/spacing_small"
-    android:layout_marginTop="@dimen/spacing_xsmall"
     android:layout_marginRight="@dimen/spacing_small"
-    android:layout_marginBottom="@dimen/spacing_xsmall">
+    android:layout_marginTop="@dimen/spacing_xsmall">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_small">
 
-    <ImageView
-        android:id="@+id/ivStatus"
-        android:layout_width="@dimen/size_icon_xsmall"
-        android:layout_height="@dimen/size_icon_xsmall"
-        android:layout_margin="@dimen/spacing_medium"
-        android:tint="@color/yellow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_circle"
-        tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/ivStatus"
+            android:layout_width="@dimen/size_icon_xsmall"
+            android:layout_height="@dimen/size_icon_xsmall"
+            android:layout_margin="@dimen/spacing_medium"
+            android:tint="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_circle"
+            tools:ignore="ContentDescription"/>
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginEnd="@dimen/spacing_medium"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/black"
+            android:textStyle="bold"
 
-        app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
-        app:layout_constraintEnd_toStartOf="@+id/tvDateFrom"
-        app:layout_constraintStart_toEndOf="@+id/ivStatus"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Title" />
+            app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
+            app:layout_constraintEnd_toStartOf="@+id/tvDateFrom"
+            app:layout_constraintStart_toEndOf="@+id/ivStatus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Title"/>
 
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginEnd="@dimen/spacing_medium"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textColor="@color/black"
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/black"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvDateTo"
-        app:layout_constraintStart_toEndOf="@+id/ivStatus"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvDateTo"
+            app:layout_constraintStart_toEndOf="@+id/ivStatus"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
 
-        tools:text="Подзаголовок" />
+            tools:text="Подзаголовок"/>
 
-    <TextView
-        android:id="@+id/tvDateFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/text_size_tiny"
+        <TextView
+            android:id="@+id/tvDateFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_tiny"
 
-        app:layout_constraintBottom_toTopOf="@+id/tvDateTo"
-        app:layout_constraintLeft_toLeftOf="@+id/tvDateTo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/tvDateTo"
+            app:layout_constraintLeft_toLeftOf="@+id/tvDateTo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
 
-        tools:text="C 16/09/2018 " />
+            tools:text="C 16/09/2018 "/>
 
-    <TextView
-        android:id="@+id/tvDateTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/text_size_tiny"
+        <TextView
+            android:id="@+id/tvDateTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_tiny"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDateFrom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateFrom"
 
-        tools:text="До 16/09/2018" />
+            tools:text="До 16/09/2018"/>
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

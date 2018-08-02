@@ -15,9 +15,9 @@ import ru.panmin.gtspro.data.models.Promo;
 public class BlockPromoVH extends DefaultViewHolder<Promo> {
     private ImageView ivStatus = itemView.findViewById(R.id.ivStatus);
     private TextView tvTitle = itemView.findViewById(R.id.tvTitle);
-    private TextView  tvSubtitle  = itemView.findViewById(R.id.tvSubtitle);
-    private TextView  tvDateFrom  = itemView.findViewById(R.id.tvDateFrom);
-    private TextView tvDateTo   = itemView.findViewById(R.id.tvDateTo);
+    private TextView tvSubtitle = itemView.findViewById(R.id.tvSubtitle);
+    private TextView tvDateFrom = itemView.findViewById(R.id.tvDateFrom);
+    private TextView tvDateTo = itemView.findViewById(R.id.tvDateTo);
     private ViewGroup promoRoot = itemView.findViewById(R.id.promoRoot);
 
 

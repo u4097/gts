@@ -18,14 +18,14 @@ public class BlockViewModel implements IBlocksViewModel {
     @Override
     public void loadData(String tradePointId) {
         List<Block> blocks = new ArrayList<>();
-        blocks.add(new Block(BlockType.Type.CLAIMS,1,false));
-        blocks.add(new Block(BlockType.Type.PROMO,3,false));
-        blocks.add(new Block(BlockType.Type.PHOTO_REPORT,2,false));
-        blocks.add(new Block(BlockType.Type.REPORT,3,false));
-        blocks.add(new Block(BlockType.Type.PLANOGRAM,0,false));
-        blocks.add(new Block(BlockType.Type.HOT_LINE,1,false));
-        blocks.add(new Block(BlockType.Type.SKU,0,false));
-        blocks.add(new Block(BlockType.Type.STATISTICS,3,false));
+        blocks.add(new Block(BlockType.Type.CLAIMS, 1, false));
+        blocks.add(new Block(BlockType.Type.PROMO, 3, false));
+        blocks.add(new Block(BlockType.Type.PHOTO_REPORT, 2, false));
+        blocks.add(new Block(BlockType.Type.REPORT, 3, false));
+        blocks.add(new Block(BlockType.Type.PLANOGRAM, 0, false));
+        blocks.add(new Block(BlockType.Type.HOT_LINE, 1, false));
+        blocks.add(new Block(BlockType.Type.SKU, 0, false));
+        blocks.add(new Block(BlockType.Type.STATISTICS, 3, false));
         this.blocksModel = new BlocksModel();
         this.blocksModel.setBlocks(blocks);
 

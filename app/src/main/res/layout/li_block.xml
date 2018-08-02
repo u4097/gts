@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:layout_marginTop="@dimen/spacing_large"
-    android:layout_marginBottom="@dimen/spacing_large">
+    android:layout_marginBottom="@dimen/spacing_large"
+    android:layout_marginTop="@dimen/spacing_large">
 
     <!-- Claims -->
 
@@ -20,7 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/btnPromo"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_claims_me" />
+        app:srcCompat="@drawable/btn_claims_me"/>
 
     <TextView
         android:id="@+id/tCounterClaims"
@@ -29,7 +28,7 @@
         app:layout_constraintLeft_toRightOf="@+id/btnClaims"
         app:layout_constraintRight_toRightOf="@+id/btnClaims"
         app:layout_constraintTop_toTopOf="@+id/btnClaims"
-        tools:text="1" />
+        tools:text="1"/>
 
     <!-- PromoModel -->
 
@@ -41,7 +40,7 @@
         app:layout_constraintLeft_toRightOf="@+id/btnClaims"
         app:layout_constraintRight_toLeftOf="@+id/btnPhotoReport"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_promo_me" />
+        app:srcCompat="@drawable/btn_promo_me"/>
 
     <TextView
         android:id="@+id/tCounterPromo"
@@ -50,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnPromo"
         app:layout_constraintStart_toEndOf="@+id/btnPromo"
         app:layout_constraintTop_toTopOf="@+id/btnPromo"
-        tools:text="2" />
+        tools:text="2"/>
 
     <!-- PhotoReport -->
 
@@ -62,7 +61,7 @@
         app:layout_constraintLeft_toRightOf="@+id/btnPromo"
         app:layout_constraintRight_toLeftOf="@+id/btnReport"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_photo_report_me" />
+        app:srcCompat="@drawable/btn_photo_report_me"/>
 
     <TextView
         android:id="@+id/tCounterPhotoReport"
@@ -71,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnPhotoReport"
         app:layout_constraintStart_toEndOf="@+id/btnPhotoReport"
         app:layout_constraintTop_toTopOf="@+id/btnPhotoReport"
-        tools:text="3" />
+        tools:text="3"/>
 
     <!-- Report -->
 
@@ -83,7 +82,7 @@
         app:layout_constraintLeft_toRightOf="@+id/btnPhotoReport"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_report_me" />
+        app:srcCompat="@drawable/btn_report_me"/>
 
     <TextView
         android:id="@+id/tCounterReport"
@@ -92,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnReport"
         app:layout_constraintStart_toEndOf="@+id/btnReport"
         app:layout_constraintTop_toTopOf="@+id/btnReport"
-        tools:text="4" />
+        tools:text="4"/>
 
     <!-- Sku -->
 
@@ -100,14 +99,14 @@
         android:id="@+id/btnSku"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/btnPlanogram"
         app:layout_constraintTop_toBottomOf="@+id/btnClaims"
-        app:srcCompat="@drawable/btn_sku" />
+        app:srcCompat="@drawable/btn_sku"/>
 
     <TextView
         android:id="@+id/tCounterSku"
@@ -116,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnSku"
         app:layout_constraintStart_toEndOf="@+id/btnSku"
         app:layout_constraintTop_toTopOf="@+id/btnSku"
-        tools:text="96" />
+        tools:text="96"/>
 
     <!-- Planogram -->
 
@@ -124,12 +123,12 @@
         android:id="@+id/btnPlanogram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintLeft_toRightOf="@+id/btnSku"
         app:layout_constraintRight_toLeftOf="@+id/btnHotLine"
         app:layout_constraintTop_toBottomOf="@+id/btnClaims"
-        app:srcCompat="@drawable/btn_planogram_me" />
+        app:srcCompat="@drawable/btn_planogram_me"/>
 
     <TextView
         android:id="@+id/tCounterPlanogram"
@@ -138,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnPlanogram"
         app:layout_constraintStart_toEndOf="@+id/btnPlanogram"
         app:layout_constraintTop_toTopOf="@+id/btnPlanogram"
-        tools:text="97" />
+        tools:text="97"/>
 
     <!-- HotLine -->
 
@@ -146,12 +145,12 @@
         android:id="@+id/btnHotLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintLeft_toRightOf="@+id/btnPlanogram"
         app:layout_constraintRight_toLeftOf="@+id/btnStatistics"
         app:layout_constraintTop_toBottomOf="@+id/btnClaims"
-        app:srcCompat="@drawable/btn_hot_line_me" />
+        app:srcCompat="@drawable/btn_hot_line_me"/>
 
     <TextView
         android:id="@+id/tCounterHotLine"
@@ -160,7 +159,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnHotLine"
         app:layout_constraintStart_toEndOf="@+id/btnHotLine"
         app:layout_constraintTop_toTopOf="@+id/btnHotLine"
-        tools:text="98" />
+        tools:text="98"/>
 
     <!-- Statistics -->
 
@@ -168,12 +167,12 @@
         android:id="@+id/btnStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintLeft_toRightOf="@+id/btnHotLine"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnClaims"
-        app:srcCompat="@drawable/btn_statistics_me" />
+        app:srcCompat="@drawable/btn_statistics_me"/>
 
     <TextView
         android:id="@+id/tCounterStatistics"
@@ -182,6 +181,6 @@
         app:layout_constraintEnd_toEndOf="@+id/btnStatistics"
         app:layout_constraintStart_toEndOf="@+id/btnStatistics"
         app:layout_constraintTop_toTopOf="@+id/btnStatistics"
-        tools:text="99" />
+        tools:text="99"/>
 
 </android.support.constraint.ConstraintLayout>
