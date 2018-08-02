@@ -30,6 +30,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
     @BindView(R.id.report_text) AppCompatTextView report;
     private TradePoint tradePoint = null;
+
     public TradePointInfoMeActivity() {
     }
 

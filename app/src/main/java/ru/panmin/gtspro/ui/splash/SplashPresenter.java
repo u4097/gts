@@ -40,6 +40,9 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
                     .subscribe(
                             addressProgramResponse -> {
                                 dataManager.setSyncTime(calendar);
+                                dataManager.setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
+                                dataManager.setTradePointRadius(addressProgramResponse.getTradePointRadius());
+                                dataManager.setHotLine(addressProgramResponse.getHotLine());
                                 dataManager.setTradePoints(addressProgramResponse.getTradePoints());
                                 getMvpView().openMainActivity();
                                 getMvpView().finishActivity();

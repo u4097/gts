@@ -20,4 +20,6 @@ public interface MvpView {
 
     void showUnknownError();
 
+    void startSync();
+
 }

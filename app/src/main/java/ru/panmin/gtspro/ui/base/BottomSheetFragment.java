@@ -3,6 +3,7 @@ package ru.panmin.gtspro.ui.base;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.View;
@@ -15,16 +16,17 @@ import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.utils.DialogUtils;
 
 
-public abstract class BottomshettFragment extends BottomSheetDialogFragment implements MvpView {
+public abstract class BottomSheetFragment extends BottomSheetDialogFragment implements MvpView {
 
     protected Unbinder unbinder;
     protected MvpView mvpView;
     private MaterialDialog materialDialog = null;
 
-    public BottomshettFragment() {
+    public BottomSheetFragment() {
     }
 
     @Override
@@ -80,6 +82,13 @@ public abstract class BottomshettFragment extends BottomSheetDialogFragment impl
     @Override
     public void finishActivity() {
         mvpView.finishActivity();
+    }
+
+    @Override
+    public void startSync() {
+        Intent intent = SplashActivity.getStartIntent(getActivity());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @SuppressLint("RestrictedApi")

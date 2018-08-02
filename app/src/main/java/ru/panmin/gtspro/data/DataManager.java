@@ -13,6 +13,7 @@ import io.reactivex.Single;
 import io.realm.RealmList;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
+import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
@@ -48,7 +49,6 @@ public class DataManager {
 
 
     /* SHARED PREFERENCES */
-
     public boolean isWasFirstPermissionDialog(List<String> permissions) {
         return preferencesHelper.isWasFirstPermissionDialog(permissions);
     }
@@ -198,6 +198,7 @@ public class DataManager {
         }
     }
 
+
     /* API */
     public Single<AuthResponse> auth(String userName, String password) {
         return apiService.auth(new AuthRequest(userName, password));
@@ -213,7 +214,6 @@ public class DataManager {
 
 
     /* DATABASE */
-
     public List<TradePoint> getTradePoints() {
         return realmHelper.getTradePoints();
     }
@@ -230,6 +230,15 @@ public class DataManager {
     @Nullable
     public Merchandiser getMerchandiserByName(String name) {
         return realmHelper.getMerchandiserByName(name);
+    }
+
+    @Nullable
+    public HotLine getHotLine() {
+        return realmHelper.getHotLine();
+    }
+
+    public void setHotLine(HotLine hotLine) {
+        realmHelper.setHotLine(hotLine);
     }
 
 }

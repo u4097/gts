@@ -34,6 +34,7 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
     @BindView(R.id.report_text) AppCompatTextView report;
     @BindView(R.id.recycler_list_me) RecyclerView recycler;
     private TradePoint tradePoint = null;
+
     public TradePointInfoSvActivity() {
     }
 
