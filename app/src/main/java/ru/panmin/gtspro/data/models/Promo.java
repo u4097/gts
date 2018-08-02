@@ -9,31 +9,31 @@ import io.realm.annotations.PrimaryKey;
 public class Promo extends RealmObject {
 
     @PrimaryKey private String id;
-    @SerializedName("name") private String name;
-    @SerializedName("author") private String author;
-    @SerializedName("description") private String description;
-    @SerializedName("sku") private String sku;
+    @SerializedName("name") private Name name;
+    @SerializedName("description") private Name description;
+    @SerializedName("client") private Name client;
     @SerializedName("begin_date") private String beginDate;
     @SerializedName("finish_date") private String finishDate;
-    @SerializedName("attachedME") private RealmList<String> attachedME = new RealmList<>();
-    @SerializedName("clients") private RealmList<String> clients = new RealmList<>();
-    @SerializedName("isActive") private Boolean isActive;
+    @SerializedName("mechanics") private Mechanic mechanics;
+    @SerializedName("type") private Type type;
+    @SerializedName("sku_ids") private RealmList<SkuListElement> skuIds = new RealmList<>();
+    @SerializedName("forms") private RealmList<Form> forms = new RealmList<>();
 
     public Promo() {
     }
 
-    public Promo(String id, String name, String author, String description, String sku, String beginDate, String finishDate,
-                 RealmList<String> attachedME, RealmList<String> clients, Boolean isActive) {
+    public Promo(String id, Name name, Name description, Name client, String beginDate, String finishDate, Mechanic mechanics,
+                 Type type, RealmList<SkuListElement> skuIds, RealmList<Form> forms) {
         this.id = id;
         this.name = name;
-        this.author = author;
         this.description = description;
-        this.sku = sku;
+        this.client = client;
         this.beginDate = beginDate;
         this.finishDate = finishDate;
-        this.attachedME = attachedME;
-        this.clients = clients;
-        this.isActive = isActive;
+        this.mechanics = mechanics;
+        this.type = type;
+        this.skuIds = skuIds;
+        this.forms = forms;
     }
 
     public String getId() {
@@ -44,28 +44,28 @@ public class Promo extends RealmObject {
         this.id = id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
-    public String getDescription() {
+    public Name getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Name description) {
         this.description = description;
     }
 
-    public String getSku() {
-        return sku;
+    public Name getClient() {
+        return client;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setClient(Name client) {
+        this.client = client;
     }
 
     public String getBeginDate() {
@@ -84,36 +84,36 @@ public class Promo extends RealmObject {
         this.finishDate = finishDate;
     }
 
-    public RealmList<String> getAttachedME() {
-        return attachedME;
+    public Mechanic getMechanics() {
+        return mechanics;
     }
 
-    public void setAttachedME(RealmList<String> attachedME) {
-        this.attachedME = attachedME;
+    public void setMechanics(Mechanic mechanics) {
+        this.mechanics = mechanics;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public Type getType() {
+        return type;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public RealmList<String> getClients() {
-        return clients;
+    public RealmList<SkuListElement> getSkuIds() {
+        return skuIds;
     }
 
-    public void setClients(RealmList<String> clients) {
-        this.clients = clients;
+    public void setSkuIds(RealmList<SkuListElement> skuIds) {
+        this.skuIds = skuIds;
     }
 
-    public String getAuthor() {
-        return author;
+    public RealmList<Form> getForms() {
+        return forms;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setForms(RealmList<Form> forms) {
+        this.forms = forms;
     }
 
 }

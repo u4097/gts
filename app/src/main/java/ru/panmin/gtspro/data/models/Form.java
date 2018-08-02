@@ -6,7 +6,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class PhotoReport extends RealmObject {
+public class Form extends RealmObject {
 
     @PrimaryKey private String id;
     @SerializedName("client") private Client client;
@@ -22,11 +22,11 @@ public class PhotoReport extends RealmObject {
     @SerializedName("period") private int period;
     @SerializedName("questions") private RealmList<Question> questions = new RealmList<>();
 
-    public PhotoReport() {
+    public Form() {
     }
 
-    public PhotoReport(String id, Client client, String tradePointId, String dateBegin, String dateFinish, double filledPercent,
-                       int countAnswers, int countQuestions, String promoId, Name name, int type, int period, RealmList<Question> questions) {
+    public Form(String id, Client client, String tradePointId, String dateBegin, String dateFinish, double filledPercent,
+                int countAnswers, int countQuestions, String promoId, Name name, int type, int period, RealmList<Question> questions) {
         this.id = id;
         this.client = client;
         this.tradePointId = tradePointId;
