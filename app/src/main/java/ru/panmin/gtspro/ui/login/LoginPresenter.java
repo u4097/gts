@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.base.BasePresenter;
+import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.RxUtils;
 
 class LoginPresenter extends BasePresenter<LoginMvpView> {
@@ -39,10 +40,15 @@ class LoginPresenter extends BasePresenter<LoginMvpView> {
                                 dataManager.setId(authResponse.getId());
                                 dataManager.setUserName(authResponse.getUsername());
                                 dataManager.setRole(authResponse.getRole());
+                                switch (authResponse.getRole()) {
+                                    case Constants.ROLE_SUPERVISOR:
+                                        dataManager.setSupervisorId(authResponse.getSupervisorId());
+                                        break;
+                                }
                                 dataManager.setFullNameRu(authResponse.getFullName().getRu());
                                 dataManager.setFullNameEn(authResponse.getFullName().getEn());
                                 getMvpView().hideProgressDialog();
-                                getMvpView().openMainActivity();
+                                getMvpView().openSplashActivity();
                                 getMvpView().finishActivity();
                             },
                             throwable -> {

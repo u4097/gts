@@ -1,36 +1,41 @@
 package ru.panmin.gtspro.ui.blocks.viewmodel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import io.realm.RealmList;
 import ru.panmin.gtspro.data.models.Promo;
 
 public class PromoViewModelStub implements IPromoViewModel {
-    List<Promo> data;
-    Set<String> currentClientFilter;
-    List<Promo> dataFiltered;
+
+    private List<Promo> data;
+    private Set<String> currentClientFilter;
+    private List<Promo> dataFiltered;
 
     @Override
     public void loadData(String tradePointId) {
-        List<String> attachedME = new ArrayList<>();
-        List<String> clients = new ArrayList<>();
+
+        RealmList<String> attachedME = new RealmList<>();
+
         attachedME.add("Генадий Иванович");
         attachedME.add("Генадий Иванович");
         attachedME.add("Генадий Иванович");
+
+        RealmList<String> clients = new RealmList<>();
         clients.add("Магнит");
         clients.add("Пятерочка");
+
         Promo promoModel1 = new Promo("0"
                 , "Промо 1"
                 , "Шаляпин В.Д"
                 , "Ватки «Я сама», «Сто умелых ручек»\n" +
                 "раставлены не по планограмме"
                 , "Чай"
-                , new Date()
-                , new Date()
+                , ""
+                , ""
                 , attachedME
-                ,clients
+                , clients
                 , false);
 
         Promo promoModel2 = new Promo("1"
@@ -39,8 +44,8 @@ public class PromoViewModelStub implements IPromoViewModel {
                 , "Ватки «Я сама», «Сто умелых ручек»\n" +
                 "раставлены не по планограмме"
                 , "Кофе"
-                , new Date()
-                , new Date()
+                , ""
+                , ""
                 , attachedME
                 , clients
                 , false);
@@ -51,8 +56,8 @@ public class PromoViewModelStub implements IPromoViewModel {
                 , "Ватки «Я сама», «Сто умелых ручек»\n" +
                 "раставлены не по планограмме"
                 , "Сыр"
-                , new Date()
-                , new Date()
+                , ""
+                , ""
                 , attachedME
                 , clients
                 , false);
@@ -68,18 +73,30 @@ public class PromoViewModelStub implements IPromoViewModel {
 
     @Override
     public void onDataLoaded() {
-
     }
 
     public List<Promo> getData() {
         return data;
     }
 
+    public void setData(List<Promo> data) {
+        this.data = data;
+    }
+
     public Set<String> getCurrentClientFilter() {
         return currentClientFilter;
+    }
+
+    public void setCurrentClientFilter(Set<String> currentClientFilter) {
+        this.currentClientFilter = currentClientFilter;
     }
 
     public List<Promo> getDataFiltered() {
         return dataFiltered;
     }
+
+    public void setDataFiltered(List<Promo> dataFiltered) {
+        this.dataFiltered = dataFiltered;
+    }
+
 }

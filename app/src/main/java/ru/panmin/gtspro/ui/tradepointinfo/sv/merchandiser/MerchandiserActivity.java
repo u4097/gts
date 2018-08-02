@@ -12,7 +12,7 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class MerchandiserActivity extends ToolbarActivity implements MerchandiserMvpView {
 
-    private static final String INTENT_KEY_MERCHANDISER = "merchandiser";
+    private static final String INTENT_KEY_MERCHANDISER_NAME = "merchandiser.name";
 
     @Inject MerchandiserPresenter merchandiserPresenter;
 
@@ -21,9 +21,9 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
     public MerchandiserActivity() {
     }
 
-    public static Intent getStartIntent(Context context, Merchandiser merchandiser) {
+    public static Intent getStartIntent(Context context, String merchandiserName) {
         Intent intent = new Intent(context, MerchandiserActivity.class);
-        intent.putExtra(INTENT_KEY_MERCHANDISER, merchandiser);
+        intent.putExtra(INTENT_KEY_MERCHANDISER_NAME, merchandiserName);
         return intent;
     }
 
@@ -44,10 +44,10 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     @Override
     protected void initToolbar() {
-        merchandiser = getIntent().getParcelableExtra(INTENT_KEY_MERCHANDISER);
+        merchandiserPresenter.getMerchandiser(getIntent().getStringExtra(INTENT_KEY_MERCHANDISER_NAME));
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(merchandiser.getName());
+
     }
 
     @Override
@@ -70,6 +70,12 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     @Override
     protected void errorButtonClick() {
+    }
+
+    @Override
+    public void setMerchandiser(Merchandiser merchandiser) {
+        this.merchandiser = merchandiser;
+        setTitle(merchandiser.getName());
     }
 
 }

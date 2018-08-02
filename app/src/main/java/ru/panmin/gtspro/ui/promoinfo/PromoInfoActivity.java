@@ -20,31 +20,24 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpView {
 
-    private static final String INTENT_KEY_PROMO = "promo";
+    private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
-    @Inject
-    PromoInfoPresenter promoInfoPresenter;
+    @Inject PromoInfoPresenter promoInfoPresenter;
 
-    @BindView(R.id.tvClients)
-    TextView tvClients;
-    @BindView(R.id.tvAuthor)
-    TextView tvAuthor;
-    @BindView(R.id.tvPeriod)
-    TextView tvPeriod;
-    @BindView(R.id.tvDescription)
-    TextView tvDescription;
-    @BindView(R.id.tvSku)
-    TextView tvSku;
-
+    @BindView(R.id.tvClients) TextView tvClients;
+    @BindView(R.id.tvAuthor) TextView tvAuthor;
+    @BindView(R.id.tvPeriod) TextView tvPeriod;
+    @BindView(R.id.tvDescription) TextView tvDescription;
+    @BindView(R.id.tvSku) TextView tvSku;
 
     private Promo promo = null;
 
     public PromoInfoActivity() {
     }
 
-    public static Intent getStartIntent(Context context,Promo promo) {
+    public static Intent getStartIntent(Context context, String promoId) {
         Intent intent = new Intent(context, PromoInfoActivity.class);
-        intent.putExtra(INTENT_KEY_PROMO, promo);
+        intent.putExtra(INTENT_KEY_PROMO_ID, promoId);
         return intent;
     }
 
@@ -65,23 +58,14 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
 
     @Override
     protected void initToolbar() {
-        promo = getIntent().getParcelableExtra(INTENT_KEY_PROMO);
+        promoInfoPresenter.getPromo(getIntent().getStringExtra(INTENT_KEY_PROMO_ID));
         setNavigationIcon(R.drawable.ic_back_arrow);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(promo.getName());
     }
 
     @Override
     protected void initViews() {
-        setStateData();
-        setValue(tvClients,promo.getClients().toString(),R.string.label_clients);
-        setValue(tvAuthor, promo.getAuthor(),R.string.label_author);
-        setValue(tvDescription, promo.getDescription(),R.string.label_promo_description);
-        setValue(tvPeriod, "16-19 сентября",R.string.label_author);
-        setValue(tvSku, promo.getSku(),R.string.label_promo_sku);
-
     }
-
 
     @Override
     protected void detachView() {
@@ -102,15 +86,30 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
     }
 
     @Override
+    public void setPromo(Promo promo) {
+        this.promo = promo;
+        setTitle(promo.getName());
+
+        setValue(tvClients, promo.getClients().toString(), R.string.label_clients);
+        setValue(tvAuthor, promo.getAuthor(), R.string.label_author);
+        setValue(tvDescription, promo.getDescription(), R.string.label_promo_description);
+        setValue(tvPeriod, "16-19 сентября", R.string.label_author);
+        setValue(tvSku, promo.getSku(), R.string.label_promo_sku);
+
+        setStateData();
+    }
+
+    @Override
     public void setValue(TextView tv, String text, Integer labelRes) {
         if (TextUtils.isEmpty(text)) {
             tv.setVisibility(View.GONE);
         } else {
             String label = getString(labelRes) + " ";
-            Spannable spannable =  new SpannableString(label + text);
-            spannable.setSpan(new StyleSpan(Typeface.BOLD),0,label.length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            Spannable spannable = new SpannableString(label + text);
+            spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             tv.setText(spannable);
             tv.setVisibility(View.VISIBLE);
         }
     }
+
 }

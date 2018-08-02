@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint;
+package ru.panmin.gtspro.ui.tredpoints;
 
 
 import android.content.Context;
@@ -214,8 +214,6 @@ public class TradePointActivity
         });
 
         exitTextBottom.setOnClickListener(view -> tradePointPresenter.exit());
-
-        tradePointPresenter.getAddressProgram();
     }
 
     @Override

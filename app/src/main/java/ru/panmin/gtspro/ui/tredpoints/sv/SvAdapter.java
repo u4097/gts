@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint.supervision_trade_point;
+package ru.panmin.gtspro.ui.tredpoints.sv;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint.map;
+package ru.panmin.gtspro.ui.tredpoints.map;
 
 import java.util.Objects;
 
@@ -53,11 +53,12 @@ public class MapFragment
 
     @Override
     protected void initViews() {
-        setStateData();
+        presenter.afterInitViews();
     }
 
     @Override
     protected void detachView() {
         presenter.detachView();
     }
+
 }

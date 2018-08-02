@@ -1,13 +1,13 @@
-package ru.panmin.gtspro.ui.tredpoint;
+package ru.panmin.gtspro.ui.tredpoints;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import ru.panmin.gtspro.ui.tredpoint.map.MapFragment;
-import ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point.MeTradePointFragment;
-import ru.panmin.gtspro.ui.tredpoint.supervision_trade_point.SwTradePointFragment;
+import ru.panmin.gtspro.ui.tredpoints.map.MapFragment;
+import ru.panmin.gtspro.ui.tredpoints.me.MeTradePointFragment;
+import ru.panmin.gtspro.ui.tredpoints.sv.SwTradePointFragment;
 
 class TradePointPagerAdapter extends FragmentPagerAdapter {
 

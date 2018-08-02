@@ -18,4 +18,8 @@ class PromoInfoPresenter extends ToolbarPresenter<PromoInfoMvpView> {
     protected void dispose() {
     }
 
+    public void getPromo(String promoId) {
+        getMvpView().setPromo(dataManager.getPromoById(promoId));
+    }
+
 }

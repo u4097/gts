@@ -1,35 +1,20 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import io.realm.RealmObject;
 
-public class StandardListElement implements Parcelable {
+public class StandardListElement extends RealmObject {
 
-    public static final Parcelable.Creator<StandardListElement> CREATOR = new Parcelable.Creator<StandardListElement>() {
-        @Override
-        public StandardListElement createFromParcel(Parcel source) {
-            return new StandardListElement(source);
-        }
-
-        @Override
-        public StandardListElement[] newArray(int size) {
-            return new StandardListElement[size];
-        }
-    };
+    private String id;
 
     public StandardListElement() {
     }
 
-    private StandardListElement(Parcel in) {
+    public String getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

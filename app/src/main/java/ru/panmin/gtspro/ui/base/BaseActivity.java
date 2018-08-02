@@ -1,8 +1,10 @@
 package ru.panmin.gtspro.ui.base;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
@@ -19,13 +22,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 import ru.panmin.gtspro.Application;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.injection.component.ActivityComponent;
 import ru.panmin.gtspro.injection.component.ConfigPersistentComponent;
 import ru.panmin.gtspro.injection.component.DaggerConfigPersistentComponent;
 import ru.panmin.gtspro.injection.module.ActivityModule;
+import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.utils.DialogUtils;
 import ru.panmin.gtspro.utils.LocaleManager;
 
@@ -33,9 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
-
     @SuppressLint("UseSparseArrays") private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
-
+    @Inject SyncPresenter syncPresenter;
     private ActivityComponent mActivityComponent;
     private long activityId;
 
@@ -57,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         setContentView(getLayout());
         inflateView();
         ButterKnife.bind(this);
+        syncPresenter.attachView(this);
         attachView();
         init();
     }
@@ -68,10 +76,20 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!(this instanceof SplashActivity)) {
+            syncPresenter.checkNeedSync();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         if (!isChangingConfigurations()) {
             sComponentsMap.remove(activityId);
         }
+        SmartLocation.with(this).location().stop();
+        syncPresenter.detachView();
         detachView();
         super.onDestroy();
     }
@@ -170,6 +188,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         showError(getString(R.string.unknown_error_title));
     }
 
+    @Override
+    public void startSync() {
+        Intent intent = SplashActivity.getStartIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     protected abstract void inject();
 
     @LayoutRes
@@ -180,5 +205,18 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     protected abstract void initViews();
 
     protected abstract void detachView();
+
+    @SuppressLint("CheckResult")
+    protected void initGpsConnect(OnLocationUpdatedListener onLocationUpdatedListener) {
+        new RxPermissions(this).request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(granted -> {
+                    if (granted) {
+                        SmartLocation.with(this)
+                                .location()
+                                .start(onLocationUpdatedListener);
+                    } else {
+                    }
+                });
+    }
 
 }

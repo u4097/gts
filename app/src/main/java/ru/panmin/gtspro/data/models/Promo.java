@@ -1,96 +1,39 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class Promo extends RealmObject {
 
-public class Promo implements Parcelable {
-    String id;
-    String name;
-    String author;
-    String description;
-    String sku;
-    Date begin_date;
-    Date finish_date;
-    List<String> attachedME;
-    List<String> clients;
-    Boolean isActive;
+    @PrimaryKey private String id;
+    @SerializedName("name") private String name;
+    @SerializedName("author") private String author;
+    @SerializedName("description") private String description;
+    @SerializedName("sku") private String sku;
+    @SerializedName("begin_date") private String beginDate;
+    @SerializedName("finish_date") private String finishDate;
+    @SerializedName("attachedME") private RealmList<String> attachedME = new RealmList<>();
+    @SerializedName("clients") private RealmList<String> clients = new RealmList<>();
+    @SerializedName("isActive") private Boolean isActive;
 
-    public Promo(String id,
-                 String name,
-                 String author,
-                 String description,
-                 String sku,
-                 Date begin_date,
-                 Date finish_date,
-                 List<String> attachedME,
-                 List<String> clients,
-                 Boolean isActive) {
+    public Promo() {
+    }
+
+    public Promo(String id, String name, String author, String description, String sku, String beginDate, String finishDate,
+                 RealmList<String> attachedME, RealmList<String> clients, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.description = description;
         this.sku = sku;
-        this.begin_date = begin_date;
-        this.finish_date = finish_date;
+        this.beginDate = beginDate;
+        this.finishDate = finishDate;
         this.attachedME = attachedME;
         this.clients = clients;
         this.isActive = isActive;
-    }
-
-    public Promo() {
-    }
-
-
-    public static final Parcelable.Creator<Promo> CREATOR = new Parcelable.Creator<Promo>() {
-        @Override
-        public Promo createFromParcel(Parcel source) {
-            return new Promo(source);
-        }
-
-        @Override
-        public Promo[] newArray(int size) {
-            return new Promo[size];
-        }
-    };
-
-
-    private Promo(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-        author = in.readString();
-        description = in.readString();
-        sku = in.readString();
-        begin_date = new Date(in.readLong());
-        finish_date = new Date(in.readLong());
-        attachedME = new ArrayList<String>();
-        in.readList(attachedME, String.class.getClassLoader());
-        clients = new ArrayList<String>();
-        in.readList(clients, String.class.getClassLoader());
-        isActive = in.readByte() != 0;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(name);
-        dest.writeString(author);
-        dest.writeString(description);
-        dest.writeString(sku);
-        dest.writeLong(begin_date.getTime());
-        dest.writeLong(finish_date.getTime());
-        dest.writeList(attachedME);
-        dest.writeList(clients);
-        dest.writeByte((byte) (isActive ? 1 : 0));
     }
 
     public String getId() {
@@ -125,27 +68,27 @@ public class Promo implements Parcelable {
         this.sku = sku;
     }
 
-    public Date getBegin_date() {
-        return begin_date;
+    public String getBeginDate() {
+        return beginDate;
     }
 
-    public void setBegin_date(Date begin_date) {
-        this.begin_date = begin_date;
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public Date getFinish_date() {
-        return finish_date;
+    public String getFinishDate() {
+        return finishDate;
     }
 
-    public void setFinish_date(Date finish_date) {
-        this.finish_date = finish_date;
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
     }
 
-    public List<String> getAttachedME() {
+    public RealmList<String> getAttachedME() {
         return attachedME;
     }
 
-    public void setAttachedME(List<String> attachedME) {
+    public void setAttachedME(RealmList<String> attachedME) {
         this.attachedME = attachedME;
     }
 
@@ -157,11 +100,11 @@ public class Promo implements Parcelable {
         isActive = active;
     }
 
-    public List<String> getClients() {
+    public RealmList<String> getClients() {
         return clients;
     }
 
-    public void setClients(List<String> clients) {
+    public void setClients(RealmList<String> clients) {
         this.clients = clients;
     }
 
@@ -172,4 +115,5 @@ public class Promo implements Parcelable {
     public void setAuthor(String author) {
         this.author = author;
     }
+
 }

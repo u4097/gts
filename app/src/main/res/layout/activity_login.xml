@@ -42,7 +42,7 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:singleLine="true"
-            android:text="Лименько"
+            android:text="Бенищук2"
             android:textColor="@color/azure"
             android:textColorHint="@color/azure_60"
             android:textCursorDrawable="@drawable/cursor_edit_text"

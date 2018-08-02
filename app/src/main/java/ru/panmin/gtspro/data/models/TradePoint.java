@@ -1,68 +1,39 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class TradePoint implements Parcelable {
+public class TradePoint extends RealmObject {
 
-    public static final Parcelable.Creator<TradePoint> CREATOR = new Parcelable.Creator<TradePoint>() {
-        @Override
-        public TradePoint createFromParcel(Parcel source) {
-            return new TradePoint(source);
-        }
-
-        @Override
-        public TradePoint[] newArray(int size) {
-            return new TradePoint[size];
-        }
-    };
-
-    @SerializedName("id")
-    private String id;
-    @SerializedName("coordinates")
-    private Coordinates coordinates;
-    @SerializedName("signboard")
-    private Name signboard;
-    @SerializedName("address")
-    private Name address;
-    @SerializedName("trade_network")
-    private Name tradeNetwork;
-    @SerializedName("trade_network_id")
-    private String tradeNetworkId;
-    @SerializedName("regional_office")
-    private Name regionalOffice;
-    @SerializedName("formats")
-    private List<String> formats = new ArrayList<>();
-    @SerializedName("department_id")
-    private String departmentId;
-    @SerializedName("clients")
-    private List<Client> clients = new ArrayList<>();
-    @SerializedName("merchandisers")
-    private List<Merchandiser> merchandisers = new ArrayList<>();
-    @SerializedName("promos")
-    private List<Promo> promos = new ArrayList<>();
-    @SerializedName("reports")
-    private List<Report> reports = new ArrayList<>();
-    @SerializedName("photoreports")
-    private List<PhotoReport> photoreports = new ArrayList<>();
-    //@SerializedName("skus") private List<Sku> skus = new ArrayList<>();
-    @SerializedName("standards")
-    private List<Standard> standards = new ArrayList<>();
-    @SerializedName("claims")
-    private List<Claim> claims = new ArrayList<>();
+    @PrimaryKey private String id;
+    @SerializedName("coordinates") private Coordinates coordinates;
+    @SerializedName("signboard") private Name signboard;
+    @SerializedName("address") private Name address;
+    @SerializedName("trade_network") private Name tradeNetwork;
+    @SerializedName("trade_network_id") private String tradeNetworkId;
+    @SerializedName("regional_office") private Name regionalOffice;
+    @SerializedName("formats") private RealmList<String> formats = new RealmList<>();
+    @SerializedName("department_id") private String departmentId;
+    @SerializedName("clients") private RealmList<Client> clients = new RealmList<>();
+    @SerializedName("times") private RealmList<Time> times = new RealmList<>();
+    @SerializedName("merchandisers") private RealmList<Merchandiser> merchandisers = new RealmList<>();
+    @SerializedName("promos") private RealmList<Promo> promos = new RealmList<>();
+    @SerializedName("reports") private RealmList<Report> reports = new RealmList<>();
+    @SerializedName("photoreports") private RealmList<PhotoReport> photoreports = new RealmList<>();
+    //@SerializedName("skus") private RealmList<Sku> skus = new RealmList<>();
+    @SerializedName("standards") private RealmList<Standard> standards = new RealmList<>();
+    @SerializedName("claims") private RealmList<Claim> claims = new RealmList<>();
 
     public TradePoint() {
     }
 
     public TradePoint(String id, Coordinates coordinates, Name signboard, Name address, Name tradeNetwork, String tradeNetworkId,
-                      Name regionalOffice, List<String> formats, String departmentId, List<Client> clients,
-                      List<Merchandiser> merchandisers, List<Promo> promos, List<Report> reports, List<PhotoReport> photoreports,
-                      List<Sku> skus, List<Standard> standards, List<Claim> claims) {
+                      Name regionalOffice, RealmList<String> formats, String departmentId, RealmList<Client> clients, RealmList<Time> times,
+                      RealmList<Merchandiser> merchandisers, RealmList<Promo> promos, RealmList<Report> reports, RealmList<PhotoReport> photoreports,
+                      RealmList<Sku> skus, RealmList<Standard> standards, RealmList<Claim> claims) {
         this.id = id;
         this.coordinates = coordinates;
         this.signboard = signboard;
@@ -73,6 +44,7 @@ public class TradePoint implements Parcelable {
         this.formats = formats;
         this.departmentId = departmentId;
         this.clients = clients;
+        this.times = times;
         this.merchandisers = merchandisers;
         this.promos = promos;
         this.reports = reports;
@@ -80,26 +52,6 @@ public class TradePoint implements Parcelable {
         //this.skus = skus;
         this.standards = standards;
         this.claims = claims;
-    }
-
-    private TradePoint(Parcel in) {
-        this.id = in.readString();
-        this.coordinates = in.readParcelable(Coordinates.class.getClassLoader());
-        this.signboard = in.readParcelable(Name.class.getClassLoader());
-        this.address = in.readParcelable(Name.class.getClassLoader());
-        this.tradeNetwork = in.readParcelable(Name.class.getClassLoader());
-        this.tradeNetworkId = in.readString();
-        this.regionalOffice = in.readParcelable(Name.class.getClassLoader());
-        this.formats = in.createStringArrayList();
-        this.departmentId = in.readString();
-        this.clients = in.createTypedArrayList(Client.CREATOR);
-        this.merchandisers = in.createTypedArrayList(Merchandiser.CREATOR);
-        this.promos = in.createTypedArrayList(Promo.CREATOR);
-        this.reports = in.createTypedArrayList(Report.CREATOR);
-        this.photoreports = in.createTypedArrayList(PhotoReport.CREATOR);
-        //this.skus = in.createTypedArrayList(Sku.CREATOR);
-        this.standards = in.createTypedArrayList(Standard.CREATOR);
-        this.claims = in.createTypedArrayList(Claim.CREATOR);
     }
 
     public String getId() {
@@ -158,11 +110,11 @@ public class TradePoint implements Parcelable {
         this.regionalOffice = regionalOffice;
     }
 
-    public List<String> getFormats() {
+    public RealmList<String> getFormats() {
         return formats;
     }
 
-    public void setFormats(List<String> formats) {
+    public void setFormats(RealmList<String> formats) {
         this.formats = formats;
     }
 
@@ -174,94 +126,76 @@ public class TradePoint implements Parcelable {
         this.departmentId = departmentId;
     }
 
-    public List<Client> getClients() {
+    public RealmList<Client> getClients() {
         return clients;
     }
 
-    public void setClients(List<Client> clients) {
+    public void setClients(RealmList<Client> clients) {
         this.clients = clients;
     }
 
-    public List<Merchandiser> getMerchandisers() {
+    public RealmList<Time> getTimes() {
+        return times;
+    }
+
+    public void setTimes(RealmList<Time> times) {
+        this.times = times;
+    }
+
+    public RealmList<Merchandiser> getMerchandisers() {
         return merchandisers;
     }
 
-    public void setMerchandisers(List<Merchandiser> merchandisers) {
+    public void setMerchandisers(RealmList<Merchandiser> merchandisers) {
         this.merchandisers = merchandisers;
     }
 
-    public List<Promo> getPromos() {
+    public RealmList<Promo> getPromos() {
         return promos;
     }
 
-    public void setPromos(List<Promo> promos) {
+    public void setPromos(RealmList<Promo> promos) {
         this.promos = promos;
     }
 
-    public List<Report> getReports() {
+    public RealmList<Report> getReports() {
         return reports;
     }
 
-    public void setReports(List<Report> reports) {
+    public void setReports(RealmList<Report> reports) {
         this.reports = reports;
     }
 
-    public List<PhotoReport> getPhotoreports() {
+    public RealmList<PhotoReport> getPhotoreports() {
         return photoreports;
     }
 
-    public void setPhotoreports(List<PhotoReport> photoreports) {
+    public void setPhotoreports(RealmList<PhotoReport> photoreports) {
         this.photoreports = photoreports;
     }
 
-    //public List<Sku> getSkus() {
+    //public RealmList<Sku> getSkus() {
     //    return skus;
     //}
 
-    //public void setSkus(List<Sku> skus) {
+    //public void setSkus(RealmList<Sku> skus) {
     //    this.skus = skus;
     //}
 
-    public List<Standard> getStandards() {
+    public RealmList<Standard> getStandards() {
         return standards;
     }
 
-    public void setStandards(List<Standard> standards) {
+    public void setStandards(RealmList<Standard> standards) {
         this.standards = standards;
     }
 
-    public List<Claim> getClaims() {
+    public RealmList<Claim> getClaims() {
         return claims;
     }
 
-    public void setClaims(List<Claim> claims) {
+    public void setClaims(RealmList<Claim> claims) {
         this.claims = claims;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeParcelable(this.coordinates, flags);
-        dest.writeParcelable(this.signboard, flags);
-        dest.writeParcelable(this.address, flags);
-        dest.writeParcelable(this.tradeNetwork, flags);
-        dest.writeString(this.tradeNetworkId);
-        dest.writeParcelable(this.regionalOffice, flags);
-        dest.writeStringList(this.formats);
-        dest.writeString(this.departmentId);
-        dest.writeTypedList(this.clients);
-        dest.writeTypedList(this.merchandisers);
-        dest.writeTypedList(this.promos);
-        dest.writeTypedList(this.reports);
-        dest.writeTypedList(this.photoreports);
-        //dest.writeTypedList(this.skus);
-        dest.writeTypedList(this.standards);
-        dest.writeTypedList(this.claims);
     }
 
 }

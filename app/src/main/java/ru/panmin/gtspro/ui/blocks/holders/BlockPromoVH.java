@@ -34,8 +34,8 @@ public class BlockPromoVH extends DefaultViewHolder<Promo> {
 //      ivStatus.setImageTintList(itemView.getContext(),itemView.getResources().getColorStateList(itemView.getContext(), R.color.orange));
         tvTitle.setText(model.getName());
         tvSubtitle.setText(model.getSku());
-        tvDateFrom.setText(model.getBegin_date().toString());
-        tvDateTo.setText(model.getFinish_date().toString());
+        tvDateFrom.setText(model.getBeginDate().toString());
+        tvDateTo.setText(model.getFinishDate().toString());
 
         promoRoot.setOnClickListener(v -> listener.onPromoClick(model));
 

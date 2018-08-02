@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint;
+package ru.panmin.gtspro.ui.tredpoints;
 
 import ru.panmin.gtspro.ui.progress.ProgressMvpView;
 

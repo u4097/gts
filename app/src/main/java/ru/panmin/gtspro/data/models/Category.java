@@ -1,28 +1,14 @@
 package ru.panmin.gtspro.data.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
-public class Category implements Parcelable {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
-        @Override
-        public Category createFromParcel(Parcel source) {
-            return new Category(source);
-        }
+public class Category extends RealmObject {
 
-        @Override
-        public Category[] newArray(int size) {
-            return new Category[size];
-        }
-    };
-
-    @SerializedName("id")
-    private String id;
-    @SerializedName("name")
-    private Name name;
+    @PrimaryKey private String id;
+    @SerializedName("name") private Name name;
 
     public Category() {
     }
@@ -30,11 +16,6 @@ public class Category implements Parcelable {
     public Category(String id, Name name) {
         this.id = id;
         this.name = name;
-    }
-
-    private Category(Parcel in) {
-        this.id = in.readString();
-        this.name = in.readParcelable(Name.class.getClassLoader());
     }
 
     public String getId() {
@@ -51,17 +32,6 @@ public class Category implements Parcelable {
 
     public void setName(Name name) {
         this.name = name;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeParcelable(this.name, flags);
     }
 
 }

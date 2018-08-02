@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
+import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.injection.ApplicationContext;
 import ru.panmin.gtspro.injection.module.ApplicationModule;
@@ -24,5 +25,6 @@ public interface ApplicationComponent {
     PreferencesHelper preferencesHelper();
     ApiService apiService();
     RxEventBus eventBus();
+    RealmHelper realmHelper();
 
 }

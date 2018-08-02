@@ -109,7 +109,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     public void showPromoInfo(Promo promo) {
-        startActivity(PromoInfoActivity.getStartIntent(this, promo));
+        startActivity(PromoInfoActivity.getStartIntent(this, promo.getId()));
     }
 
 }

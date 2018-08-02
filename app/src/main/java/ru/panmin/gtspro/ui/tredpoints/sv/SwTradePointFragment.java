@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint.supervision_trade_point;
+package ru.panmin.gtspro.ui.tredpoints.sv;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,6 +76,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
                 }
             }
         });
+        presenter.afterInitViews();
     }
 
     @Override
@@ -90,7 +91,7 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     public void showInfo(TradePoint tradePoint) {
-        startActivity(TradePointInfoSvActivity.getStartIntent(getActivity(), tradePoint));
+        startActivity(TradePointInfoSvActivity.getStartIntent(getActivity(), tradePoint.getId()));
     }
 
 }

@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.tredpoint.merchandise_trade_point;
+package ru.panmin.gtspro.ui.tredpoints.me;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,6 +77,7 @@ public class MeTradePointFragment
                 }
             }
         });
+        presenter.afterInitViews();
     }
 
     @Override
@@ -91,7 +92,7 @@ public class MeTradePointFragment
 
     @Override
     public void showInfo(TradePoint tradePoint) {
-        startActivity(TradePointInfoMeActivity.getStartIntent(getActivity(), tradePoint));
+        startActivity(TradePointInfoMeActivity.getStartIntent(getActivity(), tradePoint.getId()));
     }
 
 }

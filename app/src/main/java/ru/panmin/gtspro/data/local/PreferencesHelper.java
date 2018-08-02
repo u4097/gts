@@ -3,6 +3,8 @@ package ru.panmin.gtspro.data.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +45,15 @@ public class PreferencesHelper {
 
     private static final String PREF_FULL_NAME_EN = "full.name.en";
     private static final String DEFAULT_PREF_FULL_NAME_EN = "";
+
+    private static final String PREF_SYNC_TIME = "sync.time";
+    private static final long DEFAULT_PREF_SYNC_TIME = 0;
+
+    private static final String PREF_AUTO_CHECKOUT_TIME = "auto.checkout.time";
+    private static final int DEFAULT_PREF_AUTO_CHECKOUT_TIME = 5;
+
+    private static final String PREF_TRADE_POINT_RADIUS = "trade.point.radius";
+    private static final int DEFAULT_PREF_TRADE_POINT_RADIUS = 500;
 
     private final SharedPreferences preferencesHelper;
 
@@ -113,12 +124,12 @@ public class PreferencesHelper {
         preferencesHelper.edit().putString(PREF_ROLE, role).apply();
     }
 
-    public String getSuoervisorId() {
+    public String getSupervisorId() {
         return preferencesHelper.getString(PREF_SUPERVISOR_ID, DEFAULT_PREF_SUPERVISOR_ID);
     }
 
-    public void setSuoervisorId(String suoervisorId) {
-        preferencesHelper.edit().putString(PREF_SUPERVISOR_ID, suoervisorId).apply();
+    public void setSupervisorId(String supervisorId) {
+        preferencesHelper.edit().putString(PREF_SUPERVISOR_ID, supervisorId).apply();
     }
 
     public String getFullNameRu() {
@@ -135,6 +146,32 @@ public class PreferencesHelper {
 
     public void setFullNameEn(String fullNameEn) {
         preferencesHelper.edit().putString(PREF_FULL_NAME_EN, fullNameEn).apply();
+    }
+
+    public Calendar getSyncTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(preferencesHelper.getLong(PREF_SYNC_TIME, DEFAULT_PREF_SYNC_TIME)));
+        return calendar;
+    }
+
+    public void setSyncTime(Calendar calendar) {
+        preferencesHelper.edit().putLong(PREF_SYNC_TIME, calendar.getTime().getTime()).apply();
+    }
+
+    public int getAutoCheckoutTime() {
+        return preferencesHelper.getInt(PREF_AUTO_CHECKOUT_TIME, DEFAULT_PREF_AUTO_CHECKOUT_TIME);
+    }
+
+    public void setAutoCheckoutTime(int autoCheckoutTime) {
+        preferencesHelper.edit().putInt(PREF_AUTO_CHECKOUT_TIME, autoCheckoutTime).apply();
+    }
+
+    public int getTradePointRadius() {
+        return preferencesHelper.getInt(PREF_TRADE_POINT_RADIUS, DEFAULT_PREF_TRADE_POINT_RADIUS);
+    }
+
+    public void setTradePointRadius(int tradePointRadius) {
+        preferencesHelper.edit().putInt(PREF_TRADE_POINT_RADIUS, tradePointRadius).apply();
     }
 
 }
