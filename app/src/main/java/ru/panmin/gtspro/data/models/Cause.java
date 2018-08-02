@@ -3,10 +3,11 @@ package ru.panmin.gtspro.data.models;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Cause extends RealmObject {
 
-    @SerializedName("id") private String id;
+    @PrimaryKey private String id;
     @SerializedName("position") private int position;
     @SerializedName("without_sku") private boolean withoutSku;
     @SerializedName("name") private Name name;

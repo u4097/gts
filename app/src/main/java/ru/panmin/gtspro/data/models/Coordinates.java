@@ -4,10 +4,14 @@ import android.location.Location;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Coordinates extends RealmObject {
 
+    @PrimaryKey private String id = UUID.randomUUID().toString();
     @SerializedName("latitude") private double latitude;
     @SerializedName("longitude") private double longitude;
 
@@ -17,6 +21,14 @@ public class Coordinates extends RealmObject {
     public Coordinates(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getLatitude() {

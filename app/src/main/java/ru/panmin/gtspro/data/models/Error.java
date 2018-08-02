@@ -1,12 +1,11 @@
 package ru.panmin.gtspro.data.models;
 
-import com.google.gson.annotations.SerializedName;
-
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Error extends RealmObject {
 
-    @SerializedName("detail") private String detail;
+    @PrimaryKey private String detail;
 
     public Error() {
     }

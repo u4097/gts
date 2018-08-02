@@ -32,6 +32,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
     @BindView(R.id.report_text) AppCompatTextView report;
     private TradePoint tradePoint = null;
+
     public TradePointInfoMeActivity() {
     }
 
@@ -109,12 +110,18 @@ setStateData();
 
         StringBuilder listTime = new StringBuilder();
         for (int i = 0; i < tradePoint.getTimes().size(); i++) {
+
             // if (Objects.requireNonNull(tradePoint.getTimes().get(i)).getBegin() != null || Objects.requireNonNull(tradePoint.getTimes().get(i)).getEnd() != null) {
             listTime.append(simpleDateFormat.format(
                     Objects.requireNonNull(tradePoint.getTimes().get(i)).getBegin()))
                     .append(" - ")
                     .append(simpleDateFormat.format(
                             Objects.requireNonNull(tradePoint.getTimes().get(i)).getEnd()));
+
+
+            if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
+                listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());
+            }
 
         }
         schedule.setText("График Визита:" + " " + "" + listTime);

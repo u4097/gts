@@ -117,6 +117,11 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         showError(getString(R.string.unknown_error_title));
     }
 
+    @Override
+    public void startSync() {
+        baseActivity.startSync();
+    }
+
     @LayoutRes
     protected abstract int getLayout();
 

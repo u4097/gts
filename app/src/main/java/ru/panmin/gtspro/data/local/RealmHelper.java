@@ -13,6 +13,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.injection.ApplicationContext;
@@ -82,6 +83,20 @@ public class RealmHelper {
         Merchandiser merchandiser = realm.where(Merchandiser.class).equalTo("name", name).findFirst();
         realm.commitTransaction();
         return merchandiser;
+    }
+
+    @Nullable
+    public HotLine getHotLine() {
+        realm.beginTransaction();
+        HotLine hotLine = realm.where(HotLine.class).findFirst();
+        realm.commitTransaction();
+        return hotLine;
+    }
+
+    public void setHotLine(HotLine hotLine) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(hotLine);
+        realm.commitTransaction();
     }
 
 }

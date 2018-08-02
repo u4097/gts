@@ -3,10 +3,11 @@ package ru.panmin.gtspro.data.models;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class HotLineContext extends RealmObject {
 
-    @SerializedName("id") private String id;
+    @PrimaryKey private String id;
     @SerializedName("name") private Name name;
     @SerializedName("comment_description") private String commentDescription;
     @SerializedName("hot_line_cause_id") private String hotLineCauseId;

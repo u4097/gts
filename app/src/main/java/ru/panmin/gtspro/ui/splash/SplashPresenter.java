@@ -30,24 +30,32 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
     protected void dispose() {
     }
 
-    void init() {
+    void init(boolean isOnline) {
         if (dataManager.isAuth() && dataManager.isNeedUpdateDB()) {
-            Calendar calendar = Calendar.getInstance();
-            RxUtils.dispose(disposable);
-            disposable = dataManager.addressProgram()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(
-                            addressProgramResponse -> {
-                                dataManager.setSyncTime(calendar);
-                                dataManager.setTradePoints(addressProgramResponse.getTradePoints());
-                                getMvpView().openMainActivity();
-                                getMvpView().finishActivity();
-                            },
-                            throwable -> {
-                                parseError(throwable);
-                            }
-                    );
+            dataManager.clearDataBase();
+            if (isOnline) {
+                Calendar calendar = Calendar.getInstance();
+                RxUtils.dispose(disposable);
+                disposable = dataManager.addressProgram()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(
+                                addressProgramResponse -> {
+                                    dataManager.setSyncTime(calendar);
+                                    dataManager.setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
+                                    dataManager.setTradePointRadius(addressProgramResponse.getTradePointRadius());
+                                    dataManager.setHotLine(addressProgramResponse.getHotLine());
+                                    dataManager.setTradePoints(addressProgramResponse.getTradePoints());
+                                    getMvpView().openMainActivity();
+                                    getMvpView().finishActivity();
+                                },
+                                throwable -> {
+                                    parseError(throwable);
+                                }
+                        );
+            } else {
+                getMvpView().showNoInternetDialog();
+            }
         } else {
             timer = new CountDownTimer(LAUNCH_TIME, TIMER_STEP) {
                 public void onTick(long millisUntilFinished) {

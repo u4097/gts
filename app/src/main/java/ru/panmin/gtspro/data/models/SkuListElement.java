@@ -4,10 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class SkuListElement extends RealmObject {
 
-    @SerializedName("id") private String id;
+    @PrimaryKey private String id;
     @SerializedName("name") private Name name;
     @SerializedName("brand") private Brand brand;
     @SerializedName("category") private Category category;
