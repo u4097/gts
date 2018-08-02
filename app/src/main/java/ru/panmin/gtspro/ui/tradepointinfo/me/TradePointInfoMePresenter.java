@@ -9,9 +9,11 @@ class TradePointInfoMePresenter extends ToolbarPresenter<TradePointInfoMeMvpView
 
     private final DataManager dataManager;
 
+
     @Inject
     TradePointInfoMePresenter(DataManager dataManager) {
         this.dataManager = dataManager;
+
     }
 
     @Override

@@ -2,8 +2,6 @@ package ru.panmin.gtspro.data.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 import io.realm.RealmObject;
 
 public class Group extends RealmObject {

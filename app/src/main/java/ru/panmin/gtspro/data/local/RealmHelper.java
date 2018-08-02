@@ -62,18 +62,18 @@ public class RealmHelper {
         return tradePoints;
     }
 
+    public void setTradePoints(RealmList<TradePoint> tradePoints) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(tradePoints);
+        realm.commitTransaction();
+    }
+
     @Nullable
     public TradePoint getTradePointById(String id) {
         realm.beginTransaction();
         TradePoint tradePoint = realm.where(TradePoint.class).equalTo("id", id).findFirst();
         realm.commitTransaction();
         return tradePoint;
-    }
-
-    public void setTradePoints(RealmList<TradePoint> tradePoints) {
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(tradePoints);
-        realm.commitTransaction();
     }
 
     @Nullable

@@ -4,8 +4,6 @@ import android.location.Location;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 import io.realm.RealmObject;
 
 public class Coordinates extends RealmObject {

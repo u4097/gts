@@ -2,12 +2,10 @@ package ru.panmin.gtspro.data.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
-public class SkuListElement extends RealmObject{
+public class SkuListElement extends RealmObject {
 
     @SerializedName("id") private String id;
     @SerializedName("name") private Name name;

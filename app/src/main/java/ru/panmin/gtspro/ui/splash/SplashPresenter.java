@@ -31,7 +31,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
     }
 
     void init() {
-        if (dataManager.isAuth() && dataManager.isNeedUpdateDB()){
+        if (dataManager.isAuth() && dataManager.isNeedUpdateDB()) {
             Calendar calendar = Calendar.getInstance();
             RxUtils.dispose(disposable);
             disposable = dataManager.addressProgram()

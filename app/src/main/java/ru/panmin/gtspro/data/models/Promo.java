@@ -1,12 +1,13 @@
 package ru.panmin.gtspro.data.models;
 
-import java.io.Serializable;
-
 import io.realm.RealmObject;
 
 public class Promo extends RealmObject {
 
     private String id;
+
+    public Promo() {
+    }
 
     public String getId() {
         return id;
@@ -14,9 +15,6 @@ public class Promo extends RealmObject {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Promo() {
     }
 
 }

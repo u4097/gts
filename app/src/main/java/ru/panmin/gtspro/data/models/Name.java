@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 import io.realm.RealmObject;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.LocaleManager;

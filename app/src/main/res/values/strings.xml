@@ -44,5 +44,14 @@
     <string name="by_visit_time">По времени посещения</string>
     <string name="by_distance">Подистанции</string>
     <string name="alphabetically">По алфавиту</string>
+    <string name="detailed_information_text_tag">Подробная информация:</string>
+    <string name="run_text_teg">Приступить</string>
+    <string name="claims_quantity_text_teg">Претензии</string>
+    <string name="photo_report_text_teg">Фотоотчет</string>
+    <string name="promotions_text_teg">Промо акции</string>
+    <string name="report_text_teg">Отчет</string>
+    <string name="error_message_text_info">Чтобы приступить к заданию вы должны быть в периметре 500м</string>
+    <string name="task_list_text_info">Список задач:</string>
+    <string name="go_to">Продолжить</string>
 
 </resources>

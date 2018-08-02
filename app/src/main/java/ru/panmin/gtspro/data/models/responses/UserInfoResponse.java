@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-import io.realm.RealmModel;
 import ru.panmin.gtspro.data.models.Name;
 
 public class UserInfoResponse extends BaseResponse implements Serializable {

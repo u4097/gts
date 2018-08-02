@@ -218,13 +218,13 @@ public class DataManager {
         return realmHelper.getTradePoints();
     }
 
+    public void setTradePoints(RealmList<TradePoint> tradePoints) {
+        realmHelper.setTradePoints(tradePoints);
+    }
+
     @Nullable
     public TradePoint getTradePointById(String id) {
         return realmHelper.getTradePointById(id);
-    }
-
-    public void setTradePoints(RealmList<TradePoint> tradePoints) {
-        realmHelper.setTradePoints(tradePoints);
     }
 
     @Nullable
