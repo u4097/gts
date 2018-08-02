@@ -3,10 +3,11 @@ package ru.panmin.gtspro.data.models;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Brand extends RealmObject {
 
-    @SerializedName("id") private String id;
+    @PrimaryKey private String id;
     @SerializedName("name") private Name name;
 
     public Brand() {

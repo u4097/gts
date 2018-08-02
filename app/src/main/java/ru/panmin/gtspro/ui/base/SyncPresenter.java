@@ -18,7 +18,7 @@ class SyncPresenter extends BasePresenter<MvpView> {
     }
 
     void checkNeedSync() {
-        if (dataManager.isNeedUpdateDB()) {
+        if (dataManager.isAuth() && dataManager.isNeedUpdateDB()) {
             getMvpView().startSync();
         }
     }

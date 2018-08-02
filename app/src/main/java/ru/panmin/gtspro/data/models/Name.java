@@ -4,12 +4,16 @@ import android.content.Context;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.LocaleManager;
 
 public class Name extends RealmObject {
 
+    @PrimaryKey private String id = UUID.randomUUID().toString();
     @SerializedName("ru") private String ru;
     @SerializedName("en") private String en;
 
@@ -19,6 +23,14 @@ public class Name extends RealmObject {
     public Name(String ru, String en) {
         this.ru = ru;
         this.en = en;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getRu() {

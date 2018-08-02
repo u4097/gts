@@ -28,4 +28,18 @@ public class DialogUtils {
                 .build();
     }
 
+    public static MaterialDialog createSplashErrorDialog(Context context, String content,
+                                                         MaterialDialog.SingleButtonCallback negativeCallback,
+                                                         MaterialDialog.SingleButtonCallback positiveCallback) {
+        return new MaterialDialog.Builder(context)
+                .title(R.string.error)
+                .content(content)
+                .positiveText(R.string.repeat)
+                .onPositive(positiveCallback)
+                .negativeText(R.string.exit)
+                .onNegative(negativeCallback)
+                .cancelable(false)
+                .build();
+    }
+
 }

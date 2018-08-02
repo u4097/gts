@@ -43,12 +43,16 @@ public class DataManager {
     }
 
     public void clear() {
-        preferencesHelper.clear();
-        realmHelper.clear();
+        clearPreferences();
+        clearDataBase();
     }
 
 
     /* SHARED PREFERENCES */
+    public void clearPreferences() {
+        preferencesHelper.clear();
+    }
+
     public boolean isWasFirstPermissionDialog(List<String> permissions) {
         return preferencesHelper.isWasFirstPermissionDialog(permissions);
     }
@@ -239,6 +243,10 @@ public class DataManager {
 
     public void setHotLine(HotLine hotLine) {
         realmHelper.setHotLine(hotLine);
+    }
+
+    public void clearDataBase() {
+        realmHelper.clear();
     }
 
 }

@@ -124,11 +124,6 @@ dependencies {
     //== keyboard visibility event listener ==//
     implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${keyboardVisibilityEventVersion}"
 
-    //== Room components ==//
-    implementation "android.arch.persistence.room:runtime:${roomVersion}"
-    annotationProcessor "android.arch.persistence.room:compiler:${roomVersion}"
-    androidTestImplementation "android.arch.persistence.room:testing:${roomVersion}"
-
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("com.github.ihsanbal:LoggingInterceptor:${loggingInterceptorVersion}") {

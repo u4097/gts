@@ -107,7 +107,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
         for (int i = 0; i < tradePoint.getTimes().size(); i++) {
             if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
-                listTime.append(simpleDateFormat.format(tradePoint.getTimes().get(i).getBegin())).append(" - ").append(simpleDateFormat.format(tradePoint.getTimes().get(i).getEnd()));
+                listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());
             }
         }
         schedule.setText("График Визита:" + " " + "" + listTime);

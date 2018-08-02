@@ -74,7 +74,9 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     @Override
     protected void onResume() {
         super.onResume();
-        syncPresenter.checkNeedSync();
+        if (!(this instanceof SplashActivity)) {
+            syncPresenter.checkNeedSync();
+        }
     }
 
     @Override

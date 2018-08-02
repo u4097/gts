@@ -41,7 +41,6 @@ ext {
     materialDialogsVersion = '0.9.6.0'
     materialSearchViewVersion = '1.4.0'
     keyboardVisibilityEventVersion = '2.1.0'
-    roomVersion = '1.1.1'
     timberVersion = '4.7.0'
     loggingInterceptorVersion = '2.0.5'
     chuckVersion = '1.1.0'
