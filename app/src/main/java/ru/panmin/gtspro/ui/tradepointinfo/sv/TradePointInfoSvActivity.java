@@ -17,6 +17,7 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import ru.panmin.gtspro.utils.MessageUtils;
 
 public class TradePointInfoSvActivity extends ToolbarActivity implements TradePointInfoSvMvpView {
 
@@ -68,6 +69,9 @@ public class TradePointInfoSvActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initViews() {
+        initGpsConnect(location -> {
+            MessageUtils.showShortToast(this, location.getLatitude() + "\n" + location.getLongitude());
+        });
     }
 
     @SuppressLint("SetTextI18n")

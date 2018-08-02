@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.base;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
@@ -23,6 +25,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 import ru.panmin.gtspro.Application;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.injection.component.ActivityComponent;
@@ -84,6 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         if (!isChangingConfigurations()) {
             sComponentsMap.remove(activityId);
         }
+        SmartLocation.with(this).location().stop();
         syncPresenter.detachView();
         detachView();
         super.onDestroy();
@@ -200,5 +205,18 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     protected abstract void initViews();
 
     protected abstract void detachView();
+
+    @SuppressLint("CheckResult")
+    protected void initGpsConnect(OnLocationUpdatedListener onLocationUpdatedListener) {
+        new RxPermissions(this).request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(granted -> {
+                    if (granted) {
+                        SmartLocation.with(this)
+                                .location()
+                                .start(onLocationUpdatedListener);
+                    } else {
+                    }
+                });
+    }
 
 }
