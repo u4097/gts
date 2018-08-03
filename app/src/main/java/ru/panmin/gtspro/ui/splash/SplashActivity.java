@@ -52,7 +52,10 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     protected void initViews() {
-        splashPresenter.init(Application.get(this).isOnline());
+//        splashPresenter.init(Application.get(this).isOnline());
+
+        openMainActivity();
+        finishActivity();
     }
 
     @Override

@@ -87,7 +87,7 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
 
     @Override
     public void setPromo(Promo promo) {
-        this.promo = promo;
+/*        this.promo = promo;
         setTitle(promo.getName());
 
         setValue(tvClients, promo.getClients().toString(), R.string.label_clients);
@@ -96,7 +96,7 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
         setValue(tvPeriod, "16-19 сентября", R.string.label_author);
         setValue(tvSku, promo.getSku(), R.string.label_promo_sku);
 
-        setStateData();
+        setStateData();*/
     }
 
     @Override
