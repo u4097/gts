@@ -14,12 +14,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import ru.lliepmah.lib.UniversalAdapter;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
-import ru.panmin.gtspro.ui.blocks.holders.BlockPromoVHBuilder;
-import ru.panmin.gtspro.ui.blocks.holders.BlockTitleVHBuilder;
-import ru.panmin.gtspro.ui.blocks.holders.BlocksVHBuilder;
+import ru.panmin.gtspro.ui.blocks.adapters.PromoAdapter;
 import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
@@ -29,7 +26,7 @@ import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
-public class BlockActivity extends ToolbarActivity implements BlockMvpView {
+public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoAdapter.InfoClickListener {
 
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
@@ -73,14 +70,23 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
     @BindView(R.id.tCounterStatistics)
     TextView tCounterStatistics;
 
+    @BindView(R.id.rvPromo)
+    RecyclerView rvPromo;
 
+
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
 
     @Inject
     BlockPresenter blockPresenter;
 
+    @Inject
+    PromoAdapter adapter;
+
 
     private OnTradePointBlockClickListener listener = null;
     private Map<BlockType.Type, Holder> tradePointBlockViews;
+
 
 
     class Holder {
@@ -105,7 +111,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
         void onTradePointBlockClick(BlockType.Type blockType);
     }
 
-    private UniversalAdapter adapter;
+//    private UniversalAdapter adapter;
 
     public BlockActivity() {
     }
@@ -139,7 +145,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
     @Override
     protected void initViews() {
         setStateData();
-//        initRvAdapter();
+        initRvAdapter();
 
         tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS,
@@ -197,10 +203,12 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
             }
         }
+
+        tvTitle.setText("Промо");
     }
 
     private void initRvAdapter() {
-        adapter = new UniversalAdapter(new BlocksVHBuilder(blockPresenter), new BlockTitleVHBuilder(),
+/*        adapter = new UniversalAdapter(
                 new BlockPromoVHBuilder(blockPresenter));
 
         adapter.clear();
@@ -213,12 +221,20 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
         adapter.add(blockType);
 
         PromoViewModelStub promViewModelStub = new PromoViewModelStub();
-
         promViewModelStub.loadData("0");
-        adapter.addAll(promViewModelStub.getData());
+
+        adapter.addAll(promViewModelStub.getData());*/
 
 //        rvTradePointBrowse.setLayoutManager(new LinearLayoutManager(this));
 //        rvTradePointBrowse.setAdapter(this.adapter);
+        rvPromo.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setInfoClickListener(this);
+
+        PromoViewModelStub promViewModelStub = new PromoViewModelStub();
+        promViewModelStub.loadData("0");
+        adapter.setData(promViewModelStub.getData());
+
+        rvPromo.setAdapter(adapter);
     }
 
     @Override
@@ -241,6 +257,11 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView {
 
     @Override
     public void showPromoInfo(Promo promo) {
+        startActivity(PromoInfoActivity.getStartIntent(this, promo.getId()));
+    }
+
+    @Override
+    public void showInfo(Promo promo) {
         startActivity(PromoInfoActivity.getStartIntent(this, promo.getId()));
     }
 
