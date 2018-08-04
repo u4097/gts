@@ -88,37 +88,14 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     private Map<BlockType.Type, Holder> tradePointBlockViews;
 
 
-
-    class Holder {
-        FloatingActionButton btn;
-        TextView tvBadge;
-
-        public Holder(FloatingActionButton btn, TextView tvBadge) {
-            this.btn = btn;
-            this.tvBadge = tvBadge;
-        }
-
-        public FloatingActionButton getBtn() {
-            return btn;
-        }
-
-        public TextView getTvBadge() {
-            return tvBadge;
-        }
-    }
-
-    public interface OnTradePointBlockClickListener {
-        void onTradePointBlockClick(BlockType.Type blockType);
-    }
-
-//    private UniversalAdapter adapter;
-
     public BlockActivity() {
     }
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, BlockActivity.class);
     }
+
+//    private UniversalAdapter adapter;
 
     @Override
     protected void inject() {
@@ -179,10 +156,9 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     }
 
-
     public void initBlocks(BlocksModel model) {
         for (Block block : model.getBlocks()
-        ) {
+                ) {
             Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
                 TextView tvBadge = holder.getTvBadge();
@@ -263,6 +239,28 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     public void showInfo(Promo promo) {
         startActivity(PromoInfoActivity.getStartIntent(this, promo.getId()));
+    }
+
+    public interface OnTradePointBlockClickListener {
+        void onTradePointBlockClick(BlockType.Type blockType);
+    }
+
+    class Holder {
+        FloatingActionButton btn;
+        TextView tvBadge;
+
+        public Holder(FloatingActionButton btn, TextView tvBadge) {
+            this.btn = btn;
+            this.tvBadge = tvBadge;
+        }
+
+        public FloatingActionButton getBtn() {
+            return btn;
+        }
+
+        public TextView getTvBadge() {
+            return tvBadge;
+        }
     }
 
 }

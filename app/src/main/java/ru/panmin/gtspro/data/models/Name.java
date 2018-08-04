@@ -10,6 +10,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.LocaleManager;
+import ru.panmin.gtspro.utils.TextUtils;
 
 public class Name extends RealmObject {
 
@@ -52,9 +53,9 @@ public class Name extends RealmObject {
     public String toString(Context context) {
         switch (LocaleManager.getLanguage(context)) {
             case Constants.LANGUAGE_RUSSIAN:
-                return ru;
+                return TextUtils.isEmpty(ru) ? TextUtils.isEmpty(en) ? "" : en : ru;
             case Constants.LANGUAGE_ENGLISH:
-                return en;
+                return TextUtils.isEmpty(en) ? TextUtils.isEmpty(ru) ? "" : ru : en;
             default:
                 return "";
 

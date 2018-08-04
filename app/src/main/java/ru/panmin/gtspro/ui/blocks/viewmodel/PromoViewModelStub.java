@@ -35,7 +35,7 @@ public class PromoViewModelStub implements IPromoViewModel {
         clients.add("Магнит");
         clients.add("Пятерочка");
 
-        Name name1 = new Name("Иванов И.B.","Ivanov I.V.");
+        Name name1 = new Name("Иванов И.B.", "Ivanov I.V.");
         RealmList<String> ean = new RealmList<>();
         ean.add("12345444");
         ean.add("12434444");
@@ -46,58 +46,57 @@ public class PromoViewModelStub implements IPromoViewModel {
 
 
         RealmList<SkuListElement> skuListElements = new RealmList<>();
-        SkuListElement skuListElement1 = new SkuListElement("0",new Name("Чай", "Tea")
-                ,new Brand("0", new Name("Ахмат","Achmat"))
-                ,new Category("0",new Name("Продукты", "Product"))
-                ,new Group("0", new Name("Товары","Goods"))
-                ,new SubBrand("0",new Name ("Ахмат","Achamat"))
-                ,ean
-                ,plu);
-        SkuListElement skuListElement2 = new SkuListElement("1",new Name("Чай", "Tea")
-                ,new Brand("0", new Name("Ахмат","Achmat"))
-                ,new Category("0",new Name("Продукты", "Product"))
-                ,new Group("0", new Name("Товары","Goods"))
-                ,new SubBrand("0",new Name ("Ахмат","Achamat"))
-                ,ean
-                ,plu);
-        SkuListElement skuListElement3 = new SkuListElement("2",new Name("Чай", "Tea")
-                ,new Brand("0", new Name("Ахмат","Achmat"))
-                ,new Category("0",new Name("Продукты", "Product"))
-                ,new Group("0", new Name("Товары","Goods"))
-                ,new SubBrand("0",new Name ("Ахмат","Achamat"))
-                ,ean
-                ,plu);
+        SkuListElement skuListElement1 = new SkuListElement("0", new Name("Чай", "Tea")
+                , new Brand("0", new Name("Ахмат", "Achmat"))
+                , new Category("0", new Name("Продукты", "Product"))
+                , new Group("0", new Name("Товары", "Goods"))
+                , new SubBrand("0", new Name("Ахмат", "Achamat"))
+                , ean
+                , plu);
+        SkuListElement skuListElement2 = new SkuListElement("1", new Name("Чай", "Tea")
+                , new Brand("0", new Name("Ахмат", "Achmat"))
+                , new Category("0", new Name("Продукты", "Product"))
+                , new Group("0", new Name("Товары", "Goods"))
+                , new SubBrand("0", new Name("Ахмат", "Achamat"))
+                , ean
+                , plu);
+        SkuListElement skuListElement3 = new SkuListElement("2", new Name("Чай", "Tea")
+                , new Brand("0", new Name("Ахмат", "Achmat"))
+                , new Category("0", new Name("Продукты", "Product"))
+                , new Group("0", new Name("Товары", "Goods"))
+                , new SubBrand("0", new Name("Ахмат", "Achamat"))
+                , ean
+                , plu);
         skuListElements.add(skuListElement1);
         skuListElements.add(skuListElement2);
         skuListElements.add(skuListElement3);
 
 
-
         RealmList<Form> formRealmList = new RealmList<>();
         Promo promo1 = new Promo("0", name1,
                 new Name("Мерчендайзер", "Merchandizer")
-                ,new Name("Иванов И.B.","Ivanov I.V.")
-                ,"16.07.2018","20.08.2018"
-                ,new Mechanic("0",name1)
-                ,new Type("0", name1)
-                ,skuListElements
-                ,formRealmList);
+                , new Name("Иванов И.B.", "Ivanov I.V.")
+                , "16.07.2018", "20.08.2018"
+                , new Mechanic("0", name1)
+                , new Type("0", name1)
+                , skuListElements
+                , formRealmList);
         Promo promo2 = new Promo("1", name1,
                 new Name("Мерчендайзер", "Merchandizer")
-                ,new Name("Петров И.B.","Petrov I.V.")
-                ,"16.07.2018","20.08.2018"
-                ,new Mechanic("0",name1)
-                ,new Type("0", name1)
-                ,skuListElements
-                ,formRealmList);
+                , new Name("Петров И.B.", "Petrov I.V.")
+                , "16.07.2018", "20.08.2018"
+                , new Mechanic("0", name1)
+                , new Type("0", name1)
+                , skuListElements
+                , formRealmList);
         Promo promo3 = new Promo("1", name1,
                 new Name("Мерчендайзер", "Merchandizer")
-                ,new Name("Иванов И.B.","Ivanov I.V.")
-                ,"16.07.2018","20.08.2018"
-                ,new Mechanic("0",name1)
-                ,new Type("0", name1)
-                ,skuListElements
-                ,formRealmList);
+                , new Name("Иванов И.B.", "Ivanov I.V.")
+                , "16.07.2018", "20.08.2018"
+                , new Mechanic("0", name1)
+                , new Type("0", name1)
+                , skuListElements
+                , formRealmList);
 
 
         data = new ArrayList<>();

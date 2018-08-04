@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import ru.panmin.gtspro.data.models.responses.Answer;
 
 public class Question extends RealmObject {
 
@@ -19,14 +18,14 @@ public class Question extends RealmObject {
     @SerializedName("group_name") private Name groupName;
     @SerializedName("group_type") private int groupType;
     @SerializedName("add_type") private int addType;
-    @SerializedName("answer") private Answer answer;
+    //@SerializedName("answer") private Boolean answer;
     @SerializedName("sku") private SkuListElement sku;
 
     public Question() {
     }
 
     public Question(String id, int type, String description, RealmList<Option> options, Name name, String limitFractional,
-                    String limitInteger, Name groupName, int groupType, int addType, Answer answer, SkuListElement sku) {
+                    String limitInteger, Name groupName, int groupType, int addType, Boolean answer, SkuListElement sku) {
         this.id = id;
         this.type = type;
         this.description = description;
@@ -37,7 +36,7 @@ public class Question extends RealmObject {
         this.groupName = groupName;
         this.groupType = groupType;
         this.addType = addType;
-        this.answer = answer;
+        //this.answer = answer;
         this.sku = sku;
     }
 
@@ -121,13 +120,13 @@ public class Question extends RealmObject {
         this.addType = addType;
     }
 
-    public Answer getAnswer() {
-        return answer;
-    }
+    //public boolean getAnswer() {
+    //    return answer;
+    //}
 
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
-    }
+    //public void setAnswer(Boolean answer) {
+    //    this.answer = answer;
+    //}
 
     public SkuListElement getSku() {
         return sku;
