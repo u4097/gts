@@ -1,12 +1,39 @@
 package ru.panmin.gtspro.data.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Promo extends RealmObject {
 
-    private String id;
+    @PrimaryKey private String id;
+    @SerializedName("name") private Name name;
+    @SerializedName("description") private Name description;
+    @SerializedName("client") private Name client;
+    @SerializedName("begin_date") private String beginDate;
+    @SerializedName("finish_date") private String finishDate;
+    @SerializedName("mechanics") private Mechanic mechanics;
+    @SerializedName("type") private Type type;
+    @SerializedName("sku_ids") private RealmList<SkuListElement> skuIds = new RealmList<>();
+    @SerializedName("forms") private RealmList<Form> forms = new RealmList<>();
 
     public Promo() {
+    }
+
+    public Promo(String id, Name name, Name description, Name client, String beginDate, String finishDate, Mechanic mechanics,
+                 Type type, RealmList<SkuListElement> skuIds, RealmList<Form> forms) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.client = client;
+        this.beginDate = beginDate;
+        this.finishDate = finishDate;
+        this.mechanics = mechanics;
+        this.type = type;
+        this.skuIds = skuIds;
+        this.forms = forms;
     }
 
     public String getId() {
@@ -15,6 +42,78 @@ public class Promo extends RealmObject {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    public Name getDescription() {
+        return description;
+    }
+
+    public void setDescription(Name description) {
+        this.description = description;
+    }
+
+    public Name getClient() {
+        return client;
+    }
+
+    public void setClient(Name client) {
+        this.client = client;
+    }
+
+    public String getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public Mechanic getMechanics() {
+        return mechanics;
+    }
+
+    public void setMechanics(Mechanic mechanics) {
+        this.mechanics = mechanics;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public RealmList<SkuListElement> getSkuIds() {
+        return skuIds;
+    }
+
+    public void setSkuIds(RealmList<SkuListElement> skuIds) {
+        this.skuIds = skuIds;
+    }
+
+    public RealmList<Form> getForms() {
+        return forms;
+    }
+
+    public void setForms(RealmList<Form> forms) {
+        this.forms = forms;
     }
 
 }

@@ -28,6 +28,7 @@ ext {
 
     multidexVersion = '1.0.3'
     androidSupportVersion = '27.1.1'
+    constraintLayoutVersion = '1.1.2'
     retrofitVersion = '2.3.0'
     smartLocationVersion = '3.3.3'
     rxJavaVersion = '2.1.10'

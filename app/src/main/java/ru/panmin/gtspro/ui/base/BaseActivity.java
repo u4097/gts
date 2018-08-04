@@ -88,6 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         if (!isChangingConfigurations()) {
             sComponentsMap.remove(activityId);
         }
+        SmartLocation.with(this).location().stop();
         syncPresenter.detachView();
         detachView();
         super.onDestroy();

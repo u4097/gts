@@ -109,6 +109,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         }
 
         StringBuilder listTime = new StringBuilder();
+
         for (int i = 0; i < tradePoint.getTimes().size(); i++) {
             if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
                 listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());

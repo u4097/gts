@@ -1,7 +1,7 @@
 package ru.panmin.gtspro.data;
 
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
+import ru.panmin.gtspro.utils.TextUtils;
 
 import java.util.Calendar;
 import java.util.List;
@@ -15,6 +15,7 @@ import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
+import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
@@ -22,6 +23,7 @@ import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.utils.Constants;
+import ru.panmin.gtspro.utils.LocaleManager;
 import ru.panmin.gtspro.utils.RxEventBus;
 
 @Singleton
@@ -164,12 +166,11 @@ public class DataManager {
     public String getFullName() {
         switch (getLanguage()) {
             case Constants.LANGUAGE_RUSSIAN:
-                return getFullNameRu();
+                return TextUtils.isEmpty(getFullNameRu()) ? TextUtils.isEmpty(getFullNameEn()) ? "" : getFullNameEn() : getFullNameRu();
             case Constants.LANGUAGE_ENGLISH:
-                return getFullNameEn();
+                return TextUtils.isEmpty(getFullNameEn()) ? TextUtils.isEmpty(getFullNameRu()) ? "" : getFullNameRu() : getFullNameEn();
             default:
                 return "";
-
         }
     }
 
@@ -226,6 +227,10 @@ public class DataManager {
 
 
     /* DATABASE */
+    public void clearDataBase() {
+        realmHelper.clear();
+    }
+
     public List<TradePoint> getTradePoints() {
         return realmHelper.getTradePoints();
     }
@@ -253,8 +258,9 @@ public class DataManager {
         realmHelper.setHotLine(hotLine);
     }
 
-    public void clearDataBase() {
-        realmHelper.clear();
+    @Nullable
+    public Promo getPromoById(String id) {
+        return realmHelper.getPromoById(id);
     }
 
 }

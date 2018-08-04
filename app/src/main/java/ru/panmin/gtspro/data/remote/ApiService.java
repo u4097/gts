@@ -135,8 +135,12 @@ public interface ApiService {
                                 reader.nextNull();
                                 return false;
                             }
-                            String stringValue = reader.nextString();
-                            return stringValue.equals("true") || stringValue.equals("yes") || stringValue.equals("1");
+                            try {
+                                return reader.nextBoolean();
+                            } catch (Exception e) {
+                                String stringValue = reader.nextString();
+                                return stringValue.equals("true") || stringValue.equals("yes") || stringValue.equals("1");
+                            }
                         }
 
                         @Override

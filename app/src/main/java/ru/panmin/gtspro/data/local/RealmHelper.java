@@ -15,6 +15,7 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
+import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.injection.ApplicationContext;
 
@@ -97,6 +98,14 @@ public class RealmHelper {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(hotLine);
         realm.commitTransaction();
+    }
+
+    @Nullable
+    public Promo getPromoById(String id) {
+        realm.beginTransaction();
+        Promo promo = realm.where(Promo.class).equalTo("id", id).findFirst();
+        realm.commitTransaction();
+        return promo;
     }
 
 }

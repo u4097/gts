@@ -39,4 +39,6 @@ captures/
 *.keystore
 *.jks
 
+.DS_Store
+
 release_keystore.properties

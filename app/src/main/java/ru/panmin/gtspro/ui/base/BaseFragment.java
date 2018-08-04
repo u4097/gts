@@ -63,6 +63,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     @Override
     public void onDestroyView() {
         detachView();
+        SmartLocation.with(getActivity()).location().stop();
         if (unbinder != null) {
             unbinder.unbind();
         }

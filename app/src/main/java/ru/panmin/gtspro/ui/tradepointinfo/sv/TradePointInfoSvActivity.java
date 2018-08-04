@@ -80,6 +80,7 @@ public class TradePointInfoSvActivity
         adapter.setData(tradePoint.getMerchandisers());
         adapter.setMeClickListener(this);
         recycler.setAdapter(adapter);
+
         address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
@@ -135,4 +136,5 @@ public class TradePointInfoSvActivity
     public void showInfo(Merchandiser merchandisers) {
         startActivity(MerchandiserActivity.getStartIntent(this, merchandisers.getName()));
     }
+
 }

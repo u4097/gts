@@ -1,6 +1,5 @@
 package ru.panmin.gtspro.ui.tredpoints.sv;
 
-import android.location.Location;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +10,6 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
