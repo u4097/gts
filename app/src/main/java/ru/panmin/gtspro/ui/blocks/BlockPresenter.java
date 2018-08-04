@@ -28,4 +28,15 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView> {
 
         currentBlock = blockType;
     }
+
+    public void getTradePoint(String tradePointId) {
+        getMvpView().setTradePoint(dataManager.getTradePointById(tradePointId));
+    }
+
+    public void logout() {
+        dataManager.clear();
+        getMvpView().openLoginActivity();
+        getMvpView().finishActivity();
+    }
+
 }

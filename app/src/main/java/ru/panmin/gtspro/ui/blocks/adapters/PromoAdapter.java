@@ -60,24 +60,22 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
 
     class PromoVH extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tvTitle)
-        TextView tvTitle;
-        @BindView(R.id.tvSubtitle)
-        TextView tvSubtitle;
-        @BindView(R.id.ivStatus)
-        AppCompatImageView ivStatus;
-        @BindView(R.id.promoRoot)
-        ViewGroup promoRoot;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvSubtitle) TextView tvSubtitle;
+        @BindView(R.id.ivStatus) AppCompatImageView ivStatus;
+        @BindView(R.id.promoRoot) ViewGroup promoRoot;
 
-        public PromoVH(View itemView) {
+        PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Promo promo) {
+        void bind(Promo promo) {
             tvTitle.setText(promo.getName().toString(itemView.getContext()));
             tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
+
     }
+
 }

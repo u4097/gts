@@ -8,6 +8,7 @@ import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 
 public class BlockViewModel implements IBlocksViewModel {
+
     BlocksModel blocksModel;
 
     @Override

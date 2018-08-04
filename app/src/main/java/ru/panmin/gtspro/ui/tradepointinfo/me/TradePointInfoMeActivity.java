@@ -3,7 +3,9 @@ package ru.panmin.gtspro.ui.tradepointinfo.me;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
@@ -31,6 +34,8 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     @BindView(R.id.promotions_text) AppCompatTextView promotions;
     @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
     @BindView(R.id.report_text) AppCompatTextView report;
+    @BindView(R.id.run_button_me) AppCompatButton runButtonMe;
+
     private TradePoint tradePoint = null;
 
     public TradePointInfoMeActivity() {
@@ -122,6 +127,9 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         promotions.setText(String.valueOf(tradePoint.getPromos().size()));
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
+
+        runButtonMe.setOnClickListener(view -> startActivity(BlockActivity.getStartIntent(this, tradePoint.getId())));
+
         setStateData();
     }
 

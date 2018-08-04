@@ -45,9 +45,7 @@ public class TradePointActivity
     @BindView(R.id.statusTextNavigationView) AppCompatTextView statusTextNavigationView;
     @BindView(R.id.buttonLanguageRu) AppCompatButton buttonLanguageRu;
     @BindView(R.id.buttonLanguageEn) AppCompatButton buttonLanguageEn;
-    @BindView(R.id.exitTextBottom)
-
-    VectorsSupportTextView exitTextBottom;
+    @BindView(R.id.exitTextBottom) VectorsSupportTextView exitTextBottom;
 
     private TradePointPagerAdapter tradePointPagerAdapter = null;
 
@@ -218,7 +216,9 @@ public class TradePointActivity
 
     @Override
     public void openLoginActivity() {
-        startActivity(LoginActivity.getStartIntent(this));
+        Intent intent = LoginActivity.getStartIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
