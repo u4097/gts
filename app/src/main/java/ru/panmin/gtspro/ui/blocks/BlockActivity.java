@@ -16,17 +16,20 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
-import ru.panmin.gtspro.ui.blocks.adapters.PromoAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
 import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.PromoViewModelStub;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
-import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
+import ru.panmin.gtspro.ui.promoinfo.PromoInfoMeActivity;
+import ru.panmin.gtspro.ui.promoinfo.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import ru.panmin.gtspro.utils.Constants;
 
-public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoAdapter.InfoClickListener {
+public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoMeAdapter.InfoClickListener, PromoSvAdapter.InfoClickListener {
 
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
@@ -80,13 +83,14 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Inject
     BlockPresenter blockPresenter;
 
-    @Inject
-    PromoAdapter adapter;
 
+    PromoMeAdapter promoMeAdapter;
+    PromoSvAdapter promoSvAdapter;
+    String userRole;
+    PromoViewModelStub promViewModelStub = new PromoViewModelStub();
 
     private OnTradePointBlockClickListener listener = null;
     private Map<BlockType.Type, Holder> tradePointBlockViews;
-
 
 
     class Holder {
@@ -138,14 +142,15 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     protected void initToolbar() {
         setTitle("ОАО Магнит");
-        setNavigationIcon(R.drawable.ic_back_arrow);
+        setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         inflateMenu(R.menu.logout);
     }
 
     @Override
     protected void initViews() {
         setStateData();
-        initRvAdapter();
+        this.userRole = Constants.ROLE_SUPERVISOR;
+        initRvAdapter(userRole);
 
         tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS,
@@ -165,7 +170,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         tradePointBlockViews.put(BlockType.Type.STATISTICS,
                 new Holder(btnStatistics, tCounterStatistics));
 
-        for (Map.Entry<BlockType.Type, Holder> entry :
+        for (Map.Entry<BlockType.Type, Holder> entry:
                 tradePointBlockViews.entrySet()) {
 
             entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
@@ -181,7 +186,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
 
     public void initBlocks(BlocksModel model) {
-        for (Block block : model.getBlocks()
+        for (Block block: model.getBlocks()
         ) {
             Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
@@ -207,34 +212,33 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         tvTitle.setText("Промо");
     }
 
-    private void initRvAdapter() {
-/*        adapter = new UniversalAdapter(
-                new BlockPromoVHBuilder(blockPresenter));
-
-        adapter.clear();
-
-        BlockViewModel blockViewModel = new BlockViewModel();
-        blockViewModel.loadData("0");
-        adapter.add(blockViewModel.getBlocks());
-
-        BlockType blockType = new BlockType(BlockType.Type.PROMO);
-        adapter.add(blockType);
-
-        PromoViewModelStub promViewModelStub = new PromoViewModelStub();
-        promViewModelStub.loadData("0");
-
-        adapter.addAll(promViewModelStub.getData());*/
-
-//        rvTradePointBrowse.setLayoutManager(new LinearLayoutManager(this));
-//        rvTradePointBrowse.setAdapter(this.adapter);
+    private void initRvAdapter(String role) {
         rvPromo.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setInfoClickListener(this);
-
-        PromoViewModelStub promViewModelStub = new PromoViewModelStub();
         promViewModelStub.loadData("0");
-        adapter.setData(promViewModelStub.getData());
 
-        rvPromo.setAdapter(adapter);
+        switch (role) {
+            case Constants.ROLE_MERCHANDISER:
+                promoMeAdapter = new PromoMeAdapter();
+                promoMeAdapter.setInfoClickListener(this);
+                promoMeAdapter.setData(promViewModelStub.getData());
+                rvPromo.setAdapter(promoMeAdapter);
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                promoSvAdapter = new PromoSvAdapter();
+                promoSvAdapter.setInfoClickListener(this);
+                promoSvAdapter.setData(promViewModelStub.getData());
+                rvPromo.setAdapter(promoSvAdapter);
+                break;
+            default:
+                promoMeAdapter = new PromoMeAdapter();
+                rvPromo.setLayoutManager(new LinearLayoutManager(this));
+                promoMeAdapter.setInfoClickListener(this);
+                promoMeAdapter.setData(promViewModelStub.getData());
+                rvPromo.setAdapter(promoMeAdapter);
+                break;
+
+
+        }
     }
 
     @Override
@@ -255,14 +259,21 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     protected void errorButtonClick() {
     }
 
-    @Override
-    public void showPromoInfo(Promo promo) {
-        startActivity(PromoInfoActivity.getStartIntent(this, promo.getId()));
-    }
 
     @Override
     public void showInfo(Promo promo) {
-        startActivity(PromoInfoActivity.getStartIntent(this, promo.getId()));
+        switch (this.userRole) {
+            case Constants.ROLE_MERCHANDISER:
+                startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
+                break;
+            default:
+                startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
+                break;
+
+        }
     }
 
 }

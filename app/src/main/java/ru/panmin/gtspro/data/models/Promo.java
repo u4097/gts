@@ -12,6 +12,7 @@ public class Promo extends RealmObject {
     @SerializedName("name") private Name name;
     @SerializedName("description") private Name description;
     @SerializedName("client") private Name client;
+    @SerializedName("author") private Name author;
     @SerializedName("begin_date") private String beginDate;
     @SerializedName("finish_date") private String finishDate;
     @SerializedName("mechanics") private Mechanic mechanics;
@@ -22,12 +23,13 @@ public class Promo extends RealmObject {
     public Promo() {
     }
 
-    public Promo(String id, Name name, Name description, Name client, String beginDate, String finishDate, Mechanic mechanics,
+    public Promo(String id, Name name, Name description, Name client, Name author, String beginDate, String finishDate, Mechanic mechanics,
                  Type type, RealmList<SkuListElement> skuIds, RealmList<Form> forms) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.client = client;
+        this.author = author;
         this.beginDate = beginDate;
         this.finishDate = finishDate;
         this.mechanics = mechanics;
@@ -116,4 +118,11 @@ public class Promo extends RealmObject {
         this.forms = forms;
     }
 
+    public Name getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Name author) {
+        this.author = author;
+    }
 }

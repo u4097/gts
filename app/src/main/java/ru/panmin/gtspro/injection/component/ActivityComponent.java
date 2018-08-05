@@ -5,7 +5,8 @@ import ru.panmin.gtspro.injection.PerActivity;
 import ru.panmin.gtspro.injection.module.ActivityModule;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
-import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
+import ru.panmin.gtspro.ui.promoinfo.PromoInfoMeActivity;
+import ru.panmin.gtspro.ui.promoinfo.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
@@ -28,7 +29,8 @@ public interface ActivityComponent {
     void inject(TradePointInfoSvActivity tradePointInfoSvActivity);
     void inject(MerchandiserActivity merchandiserActivity);
     void inject(BlockActivity blockActivity);
-    void inject(PromoInfoActivity promoInfoActivity);
+    void inject(PromoInfoMeActivity promoInfoMeActivity);
+    void inject(PromoInfoSvActivity promoInfoSvActivity);
 
     //fragment
     void inject(MeTradePointFragment meTradePointFragment);

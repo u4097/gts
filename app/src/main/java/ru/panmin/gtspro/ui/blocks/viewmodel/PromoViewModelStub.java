@@ -35,7 +35,6 @@ public class PromoViewModelStub implements IPromoViewModel {
         clients.add("Магнит");
         clients.add("Пятерочка");
 
-        Name name1 = new Name("Иванов И.B.","Ivanov I.V.");
         RealmList<String> ean = new RealmList<>();
         ean.add("12345444");
         ean.add("12434444");
@@ -73,27 +72,71 @@ public class PromoViewModelStub implements IPromoViewModel {
 
 
 
+        Name description1 = new Name("Чай","Tea");
+        Name description2 = new Name("Шоколад","Chocolate");
+        Name description3 = new Name("Сыр","Cheese");
+        Name description4 = new Name("Кофе","Coffee");
+        Name description5 = new Name("Хлеб","Bread");
+
+
+
+        Name name1 = new Name("Промо1", "Promo1");
+        Name name2 = new Name("Промо2", "Promo2");
+        Name name3 = new Name("Промо3", "Promo3");
+        Name name4 = new Name("Промо4", "Promo4");
+        Name name5 = new Name("Промо5", "Promo5");
+
+        Name client1 = new Name("Ринг", "Ring");
+        Name client2 = new Name("Hilltop", "Hilltop");
+
+        Name author1 = new Name("Шаляпин В.Р.", "Shalyapin V.R.");
+
+
         RealmList<Form> formRealmList = new RealmList<>();
-        Promo promo1 = new Promo("0", name1,
-                new Name("Мерчендайзер", "Merchandizer")
-                ,new Name("Иванов И.B.","Ivanov I.V.")
+        Promo promo1 = new Promo("0"
+                ,name1
+                ,description1
+                ,client1
+                ,author1
                 ,"16.07.2018","20.08.2018"
                 ,new Mechanic("0",name1)
                 ,new Type("0", name1)
                 ,skuListElements
                 ,formRealmList);
-        Promo promo2 = new Promo("1", name1,
-                new Name("Мерчендайзер", "Merchandizer")
-                ,new Name("Петров И.B.","Petrov I.V.")
-                ,"16.07.2018","20.08.2018"
+        Promo promo2 = new Promo("1", name2,
+                description2
+                ,client2
+                ,author1
+                ,"16/07/2018","20/08/2018"
                 ,new Mechanic("0",name1)
                 ,new Type("0", name1)
                 ,skuListElements
                 ,formRealmList);
-        Promo promo3 = new Promo("1", name1,
-                new Name("Мерчендайзер", "Merchandizer")
-                ,new Name("Иванов И.B.","Ivanov I.V.")
-                ,"16.07.2018","20.08.2018"
+        Promo promo3 = new Promo("2", name3,
+                 description3
+                ,client1
+                ,author1
+                ,"16/07/2018","20/08/2018"
+                ,new Mechanic("0",name1)
+                ,new Type("0", name1)
+                ,skuListElements
+                ,formRealmList);
+
+        Promo promo4 = new Promo("3", name4,
+                description4
+                ,client2
+                ,author1
+                ,"16/07/2018","20/08/2018"
+                ,new Mechanic("0",name1)
+                ,new Type("0", name1)
+                ,skuListElements
+                ,formRealmList);
+
+        Promo promo5 = new Promo("4", name5,
+                description5
+                , client1
+                ,author1
+                ,"16/07/2018","20/08/2018"
                 ,new Mechanic("0",name1)
                 ,new Type("0", name1)
                 ,skuListElements
@@ -105,6 +148,8 @@ public class PromoViewModelStub implements IPromoViewModel {
         data.add(promo1);
         data.add(promo2);
         data.add(promo3);
+        data.add(promo4);
+        data.add(promo5);
 
         onDataLoaded();
     }

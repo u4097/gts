@@ -1,8 +1,13 @@
 package ru.panmin.gtspro.ui.blocks.adapters;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +23,13 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
 
-public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
+public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
     private List<Promo> promoList = new ArrayList<>();
     private InfoClickListener infoClickListener;
 
     @Inject
-    PromoAdapter() {
+    public PromoSvAdapter() {
     }
 
     public void setData(List<Promo> promoList) {
@@ -45,7 +50,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
     @NonNull
     @Override
     public PromoVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_promo, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_promo_sv, parent, false);
         return new PromoVH(v);
     }
 
@@ -62,10 +67,16 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
 
         @BindView(R.id.tvTitle)
         TextView tvTitle;
-        @BindView(R.id.tvSubtitle)
-        TextView tvSubtitle;
-        @BindView(R.id.ivStatus)
-        AppCompatImageView ivStatus;
+        @BindView(R.id.tvDescription)
+        TextView tvDescription;
+        @BindView(R.id.tvDateStart)
+        TextView tvDateStart;
+        @BindView(R.id.tvDateEnd)
+        TextView tvDateEnd;
+        @BindView(R.id.tvAuthor)
+        TextView tvAuthor;
+        @BindView(R.id.tvAuthor_label)
+        TextView tvAuthor_label;
         @BindView(R.id.promoRoot)
         ViewGroup promoRoot;
 
@@ -76,8 +87,13 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
 
         public void bind(Promo promo) {
             tvTitle.setText(promo.getName().toString(itemView.getContext()));
-            tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
+            tvDescription.setText(promo.getDescription().toString(itemView.getContext()));
+            tvDateStart.setText(promo.getBeginDate());
+            tvDateEnd.setText(promo.getFinishDate());
+            tvAuthor.setText(promo.getAuthor().toString(itemView.getContext()));
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
     }
+
+
 }
