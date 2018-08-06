@@ -33,50 +33,38 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
-
     @BindView(R.id.tCounterClaims)
     TextView tCounterClaims;
-
     @BindView(R.id.btnPromo)
     FloatingActionButton btnPromo;
     @BindView(R.id.tCounterPromo)
     TextView tCounterPromo;
-
-
     @BindView(R.id.btnPhotoReport)
     FloatingActionButton btnPhotoReport;
     @BindView(R.id.tCounterPhotoReport)
     TextView tCounterPhotoReport;
-
     @BindView(R.id.btnReport)
     FloatingActionButton btnReport;
     @BindView(R.id.tCounterReport)
     TextView tCounterReport;
-
     @BindView(R.id.btnSku)
     FloatingActionButton btnSku;
     @BindView(R.id.tCounterSku)
     TextView tCounterSku;
-
     @BindView(R.id.btnPlanogram)
     FloatingActionButton btnPlanogram;
     @BindView(R.id.tCounterPlanogram)
     TextView tCounterPlanogram;
-
     @BindView(R.id.btnHotLine)
     FloatingActionButton btnHotLine;
     @BindView(R.id.tCounterHotLine)
     TextView tCounterHotLine;
-
     @BindView(R.id.btnStatistics)
     FloatingActionButton btnStatistics;
     @BindView(R.id.tCounterStatistics)
     TextView tCounterStatistics;
-
     @BindView(R.id.rvPromo)
     RecyclerView rvPromo;
-
-
     @BindView(R.id.tvTitle)
     TextView tvTitle;
 
@@ -115,8 +103,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         void onTradePointBlockClick(BlockType.Type blockType);
     }
 
-//    private UniversalAdapter adapter;
-
     public BlockActivity() {
     }
 
@@ -153,26 +139,17 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         initRvAdapter(userRole);
 
         tradePointBlockViews = new HashMap<>();
-        tradePointBlockViews.put(BlockType.Type.CLAIMS,
-                new Holder(btnClaims, tCounterClaims));
-        tradePointBlockViews.put(BlockType.Type.PROMO,
-                new Holder(btnPromo, tCounterPromo));
-        tradePointBlockViews.put(BlockType.Type.PHOTO_REPORT,
-                new Holder(btnPhotoReport, tCounterPhotoReport));
-        tradePointBlockViews.put(BlockType.Type.REPORT,
-                new Holder(btnReport, tCounterReport));
-        tradePointBlockViews.put(BlockType.Type.SKU,
-                new Holder(btnSku, tCounterSku));
-        tradePointBlockViews.put(BlockType.Type.PLANOGRAM,
-                new Holder(btnPlanogram, tCounterPlanogram));
-        tradePointBlockViews.put(BlockType.Type.HOT_LINE,
-                new Holder(btnHotLine, tCounterHotLine));
-        tradePointBlockViews.put(BlockType.Type.STATISTICS,
-                new Holder(btnStatistics, tCounterStatistics));
+        tradePointBlockViews.put(BlockType.Type.CLAIMS, new Holder(btnClaims, tCounterClaims));
+        tradePointBlockViews.put(BlockType.Type.PROMO, new Holder(btnPromo, tCounterPromo));
+        tradePointBlockViews.put(BlockType.Type.PHOTO_REPORT, new Holder(btnPhotoReport, tCounterPhotoReport));
+        tradePointBlockViews.put(BlockType.Type.REPORT, new Holder(btnReport, tCounterReport));
+        tradePointBlockViews.put(BlockType.Type.SKU, new Holder(btnSku, tCounterSku));
+        tradePointBlockViews.put(BlockType.Type.PLANOGRAM, new Holder(btnPlanogram, tCounterPlanogram));
+        tradePointBlockViews.put(BlockType.Type.HOT_LINE, new Holder(btnHotLine, tCounterHotLine));
+        tradePointBlockViews.put(BlockType.Type.STATISTICS, new Holder(btnStatistics, tCounterStatistics));
 
         for (Map.Entry<BlockType.Type, Holder> entry:
                 tradePointBlockViews.entrySet()) {
-
             entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
 
         }
@@ -272,7 +249,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
             default:
                 startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
                 break;
-
         }
     }
 

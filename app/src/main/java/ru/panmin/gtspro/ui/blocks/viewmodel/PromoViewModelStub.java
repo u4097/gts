@@ -16,13 +16,12 @@ import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.data.models.SubBrand;
 import ru.panmin.gtspro.data.models.Type;
 
-public class PromoViewModelStub implements IPromoViewModel {
+public class PromoViewModelStub {
 
     private List<Promo> data;
     private Set<String> currentClientFilter;
     private List<Promo> dataFiltered;
 
-    @Override
     public void loadData(String tradePointId) {
 
         RealmList<String> attachedME = new RealmList<>();
@@ -151,12 +150,8 @@ public class PromoViewModelStub implements IPromoViewModel {
         data.add(promo4);
         data.add(promo5);
 
-        onDataLoaded();
     }
 
-    @Override
-    public void onDataLoaded() {
-    }
 
     public List<Promo> getData() {
         return data;

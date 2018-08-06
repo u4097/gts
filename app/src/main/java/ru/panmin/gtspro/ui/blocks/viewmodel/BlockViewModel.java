@@ -7,15 +7,9 @@ import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 
-public class BlockViewModel implements IBlocksViewModel {
+public class BlockViewModel  {
     BlocksModel blocksModel;
 
-    @Override
-    public void onDataLoaded() {
-
-    }
-
-    @Override
     public void loadData(String tradePointId) {
         List<Block> blocks = new ArrayList<>();
         blocks.add(new Block(BlockType.Type.CLAIMS, 1, false));
