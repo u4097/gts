@@ -23,7 +23,7 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class TradePointInfoMeActivity extends ToolbarActivity implements TradePointInfoMeMvpView {
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
     @Inject TradePointInfoMePresenter tradePointInfoMePresenter;
