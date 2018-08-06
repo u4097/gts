@@ -13,9 +13,11 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
+import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
+import ru.panmin.gtspro.ui.tredpoints.filter.BottomSheetFilter;
 
 
 public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView, SvAdapter.InfoClickListener {
@@ -42,12 +44,10 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     protected void emptyButtonClick() {
-
     }
 
     @Override
     protected void errorButtonClick() {
-
     }
 
     @Override
@@ -62,6 +62,8 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
 
     @Override
     protected void initViews() {
+        initGpsConnect(location -> adapter.onLocationUpdated(location));
+        initFilter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setInfoClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -79,14 +81,30 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
         presenter.afterInitViews();
     }
 
+    private void initFilter() {
+        filter.setOnClickListener(view -> showDialogFragment(new BottomSheetFilter()));
+    }
+
+    private <T extends BottomSheetFragment> void showDialogFragment(T bottomSheetFilter) {
+        String tag = bottomSheetFilter.getClass().getSimpleName();
+        if (getChildFragmentManager().findFragmentByTag(tag) == null) {
+            bottomSheetFilter.show(getChildFragmentManager(), bottomSheetFilter.getClass().getSimpleName());
+        }
+    }
+
     @Override
     protected void detachView() {
         presenter.detachView();
     }
 
     @Override
-    public void setTradePoint(List<TradePoint> tradePoints) {
-        adapter.setData(tradePoints);
+    public void setTradePoint(List<TradePoint> tradePoints, String sortType) {
+        adapter.setData(getActivity(), tradePoints, sortType);
+    }
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        adapter.selectNewSortType(getActivity(), sortType);
     }
 
     @Override

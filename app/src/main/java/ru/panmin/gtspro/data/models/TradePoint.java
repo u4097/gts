@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
 public class TradePoint extends RealmObject {
@@ -26,6 +27,7 @@ public class TradePoint extends RealmObject {
     //@SerializedName("skus") private RealmList<Sku> skus = new RealmList<>();
     @SerializedName("standards") private RealmList<Standard> standards = new RealmList<>();
     @SerializedName("claims") private RealmList<Claim> claims = new RealmList<>();
+    @Ignore private double distance = 0.0d;
 
     public TradePoint() {
     }
@@ -196,6 +198,14 @@ public class TradePoint extends RealmObject {
 
     public void setClaims(RealmList<Claim> claims) {
         this.claims = claims;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
 }

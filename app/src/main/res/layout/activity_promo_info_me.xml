@@ -138,7 +138,7 @@
         android:background="@drawable/bg_btn_accent"
         android:paddingEnd="30dp"
         android:paddingStart="30dp"
-        android:text="Приступить"
+        android:text="@string/run_text_teg"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

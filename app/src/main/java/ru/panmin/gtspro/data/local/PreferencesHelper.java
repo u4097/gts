@@ -25,6 +25,9 @@ public class PreferencesHelper {
     private static final String PREF_LANGUAGE = "language";
     private static final String DEFAULT_PREF_LANGUAGE = Constants.LANGUAGE_RUSSIAN;
 
+    private static final String PREF_SORT_TYPE = "sort.type";
+    private static final String DEFAULT_PREF_SORT_TYPE = Constants.SORT_TYPE_ALPHABET;
+
     private static final String PREF_TOKEN = "token";
     private static final String DEFAULT_PREF_TOKEN = "";
 
@@ -90,6 +93,14 @@ public class PreferencesHelper {
 
     public void setLanguage(String language) {
         preferencesHelper.edit().putString(PREF_LANGUAGE, language).apply();
+    }
+
+    public String getSortType() {
+        return preferencesHelper.getString(PREF_SORT_TYPE, DEFAULT_PREF_SORT_TYPE);
+    }
+
+    public void setSortType(String sortType) {
+        preferencesHelper.edit().putString(PREF_SORT_TYPE, sortType).apply();
     }
 
     public String getToken() {

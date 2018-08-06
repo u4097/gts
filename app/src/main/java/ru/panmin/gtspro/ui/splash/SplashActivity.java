@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import ru.panmin.gtspro.Application;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
-import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
+import ru.panmin.gtspro.ui.tredpoints.TradePointActivity;
 import ru.panmin.gtspro.utils.DialogUtils;
 
 public class SplashActivity extends BaseActivity implements SplashMvpView {
@@ -52,10 +52,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     protected void initViews() {
-//        splashPresenter.init(Application.get(this).isOnline());
-
-        openMainActivity();
-        finishActivity();
+        splashPresenter.init(Application.get(this).isOnline());
     }
 
     @Override
@@ -80,9 +77,7 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     @Override
     public void openMainActivity() {
-//        startActivity(TradePointActivity.getStartIntent(this));
-        startActivity(BlockActivity.getStartIntent(this));
-
+        startActivity(TradePointActivity.getStartIntent(this));
     }
 
     private void showErrorDialog(String text) {

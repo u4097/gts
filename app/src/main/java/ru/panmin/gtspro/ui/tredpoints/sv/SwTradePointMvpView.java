@@ -7,6 +7,8 @@ import ru.panmin.gtspro.ui.progress.ProgressMvpView;
 
 public interface SwTradePointMvpView extends ProgressMvpView {
 
-    void setTradePoint(List<TradePoint> tradePoints);
+    void setTradePoint(List<TradePoint> tradePoints, String sortType);
+
+    void selectNewSortType(String sortType);
 
 }

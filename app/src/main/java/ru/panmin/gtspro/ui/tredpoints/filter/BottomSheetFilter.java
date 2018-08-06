@@ -1,10 +1,9 @@
 package ru.panmin.gtspro.ui.tredpoints.filter;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
-import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -14,18 +13,28 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
+import ru.panmin.gtspro.ui.tredpoints.TradePointMvpView;
+import ru.panmin.gtspro.utils.Constants;
 
 public class BottomSheetFilter extends BottomSheetFragment implements BottomSheetFilterMvpView {
 
-    @Inject
-    BottomSheetFilterPresenter presenter;
-    @BindView(R.id.close_textView)
-    AppCompatTextView close;
-    @BindView(R.id.radio_group_filter)
-    RadioGroup radioGroup;
+    @Inject BottomSheetFilterPresenter presenter;
 
-    @SuppressLint("ValidFragment")
-    private BottomSheetFilter() {
+    @BindView(R.id.close_textView) AppCompatTextView close;
+    @BindView(R.id.radio_group_filter) RadioGroup radioGroup;
+    @BindView(R.id.rbByVisitTime) RadioButton rbByVisitTime;
+    @BindView(R.id.rbByDistance) RadioButton rbByDistance;
+    @BindView(R.id.rbAlphabetically) RadioButton rbAlphabetically;
+
+    private TradePointMvpView tradePointMvpView;
+
+    public BottomSheetFilter() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        tradePointMvpView = (TradePointMvpView) context;
     }
 
     @Override
@@ -45,47 +54,24 @@ public class BottomSheetFilter extends BottomSheetFragment implements BottomShee
 
     @Override
     protected void initViews() {
-        initBottom();
-        initRadioGroup();
-    }
-
-    private void initRadioGroup() {
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i) {
-                    case R.id.rbByVisitTime:
-                        showToast("По времени посещения");
-                    case R.id.rbByDistance:
-                        showToast("По дистанции");
-                    case R.id.rbAlphabetically:
-                        showToast("По алфавиту");
-                }
-            }
-        });
-    }
-
-    private void showToast(String teg) {
-        Toast.makeText(getActivity(), teg, Toast.LENGTH_SHORT).show();
-    }
-
-
-    private void initBottom() {
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeBottomShet();
-            }
-        });
-    }
-
-    private void closeBottomShet() {
-        dismiss();
+        presenter.initViews();
+        close.setOnClickListener(view -> dismiss());
     }
 
     @Override
     protected void detachView() {
-        presenter.detachView();
+        switch (radioGroup.getCheckedRadioButtonId()) {
+            case R.id.rbByVisitTime:
+                presenter.detachView(Constants.SORT_TYPE_TIME);
+                break;
+            case R.id.rbByDistance:
+                presenter.detachView(Constants.SORT_TYPE_DISTANCE);
+                break;
+            case R.id.rbAlphabetically:
+                presenter.detachView(Constants.SORT_TYPE_ALPHABET);
+                break;
+        }
+        tradePointMvpView = null;
     }
 
     @Override
@@ -98,6 +84,26 @@ public class BottomSheetFilter extends BottomSheetFragment implements BottomShee
 
     @Override
     public void showUnknownError() {
+    }
+
+    @Override
+    public void afterViews(String sortType) {
+        switch (sortType) {
+            case Constants.SORT_TYPE_TIME:
+                rbByVisitTime.setChecked(true);
+                break;
+            case Constants.SORT_TYPE_DISTANCE:
+                rbByDistance.setChecked(true);
+                break;
+            case Constants.SORT_TYPE_ALPHABET:
+                rbAlphabetically.setChecked(true);
+                break;
+        }
+    }
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        tradePointMvpView.selectNewSortType(sortType);
     }
 
 }

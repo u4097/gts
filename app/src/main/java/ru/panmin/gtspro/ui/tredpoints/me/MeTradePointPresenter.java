@@ -19,7 +19,7 @@ public class MeTradePointPresenter extends ProgressPresenter<MeTradePointMvpView
     }
 
     public void afterInitViews() {
-        getMvpView().setTradePoint(dataManager.getTradePoints());
+        getMvpView().setTradePoint(dataManager.getTradePoints(), dataManager.getSortType());
         getMvpView().setStateData();
     }
 

@@ -2,5 +2,10 @@ package ru.panmin.gtspro.ui.tredpoints.filter;
 
 import ru.panmin.gtspro.ui.base.MvpView;
 
-public interface BottomSheetFilterMvpView extends MvpView {
+interface BottomSheetFilterMvpView extends MvpView {
+
+    void afterViews(String sortType);
+
+    void selectNewSortType(String sortType);
+
 }

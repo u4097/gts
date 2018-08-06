@@ -3,19 +3,23 @@ package ru.panmin.gtspro.ui.tradepointinfo.me;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import ru.panmin.gtspro.utils.MessageUtils;
 
 public class TradePointInfoMeActivity extends ToolbarActivity implements TradePointInfoMeMvpView {
 
@@ -30,6 +34,8 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     @BindView(R.id.promotions_text) AppCompatTextView promotions;
     @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
     @BindView(R.id.report_text) AppCompatTextView report;
+    @BindView(R.id.run_button_me) AppCompatButton runButtonMe;
+
     private TradePoint tradePoint = null;
 
     public TradePointInfoMeActivity() {
@@ -65,9 +71,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     @Override
     protected void initViews() {
-        initGpsConnect(location -> {
-            MessageUtils.showShortToast(this, location.getLatitude() + "\n" + location.getLongitude());
-        });
+        setStateData();
     }
 
     @Override
@@ -100,10 +104,12 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
-            if (i != tradePoint.getClients().size() - 1) {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
-            } else {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this));
+            if (!TextUtils.isEmpty(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this))) {
+                if (i != tradePoint.getClients().size() - 1) {
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this)).append(", ");
+                } else {
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this));
+                }
             }
         }
 
@@ -114,12 +120,16 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
                 listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());
             }
         }
+
         schedule.setText("График Визита:" + " " + "" + listTime);
         client.setText("Клиенты:" + " " + listClients);
         claimsQuantity.setText(String.valueOf(tradePoint.getClaims().size()));
         promotions.setText(String.valueOf(tradePoint.getPromos().size()));
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
+
+        runButtonMe.setOnClickListener(view -> startActivity(BlockActivity.getStartIntent(this, tradePoint.getId())));
+
         setStateData();
     }
 
