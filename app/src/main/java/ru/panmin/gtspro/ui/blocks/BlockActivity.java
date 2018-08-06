@@ -24,6 +24,7 @@ import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.PromoViewModelStub;
+import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.PromoInfoSvActivity;
@@ -132,14 +133,27 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     @Override
     protected void initToolbar() {
-        setTitle("ОАО Магнит");
+//        setTitle("ОАО Магнит");
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         inflateMenu(R.menu.logout);
+        setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case R.id.action_logout:
+                            blockPresenter.logout();
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+        );
+
     }
 
     @Override
     protected void initViews() {
-        setStateData();
+        blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
+
+//        setStateData();
         this.userRole = Constants.ROLE_SUPERVISOR;
         initRvAdapter(userRole);
 
@@ -256,5 +270,24 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
                 break;
         }
     }
+
+    @Override
+    public void setTradePoint(TradePoint tradePoint) {
+        setTitle(tradePoint.getSignboard().toString(this));
+
+//        rvPromo.setLayoutManager(new LinearLayoutManager(this));
+//        adapter.setInfoClickListener(this);
+//        adapter.setData(tradePoint.getPromos());
+//        rvPromo.setAdapter(adapter);
+        setStateData();
+    }
+
+    @Override
+    public void openLoginActivity() {
+        Intent intent = LoginActivity.getStartIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 
 }
