@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
 import ru.panmin.gtspro.ui.blocks.model.Block;
@@ -80,6 +81,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     private OnTradePointBlockClickListener listener = null;
     private Map<BlockType.Type, Holder> tradePointBlockViews;
 
+    private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
+
 
     class Holder {
         FloatingActionButton btn;
@@ -106,8 +109,10 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     public BlockActivity() {
     }
 
-    public static Intent getStartIntent(Context context) {
-        return new Intent(context, BlockActivity.class);
+    public static Intent getStartIntent(Context context, String tradePointId) {
+        Intent intent = new Intent(context, BlockActivity.class);
+        intent.putExtra(INTENT_KEY_TRADE_POINT_ID, tradePointId);
+        return intent;
     }
 
     @Override
