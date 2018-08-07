@@ -137,6 +137,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     protected void initToolbar() {
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
+        setNavigationOnClickListener(view -> finishActivity());
         inflateMenu(R.menu.logout);
         setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
