@@ -2,7 +2,7 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="@color/white"
         android:paddingBottom="16dp"
         android:paddingTop="26dp"
         android:textColor="@color/azure"
@@ -18,5 +19,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:background="@color/black_20"/>
+        android:background="@color/grey"/>
 </android.support.v7.widget.LinearLayoutCompat>

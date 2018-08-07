@@ -1,4 +1,5 @@
-package ru.panmin.gtspro.ui.hotline.me;
+package ru.panmin.gtspro.ui.hotline.sw;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,31 +14,28 @@ import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressActivity;
 
-public class HotlineMeActivity
+
+public class HotlineSvActivity
         extends ProgressActivity
-        implements HotlineMeMvpView, HotlineMeAdapter.ClientAdapterClickListener {
+        implements HotlineSvMvpView, HotlineSvAdapter.ClientAdapterClickListener {
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
+    @Inject
+    HotlineSvPresenter hotlineSvPresenter;
+    @Inject
+    HotlineSvAdapter hotlineSvAdapter;
+    @BindView(R.id.recycler_hot_line)
+    RecyclerView recycler_hot_line;
+    private TradePoint tradePoint = null;
 
-    public HotlineMeActivity() {
+    public HotlineSvActivity() {
     }
 
     public static Intent getStartIntent(Context context, String tradePointId) {
-        Intent intent = new Intent(context, HotlineMeActivity.class);
+        Intent intent = new Intent(context, HotlineSvActivity.class);
         intent.putExtra(INTENT_KEY_TRADE_POINT_ID, tradePointId);
         return intent;
     }
-
-    @Inject
-    HotlineMePresenter hotlineMePresenter;
-
-    @Inject
-    HotlineMeAdapter hotlineMeAdapter;
-
-    private TradePoint tradePoint = null;
-
-    @BindView(R.id.recycler_hot_line)
-    RecyclerView recycler_hot_line;
 
     @Override
     protected int getDataView() {
@@ -64,32 +62,35 @@ public class HotlineMeActivity
         activityComponent().inject(this);
     }
 
+
     @Override
     protected void attachView() {
-        hotlineMePresenter.attachView(this);
+        hotlineSvPresenter.attachView(this);
     }
 
     @Override
     protected void initViews() {
-        hotlineMePresenter.getClient(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
+        hotlineSvPresenter.getClient(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
     }
+
 
     private void innitRecycler() {
         recycler_hot_line.setLayoutManager(new LinearLayoutManager(this));
-        hotlineMeAdapter.setClientAdapterClickListener(this);
-        recycler_hot_line.setAdapter(hotlineMeAdapter);
+        hotlineSvAdapter.setClientAdapterClickListener(this);
+        recycler_hot_line.setAdapter(hotlineSvAdapter);
         setStateData();
     }
 
     @Override
     protected void detachView() {
-        hotlineMePresenter.detachView();
+        hotlineSvPresenter.detachView();
     }
+
 
     @Override
     public void setClient(TradePoint tradePointById) {
         tradePoint = tradePointById;
-        hotlineMeAdapter.setClient(tradePoint, HotlineMeActivity.this);
+        hotlineSvAdapter.setData(tradePoint, HotlineSvActivity.this);
         innitRecycler();
     }
 

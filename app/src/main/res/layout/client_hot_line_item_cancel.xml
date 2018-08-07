@@ -11,7 +11,7 @@
         android:textSize="13sp"
         android:textAllCaps="true"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black_three"
         android:text="@string/cancel"
         android:paddingBottom="12dp"
         android:paddingTop="12dp"/>

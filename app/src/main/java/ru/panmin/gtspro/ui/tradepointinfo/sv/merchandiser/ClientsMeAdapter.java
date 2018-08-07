@@ -69,15 +69,9 @@ public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.Clie
         }
 
         public void bind(Client client, int position) {
-            if (!TextUtils.isEmpty(client.getName().toString())) {
-                client_name_text.setVisibility(View.VISIBLE);
-                client_number_text.setVisibility(View.VISIBLE);
                 client_number_text.setText(String.valueOf(position + 1));
                 client_name_text.setText(client.getName().toString(itemView.getContext()));
-            } else {
-                client_name_text.setVisibility(View.GONE);
-                client_number_text.setVisibility(View.GONE);
-            }
+
 
         }
     }

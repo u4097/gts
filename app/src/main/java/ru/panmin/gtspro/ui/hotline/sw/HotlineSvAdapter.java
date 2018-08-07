@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.hotline.me;
+package ru.panmin.gtspro.ui.hotline.sw;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -20,35 +20,31 @@ import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.utils.TextUtils;
 
-public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-
-    @Inject
-    HotlineMeAdapter() {
-    }
+class HotlineSvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final static int CANCEL_VIEW = 0;
-
     private final static int CONTENT_VIEW = 2;
-
     private List<Client> clients = new ArrayList<>();
-
     private int maxLenght;
     private ClientAdapterClickListener clientAdapterClickListener;
 
-    public void setClientAdapterClickListener(ClientAdapterClickListener clientAdapterClickListener) {
-        this.clientAdapterClickListener = clientAdapterClickListener;
+    @Inject
+    HotlineSvAdapter() {
     }
 
-    public void setClient(TradePoint tradePointById, Context context) {
+    public void setData(TradePoint tradePoint, Context context) {
         clients.clear();
-        for (Client client : tradePointById.getClients()) {
+        for (Client client : tradePoint.getClients()) {
             if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString(context))) {
                 clients.add(client);
             }
         }
         maxLenght = clients.size();
         notifyDataSetChanged();
+    }
+
+    public void setClientAdapterClickListener(ClientAdapterClickListener clientAdapterClickListener) {
+        this.clientAdapterClickListener = clientAdapterClickListener;
     }
 
     @Override
@@ -63,29 +59,26 @@ public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         switch (viewType) {
             case CONTENT_VIEW:
                 View content = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.client_hot_line_item, parent, false);
-                return new ViewHolderContent(content);
+                return new HotlineSvAdapter.ViewHolderContent(content);
             case CANCEL_VIEW:
                 View cancel = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.client_hot_line_item_cancel, parent, false);
-                return new ViewHolderCancel(cancel);
+                return new HotlineSvAdapter.ViewHolderCancel(cancel);
             default:
                 View v = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.client_hot_line_item, parent, false);
-                return new ViewHolderContent(v);
+                return new HotlineSvAdapter.ViewHolderContent(v);
         }
-
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() != CANCEL_VIEW) {
-            ViewHolderContent viewHolderContent = (ViewHolderContent) holder;
+            HotlineSvAdapter.ViewHolderContent viewHolderContent = (HotlineSvAdapter.ViewHolderContent) holder;
             viewHolderContent.bind(clients.get(position));
         }
     }
@@ -103,7 +96,6 @@ public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class ViewHolderContent extends RecyclerView.ViewHolder {
-
         @BindView(R.id.text_client_hot_line_item)
         AppCompatTextView text_client_hot_line_item;
 
@@ -118,8 +110,7 @@ public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private class ViewHolderCancel extends RecyclerView.ViewHolder {
-
+    public class ViewHolderCancel extends RecyclerView.ViewHolder {
         ViewHolderCancel(View cancel) {
             super(cancel);
             itemView.setOnClickListener(view -> clientAdapterClickListener.cancelClick());

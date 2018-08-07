@@ -19,8 +19,9 @@ public class HotlineMePresenter extends ProgressPresenter<HotlineMeMvpView> {
     protected void dispose() {
 
     }
-    public void getClient () {
-        getMvpView().setClient(dataManager.getTradePointById(dataManager.getId()));
+
+    public void getClient(String id) {
+        getMvpView().setClient(dataManager.getTradePointById(id));
     }
 
 }
