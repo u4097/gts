@@ -23,11 +23,10 @@ import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
-import ru.panmin.gtspro.ui.blocks.viewmodel.PromoViewModelStub;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
-import ru.panmin.gtspro.ui.promoinfo.PromoInfoMeActivity;
-import ru.panmin.gtspro.ui.promoinfo.PromoInfoSvActivity;
+import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
+import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
 
@@ -77,7 +76,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     PromoMeAdapter promoMeAdapter;
     PromoSvAdapter promoSvAdapter;
     String userRole;
-    PromoViewModelStub promViewModelStub = new PromoViewModelStub();
 
     private OnTradePointBlockClickListener listener = null;
     private Map<BlockType.Type, Holder> tradePointBlockViews;
@@ -133,7 +131,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     @Override
     protected void initToolbar() {
-//        setTitle("ОАО Магнит");
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         inflateMenu(R.menu.logout);
         setOnMenuItemClickListener(item -> {
@@ -151,11 +148,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     @Override
     protected void initViews() {
+        this.userRole = Constants.ROLE_MERCHANDISER;
         blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
-
-//        setStateData();
-        this.userRole = Constants.ROLE_SUPERVISOR;
-        initRvAdapter(userRole);
 
         tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS, new Holder(btnClaims, tCounterClaims));
@@ -172,7 +166,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
             entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
 
         }
-
 
         BlockViewModel blockViewModel = new BlockViewModel();
         blockViewModel.loadData("0");
@@ -208,34 +201,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         tvTitle.setText("Промо");
     }
 
-    private void initRvAdapter(String role) {
-        rvPromo.setLayoutManager(new LinearLayoutManager(this));
-        promViewModelStub.loadData("0");
-
-        switch (role) {
-            case Constants.ROLE_MERCHANDISER:
-                promoMeAdapter = new PromoMeAdapter();
-                promoMeAdapter.setInfoClickListener(this);
-                promoMeAdapter.setData(promViewModelStub.getData());
-                rvPromo.setAdapter(promoMeAdapter);
-                break;
-            case Constants.ROLE_SUPERVISOR:
-                promoSvAdapter = new PromoSvAdapter();
-                promoSvAdapter.setInfoClickListener(this);
-                promoSvAdapter.setData(promViewModelStub.getData());
-                rvPromo.setAdapter(promoSvAdapter);
-                break;
-            default:
-                promoMeAdapter = new PromoMeAdapter();
-                rvPromo.setLayoutManager(new LinearLayoutManager(this));
-                promoMeAdapter.setInfoClickListener(this);
-                promoMeAdapter.setData(promViewModelStub.getData());
-                rvPromo.setAdapter(promoMeAdapter);
-                break;
-
-
-        }
-    }
 
     @Override
     protected void detachView() {
@@ -274,11 +239,29 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         setTitle(tradePoint.getSignboard().toString(this));
+        rvPromo.setLayoutManager(new LinearLayoutManager(this));
 
-//        rvPromo.setLayoutManager(new LinearLayoutManager(this));
-//        adapter.setInfoClickListener(this);
-//        adapter.setData(tradePoint.getPromos());
-//        rvPromo.setAdapter(adapter);
+        switch (this.userRole) {
+            case Constants.ROLE_MERCHANDISER:
+                promoMeAdapter = new PromoMeAdapter();
+                promoMeAdapter.setInfoClickListener(this);
+                promoMeAdapter.setData(tradePoint.getPromos());
+                rvPromo.setAdapter(promoMeAdapter);
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                promoSvAdapter = new PromoSvAdapter();
+                promoSvAdapter.setInfoClickListener(this);
+                promoSvAdapter.setData(tradePoint.getPromos());
+                rvPromo.setAdapter(promoSvAdapter);
+                break;
+            default:
+                promoMeAdapter = new PromoMeAdapter();
+                rvPromo.setLayoutManager(new LinearLayoutManager(this));
+                promoMeAdapter.setInfoClickListener(this);
+                promoMeAdapter.setData(tradePoint.getPromos());
+                rvPromo.setAdapter(promoMeAdapter);
+                break;
+        }
         setStateData();
     }
 

@@ -1,15 +1,13 @@
-package ru.panmin.gtspro.ui.promoinfo;
+package ru.panmin.gtspro.ui.promoinfo.sv;
 
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
-import ru.panmin.gtspro.ui.blocks.viewmodel.PromoViewModelStub;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 
 class PromoInfoSvPresenter extends ToolbarPresenter<PromoInfoSvMvpView> {
 
     private final DataManager dataManager;
-    PromoViewModelStub promViewModelStub = new PromoViewModelStub();
 
     @Inject
     PromoInfoSvPresenter(DataManager dataManager) {
@@ -21,9 +19,7 @@ class PromoInfoSvPresenter extends ToolbarPresenter<PromoInfoSvMvpView> {
     }
 
     public void getPromo(String promoId) {
-           promViewModelStub.loadData("0");
-//        getMvpView().setPromo(dataManager.getPromoById(promoId));
-        getMvpView().setPromo(promViewModelStub.getData().get(Integer.parseInt(promoId)));
+        getMvpView().setPromo(dataManager.getPromoById(promoId));
     }
 
 }

@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -22,11 +24,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
+import timber.log.Timber;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
     private List<Promo> promoList = new ArrayList<>();
     private InfoClickListener infoClickListener;
+
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     @Inject
     public PromoSvAdapter() {
@@ -86,11 +91,20 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         }
 
         public void bind(Promo promo) {
+            if (promo.getAuthor() != null) {
+                tvAuthor.setText(promo.getAuthor().toString(itemView.getContext()));
+            }
+            if (promo.getFinishDate() != null) {
+                tvDateEnd.setText(promo.getFinishDate());
+            }
+            if (promo.getBeginDate() != null) {
+                tvDateStart.setText(promo.getBeginDate());
+            }
+            if (promo.getDescription() != null) {
+                tvDescription.setText(promo.getDescription().toString(itemView.getContext()));
+            }
+
             tvTitle.setText(promo.getName().toString(itemView.getContext()));
-            tvDescription.setText(promo.getDescription().toString(itemView.getContext()));
-            tvDateStart.setText(promo.getBeginDate());
-            tvDateEnd.setText(promo.getFinishDate());
-            tvAuthor.setText(promo.getAuthor().toString(itemView.getContext()));
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
     }

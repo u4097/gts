@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.promoinfo;
+package ru.panmin.gtspro.ui.promoinfo.me;
 
 import android.content.Context;
 import android.content.Intent;
@@ -89,15 +89,27 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
 
     @Override
     public void setPromo(Promo promo) {
-        this.promo = promo;
-        setTitle(promo.getName().toString(this));
-        Timber.d(promo.getClient().toString(this));
-
-        setValue(tvClients, promo.getClient().toString(this), R.string.label_clients);
-        setValue(tvAuthor, promo.getAuthor().toString(this), R.string.label_author);
-        setValue(tvPeriod, "16-19 сентября", R.string.label_period);
-        setValue(tvDescription, promo.getDescription().toString(this), R.string.label_promo_description);
-        setValue(tvSku, "Баунти", R.string.label_promo_sku);
+        if (promo != null) {
+            this.promo = promo;
+            if (promo.getName() != null) {
+                setTitle(promo.getName().toString(this));
+            }
+            if (promo.getClient() != null) {
+                setValue(tvClients, promo.getClient().toString(this), R.string.label_clients);
+            }
+            if (promo.getAuthor() != null) {
+                setValue(tvAuthor, promo.getAuthor().toString(this), R.string.label_author);
+            }
+            if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
+                setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
+            }
+            if (promo.getDescription() != null) {
+                setValue(tvDescription, promo.getDescription().toString(this), R.string.label_promo_description);
+            }
+            if (promo.getSkuIds() != null) {
+                setValue(tvSku, promo.getSkuIds().toString(), R.string.label_promo_sku);
+            }
+        }
 
         setStateData();
     }

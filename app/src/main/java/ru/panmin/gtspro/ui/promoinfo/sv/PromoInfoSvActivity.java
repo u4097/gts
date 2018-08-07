@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.promoinfo;
+package ru.panmin.gtspro.ui.promoinfo.sv;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,12 +26,18 @@ public class PromoInfoSvActivity extends ToolbarActivity implements PromoInfoSvM
     @Inject
     PromoInfoSvPresenter promoInfoSvPresenter;
 
-    @BindView(R.id.tvClients) TextView tvClients;
-    @BindView(R.id.tvAuthor) TextView tvAuthor;
-    @BindView(R.id.tvPeriod) TextView tvPeriod;
-    @BindView(R.id.tvDescription) TextView tvDescription;
-    @BindView(R.id.tvSku) TextView tvSku;
-    @BindView(R.id.tvAuthorBottom) TextView tvAuthorBottom;
+    @BindView(R.id.tvClients)
+    TextView tvClients;
+    @BindView(R.id.tvAuthor)
+    TextView tvAuthor;
+    @BindView(R.id.tvPeriod)
+    TextView tvPeriod;
+    @BindView(R.id.tvDescription)
+    TextView tvDescription;
+    @BindView(R.id.tvSku)
+    TextView tvSku;
+    @BindView(R.id.tvAuthorBottom)
+    TextView tvAuthorBottom;
 
 
     private Promo promo = null;
@@ -91,18 +97,29 @@ public class PromoInfoSvActivity extends ToolbarActivity implements PromoInfoSvM
 
     @Override
     public void setPromo(Promo promo) {
-        this.promo = promo;
-        setTitle(promo.getName().toString(this));
-        Timber.d(promo.getClient().toString(this));
+        if (promo != null) {
+            this.promo = promo;
+            setTitle(promo.getName().toString(this));
+            Timber.d(promo.getClient().toString(this));
 
-        setValue(tvClients, promo.getClient().toString(this), R.string.label_clients);
-        setValue(tvAuthor, promo.getAuthor().toString(this), R.string.label_author);
-        setValue(tvPeriod, "16-19 сентября", R.string.label_period);
-        setValue(tvDescription, promo.getDescription().toString(this), R.string.label_promo_description);
-        setValue(tvSku, "Баунти", R.string.label_promo_sku);
+            if (promo.getClient() != null) {
+                setValue(tvClients, promo.getClient().toString(this), R.string.label_clients);
+            }
+            if (promo.getAuthor() != null) {
+                setValue(tvAuthor, promo.getAuthor().toString(this), R.string.label_author);
+                tvAuthorBottom.setText(promo.getAuthor().toString(this));
+            }
+            if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
+                setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
+            }
+            if (promo.getDescription() != null) {
+                setValue(tvDescription, promo.getDescription().toString(this), R.string.label_promo_description);
+            }
+            if (promo.getSkuIds() != null) {
+                setValue(tvSku, promo.getSkuIds().toString(), R.string.label_promo_sku);
+            }
 
-        tvAuthorBottom.setText(promo.getAuthor().toString(this));
-
+        }
         setStateData();
     }
 

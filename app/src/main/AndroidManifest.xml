@@ -52,8 +52,8 @@
 
         <activity android:name=".ui.blocks.BlockActivity"/>
 
-        <activity android:name=".ui.promoinfo.PromoInfoMeActivity"/>
-        <activity android:name=".ui.promoinfo.PromoInfoSvActivity" />
+        <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
+        <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
