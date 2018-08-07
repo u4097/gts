@@ -4,6 +4,7 @@ import dagger.Subcomponent;
 import ru.panmin.gtspro.injection.PerActivity;
 import ru.panmin.gtspro.injection.module.ActivityModule;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
+import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
@@ -37,4 +38,5 @@ public interface ActivityComponent {
     void inject(MapFragment mapFragment);
     void inject(SwTradePointFragment swTradePointFragment);
     void inject(BottomSheetFilter bottomSheetFilter);
+    void inject(BlockFilter blockFilter);
 }

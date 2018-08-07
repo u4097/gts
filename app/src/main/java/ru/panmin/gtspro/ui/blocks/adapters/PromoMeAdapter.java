@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
+import timber.log.Timber;
 
 public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH> {
 
@@ -79,10 +80,23 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
         }
 
         public void bind(Promo promo) {
-            tvTitle.setText(promo.getName().toString(itemView.getContext()));
-            tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
-            tvDateFrom.setText("c     " + promo.getBeginDate());
-            tvDateTo.setText("до " + promo.getFinishDate());
+            if (promo.getName() != null) {
+                tvTitle.setText(promo.getName().toString(itemView.getContext()));
+                Timber.d("promo title: %s", promo.getName().toString(itemView.getContext()));
+            }
+            if (promo.getDescription() != null) {
+                tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
+                Timber.d("promo description: %s",promo.getDescription().toString(itemView.getContext()));
+            }
+            if (promo.getBeginDate() != null) {
+//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from,promo.getBeginDate()));
+                Timber.d("promo begin date: %s", promo.getBeginDate());
+            }
+            if (promo.getFinishDate() != null) {
+//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_to,promo.getFinishDate()));
+                Timber.d("promo end date: %s",promo.getFinishDate());
+            }
+
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
     }

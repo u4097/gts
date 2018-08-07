@@ -1,5 +1,7 @@
 package ru.panmin.gtspro.ui.blocks;
 
+import java.util.function.ToDoubleBiFunction;
+
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
@@ -43,6 +45,11 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
 
     public void initViews() {
         getMvpView().initViews(dataManager.getFullName(), dataManager.getRole());
+    }
+
+    public void selectNewSortType(String sortType) {
+        // TODO: 07/08/2018 Not implemented.
+//            getMvpView().selectNewSortType(sortType);
     }
 
 }

@@ -17,8 +17,10 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
+import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
 import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
@@ -68,6 +70,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     RecyclerView rvPromo;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
+    @BindView(R.id.fab_filter) FloatingActionButton filter;
 
     @Inject
     BlockPresenter blockPresenter;
@@ -130,6 +133,18 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     }
 
     @Override
+    public void initFilter() {
+        filter.setOnClickListener(view -> showDialogFragment(new BlockFilter()));
+    }
+
+    private <T extends BottomSheetFragment> void showDialogFragment(T bottomSheetFilter) {
+        String tag = bottomSheetFilter.getClass().getSimpleName();
+        if (getSupportFragmentManager().findFragmentByTag(tag) == null) {
+            bottomSheetFilter.show(getSupportFragmentManager(), bottomSheetFilter.getClass().getSimpleName());
+        }
+    }
+
+    @Override
     protected int getDataView() {
         return R.layout.activity_blocks;
     }
@@ -154,6 +169,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     @Override
     public void initViews(String fullName, String role) {
+        initFilter();
         this.userRole = role;
         blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
 
@@ -278,5 +294,10 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         startActivity(intent);
     }
 
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        blockPresenter.selectNewSortType(sortType);
+    }
 
 }
