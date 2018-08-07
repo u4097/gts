@@ -125,6 +125,11 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     }
 
     @Override
+    protected void initViews() {
+        blockPresenter.initViews();
+    }
+
+    @Override
     protected int getDataView() {
         return R.layout.activity_blocks;
     }
@@ -147,8 +152,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     }
 
     @Override
-    protected void initViews() {
-        this.userRole = Constants.ROLE_MERCHANDISER;
+    public void initViews(String fullName, String role) {
+        this.userRole = role;
         blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
 
         tradePointBlockViews = new HashMap<>();

@@ -40,4 +40,9 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
         getMvpView().setTradePoint(dataManager.getTradePointById(tradePointId));
     }
 
+
+    public void initViews() {
+        getMvpView().initViews(dataManager.getFullName(), dataManager.getRole());
+    }
+
 }
