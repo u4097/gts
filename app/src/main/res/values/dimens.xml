@@ -45,5 +45,6 @@
     <dimen name="size_throbber_medium">50dp</dimen>
     <dimen name="width_status">5dp</dimen>
     <dimen name="size_divider">2dp</dimen>
+    <dimen name="small_distance">8dp</dimen>
 
 </resources>

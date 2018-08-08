@@ -77,5 +77,10 @@
     <string name="label_period">Promo period:</string>
     <string name="label_promo_description">Promo description:</string>
     <string name="label_promo_sku">SKU</string>
+    <string name="type_messege_hotline_teg">Тип сообщения</string>
+    <string name="sku_choice_text_teg">Выбор SKU</string>
+    <string name="сauses_choice_text_teg">Выбор причины</string>
+    <string name="situation_choice_text_teg">Выбор ситуации</string>
+    <string name="quantity_goods_text_teg">Введите кол-во товара</string>
 
 </resources>
