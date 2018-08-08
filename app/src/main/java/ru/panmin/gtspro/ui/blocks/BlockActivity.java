@@ -68,7 +68,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @BindView(R.id.tCounterStatistics)
     TextView tCounterStatistics;
     @BindView(R.id.rvPromo)
-    RecyclerView rvPromo;
+    RecyclerView rvBlock;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.fab_filter) FloatingActionButton filter;
@@ -164,7 +164,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     public void initBlocks() {
         BlockViewModel blockViewModel = new BlockViewModel();
-        blockViewModel.loadData("0");
+        blockViewModel.loadData(this.tradePoint);
         BlocksModel model = blockViewModel.getBlocks();
 
         tradePointBlockViews = new HashMap<>();
@@ -281,13 +281,13 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
             return;
         }
         if (blockType != BlockType.Type.PROMO) {
-            rvPromo.setVisibility(View.GONE);
+            rvBlock.setVisibility(View.GONE);
             setBlockTitle("Блок " + blockType + " в разработке");
         } else {
             setBlockTitle("Промо");
-            rvPromo.setVisibility(View.VISIBLE);
+            rvBlock.setVisibility(View.VISIBLE);
         }
-        rvPromo.setLayoutManager(new LinearLayoutManager(this));
+        rvBlock.setLayoutManager(new LinearLayoutManager(this));
 
         if (blockType == BlockType.Type.PROMO) {
             switch (this.userRole) {
@@ -295,20 +295,20 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
                     promoMeAdapter = new PromoMeAdapter();
                     promoMeAdapter.setInfoClickListener(this);
                     promoMeAdapter.setData(tradePoint.getPromos());
-                    rvPromo.setAdapter(promoMeAdapter);
+                    rvBlock.setAdapter(promoMeAdapter);
                     break;
                 case Constants.ROLE_SUPERVISOR:
                     promoSvAdapter = new PromoSvAdapter();
                     promoSvAdapter.setInfoClickListener(this);
                     promoSvAdapter.setData(tradePoint.getPromos());
-                    rvPromo.setAdapter(promoSvAdapter);
+                    rvBlock.setAdapter(promoSvAdapter);
                     break;
                 default:
                     promoMeAdapter = new PromoMeAdapter();
-                    rvPromo.setLayoutManager(new LinearLayoutManager(this));
+                    rvBlock.setLayoutManager(new LinearLayoutManager(this));
                     promoMeAdapter.setInfoClickListener(this);
                     promoMeAdapter.setData(tradePoint.getPromos());
-                    rvPromo.setAdapter(promoMeAdapter);
+                    rvBlock.setAdapter(promoMeAdapter);
                     break;
             }
         }
