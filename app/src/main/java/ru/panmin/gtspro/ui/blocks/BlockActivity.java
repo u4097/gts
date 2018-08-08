@@ -15,9 +15,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
+import ru.panmin.gtspro.ui.blocks.adapters.ClaimMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
@@ -33,7 +35,10 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
 import timber.log.Timber;
 
-public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoMeAdapter.InfoClickListener, PromoSvAdapter.InfoClickListener {
+public class BlockActivity extends ToolbarActivity implements BlockMvpView,
+        PromoMeAdapter.InfoClickListener,
+        PromoSvAdapter.PromoClickListener,
+        ClaimMeAdapter.ClaimClickListener {
 
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
@@ -71,7 +76,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     RecyclerView rvBlock;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
-    @BindView(R.id.fab_filter) FloatingActionButton filter;
+    @BindView(R.id.fab_filter)
+    FloatingActionButton filter;
 
     @Inject
     BlockPresenter blockPresenter;
@@ -79,17 +85,14 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     PromoMeAdapter promoMeAdapter;
     PromoSvAdapter promoSvAdapter;
+
+    ClaimMeAdapter claimMeAdapter;
     String userRole;
 
-    private OnTradePointBlockClickListener listener = null;
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
     private TradePoint tradePoint = null;
 
-
-    public interface OnTradePointBlockClickListener {
-        void onTradePointBlockClick(BlockType.Type blockType);
-    }
 
     public BlockActivity() {
     }
@@ -177,12 +180,12 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         tradePointBlockViews.put(BlockType.Type.HOT_LINE, new Holder(btnHotLine, tCounterHotLine));
         tradePointBlockViews.put(BlockType.Type.STATISTICS, new Holder(btnStatistics, tCounterStatistics));
 
-        for (Map.Entry<BlockType.Type, Holder> entry:
+        for (Map.Entry<BlockType.Type, Holder> entry :
                 tradePointBlockViews.entrySet()) {
             entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
         }
 
-        for (Block block: model.getBlocks()
+        for (Block block : model.getBlocks()
         ) {
             Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
@@ -246,7 +249,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
 
     @Override
-    public void showInfo(Promo promo) {
+    public void showPromo(Promo promo) {
         switch (this.userRole) {
             case Constants.ROLE_MERCHANDISER:
                 startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
@@ -261,6 +264,11 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     }
 
     @Override
+    public void showClaim(Claim claim) {
+       Timber.d("Not implemented");
+    }
+
+    @Override
     public void setBlockTitle(String title) {
         tvTitle.setText(title);
     }
@@ -269,7 +277,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
         setTitle(tradePoint.getSignboard().toString(this));
-        BlockType.Type  blockType =  blockPresenter.getCurrentBlock();
+        BlockType.Type blockType = blockPresenter.getCurrentBlock();
         initBlockData(blockType);
         setStateData();
     }
@@ -280,12 +288,15 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
             Timber.e("tradePoint is null");
             return;
         }
-        if (blockType != BlockType.Type.PROMO) {
-            rvBlock.setVisibility(View.GONE);
-            setBlockTitle("Блок " + blockType + " в разработке");
-        } else {
-            setBlockTitle("Промо");
+        if (blockType == BlockType.Type.PROMO) {
             rvBlock.setVisibility(View.VISIBLE);
+            setBlockTitle("Промо");
+        } else if (blockType == BlockType.Type.CLAIMS) {
+            rvBlock.setVisibility(View.VISIBLE);
+            setBlockTitle("Претензии");
+        } else {
+            setBlockTitle("Блок " + blockType + " в разработке");
+            rvBlock.setVisibility(View.GONE);
         }
         rvBlock.setLayoutManager(new LinearLayoutManager(this));
 
@@ -304,14 +315,33 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
                     rvBlock.setAdapter(promoSvAdapter);
                     break;
                 default:
-                    promoMeAdapter = new PromoMeAdapter();
-                    rvBlock.setLayoutManager(new LinearLayoutManager(this));
-                    promoMeAdapter.setInfoClickListener(this);
-                    promoMeAdapter.setData(tradePoint.getPromos());
-                    rvBlock.setAdapter(promoMeAdapter);
+                    rvBlock.setVisibility(View.GONE);
                     break;
             }
         }
+
+        if (blockType == BlockType.Type.CLAIMS) {
+            switch (this.userRole) {
+                case Constants.ROLE_MERCHANDISER:
+                    claimMeAdapter = new ClaimMeAdapter();
+                    claimMeAdapter.setInfoClickListener(this);
+                    claimMeAdapter.setData(tradePoint.getClaims());
+                    rvBlock.setAdapter(claimMeAdapter);
+                    break;
+                case Constants.ROLE_SUPERVISOR:
+/*                      promoSvAdapter = new PromoSvAdapter();
+                        promoSvAdapter.setInfoClickListener(this);
+                        promoSvAdapter.setData(tradePoint.getPromos());
+                        rvBlock.setAdapter(promoSvAdapter);*/
+                    rvBlock.setVisibility(View.GONE);
+                    break;
+                default:
+                    rvBlock.setVisibility(View.GONE);
+                    break;
+            }
+        }
+
+
     }
 
     @Override

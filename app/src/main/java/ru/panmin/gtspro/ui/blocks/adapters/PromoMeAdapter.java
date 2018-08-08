@@ -56,7 +56,7 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
     }
 
     public interface InfoClickListener {
-        void showInfo(Promo promo);
+        void showPromo(Promo promo);
     }
 
     class PromoVH extends RecyclerView.ViewHolder {
@@ -97,7 +97,7 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
                 Timber.d("promo end date: %s",promo.getFinishDate());
             }
 
-            promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
+            promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
     }
 }

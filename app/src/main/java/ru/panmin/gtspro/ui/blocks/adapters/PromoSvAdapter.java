@@ -1,13 +1,7 @@
 package ru.panmin.gtspro.ui.blocks.adapters;
 
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
-import timber.log.Timber;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
     private List<Promo> promoList = new ArrayList<>();
-    private InfoClickListener infoClickListener;
+    private PromoClickListener infoClickListener;
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
@@ -43,7 +36,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         notifyDataSetChanged();
     }
 
-    public void setInfoClickListener(InfoClickListener infoClickListener) {
+    public void setInfoClickListener(PromoClickListener infoClickListener) {
         this.infoClickListener = infoClickListener;
     }
 
@@ -64,8 +57,8 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         return (promoList == null || promoList.isEmpty()) ? 0 : promoList.size();
     }
 
-    public interface InfoClickListener {
-        void showInfo(Promo promo);
+    public interface PromoClickListener {
+        void showPromo(Promo promo);
     }
 
     class PromoVH extends RecyclerView.ViewHolder {
@@ -105,7 +98,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
             }
 
             tvTitle.setText(promo.getName().toString(itemView.getContext()));
-            promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
+            promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
     }
 
