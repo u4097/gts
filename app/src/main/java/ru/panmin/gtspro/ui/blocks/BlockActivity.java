@@ -31,6 +31,7 @@ import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
+import timber.log.Timber;
 
 public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoMeAdapter.InfoClickListener, PromoSvAdapter.InfoClickListener {
 
@@ -81,28 +82,10 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     String userRole;
 
     private OnTradePointBlockClickListener listener = null;
-    private Map<BlockType.Type, Holder> tradePointBlockViews;
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
+    private TradePoint tradePoint = null;
 
-
-    class Holder {
-        FloatingActionButton btn;
-        TextView tvBadge;
-
-        public Holder(FloatingActionButton btn, TextView tvBadge) {
-            this.btn = btn;
-            this.tvBadge = tvBadge;
-        }
-
-        public FloatingActionButton getBtn() {
-            return btn;
-        }
-
-        public TextView getTvBadge() {
-            return tvBadge;
-        }
-    }
 
     public interface OnTradePointBlockClickListener {
         void onTradePointBlockClick(BlockType.Type blockType);
@@ -172,6 +155,17 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         initFilter();
         this.userRole = role;
         blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
+        initBlocks();
+
+    }
+
+
+    private Map<BlockType.Type, Holder> tradePointBlockViews;
+
+    public void initBlocks() {
+        BlockViewModel blockViewModel = new BlockViewModel();
+        blockViewModel.loadData("0");
+        BlocksModel model = blockViewModel.getBlocks();
 
         tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS, new Holder(btnClaims, tCounterClaims));
@@ -186,17 +180,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         for (Map.Entry<BlockType.Type, Holder> entry:
                 tradePointBlockViews.entrySet()) {
             entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
-
         }
 
-        BlockViewModel blockViewModel = new BlockViewModel();
-        blockViewModel.loadData("0");
-        initBlocks(blockViewModel.getBlocks());
-
-    }
-
-
-    public void initBlocks(BlocksModel model) {
         for (Block block: model.getBlocks()
         ) {
             Holder holder = tradePointBlockViews.get(block.getType());
@@ -220,7 +205,24 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
             }
         }
 
-        tvTitle.setText("Промо");
+    }
+
+    class Holder {
+        FloatingActionButton btn;
+        TextView tvBadge;
+
+        public Holder(FloatingActionButton btn, TextView tvBadge) {
+            this.btn = btn;
+            this.tvBadge = tvBadge;
+        }
+
+        public FloatingActionButton getBtn() {
+            return btn;
+        }
+
+        public TextView getTvBadge() {
+            return tvBadge;
+        }
     }
 
 
@@ -259,32 +261,57 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     }
 
     @Override
+    public void setBlockTitle(String title) {
+        tvTitle.setText(title);
+    }
+
+    @Override
     public void setTradePoint(TradePoint tradePoint) {
+        this.tradePoint = tradePoint;
         setTitle(tradePoint.getSignboard().toString(this));
+        BlockType.Type  blockType =  blockPresenter.getCurrentBlock();
+        initBlockData(blockType);
+        setStateData();
+    }
+
+    @Override
+    public void initBlockData(BlockType.Type blockType) {
+        if (this.tradePoint == null) {
+            Timber.e("tradePoint is null");
+            return;
+        }
+        if (blockType != BlockType.Type.PROMO) {
+            rvPromo.setVisibility(View.GONE);
+            setBlockTitle("Блок " + blockType + " в разработке");
+        } else {
+            setBlockTitle("Промо");
+            rvPromo.setVisibility(View.VISIBLE);
+        }
         rvPromo.setLayoutManager(new LinearLayoutManager(this));
 
-        switch (this.userRole) {
-            case Constants.ROLE_MERCHANDISER:
-                promoMeAdapter = new PromoMeAdapter();
-                promoMeAdapter.setInfoClickListener(this);
-                promoMeAdapter.setData(tradePoint.getPromos());
-                rvPromo.setAdapter(promoMeAdapter);
-                break;
-            case Constants.ROLE_SUPERVISOR:
-                promoSvAdapter = new PromoSvAdapter();
-                promoSvAdapter.setInfoClickListener(this);
-                promoSvAdapter.setData(tradePoint.getPromos());
-                rvPromo.setAdapter(promoSvAdapter);
-                break;
-            default:
-                promoMeAdapter = new PromoMeAdapter();
-                rvPromo.setLayoutManager(new LinearLayoutManager(this));
-                promoMeAdapter.setInfoClickListener(this);
-                promoMeAdapter.setData(tradePoint.getPromos());
-                rvPromo.setAdapter(promoMeAdapter);
-                break;
+        if (blockType == BlockType.Type.PROMO) {
+            switch (this.userRole) {
+                case Constants.ROLE_MERCHANDISER:
+                    promoMeAdapter = new PromoMeAdapter();
+                    promoMeAdapter.setInfoClickListener(this);
+                    promoMeAdapter.setData(tradePoint.getPromos());
+                    rvPromo.setAdapter(promoMeAdapter);
+                    break;
+                case Constants.ROLE_SUPERVISOR:
+                    promoSvAdapter = new PromoSvAdapter();
+                    promoSvAdapter.setInfoClickListener(this);
+                    promoSvAdapter.setData(tradePoint.getPromos());
+                    rvPromo.setAdapter(promoSvAdapter);
+                    break;
+                default:
+                    promoMeAdapter = new PromoMeAdapter();
+                    rvPromo.setLayoutManager(new LinearLayoutManager(this));
+                    promoMeAdapter.setInfoClickListener(this);
+                    promoMeAdapter.setData(tradePoint.getPromos());
+                    rvPromo.setAdapter(promoMeAdapter);
+                    break;
+            }
         }
-        setStateData();
     }
 
     @Override

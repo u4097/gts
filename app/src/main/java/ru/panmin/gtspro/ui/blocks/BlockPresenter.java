@@ -1,11 +1,8 @@
 package ru.panmin.gtspro.ui.blocks;
 
-import java.util.function.ToDoubleBiFunction;
-
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
-import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 import timber.log.Timber;
@@ -20,16 +17,24 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
         this.dataManager = dataManager;
     }
 
+
     @Override
     protected void dispose() {
     }
 
+    public BlockType.Type getCurrentBlock() {
+        return currentBlock;
+    }
+
     public void onTradePointBlockClick(BlockType.Type blockType) {
         if (blockType != BlockType.Type.PROMO) {
-            Timber.d("Блок " + blockType + " в разработке");
+            getMvpView().setBlockTitle("Блок " + blockType + " в разработке");
+        } else {
+           getMvpView().setBlockTitle("Промо");
         }
 
         currentBlock = blockType;
+        getMvpView().initBlockData(blockType);
     }
 
     public void logout() {
