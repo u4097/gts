@@ -82,5 +82,6 @@
     <string name="label_date_end">Дата выполнения</string>
     <string name="label_from">c %1$s</string>
     <string name="label_to">до %1$s</string>
+    <string name="label_filter_title">Фильтр по:</string>
 
 </resources>

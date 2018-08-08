@@ -17,19 +17,17 @@ import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.blocks.BlockMvpView;
 import ru.panmin.gtspro.ui.tredpoints.TradePointMvpView;
 import ru.panmin.gtspro.utils.Constants;
-
-public class BlockFilter extends BottomSheetFragment implements BlockFilterMvpView {
-
-    @Inject
+public class BlockFilter extends BottomSheetFragment implements BlockFilterMvpView { @Inject
     BlockFilterPresenter presenter;
 
-    @BindView(R.id.close_textView) AppCompatTextView close;
-    @BindView(R.id.radio_group_filter) RadioGroup radioGroup;
+    @BindView(R.id.close_textView)
+    AppCompatTextView close;
+    @BindView(R.id.radio_group_filter)
+    RadioGroup radioGroup;
     @BindView(R.id.rbByVisitTime)
-    CheckBox rbByVisitTime;
-    @BindView(R.id.rbByDistance) CheckBox rbByDistance;
-    @BindView(R.id.rbAlphabetically) CheckBox rbAlphabetically;
-
+    RadioButton rbByVisitTime; @BindView(R.id.rbByDistance)
+    RadioButton rbByDistance; @BindView(R.id.rbAlphabetically)
+    RadioButton rbAlphabetically;
     private BlockMvpView blockMvpView;
 
     public BlockFilter() {
