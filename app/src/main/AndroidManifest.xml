@@ -54,6 +54,7 @@
 
         <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
         <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity" />
+        <activity android:name=".ui.claiminfo.me.ClaimInfoMeActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

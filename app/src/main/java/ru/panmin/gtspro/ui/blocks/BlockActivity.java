@@ -27,6 +27,7 @@ import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
+import ru.panmin.gtspro.ui.claiminfo.me.ClaimInfoMeActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
@@ -258,14 +259,25 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                 startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
                 break;
             default:
-                startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
                 break;
         }
     }
 
     @Override
     public void showClaim(Claim claim) {
-       Timber.d("Not implemented");
+        switch (this.userRole) {
+            case Constants.ROLE_MERCHANDISER:
+                startActivity(ClaimInfoMeActivity.getStartIntent(this, claim.getId()));
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                Timber.d("Not implemented");
+//                startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
+                break;
+            default:
+                Timber.d("Not implemented");
+//                startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
+                break;
+        }
     }
 
     @Override
