@@ -68,10 +68,12 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         @BindView(R.id.tvDescription)
         TextView tvDescription;
         @BindView(R.id.tvDateStart)
+
         TextView tvDateStart;
         @BindView(R.id.tvDateEnd)
         TextView tvDateEnd;
         @BindView(R.id.tvAuthor)
+
         TextView tvAuthor;
         @BindView(R.id.tvAuthor_label)
         TextView tvAuthor_label;

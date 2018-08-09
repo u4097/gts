@@ -123,6 +123,9 @@ dependencies {
     //== keyboard visibility event listener ==//
     implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${keyboardVisibilityEventVersion}"
 
+    //== view pager for claim photos == //
+    implementation 'com.pixplicity.multiviewpager:library:1.0'
+
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("com.github.ihsanbal:LoggingInterceptor:${loggingInterceptorVersion}") {

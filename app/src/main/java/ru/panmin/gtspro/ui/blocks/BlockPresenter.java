@@ -10,7 +10,7 @@ import timber.log.Timber;
 public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
 
     private final DataManager dataManager;
-    private BlockType.Type currentBlock = BlockType.Type.PROMO;
+    private BlockType.Type currentBlock = BlockType.Type.CLAIMS;
 
     @Inject
     BlockPresenter(DataManager dataManager) {

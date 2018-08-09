@@ -3,6 +3,8 @@ package ru.panmin.gtspro.ui.claiminfo.me;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -10,11 +12,20 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.pixplicity.multiviewpager.MultiViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ImageSlider;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
@@ -26,6 +37,9 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
     ClaimInfoMePresenter claimInfoMePresenter;
 
     @BindView(R.id.tvAuthor) TextView tvAuthor;
+
+    @BindView(R.id.vpPhoto) MultiViewPager vpPhoto;
+
 
     private Claim claim = null;
 
@@ -62,7 +76,17 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
 
     @Override
     protected void initViews() {
+        vpPhoto.setAdapter(new ClaimPhotoViewPagerAdapter(this,getImageList()));
     }
+
+    private List<ImageSlider> getImageList(){
+        List<ImageSlider> imageList = new ArrayList<>();
+        imageList.add(new ImageSlider("Photo 1",R.drawable.photo1));
+        imageList.add(new ImageSlider("Photo 2",R.drawable.photo2));
+        imageList.add(new ImageSlider("Photo 3",R.drawable.photo1));
+        return imageList;
+    }
+
 
     @Override
     protected void detachView() {

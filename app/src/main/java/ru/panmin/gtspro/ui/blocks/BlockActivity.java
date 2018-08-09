@@ -271,7 +271,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                 break;
             case Constants.ROLE_SUPERVISOR:
                 Timber.d("Not implemented");
-//                startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
+//                startActivity(ClaimInfoSvActivity.getStartIntent(this, promo.getId()));
                 break;
             default:
                 Timber.d("Not implemented");

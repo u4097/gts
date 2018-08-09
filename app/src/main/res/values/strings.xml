@@ -87,5 +87,8 @@
     <string name="label_claim_type">Тип претензии:</string>
     <string name="label_message_claim">Текст обращения:</string>
     <string name="label_chat_claim">Чат</string>
+    <string name="label_assign_claim">Назначить</string>
+    <string name="label_claim_photo">Фотоснимки:</string>
+    <string name="label_run_now">Сейчас выполняет:</string>
 
 </resources>
