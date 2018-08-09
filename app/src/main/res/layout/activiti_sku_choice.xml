@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="bottom"
@@ -13,6 +14,7 @@
         android:background="@color/white">
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/manufacturer_selection_text_teg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -21,11 +23,12 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/medium_distance"
             android:gravity="center_horizontal"
-            android:text="Выбор производителя"
+            android:text="@string/manufacturer_selection_text_teg"
             android:textColor="@color/azure"
             android:textSize="17sp" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/closeSkuChoiceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -35,19 +38,21 @@
             android:layout_marginTop="@dimen/medium_distance"
             android:clickable="true"
             android:focusable="true"
-            android:text="Закрыть"
+            android:text="@string/close_text_teg"
             android:textColor="@color/red"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="RelativeOverlap" />
+
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/container_tab_layout"
+        android:id="@+id/containerSkuChoice_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white">
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/skuChoiceTab_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
@@ -62,12 +67,12 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@id/container_tab_layout">
 
+        <include layout="@layout/view_shadow_bottom" />
+
         <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
+            android:id="@+id/skuChoiceView_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <include layout="@layout/view_shadow_bottom" />
 
     </android.support.v7.widget.ContentFrameLayout>
 

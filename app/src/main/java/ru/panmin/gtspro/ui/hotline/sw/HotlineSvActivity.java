@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.MessageHotLineSwActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressActivity;
 
@@ -95,8 +96,8 @@ public class HotlineSvActivity
     }
 
     @Override
-    public void clieintClick(String clientName) {
-
+    public void clieintClick(String clientId) {
+        startActivity(MessageHotLineSwActivity.getStartIntent(this, clientId, getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID)));
     }
 
     @Override

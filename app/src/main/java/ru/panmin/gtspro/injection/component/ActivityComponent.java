@@ -7,7 +7,8 @@ import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.MessageHotLineSwActivity;
-import ru.panmin.gtspro.ui.hotline.sw.messege_sw.MessegeHotLineSwMvpView;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.ChoiseSkuActivity;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_sku.ChoiceSkuListFragment;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
@@ -36,10 +37,12 @@ public interface ActivityComponent {
     void inject(HotlineMeActivity hotlineMeActivity);
     void inject(HotlineSvActivity hotlineSvActivity);
     void inject(MessageHotLineSwActivity messageHotLineSwActivity);
+    void inject(ChoiseSkuActivity choiseSkuActivity);
 
     //fragment
     void inject(MeTradePointFragment meTradePointFragment);
     void inject(MapFragment mapFragment);
     void inject(SwTradePointFragment swTradePointFragment);
     void inject(BottomSheetFilter bottomSheetFilter);
+    void inject(ChoiceSkuListFragment choiceSkuListFragment);
 }

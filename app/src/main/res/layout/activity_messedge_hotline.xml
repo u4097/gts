@@ -31,7 +31,7 @@
             tools:text="Лакалют" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/type_messege_hotline_teg"
+            android:id="@+id/type_message_hotline_teg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/medium_distance"
@@ -63,12 +63,12 @@
             android:textSize="14sp"
             android:textColor="@color/white"
             android:gravity="center"
-            tools:text="По SKU"
+            android:text="По SKU"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/type_messege_hotline_teg"
+            app:layout_constraintTop_toBottomOf="@+id/type_message_hotline_teg"
             app:layout_constraintVertical_bias="0.0"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -90,7 +90,7 @@
             app:layout_constraintStart_toEndOf="@+id/buttonSkuTypeShort"
             app:layout_constraintTop_toTopOf="@+id/buttonSkuTypeShort"
             app:layout_constraintVertical_bias="0.0"
-            tools:text="По ТТ" />
+            android:text="По ТТ" />
 
         <View
             android:id="@+id/separatorType"
@@ -120,6 +120,8 @@
             android:layout_marginRight="@dimen/medium_distance"
             android:layout_marginStart="@dimen/medium_distance"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:measureAllChildren="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -131,14 +133,14 @@
                 android:id="@+id/skuTypeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
+                <include layout="@layout/fragment_view_flipper_sku_hotline_message" />
             </android.support.v7.widget.ContentFrameLayout>
 
             <android.support.v7.widget.ContentFrameLayout
                 android:id="@+id/ttTypeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
+                <include layout="@layout/fragment_view_flipper_tt_hotline_message" />
             </android.support.v7.widget.ContentFrameLayout>
         </ViewFlipper>
 
@@ -158,6 +160,7 @@
             android:text="@string/run_text_teg"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

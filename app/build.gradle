@@ -123,6 +123,9 @@ dependencies {
     //== keyboard visibility event listener ==//
     implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${keyboardVisibilityEventVersion}"
 
+    //==ExpandableLayout==//
+    implementation "net.cachapa.expandablelayout:expandablelayout:${expandablelayout_version}"
+
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("com.github.ihsanbal:LoggingInterceptor:${loggingInterceptorVersion}") {

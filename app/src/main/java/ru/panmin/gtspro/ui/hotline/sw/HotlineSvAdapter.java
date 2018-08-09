@@ -106,7 +106,7 @@ class HotlineSvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bind(Client client) {
             text_client_hot_line_item.setText(client.getName().toString(itemView.getContext()));
-            text_client_hot_line_item.setOnClickListener(view -> clientAdapterClickListener.clieintClick(client.getName().toString(itemView.getContext())));
+            text_client_hot_line_item.setOnClickListener(view -> clientAdapterClickListener.clieintClick(client.getId()));
         }
     }
 

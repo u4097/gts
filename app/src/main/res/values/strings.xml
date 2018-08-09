@@ -82,5 +82,6 @@
     <string name="сauses_choice_text_teg">Выбор причины</string>
     <string name="situation_choice_text_teg">Выбор ситуации</string>
     <string name="quantity_goods_text_teg">Введите кол-во товара</string>
+    <string name="manufacturer_selection_text_teg">Выбор производителя</string>
 
 </resources>
