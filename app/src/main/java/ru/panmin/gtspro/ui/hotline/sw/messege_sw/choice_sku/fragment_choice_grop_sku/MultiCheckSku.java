@@ -8,7 +8,7 @@ class MultiCheckSku {
 
 
     public MultiCheckSku(String title, List<SkuListElement> items, int iconResId) {
-        super(title,items);
+        super(title, items);
 
     }
 

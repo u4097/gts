@@ -118,9 +118,12 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
 
     class MeViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title_card) TextView name;
-        @BindView(R.id.adres_card_me) TextView address;
-        @BindView(R.id.btn_info) AppCompatImageView info;
+        @BindView(R.id.title_card)
+        TextView name;
+        @BindView(R.id.adres_card_me)
+        TextView address;
+        @BindView(R.id.btn_info)
+        AppCompatImageView info;
 
         MeViewHolder(View itemView) {
             super(itemView);

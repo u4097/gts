@@ -10,7 +10,7 @@ public class ChoiseSkuPresenter extends ProgressPresenter<ChoiseSkuMvpView> {
     private final DataManager dataManager;
 
     @Inject
-    ChoiseSkuPresenter(DataManager dataManager){
+    ChoiseSkuPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 

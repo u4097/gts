@@ -19,10 +19,15 @@ public class EmptyBundle implements Parcelable {
         }
     };
 
-    @Nullable @DrawableRes private Integer image = null;
-    @Nullable private String textTitle = null;
-    @Nullable private String textDescription = null;
-    @Nullable private String textButton = null;
+    @Nullable
+    @DrawableRes
+    private Integer image = null;
+    @Nullable
+    private String textTitle = null;
+    @Nullable
+    private String textDescription = null;
+    @Nullable
+    private String textButton = null;
 
     public EmptyBundle() {
     }

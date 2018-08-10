@@ -11,7 +11,7 @@ public class ChoiceSkuAllListPresenter extends ProgressPresenter<ChoiceSkuAllLis
     private final DataManager dataManager;
 
     @Inject
-    ChoiceSkuAllListPresenter(DataManager dataManager){
+    ChoiceSkuAllListPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 

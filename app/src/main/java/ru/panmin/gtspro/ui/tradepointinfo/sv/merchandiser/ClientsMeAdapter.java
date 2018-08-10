@@ -69,8 +69,8 @@ public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.Clie
         }
 
         public void bind(Client client, int position) {
-                client_number_text.setText(String.valueOf(position + 1));
-                client_name_text.setText(client.getName().toString(itemView.getContext()));
+            client_number_text.setText(String.valueOf(position + 1));
+            client_name_text.setText(client.getName().toString(itemView.getContext()));
 
 
         }

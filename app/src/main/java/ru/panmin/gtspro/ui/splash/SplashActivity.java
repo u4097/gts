@@ -14,7 +14,8 @@ import ru.panmin.gtspro.utils.DialogUtils;
 
 public class SplashActivity extends BaseActivity implements SplashMvpView {
 
-    @Inject SplashPresenter splashPresenter;
+    @Inject
+    SplashPresenter splashPresenter;
 
     public SplashActivity() {
     }

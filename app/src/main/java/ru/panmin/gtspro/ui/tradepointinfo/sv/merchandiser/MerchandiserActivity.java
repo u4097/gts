@@ -18,7 +18,8 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     private static final String INTENT_KEY_MERCHANDISER_NAME = "merchandiser.name";
 
-    @Inject MerchandiserPresenter merchandiserPresenter;
+    @Inject
+    MerchandiserPresenter merchandiserPresenter;
     @Inject
     ClientsMeAdapter clientsMeAdapter;
     @BindView(R.id.client_me_recycler)

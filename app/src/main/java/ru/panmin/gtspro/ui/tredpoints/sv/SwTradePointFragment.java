@@ -22,11 +22,15 @@ import ru.panmin.gtspro.ui.tredpoints.filter.BottomSheetFilter;
 
 public class SwTradePointFragment extends ProgressFragment implements SwTradePointMvpView, SvAdapter.InfoClickListener {
 
-    @Inject SwTradePointPresenter presenter;
-    @Inject SvAdapter adapter;
+    @Inject
+    SwTradePointPresenter presenter;
+    @Inject
+    SvAdapter adapter;
 
-    @BindView(R.id.recycler_trade_point) RecyclerView recyclerView;
-    @BindView(R.id.floating_filter) FloatingActionButton filter;
+    @BindView(R.id.recycler_trade_point)
+    RecyclerView recyclerView;
+    @BindView(R.id.floating_filter)
+    FloatingActionButton filter;
 
     public static SwTradePointFragment createInstance() {
         return new SwTradePointFragment();

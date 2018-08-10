@@ -18,13 +18,19 @@ import ru.panmin.gtspro.utils.Constants;
 
 public class BottomSheetFilter extends BottomSheetFragment implements BottomSheetFilterMvpView {
 
-    @Inject BottomSheetFilterPresenter presenter;
+    @Inject
+    BottomSheetFilterPresenter presenter;
 
-    @BindView(R.id.close_textView) AppCompatTextView close;
-    @BindView(R.id.radio_group_filter) RadioGroup radioGroup;
-    @BindView(R.id.rbByVisitTime) RadioButton rbByVisitTime;
-    @BindView(R.id.rbByDistance) RadioButton rbByDistance;
-    @BindView(R.id.rbAlphabetically) RadioButton rbAlphabetically;
+    @BindView(R.id.close_textView)
+    AppCompatTextView close;
+    @BindView(R.id.radio_group_filter)
+    RadioGroup radioGroup;
+    @BindView(R.id.rbByVisitTime)
+    RadioButton rbByVisitTime;
+    @BindView(R.id.rbByDistance)
+    RadioButton rbByDistance;
+    @BindView(R.id.rbAlphabetically)
+    RadioButton rbAlphabetically;
 
     private TradePointMvpView tradePointMvpView;
 

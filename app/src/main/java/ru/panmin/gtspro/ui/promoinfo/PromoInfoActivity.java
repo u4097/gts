@@ -22,13 +22,19 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
 
     private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
-    @Inject PromoInfoPresenter promoInfoPresenter;
+    @Inject
+    PromoInfoPresenter promoInfoPresenter;
 
-    @BindView(R.id.tvClients) TextView tvClients;
-    @BindView(R.id.tvAuthor) TextView tvAuthor;
-    @BindView(R.id.tvPeriod) TextView tvPeriod;
-    @BindView(R.id.tvDescription) TextView tvDescription;
-    @BindView(R.id.tvSku) TextView tvSku;
+    @BindView(R.id.tvClients)
+    TextView tvClients;
+    @BindView(R.id.tvAuthor)
+    TextView tvAuthor;
+    @BindView(R.id.tvPeriod)
+    TextView tvPeriod;
+    @BindView(R.id.tvDescription)
+    TextView tvDescription;
+    @BindView(R.id.tvSku)
+    TextView tvSku;
 
     private Promo promo = null;
 

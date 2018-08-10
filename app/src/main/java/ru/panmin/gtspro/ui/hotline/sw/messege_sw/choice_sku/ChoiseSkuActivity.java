@@ -10,34 +10,31 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressActivity;
 
 public class ChoiseSkuActivity
         extends ProgressActivity
-        implements ChoiseSkuMvpView {
+        implements ChoiseSkuMvpView,
+        BaseSelectSkuInterface {
 
     private static final String INTENT_KEY_CLIENT_ID = "client.id";
+    @Inject
+    ChoiseSkuPresenter choiseSkuPresenter;
+    @BindView(R.id.closeSkuChoiceText)
+    AppCompatTextView closeSkuChoiceText;
+    @BindView(R.id.skuChoiceTab_layout)
+    TabLayout skuChoiceTab_layout;
+    @BindView(R.id.skuChoiceView_pager)
+    ViewPager skuChoiceView_pager;
+    private SkuChoicePagerAdapter skuChoicePagerAdapter = null;
 
     public static Intent getStartIntent(Context context, String clientId) {
         Intent intent = new Intent(context, ChoiseSkuActivity.class);
         intent.putExtra(INTENT_KEY_CLIENT_ID, clientId);
         return intent;
     }
-
-    @Inject
-    ChoiseSkuPresenter choiseSkuPresenter;
-
-    @BindView(R.id.closeSkuChoiceText)
-    AppCompatTextView closeSkuChoiceText;
-
-    @BindView(R.id.skuChoiceTab_layout)
-    TabLayout skuChoiceTab_layout;
-
-    @BindView(R.id.skuChoiceView_pager)
-    ViewPager skuChoiceView_pager;
-
-    private SkuChoicePagerAdapter skuChoicePagerAdapter = null;
 
     @Override
     protected int getDataView() {
@@ -88,5 +85,15 @@ public class ChoiseSkuActivity
         choiseSkuPresenter.detachView();
     }
 
+
+    @Override
+    public void selectSku(int page, SkuListElement skuListElement) {
+        skuChoicePagerAdapter.selectSku(page, skuListElement);
+    }
+
+    @Override
+    public void deselectSku(int page, SkuListElement skuListElement) {
+        skuChoicePagerAdapter.deselectSku(page, skuListElement);
+    }
 
 }

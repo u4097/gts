@@ -23,18 +23,14 @@ import ru.panmin.gtspro.utils.TextUtils;
 public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
+    private final static int CANCEL_VIEW = 0;
+    private final static int CONTENT_VIEW = 2;
+    private List<Client> clients = new ArrayList<>();
+    private int maxLenght;
+    private ClientAdapterClickListener clientAdapterClickListener;
     @Inject
     HotlineMeAdapter() {
     }
-
-    private final static int CANCEL_VIEW = 0;
-
-    private final static int CONTENT_VIEW = 2;
-
-    private List<Client> clients = new ArrayList<>();
-
-    private int maxLenght;
-    private ClientAdapterClickListener clientAdapterClickListener;
 
     public void setClientAdapterClickListener(ClientAdapterClickListener clientAdapterClickListener) {
         this.clientAdapterClickListener = clientAdapterClickListener;

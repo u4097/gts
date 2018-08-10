@@ -115,10 +115,14 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
 
     class SvViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title_card) TextView name;
-        @BindView(R.id.adres_card_sw) TextView address;
-        @BindView(R.id.tv_claims_quantity) AppCompatTextView claimsQuantity;
-        @BindView(R.id.btn_info) AppCompatImageView info;
+        @BindView(R.id.title_card)
+        TextView name;
+        @BindView(R.id.adres_card_sw)
+        TextView address;
+        @BindView(R.id.tv_claims_quantity)
+        AppCompatTextView claimsQuantity;
+        @BindView(R.id.btn_info)
+        AppCompatImageView info;
 
         SvViewHolder(View itemView) {
             super(itemView);

@@ -14,7 +14,7 @@ import java.util.List;
 import ru.panmin.gtspro.R;
 
 
-class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuGroupViewHolder, MultiCheckSkuViewHolder> {
+public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuGroupViewHolder, MultiCheckSkuViewHolder> {
 
 
     public GroupAdapter(List<? extends CheckedExpandableGroup> groups) {
@@ -43,7 +43,18 @@ class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuGroupViewHolder,
 
     @Override
     public void onBindGroupViewHolder(SkuGroupViewHolder holder, int flatPosition, ExpandableGroup group) {
-        holder.setSkuGroupTitle();
+    }
+
+    public static class GroupForAdapter extends CheckedExpandableGroup {
+
+        public GroupForAdapter(String title, List items) {
+            super(title, items);
+        }
+
+        @Override
+        public void onChildClicked(int childIndex, boolean checked) {
+        }
+
     }
 
 

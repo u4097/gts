@@ -60,10 +60,14 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
 
     class PromoVH extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tvTitle) TextView tvTitle;
-        @BindView(R.id.tvSubtitle) TextView tvSubtitle;
-        @BindView(R.id.ivStatus) AppCompatImageView ivStatus;
-        @BindView(R.id.promoRoot) ViewGroup promoRoot;
+        @BindView(R.id.tvTitle)
+        TextView tvTitle;
+        @BindView(R.id.tvSubtitle)
+        TextView tvSubtitle;
+        @BindView(R.id.ivStatus)
+        AppCompatImageView ivStatus;
+        @BindView(R.id.promoRoot)
+        ViewGroup promoRoot;
 
         PromoVH(View itemView) {
             super(itemView);

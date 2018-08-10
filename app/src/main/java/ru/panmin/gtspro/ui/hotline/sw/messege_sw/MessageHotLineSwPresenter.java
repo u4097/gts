@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.data.models.Client;
-import ru.panmin.gtspro.data.models.Sku;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 import ru.panmin.gtspro.utils.TextUtils;
@@ -16,7 +15,7 @@ public class MessageHotLineSwPresenter extends ToolbarPresenter<MessegeHotLineSw
     private final DataManager dataManager;
 
     @Inject
-    MessageHotLineSwPresenter(DataManager dataManager){
+    MessageHotLineSwPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
@@ -27,11 +26,11 @@ public class MessageHotLineSwPresenter extends ToolbarPresenter<MessegeHotLineSw
 
     public void getClient(String clientId, String tradePointId) {
         TradePoint tradePoint = dataManager.getTradePointById(tradePointId);
-        if (tradePoint!=null){
+        if (tradePoint != null) {
             List<Client> clients = tradePoint.getClients();
-            if (clients!=null && !clients.isEmpty()){
-                for(Client client:clients){
-                    if(TextUtils.equals(client.getId(), clientId)){
+            if (clients != null && !clients.isEmpty()) {
+                for (Client client : clients) {
+                    if (TextUtils.equals(client.getId(), clientId)) {
                         getMvpView().setClientSku(client);
                         break;
                     }

@@ -1,4 +1,4 @@
-package ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku;
+package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_selected_sku;
 
 import javax.inject.Inject;
 

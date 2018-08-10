@@ -14,7 +14,7 @@ import java.util.List;
 
 import ru.panmin.gtspro.R;
 
-public abstract class BaseSpinnerAdapter <T> extends ArrayAdapter<T> {
+public abstract class BaseSpinnerAdapter<T> extends ArrayAdapter<T> {
 
     @LayoutRes
     private static final int ITEM_RESOURCE_LAYOUT = R.layout.item_spinner;

@@ -31,27 +31,47 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
-    @Inject BlockPresenter blockPresenter;
-    @Inject PromoAdapter adapter;
+    @Inject
+    BlockPresenter blockPresenter;
+    @Inject
+    PromoAdapter adapter;
 
-    @BindView(R.id.btnClaims) FloatingActionButton btnClaims;
-    @BindView(R.id.tCounterClaims) TextView tCounterClaims;
-    @BindView(R.id.btnPromo) FloatingActionButton btnPromo;
-    @BindView(R.id.tCounterPromo) TextView tCounterPromo;
-    @BindView(R.id.btnPhotoReport) FloatingActionButton btnPhotoReport;
-    @BindView(R.id.tCounterPhotoReport) TextView tCounterPhotoReport;
-    @BindView(R.id.btnReport) FloatingActionButton btnReport;
-    @BindView(R.id.tCounterReport) TextView tCounterReport;
-    @BindView(R.id.btnSku) FloatingActionButton btnSku;
-    @BindView(R.id.tCounterSku) TextView tCounterSku;
-    @BindView(R.id.btnPlanogram) FloatingActionButton btnPlanogram;
-    @BindView(R.id.tCounterPlanogram) TextView tCounterPlanogram;
-    @BindView(R.id.btnHotLine) FloatingActionButton btnHotLine;
-    @BindView(R.id.tCounterHotLine) TextView tCounterHotLine;
-    @BindView(R.id.btnStatistics) FloatingActionButton btnStatistics;
-    @BindView(R.id.tCounterStatistics) TextView tCounterStatistics;
-    @BindView(R.id.rvPromo) RecyclerView rvPromo;
-    @BindView(R.id.tvTitle) TextView tvTitle;
+    @BindView(R.id.btnClaims)
+    FloatingActionButton btnClaims;
+    @BindView(R.id.tCounterClaims)
+    TextView tCounterClaims;
+    @BindView(R.id.btnPromo)
+    FloatingActionButton btnPromo;
+    @BindView(R.id.tCounterPromo)
+    TextView tCounterPromo;
+    @BindView(R.id.btnPhotoReport)
+    FloatingActionButton btnPhotoReport;
+    @BindView(R.id.tCounterPhotoReport)
+    TextView tCounterPhotoReport;
+    @BindView(R.id.btnReport)
+    FloatingActionButton btnReport;
+    @BindView(R.id.tCounterReport)
+    TextView tCounterReport;
+    @BindView(R.id.btnSku)
+    FloatingActionButton btnSku;
+    @BindView(R.id.tCounterSku)
+    TextView tCounterSku;
+    @BindView(R.id.btnPlanogram)
+    FloatingActionButton btnPlanogram;
+    @BindView(R.id.tCounterPlanogram)
+    TextView tCounterPlanogram;
+    @BindView(R.id.btnHotLine)
+    FloatingActionButton btnHotLine;
+    @BindView(R.id.tCounterHotLine)
+    TextView tCounterHotLine;
+    @BindView(R.id.btnStatistics)
+    FloatingActionButton btnStatistics;
+    @BindView(R.id.tCounterStatistics)
+    TextView tCounterStatistics;
+    @BindView(R.id.rvPromo)
+    RecyclerView rvPromo;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
 
     private Map<BlockType.Type, Holder> tradePointBlockViews;
 

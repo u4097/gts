@@ -17,7 +17,6 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
-import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
@@ -30,17 +29,28 @@ public class TradePointInfoSvActivity
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
-    @Inject TradePointInfoSvPresenter tradePointInfoSvPresenter;
-    @Inject ListMeAdapter adapter;
-    @BindView(R.id.address_text_info) AppCompatTextView address;
-    @BindView(R.id.schedule_text_info) AppCompatTextView schedule;
-    @BindView(R.id.client_text_info) AppCompatTextView client;
-    @BindView(R.id.claims_quantity_text) AppCompatTextView claimsQuantity;
-    @BindView(R.id.promotions_text) AppCompatTextView promotions;
-    @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
-    @BindView(R.id.report_text) AppCompatTextView report;
-    @BindView(R.id.recycler_list_me) RecyclerView recycler;
-    @BindView(R.id.run_button_me) AppCompatButton runButtonMe;
+    @Inject
+    TradePointInfoSvPresenter tradePointInfoSvPresenter;
+    @Inject
+    ListMeAdapter adapter;
+    @BindView(R.id.address_text_info)
+    AppCompatTextView address;
+    @BindView(R.id.schedule_text_info)
+    AppCompatTextView schedule;
+    @BindView(R.id.client_text_info)
+    AppCompatTextView client;
+    @BindView(R.id.claims_quantity_text)
+    AppCompatTextView claimsQuantity;
+    @BindView(R.id.promotions_text)
+    AppCompatTextView promotions;
+    @BindView(R.id.photo_report_text)
+    AppCompatTextView photoReport;
+    @BindView(R.id.report_text)
+    AppCompatTextView report;
+    @BindView(R.id.recycler_list_me)
+    RecyclerView recycler;
+    @BindView(R.id.run_button_me)
+    AppCompatButton runButtonMe;
 
     private TradePoint tradePoint = null;
 

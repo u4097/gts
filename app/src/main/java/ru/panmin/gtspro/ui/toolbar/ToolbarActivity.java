@@ -20,10 +20,14 @@ import ru.panmin.gtspro.ui.progress.ProgressActivity;
 
 public abstract class ToolbarActivity extends ProgressActivity implements ToolbarMvpView {
 
-    @BindView(R.id.toolbar) protected Toolbar toolbar;
-    @BindView(R.id.textToolbarTitle) protected AppCompatTextView textToolbarTitle;
-    @BindView(R.id.materialSearchView) protected MaterialSearchView materialSearchView;
-    @BindView(R.id.toolbarShadow) View toolbarShadow;
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
+    @BindView(R.id.textToolbarTitle)
+    protected AppCompatTextView textToolbarTitle;
+    @BindView(R.id.materialSearchView)
+    protected MaterialSearchView materialSearchView;
+    @BindView(R.id.toolbarShadow)
+    View toolbarShadow;
 
     public ToolbarActivity() {
     }

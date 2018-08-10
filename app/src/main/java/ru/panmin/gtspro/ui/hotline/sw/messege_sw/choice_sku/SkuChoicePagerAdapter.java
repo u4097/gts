@@ -5,15 +5,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.base.BaseFragment;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku.ChoiceSkuAllListFragment;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku.ChoiceSkuGroupListFragment;
-import ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku.SelectedSkuListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_selected_sku.SelectedSkuListFragment;
 
-class SkuChoicePagerAdapter extends FragmentPagerAdapter {
+public class SkuChoicePagerAdapter extends FragmentPagerAdapter {
+
+    public static final int PAGE_GROUP = 0;
+    public static final int PAGE_LIST = 1;
+    public static final int PAGE_SELECTED = 2;
 
     private static final int COUNT = 3;
 
+    private List<BaseSelectSkuInterface> interfaces = new ArrayList<>();
 
     public SkuChoicePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,13 +33,13 @@ class SkuChoicePagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title;
         switch (position) {
-            case 0:
+            case PAGE_GROUP:
                 title = "По группам";
                 break;
-            case 1:
+            case PAGE_LIST:
                 title = "Все";
                 break;
-            case 2:
+            case PAGE_SELECTED:
                 title = "Выбраннын";
                 break;
             default:
@@ -44,22 +53,41 @@ class SkuChoicePagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         BaseFragment fragment = null;
         switch (position) {
-            case 0:
+            case PAGE_GROUP:
                 fragment = ChoiceSkuGroupListFragment.createInstance();
                 break;
-            case 1:
+            case PAGE_LIST:
                 fragment = ChoiceSkuAllListFragment.createInstance();
                 break;
-            case 2:
+            case PAGE_SELECTED:
                 fragment = SelectedSkuListFragment.createInstance();
                 break;
         }
+        interfaces.add((BaseSelectSkuInterface) fragment);
         return fragment;
     }
 
     @Override
     public int getCount() {
         return COUNT;
+    }
+
+    public void selectSku(int page, SkuListElement skuListElement) {
+        for (int i = 0, interfacesSize = interfaces.size(); i < interfacesSize; i++) {
+            if (page != i) {
+                BaseSelectSkuInterface skuInterface = interfaces.get(i);
+                skuInterface.selectSku(i, skuListElement);
+            }
+        }
+    }
+
+    public void deselectSku(int page, SkuListElement skuListElement) {
+        for (int i = 0, interfacesSize = interfaces.size(); i < interfacesSize; i++) {
+            if (page != i) {
+                BaseSelectSkuInterface skuInterface = interfaces.get(i);
+                skuInterface.deselectSku(i, skuListElement);
+            }
+        }
     }
 
 }

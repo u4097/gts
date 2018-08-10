@@ -5,11 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -17,7 +14,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
-import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
@@ -27,15 +23,24 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
-    @Inject TradePointInfoMePresenter tradePointInfoMePresenter;
-    @BindView(R.id.address_text_info) AppCompatTextView address;
-    @BindView(R.id.schedule_text_info) AppCompatTextView schedule;
-    @BindView(R.id.client_text_info) AppCompatTextView client;
-    @BindView(R.id.claims_quantity_text) AppCompatTextView claimsQuantity;
-    @BindView(R.id.promotions_text) AppCompatTextView promotions;
-    @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
-    @BindView(R.id.report_text) AppCompatTextView report;
-    @BindView(R.id.run_button_me) AppCompatButton runButtonMe;
+    @Inject
+    TradePointInfoMePresenter tradePointInfoMePresenter;
+    @BindView(R.id.address_text_info)
+    AppCompatTextView address;
+    @BindView(R.id.schedule_text_info)
+    AppCompatTextView schedule;
+    @BindView(R.id.client_text_info)
+    AppCompatTextView client;
+    @BindView(R.id.claims_quantity_text)
+    AppCompatTextView claimsQuantity;
+    @BindView(R.id.promotions_text)
+    AppCompatTextView promotions;
+    @BindView(R.id.photo_report_text)
+    AppCompatTextView photoReport;
+    @BindView(R.id.report_text)
+    AppCompatTextView report;
+    @BindView(R.id.run_button_me)
+    AppCompatButton runButtonMe;
 
     private TradePoint tradePoint = null;
 

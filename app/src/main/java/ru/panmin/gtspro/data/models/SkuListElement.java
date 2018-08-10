@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku.GroupAdapter;
 
 public class SkuListElement extends RealmObject {
 
@@ -18,6 +19,19 @@ public class SkuListElement extends RealmObject {
     @SerializedName("plu") private RealmList<String> plu = new RealmList<>();
 
     public SkuListElement() {
+    }
+
+    public SkuListElement(GroupAdapter.SkuForAdapter skuListElement) {
+        id = skuListElement.getId();
+        name = skuListElement.getName();
+        brand = skuListElement.getBrand();
+        category = skuListElement.getCategory();
+        group = skuListElement.getGroup();
+        subBrand = skuListElement.getSubBrand();
+        ean = new RealmList<>();
+        ean.addAll(skuListElement.getEan());
+        plu = new RealmList<>();
+        plu.addAll(skuListElement.getPlu());
     }
 
     public SkuListElement(String id, Name name, Brand brand, Category category, Group group, SubBrand subBrand, RealmList<String> ean, RealmList<String> plu) {

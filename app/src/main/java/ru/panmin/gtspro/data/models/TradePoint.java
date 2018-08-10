@@ -24,7 +24,7 @@ public class TradePoint extends RealmObject {
     @SerializedName("promos") private RealmList<Promo> promos = new RealmList<>();
     @SerializedName("reports") private RealmList<Report> reports = new RealmList<>();
     @SerializedName("photoreports") private RealmList<PhotoReport> photoreports = new RealmList<>();
-    //@SerializedName("skus") private RealmList<Sku> skus = new RealmList<>();
+    @SerializedName("skus") private RealmList<Sku> skus = new RealmList<>();
     @SerializedName("standards") private RealmList<Standard> standards = new RealmList<>();
     @SerializedName("claims") private RealmList<Claim> claims = new RealmList<>();
     @Ignore private double distance = 0.0d;
@@ -51,7 +51,7 @@ public class TradePoint extends RealmObject {
         this.promos = promos;
         this.reports = reports;
         this.photoreports = photoreports;
-        //this.skus = skus;
+        this.skus = skus;
         this.standards = standards;
         this.claims = claims;
     }
@@ -176,13 +176,13 @@ public class TradePoint extends RealmObject {
         this.photoreports = photoreports;
     }
 
-    //public RealmList<Sku> getSkus() {
-    //    return skus;
-    //}
+    public RealmList<Sku> getSkus() {
+        return skus;
+    }
 
-    //public void setSkus(RealmList<Sku> skus) {
-    //    this.skus = skus;
-    //}
+    public void setSkus(RealmList<Sku> skus) {
+        this.skus = skus;
+    }
 
     public RealmList<Standard> getStandards() {
         return standards;

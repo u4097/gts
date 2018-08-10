@@ -1,6 +1,8 @@
 package ru.panmin.gtspro.data.models;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -12,7 +14,7 @@ import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.LocaleManager;
 import ru.panmin.gtspro.utils.TextUtils;
 
-public class Name extends RealmObject {
+public class Name extends RealmObject implements Parcelable {
 
     @PrimaryKey private String id = UUID.randomUUID().toString();
     @SerializedName("ru") private String ru;
@@ -20,6 +22,8 @@ public class Name extends RealmObject {
 
     public Name() {
     }
+
+
 
     public Name(String ru, String en) {
         this.ru = ru;
@@ -62,4 +66,33 @@ public class Name extends RealmObject {
         }
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.ru);
+        dest.writeString(this.en);
+    }
+
+    protected Name(Parcel in) {
+        this.id = in.readString();
+        this.ru = in.readString();
+        this.en = in.readString();
+    }
+
+    public static final Parcelable.Creator<Name> CREATOR = new Parcelable.Creator<Name>() {
+        @Override
+        public Name createFromParcel(Parcel source) {
+            return new Name(source);
+        }
+
+        @Override
+        public Name[] newArray(int size) {
+            return new Name[size];
+        }
+    };
 }

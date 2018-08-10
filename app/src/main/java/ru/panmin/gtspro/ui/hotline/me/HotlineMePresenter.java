@@ -15,6 +15,7 @@ public class HotlineMePresenter extends ProgressPresenter<HotlineMeMvpView> {
         this.dataManager = dataManager;
 
     }
+
     @Override
     protected void dispose() {
 

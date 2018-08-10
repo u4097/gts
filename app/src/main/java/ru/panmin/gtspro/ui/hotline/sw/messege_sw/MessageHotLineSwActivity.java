@@ -20,11 +20,22 @@ public class MessageHotLineSwActivity
         extends ToolbarActivity
         implements MessegeHotLineSwMvpView {
 
-    public MessageHotLineSwActivity() {
-    }
-
     private static final String INTENT_KEY_CLIENT_ID = "client.id";
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
+    @Inject
+    MessageHotLineSwPresenter messageHotLineSwPresenter;
+    @BindView(R.id.buttonSkuTypeShort)
+    AppCompatButton buttonSkuTypeShort;
+    @BindView(R.id.buttonTtTypeShort)
+    AppCompatButton buttonTtTypeShort;
+    @BindView(R.id.viewFlipperType)
+    ViewFlipper viewFlipperType;
+    @BindView(R.id.skuChoiceTextButton)
+    AppCompatImageView skuChoiceTextButton;
+    private String clientId;
+
+    public MessageHotLineSwActivity() {
+    }
 
     public static Intent getStartIntent(Context context, String clientId, String tradePointId) {
         Intent intent = new Intent(context, MessageHotLineSwActivity.class);
@@ -32,23 +43,6 @@ public class MessageHotLineSwActivity
         intent.putExtra(INTENT_KEY_TRADE_POINT_ID, tradePointId);
         return intent;
     }
-
-    @Inject
-    MessageHotLineSwPresenter messageHotLineSwPresenter;
-
-    @BindView(R.id.buttonSkuTypeShort)
-    AppCompatButton buttonSkuTypeShort;
-
-    @BindView(R.id.buttonTtTypeShort)
-    AppCompatButton buttonTtTypeShort;
-
-    @BindView(R.id.viewFlipperType)
-    ViewFlipper viewFlipperType;
-
-    @BindView(R.id.skuChoiceTextButton)
-    AppCompatImageView skuChoiceTextButton;
-
-    private String clientId;
 
     @Override
     protected void initToolbar() {
@@ -119,7 +113,7 @@ public class MessageHotLineSwActivity
     }
 
     private void initSkuMessageButton() {
-        skuChoiceTextButton.setOnClickListener(view -> startActivity(ChoiseSkuActivity.getStartIntent(this,clientId)));
+        skuChoiceTextButton.setOnClickListener(view -> startActivity(ChoiseSkuActivity.getStartIntent(this, clientId)));
     }
 
     @Override
@@ -132,6 +126,6 @@ public class MessageHotLineSwActivity
     public void setClientSku(Client client) {
         clientId = client.getId();
         setTitle(client.getName().toString(this));
-setStateData();
+        setStateData();
     }
 }

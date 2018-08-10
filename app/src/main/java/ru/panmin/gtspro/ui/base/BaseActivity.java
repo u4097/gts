@@ -41,8 +41,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
-    @SuppressLint("UseSparseArrays") private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
-    @Inject SyncPresenter syncPresenter;
+    @SuppressLint("UseSparseArrays")
+    private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
+    @Inject
+    SyncPresenter syncPresenter;
     private ActivityComponent mActivityComponent;
     private long activityId;
 

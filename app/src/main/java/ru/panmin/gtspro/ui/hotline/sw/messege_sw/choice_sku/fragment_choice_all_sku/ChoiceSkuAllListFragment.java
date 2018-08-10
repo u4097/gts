@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -9,26 +10,34 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.base.BaseActivity;
-import ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku.SelectedSkuListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.BaseSelectSkuInterface;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 
 public class ChoiceSkuAllListFragment
         extends ProgressFragment
-        implements ChoiceSkuAllListMvpView {
-
-    public static ChoiceSkuAllListFragment createInstance() {
-        return new ChoiceSkuAllListFragment();
-    }
+        implements ChoiceSkuAllListMvpView,
+        BaseSelectSkuInterface {
 
     @Inject
     ChoiceSkuAllListPresenter choiceSkuAllListPresenter;
     @Inject
     AllAdapter allAdapter;
-
     @BindView(R.id.baseRecycler)
     RecyclerView recyclerView;
+    private BaseSelectSkuInterface skuInterface;
+
+    public static ChoiceSkuAllListFragment createInstance() {
+        return new ChoiceSkuAllListFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        skuInterface = (BaseSelectSkuInterface) context;
+    }
 
     @Override
     protected int getDataView() {
@@ -73,6 +82,17 @@ public class ChoiceSkuAllListFragment
 
     @Override
     protected void detachView() {
+        skuInterface = null;
         choiceSkuAllListPresenter.detachView();
+    }
+
+    @Override
+    public void selectSku(int fromAction, SkuListElement skuListElement) {
+
+    }
+
+    @Override
+    public void deselectSku(int fromAction, SkuListElement skuListElement) {
+
     }
 }

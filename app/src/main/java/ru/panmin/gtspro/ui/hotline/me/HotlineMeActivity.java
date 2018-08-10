@@ -18,6 +18,13 @@ public class HotlineMeActivity
         implements HotlineMeMvpView, HotlineMeAdapter.ClientAdapterClickListener {
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
+    @Inject
+    HotlineMePresenter hotlineMePresenter;
+    @Inject
+    HotlineMeAdapter hotlineMeAdapter;
+    @BindView(R.id.recycler_hot_line)
+    RecyclerView recycler_hot_line;
+    private TradePoint tradePoint = null;
 
     public HotlineMeActivity() {
     }
@@ -27,17 +34,6 @@ public class HotlineMeActivity
         intent.putExtra(INTENT_KEY_TRADE_POINT_ID, tradePointId);
         return intent;
     }
-
-    @Inject
-    HotlineMePresenter hotlineMePresenter;
-
-    @Inject
-    HotlineMeAdapter hotlineMeAdapter;
-
-    private TradePoint tradePoint = null;
-
-    @BindView(R.id.recycler_hot_line)
-    RecyclerView recycler_hot_line;
 
     @Override
     protected int getDataView() {
