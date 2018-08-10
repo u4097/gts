@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <CheckedTextView
+        android:id="@+id/list_item_multicheck_sku_name"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:layout_gravity="end"
+        android:checkMark="@null"
+        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+        android:drawablePadding="20dp"
+        android:drawableRight="@null"
+        android:gravity="end|center_vertical"
+        android:paddingStart="?android:attr/listPreferredItemPaddingLeft"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="@color/black_three"
+        android:textSize="14sp"
+        tools:text="Artist Name"
+        android:drawableEnd="@null"
+        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:id="@+id/separatorSkuChoice"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/grey" />
+
+
+</android.support.v7.widget.LinearLayoutCompat>

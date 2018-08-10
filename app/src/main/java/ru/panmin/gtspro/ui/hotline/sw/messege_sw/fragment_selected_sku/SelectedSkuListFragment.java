@@ -1,5 +1,6 @@
-package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_sku;
+package ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.Objects;
@@ -9,21 +10,24 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
+
+
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku.ChoiceSkuGroupListFragment;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 
-public class ChoiceSkuListFragment
+public class SelectedSkuListFragment
         extends ProgressFragment
-        implements ChoiceSkuListMvpView {
+        implements SelectedSkuListMvpView{
 
-    public static ChoiceSkuListFragment createInstance() {
-        return new ChoiceSkuListFragment();
+    public static SelectedSkuListFragment createInstance() {
+        return new SelectedSkuListFragment();
     }
 
     @Inject
-    ChoiceSkuListPresenter choiceSkuListPresenter;
+    SelectedSkuListPresenter selectedSkuListPresenter;
     @Inject
-    GroupAdapter groupAdapter;
+    SelectedAdapter selectedAdapter;
 
     @BindView(R.id.baseRecycler)
     RecyclerView recyclerView;
@@ -51,20 +55,26 @@ public class ChoiceSkuListFragment
     @Override
     protected void inject() {
         ((BaseActivity) Objects.requireNonNull(getActivity())).activityComponent().inject(this);
+
     }
 
     @Override
     protected void attachView() {
-        choiceSkuListPresenter.attachView(this);
+        selectedSkuListPresenter.attachView(this);
     }
 
     @Override
     protected void initViews() {
+        initRecycler();
+    }
 
+    private void initRecycler() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(selectedAdapter);
     }
 
     @Override
     protected void detachView() {
-        choiceSkuListPresenter.detachView();
+        selectedSkuListPresenter.detachView();
     }
 }

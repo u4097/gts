@@ -6,14 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ru.panmin.gtspro.ui.base.BaseFragment;
-import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_sku.ChoiceSkuListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku.ChoiceSkuAllListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku.ChoiceSkuGroupListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku.SelectedSkuListFragment;
 
 class SkuChoicePagerAdapter extends FragmentPagerAdapter {
 
     private static final int COUNT = 3;
-    private static final int GROUP_SKU = 0;
-    private static final int ALL_SKU = 1;
-    private static final int CHOICE_SKU = 2;
+
 
     public SkuChoicePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -45,16 +45,16 @@ class SkuChoicePagerAdapter extends FragmentPagerAdapter {
         BaseFragment fragment = null;
         switch (position) {
             case 0:
-                fragment = ChoiceSkuListFragment.createInstance();
+                fragment = ChoiceSkuGroupListFragment.createInstance();
                 break;
             case 1:
-                fragment = ChoiceSkuListFragment.createInstance();
+                fragment = ChoiceSkuAllListFragment.createInstance();
                 break;
             case 2:
-                fragment = ChoiceSkuListFragment.createInstance();
+                fragment = SelectedSkuListFragment.createInstance();
                 break;
         }
-        return null;
+        return fragment;
     }
 
     @Override

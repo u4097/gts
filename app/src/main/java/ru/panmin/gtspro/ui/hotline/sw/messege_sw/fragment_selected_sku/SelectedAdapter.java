@@ -1,12 +1,10 @@
-package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_sku;
+package ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-
+class SelectedAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

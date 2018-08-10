@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/azure</item>
         <item name="colorPrimaryDark">#1578c3</item>
         <item name="colorAccent">@color/azure</item>
+        <item name="android:textColorSecondary">@color/azure</item>
     </style>
 
     <style name="NoActionBar" parent="MainTheme">
@@ -49,6 +50,8 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+        <item name="colorAccent">@color/azure</item>
+        <item name="android:textColorSecondary">@color/azure</item>
     </style>
 
 </resources>

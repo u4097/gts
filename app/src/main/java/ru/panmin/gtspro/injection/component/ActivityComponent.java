@@ -8,7 +8,10 @@ import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.MessageHotLineSwActivity;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.ChoiseSkuActivity;
-import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_sku.ChoiceSkuListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku.ChoiceSkuAllListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku.ChoiceSkuGroupListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku.SelectedSkuListFragment;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.fragment_selected_sku.SelectedSkuListPresenter;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
@@ -44,5 +47,7 @@ public interface ActivityComponent {
     void inject(MapFragment mapFragment);
     void inject(SwTradePointFragment swTradePointFragment);
     void inject(BottomSheetFilter bottomSheetFilter);
-    void inject(ChoiceSkuListFragment choiceSkuListFragment);
+    void inject(ChoiceSkuGroupListFragment choiceSkuGroupListFragment);
+    void inject(ChoiceSkuAllListFragment choiceSkuAllListFragment);
+    void inject(SelectedSkuListFragment selectedSkuListFragment);
 }

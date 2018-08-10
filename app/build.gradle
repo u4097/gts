@@ -126,6 +126,10 @@ dependencies {
     //==ExpandableLayout==//
     implementation "net.cachapa.expandablelayout:expandablelayout:${expandablelayout_version}"
 
+    //==ExpandableRecyclerView==//
+    implementation "com.thoughtbot:expandablecheckrecyclerview:${expandable_recyclerview_version}"
+
+
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("com.github.ihsanbal:LoggingInterceptor:${loggingInterceptorVersion}") {
