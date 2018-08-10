@@ -46,7 +46,7 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
     @NonNull
     @Override
     public ClaimVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_claim_me, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_claim_sv, parent, false);
         return new ClaimVH(v);
     }
 
@@ -61,17 +61,19 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
 
     class ClaimVH extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.promoRoot)
-        ViewGroup promoRoot;
-        @BindView(R.id.ivStatus)
+        @BindView(R.id.claimRoot)
+        ViewGroup claimRoot;
+
+/*        @BindView(R.id.ivStatus)
         AppCompatImageView ivStatus;
         @BindView(R.id.tvTitle)
         TextView tvTitle;
         @BindView(R.id.tvSubtitle)
         TextView tvSubtitle;
+        @BindView(R.id.tvDateStart)
         TextView tvDateStart;
         @BindView(R.id.tvDateEnd)
-        TextView tvDateEnd;
+        TextView tvDateEnd;*/
 
         public ClaimVH(View itemView) {
             super(itemView);
@@ -79,7 +81,7 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
         }
 
         public void bind(Claim claim) {
-            if (claim.getName() != null) {
+/*            if (claim.getName() != null) {
                 tvTitle.setText(claim.getName().toString(itemView.getContext()));
                 Timber.d("promo title: %s", claim.getName().toString(itemView.getContext()));
             }
@@ -93,9 +95,9 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
             }
             if (claim.getFinishDate() != null) {
                 tvDateEnd.setText(claim.getFinishDate());
-            }
+            }*/
 
-            promoRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
+            claimRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
         }
     }
 }

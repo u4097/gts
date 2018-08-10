@@ -10,27 +10,31 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.pixplicity.multiviewpager.MultiViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
-import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import timber.log.Timber;
 
 public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvMvpView {
 
-    private static final String INTENT_KEY_CLAIM_ID = "claim.id";
+    private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
     @Inject
-    ClaimInfoSvPresenter claimInfoSvPresenter;
+    ClaimInfoSvPresenter claimInfoMePresenter;
 
-    @BindView(R.id.tvAuthor)
-    TextView tvAuthor;
-    @BindView(R.id.tvAuthorBottom)
-    TextView tvAuthorBottom;
+    @BindView(R.id.tvAuthor) TextView tvAuthor;
+
+    @BindView(R.id.vpPhoto) MultiViewPager vpPhoto;
 
 
     private Claim claim = null;
@@ -38,9 +42,9 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
     public ClaimInfoSvActivity() {
     }
 
-    public static Intent getStartIntent(Context context, String claimId) {
+    public static Intent getStartIntent(Context context, String promoId) {
         Intent intent = new Intent(context, ClaimInfoSvActivity.class);
-        intent.putExtra(INTENT_KEY_CLAIM_ID, claimId);
+        intent.putExtra(INTENT_KEY_PROMO_ID, promoId);
         return intent;
     }
 
@@ -51,28 +55,38 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
 
     @Override
     protected int getDataView() {
-        return R.layout.activity_promo_info_sv;
+        return R.layout.activity_claim_info_sv;
     }
 
     @Override
     protected void attachView() {
-        claimInfoSvPresenter.attachView(this);
+        claimInfoMePresenter.attachView(this);
     }
 
     @Override
     protected void initToolbar() {
-        claimInfoSvPresenter.getPromo(getIntent().getStringExtra(INTENT_KEY_CLAIM_ID));
+        claimInfoMePresenter.getClaim(getIntent().getStringExtra(INTENT_KEY_PROMO_ID));
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
     }
 
     @Override
     protected void initViews() {
+        vpPhoto.setAdapter(new ClaimPhotoViewPagerAdapter(this, getPhotoList()));
     }
+
+    private List<PhotoSliderHelper> getPhotoList(){
+        List<PhotoSliderHelper> photoList = new ArrayList<>();
+        photoList.add(new PhotoSliderHelper("Photo 1",R.drawable.photo1));
+        photoList.add(new PhotoSliderHelper("Photo 2",R.drawable.photo2));
+        photoList.add(new PhotoSliderHelper("Photo 3",R.drawable.photo1));
+        return photoList;
+    }
+
 
     @Override
     protected void detachView() {
-        claimInfoSvPresenter.detachView();
+        claimInfoMePresenter.detachView();
     }
 
     @Override
@@ -92,16 +106,23 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
     public void setClaim(Claim claim) {
         if (claim != null) {
             this.claim = claim;
-            setTitle(claim.getName().toString(this));
-
+            if (claim.getName() != null) {
+                setTitle(claim.getName().toString(this));
+            }
             if (claim.getAuthor() != null) {
                 setValue(tvAuthor, claim.getAuthor().toString(this), R.string.label_author);
-                tvAuthorBottom.setText(claim.getAuthor().toString(this));
             }
-            if (claim.getBeginDate() != null && claim.getFinishDate() != null) {
-//                setValue(tvPeriod, claim.getBeginDate() + " - " + claim.getFinishDate(), R.string.label_period);
+/*            if (claim.getBeginDate() != null && claim.getFinishDate() != null) {
+                setValue(tvPeriod, claim.getBeginDate() + " - " + claim.getFinishDate(), R.string.label_period);
+            }*/
+/*            if (claim.getDescription() != null) {
+                setValue(tvDescription, claim.getDescription().toString(this), R.string.label_promo_description);
             }
+            if (claim.getSkuIds() != null) {
+                setValue(tvSku, claim.getSkuIds().toString(), R.string.label_promo_sku);
+            }*/
         }
+
         setStateData();
     }
 

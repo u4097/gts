@@ -20,6 +20,7 @@ import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ClaimSvAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
@@ -28,6 +29,7 @@ import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
 import ru.panmin.gtspro.ui.claiminfo.me.ClaimInfoMeActivity;
+import ru.panmin.gtspro.ui.claiminfo.sv.ClaimInfoSvActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
@@ -39,7 +41,9 @@ import timber.log.Timber;
 public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         PromoMeAdapter.InfoClickListener,
         PromoSvAdapter.PromoClickListener,
-        ClaimMeAdapter.ClaimClickListener {
+        ClaimMeAdapter.ClaimClickListener,
+        ClaimSvAdapter.ClaimClickListener
+{
 
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
@@ -88,6 +92,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     PromoSvAdapter promoSvAdapter;
 
     ClaimMeAdapter claimMeAdapter;
+    ClaimSvAdapter claimSvAdapter;
     String userRole;
 
 
@@ -157,7 +162,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     @Override
     public void initViews(String fullName, String role) {
         initFilter();
-        this.userRole = role;
+//        this.userRole = role;
+        this.userRole = Constants.ROLE_SUPERVISOR;
         blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
         initBlocks();
 
@@ -270,8 +276,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                 startActivity(ClaimInfoMeActivity.getStartIntent(this, claim.getId()));
                 break;
             case Constants.ROLE_SUPERVISOR:
-                Timber.d("Not implemented");
-//                startActivity(ClaimInfoSvActivity.getStartIntent(this, promo.getId()));
+                startActivity(ClaimInfoSvActivity.getStartIntent(this, claim.getId()));
                 break;
             default:
                 Timber.d("Not implemented");
@@ -341,11 +346,10 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                     rvBlock.setAdapter(claimMeAdapter);
                     break;
                 case Constants.ROLE_SUPERVISOR:
-/*                      promoSvAdapter = new PromoSvAdapter();
-                        promoSvAdapter.setInfoClickListener(this);
-                        promoSvAdapter.setData(tradePoint.getPromos());
-                        rvBlock.setAdapter(promoSvAdapter);*/
-                    rvBlock.setVisibility(View.GONE);
+                    claimSvAdapter = new ClaimSvAdapter();
+                    claimSvAdapter.setInfoClickListener(this);
+                    claimSvAdapter.setData(tradePoint.getClaims());
+                    rvBlock.setAdapter(claimSvAdapter);
                     break;
                 default:
                     rvBlock.setVisibility(View.GONE);

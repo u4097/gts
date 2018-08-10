@@ -153,37 +153,19 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="24dp" />
 
-    <ImageView
-        android:id="@+id/ivPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <com.pixplicity.multiviewpager.MultiViewPager
+        android:id="@+id/vpPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="@id/tvPhotoTitle"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:matchChildWidth="@+id/ivPhoto"
         app:layout_constraintTop_toBottomOf="@id/tvPhotoTitle"
-        android:src="@drawable/photo1"
         />
 
-    <ImageView
-        android:id="@+id/ivPhoto2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@id/ivPhoto"
-        app:layout_constraintTop_toBottomOf="@id/tvPhotoTitle"
-        android:src="@drawable/photo2"
-        android:layout_marginLeft="16dp" />
-
-    <ImageView
-        android:id="@+id/ivPhoto3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@id/ivPhoto2"
-        app:layout_constraintTop_toBottomOf="@id/tvPhotoTitle"
-        android:src="@drawable/photo1"
-        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/tvHint"
@@ -192,9 +174,12 @@
         android:layout_marginTop="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivPhoto"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/vpPhoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
+        android:text="@string/error_message_text_info"
 
         tools:text="Чтобы приступить к заданию вы
 должны быть в периметре 500м"
@@ -202,7 +187,7 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnAssign"
-        style="@style/MullerBold10"
+        style="@style/MullerBold12"
         android:layout_width="128dp"
         android:layout_height="48dp"
         android:layout_marginLeft="8dp"
@@ -210,8 +195,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_btn_round_red"
-        android:paddingEnd="30dp"
-        android:paddingStart="30dp"
         android:text="@string/label_assign_claim"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"

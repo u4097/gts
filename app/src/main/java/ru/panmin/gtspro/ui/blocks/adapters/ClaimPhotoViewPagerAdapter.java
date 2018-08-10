@@ -13,19 +13,19 @@ import ru.panmin.gtspro.R;
 
 public class ClaimPhotoViewPagerAdapter extends PagerAdapter {
     private Context mContext;
-    private List<ImageSlider> imageList;
+    private List<PhotoSliderHelper> photoList;
     private LayoutInflater inflater;
 
-    public ClaimPhotoViewPagerAdapter(Context context, List<ImageSlider> list) {
+    public ClaimPhotoViewPagerAdapter(Context context, List<PhotoSliderHelper> list) {
         mContext = context;
-        imageList = list;
+        photoList = list;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public Object instantiateItem(ViewGroup collection, int position) {
-        ViewGroup imageLayout = (ViewGroup) inflater.inflate(R.layout.li_claim_photo_me, collection, false);
-        ((ImageView) imageLayout.findViewById(R.id.ivPhoto)).setImageResource(imageList.get(position).getResId());
+        ViewGroup imageLayout = (ViewGroup) inflater.inflate(R.layout.li_claim_photo_slider, collection, false);
+        ((ImageView) imageLayout.findViewById(R.id.ivPhoto)).setImageResource(photoList.get(position).getResId());
         collection.addView(imageLayout);
         return imageLayout;
     }

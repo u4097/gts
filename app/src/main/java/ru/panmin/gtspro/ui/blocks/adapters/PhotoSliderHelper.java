@@ -2,14 +2,14 @@ package ru.panmin.gtspro.ui.blocks.adapters;
 
 import android.support.annotation.DrawableRes;
 
-public class ImageSlider {
+public class PhotoSliderHelper {
     private String name;
 
     //optional @DrawableRes
     @DrawableRes
     private int resId;
 
-    public ImageSlider(String name, int resId) {
+    public PhotoSliderHelper(String name, int resId) {
         this.name = name;
         this.resId = resId;
     }
