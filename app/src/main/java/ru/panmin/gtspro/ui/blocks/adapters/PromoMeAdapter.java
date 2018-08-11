@@ -86,7 +86,7 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
             }
             if (promo.getDescription() != null) {
                 tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
-                Timber.d("promo description: %s",promo.getDescription().toString(itemView.getContext()));
+                Timber.d("promo description: %s", promo.getDescription().toString(itemView.getContext()));
             }
             if (promo.getBeginDate() != null) {
 //                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from,promo.getBeginDate()));
@@ -94,7 +94,7 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
             }
             if (promo.getFinishDate() != null) {
 //                tvDateFrom.setText(itemView.getResources().getString(R.string.label_to,promo.getFinishDate()));
-                Timber.d("promo end date: %s",promo.getFinishDate());
+                Timber.d("promo end date: %s", promo.getFinishDate());
             }
 
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));

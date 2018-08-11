@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
+import io.realm.RealmList;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.internal.platform.Platform;
@@ -29,6 +30,8 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import ru.panmin.gtspro.BuildConfig;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
+import ru.panmin.gtspro.data.models.Answer;
+import ru.panmin.gtspro.data.models.Photo;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
@@ -48,7 +51,7 @@ public interface ApiService {
     @GET("user_info/")
     Single<UserInfoResponse> userInfo();
 
-    @GET("address_program/")
+    @GET("address_program_without_sku/")
     Single<AddressProgramResponse> addressProgram();
 
     class Creator {
@@ -150,6 +153,52 @@ public interface ApiService {
                                 return;
                             }
                             writer.value(value);
+                        }
+                    })
+                    .registerTypeAdapter(Answer.class, new TypeAdapter<Answer>() {
+                        @Override
+                        public Answer read(JsonReader reader) throws IOException {
+                            Gson newGson = new Gson();
+                            switch (reader.peek()) {
+                                case NULL:
+                                    reader.nextNull();
+                                    return null;
+                                case BEGIN_ARRAY:
+                                    Answer answer = null;
+                                    reader.beginArray();
+                                    switch (reader.peek()) {
+                                        case NUMBER:
+                                            RealmList<Integer> integerRealmList = new RealmList<>();
+                                            integerRealmList.clear();
+                                            while (reader.peek() != JsonToken.END_ARRAY) {
+                                                integerRealmList.add(reader.nextInt());
+                                            }
+                                            answer = new Answer(integerRealmList);
+                                            break;
+                                        case BEGIN_OBJECT:
+                                            RealmList<Photo> photoRealmList = new RealmList<>();
+                                            photoRealmList.clear();
+                                            while (reader.peek() != JsonToken.END_ARRAY) {
+                                                photoRealmList.add(newGson.fromJson(reader, Photo.class));
+                                            }
+                                            answer = new Answer(photoRealmList);
+                                            break;
+                                    }
+                                    reader.endArray();
+                                    return answer;
+                                case STRING:
+                                    return new Answer(reader.nextString());
+                                case NUMBER:
+                                    return new Answer(reader.nextInt());
+                                case BOOLEAN:
+                                    return new Answer(reader.nextBoolean());
+                                default:
+                                    return new Answer();
+                            }
+                        }
+
+                        @Override
+                        public void write(JsonWriter writer, Answer value) throws IOException {
                         }
                     })
                     .setDateFormat(Constants.DATE_TIME_FORMAT)

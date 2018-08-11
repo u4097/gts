@@ -3,12 +3,10 @@ package ru.panmin.gtspro.data.models;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
-public class Question extends RealmObject {
+public class QuestionForParse<T> {
 
-    @PrimaryKey private String id;
+    @SerializedName("id") private String id;
     @SerializedName("type") private int type;
     @SerializedName("description") private String description;
     @SerializedName("options") private RealmList<Option> options = new RealmList<>();
@@ -18,10 +16,10 @@ public class Question extends RealmObject {
     @SerializedName("group_name") private Name groupName;
     @SerializedName("group_type") private int groupType;
     @SerializedName("add_type") private int addType;
-    @SerializedName("answer") private Answer answer;
+    @SerializedName("answer") private T answer;
     @SerializedName("sku") private SkuListElement sku;
 
-    public Question() {
+    public QuestionForParse() {
     }
 
     public String getId() {
@@ -104,11 +102,11 @@ public class Question extends RealmObject {
         this.addType = addType;
     }
 
-    public Answer getAnswer() {
+    public T getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Answer answer) {
+    public void setAnswer(T answer) {
         this.answer = answer;
     }
 

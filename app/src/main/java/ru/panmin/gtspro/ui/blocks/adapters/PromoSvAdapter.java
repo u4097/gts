@@ -1,13 +1,7 @@
 package ru.panmin.gtspro.ui.blocks.adapters;
 
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +18,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
-import timber.log.Timber;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private List<Promo> promoList = new ArrayList<>();
     private InfoClickListener infoClickListener;
-
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     @Inject
     public PromoSvAdapter() {

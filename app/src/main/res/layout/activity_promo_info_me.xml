@@ -16,10 +16,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/label_verbose_info"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Подробная информация:"/>
 
     <android.support.v7.widget.CardView

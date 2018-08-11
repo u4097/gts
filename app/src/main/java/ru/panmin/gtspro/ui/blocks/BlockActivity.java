@@ -35,6 +35,7 @@ import timber.log.Timber;
 
 public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoMeAdapter.InfoClickListener, PromoSvAdapter.InfoClickListener {
 
+    private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
     @BindView(R.id.tCounterClaims)
@@ -72,24 +73,14 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.fab_filter) FloatingActionButton filter;
-
     @Inject
     BlockPresenter blockPresenter;
-
-
     PromoMeAdapter promoMeAdapter;
     PromoSvAdapter promoSvAdapter;
     String userRole;
-
     private OnTradePointBlockClickListener listener = null;
-
-    private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
     private TradePoint tradePoint = null;
-
-
-    public interface OnTradePointBlockClickListener {
-        void onTradePointBlockClick(BlockType.Type blockType);
-    }
+    private Map<BlockType.Type, Holder> tradePointBlockViews;
 
     public BlockActivity() {
     }
@@ -159,9 +150,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     }
 
-
-    private Map<BlockType.Type, Holder> tradePointBlockViews;
-
     public void initBlocks() {
         BlockViewModel blockViewModel = new BlockViewModel();
         blockViewModel.loadData(this.tradePoint);
@@ -177,13 +165,13 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         tradePointBlockViews.put(BlockType.Type.HOT_LINE, new Holder(btnHotLine, tCounterHotLine));
         tradePointBlockViews.put(BlockType.Type.STATISTICS, new Holder(btnStatistics, tCounterStatistics));
 
-        for (Map.Entry<BlockType.Type, Holder> entry:
+        for (Map.Entry<BlockType.Type, Holder> entry :
                 tradePointBlockViews.entrySet()) {
             entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
         }
 
-        for (Block block: model.getBlocks()
-        ) {
+        for (Block block : model.getBlocks()
+                ) {
             Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
                 TextView tvBadge = holder.getTvBadge();
@@ -207,25 +195,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     }
 
-    class Holder {
-        FloatingActionButton btn;
-        TextView tvBadge;
-
-        public Holder(FloatingActionButton btn, TextView tvBadge) {
-            this.btn = btn;
-            this.tvBadge = tvBadge;
-        }
-
-        public FloatingActionButton getBtn() {
-            return btn;
-        }
-
-        public TextView getTvBadge() {
-            return tvBadge;
-        }
-    }
-
-
     @Override
     protected void detachView() {
         blockPresenter.detachView();
@@ -243,7 +212,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     protected void errorButtonClick() {
     }
-
 
     @Override
     public void showInfo(Promo promo) {
@@ -269,7 +237,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
         setTitle(tradePoint.getSignboard().toString(this));
-        BlockType.Type  blockType =  blockPresenter.getCurrentBlock();
+        BlockType.Type blockType = blockPresenter.getCurrentBlock();
         initBlockData(blockType);
         setStateData();
     }
@@ -321,10 +289,31 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         startActivity(intent);
     }
 
-
     @Override
     public void selectNewSortType(String sortType) {
         blockPresenter.selectNewSortType(sortType);
+    }
+
+    public interface OnTradePointBlockClickListener {
+        void onTradePointBlockClick(BlockType.Type blockType);
+    }
+
+    class Holder {
+        FloatingActionButton btn;
+        TextView tvBadge;
+
+        public Holder(FloatingActionButton btn, TextView tvBadge) {
+            this.btn = btn;
+            this.tvBadge = tvBadge;
+        }
+
+        public FloatingActionButton getBtn() {
+            return btn;
+        }
+
+        public TextView getTvBadge() {
+            return tvBadge;
+        }
     }
 
 }

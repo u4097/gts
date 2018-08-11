@@ -17,7 +17,6 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import timber.log.Timber;
 
 public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeMvpView {
 
