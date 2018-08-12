@@ -158,9 +158,14 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
                 setValue(tvDateFinish, "-", R.string.label_date_end);
             }
 
-            setValue(tvAuthor,"-",R.string.label_author);
 
-            setValue(tvType,"-",R.string.label_claim_type);
+            if (claim.getType().getName() != null) {
+                setValue(tvType,claim.getType().getName().toString(this),R.string.label_claim_type);
+            } else {
+                setValue(tvType,"-",R.string.label_claim_type);
+            }
+
+            setValue(tvAuthor,"-",R.string.label_author);
 
         }
 
