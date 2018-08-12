@@ -12,6 +12,9 @@ public class Constants {
 
     public static final String DATE_TIME_FORMAT = "hh:MM:ss";
 
+    public static final String WS_TYPE_USER_INFO = "user_info";
+    public static final String WS_TYPE_ADDRESS_PROGRAM = "address_program";
+
     /* константы времени */
     public static final int SECOND = 1000;
     public static final int MINUTE = 60 * SECOND;

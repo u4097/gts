@@ -224,19 +224,60 @@ public class DataManager {
 
     /* API */
     public Single<AuthResponse> auth(String userName, String password) {
-        return apiService.auth(new AuthRequest(userName, password));
+        return apiService.auth(new AuthRequest(userName, password))
+                .map(authResponse -> {
+                    setToken(authResponse.getToken());
+                    setId(authResponse.getId());
+                    setUserName(authResponse.getUsername());
+                    setRole(authResponse.getRole());
+                    switch (authResponse.getRole()) {
+                        case Constants.ROLE_SUPERVISOR:
+                            setSupervisorId(authResponse.getSupervisorId());
+                            break;
+                    }
+                    setFullNameRu(authResponse.getFullName().getRu());
+                    setFullNameEn(authResponse.getFullName().getEn());
+                    return authResponse;
+                });
     }
 
     public Single<UserInfoResponse> userInfo() {
-        return apiService.userInfo();
+        return apiService.userInfo()
+                .map(userInfoResponse -> {
+                    setId(userInfoResponse.getId());
+                    setUserName(userInfoResponse.getUsername());
+                    setRole(userInfoResponse.getRole());
+                    switch (userInfoResponse.getRole()) {
+                        case Constants.ROLE_SUPERVISOR:
+                            setSupervisorId(userInfoResponse.getSupervisorId());
+                            break;
+                    }
+                    setFullNameRu(userInfoResponse.getFullName().getRu());
+                    setFullNameEn(userInfoResponse.getFullName().getEn());
+                    return userInfoResponse;
+                });
     }
 
     public Single<AddressProgramResponse> addressProgram() {
-        return apiService.addressProgram();
+        return apiService.addressProgram()
+                .map(addressProgramResponse -> {
+                    setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
+                    setTradePointRadius(addressProgramResponse.getTradePointRadius());
+                    setHotLine(addressProgramResponse.getHotLine());
+                    setTradePoints(addressProgramResponse.getTradePoints());
+                    return null;
+                });
     }
 
     public Single<AddressProgramResponse> addressProgramWithoutSku() {
-        return apiService.addressProgramWithoutSku();
+        return apiService.addressProgramWithoutSku()
+                .map(addressProgramResponse -> {
+                    setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
+                    setTradePointRadius(addressProgramResponse.getTradePointRadius());
+                    setHotLine(addressProgramResponse.getHotLine());
+                    setTradePoints(addressProgramResponse.getTradePoints());
+                    return null;
+                });
     }
 
 

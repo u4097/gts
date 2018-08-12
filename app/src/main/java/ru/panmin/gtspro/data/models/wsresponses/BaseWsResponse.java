@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseWsResponse {
 
+    @SerializedName("id") private String id;
+    @SerializedName("type") private String type;
     @SerializedName("status_code") private Integer statusCode;
     @SerializedName("is_error") private Boolean isError;
     @SerializedName("error") private String error;
@@ -11,10 +13,28 @@ public class BaseWsResponse {
     public BaseWsResponse() {
     }
 
-    public BaseWsResponse(Integer statusCode, Boolean isError, String error) {
+    public BaseWsResponse(String id, String type, Integer statusCode, Boolean isError, String error) {
+        this.id = id;
+        this.type = type;
         this.statusCode = statusCode;
         this.isError = isError;
         this.error = error;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Integer getStatusCode() {

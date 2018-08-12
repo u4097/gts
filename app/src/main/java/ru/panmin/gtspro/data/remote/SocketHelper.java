@@ -3,6 +3,8 @@ package ru.panmin.gtspro.data.remote;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -10,8 +12,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ru.panmin.gtspro.data.local.PreferencesHelper;
+import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
+import ru.panmin.gtspro.data.models.wsresponses.AddressProgramWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.BaseWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.UserInfoWsResponse;
 import ru.panmin.gtspro.utils.Constants;
+import ru.panmin.gtspro.utils.RxEventBus;
 import ru.panmin.gtspro.utils.TextUtils;
 import tech.gusavila92.websocketclient.WebSocketClient;
 import timber.log.Timber;
@@ -20,13 +27,20 @@ import timber.log.Timber;
 public class SocketHelper {
 
     private final PreferencesHelper preferencesHelper;
+    private final RealmHelper realmHelper;
+    private final RxEventBus rxEventBus;
+    private final Gson gson;
+
     @Nullable private WebSocketClient webSocketClient = null;
 
     private boolean isConnected = false;
 
     @Inject
-    public SocketHelper(PreferencesHelper preferencesHelper) {
+    public SocketHelper(PreferencesHelper preferencesHelper, RealmHelper realmHelper, RxEventBus rxEventBus) {
         this.preferencesHelper = preferencesHelper;
+        this.realmHelper = realmHelper;
+        this.rxEventBus = rxEventBus;
+        gson = new Gson();
     }
 
     public void createWithConnect() {
@@ -41,7 +55,7 @@ public class SocketHelper {
         create(false, request);
     }
 
-    public <T extends BaseWsRequest> void create(boolean createWithConnect, @Nullable T request) {
+    private <T extends BaseWsRequest> void create(boolean createWithConnect, @Nullable T request) {
         String token = preferencesHelper.getToken();
         if (!TextUtils.isEmpty(token)) {
             try {
@@ -57,6 +71,33 @@ public class SocketHelper {
 
                         @Override
                         public void onTextReceived(String message) {
+                            BaseWsResponse baseWsResponse = gson.fromJson(message, BaseWsResponse.class);
+                            if (baseWsResponse.isError()) {
+
+                            } else {
+                                switch (baseWsResponse.getType()) {
+                                    case Constants.WS_TYPE_USER_INFO:
+                                        UserInfoWsResponse userInfoWsResponse = gson.fromJson(message, UserInfoWsResponse.class);
+                                        preferencesHelper.setId(userInfoWsResponse.getData().getId());
+                                        preferencesHelper.setUserName(userInfoWsResponse.getData().getUsername());
+                                        preferencesHelper.setRole(userInfoWsResponse.getData().getRole());
+                                        switch (userInfoWsResponse.getData().getRole()) {
+                                            case Constants.ROLE_SUPERVISOR:
+                                                preferencesHelper.setSupervisorId(userInfoWsResponse.getData().getSupervisorId());
+                                                break;
+                                        }
+                                        rxEventBus.post(userInfoWsResponse);
+                                        break;
+                                    case Constants.WS_TYPE_ADDRESS_PROGRAM:
+                                        AddressProgramWsResponse addressProgramWsResponse = gson.fromJson(message, AddressProgramWsResponse.class);
+                                        preferencesHelper.setAutoCheckoutTime(addressProgramWsResponse.getData().getAutoCheckoutTime());
+                                        preferencesHelper.setTradePointRadius(addressProgramWsResponse.getData().getTradePointRadius());
+                                        realmHelper.setHotLine(addressProgramWsResponse.getData().getHotLine());
+                                        realmHelper.setTradePoints(addressProgramWsResponse.getData().getTradePoints());
+                                        rxEventBus.post(addressProgramWsResponse);
+                                        break;
+                                }
+                            }
                         }
 
                         @Override
