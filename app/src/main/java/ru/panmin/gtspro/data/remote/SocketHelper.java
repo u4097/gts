@@ -2,12 +2,12 @@ package ru.panmin.gtspro.data.remote;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -109,23 +109,24 @@ public class SocketHelper {
 
                         @Override
                         public void onBinaryReceived(byte[] data) {
-                            Log.d("dvev", "fv  ");
+                            Timber.d(Arrays.toString(data));
                         }
 
                         @Override
                         public void onPingReceived(byte[] data) {
-                            Log.d("dvev", "fv  ");
+                            Timber.d(Arrays.toString(data));
                         }
 
                         @Override
                         public void onPongReceived(byte[] data) {
-                            Log.d("dvev", "fv  ");
+                            Timber.d(Arrays.toString(data));
                         }
 
                         @Override
                         public void onException(Exception e) {
                             webSocketClient = null;
                             isConnected = false;
+                            createWithConnect();
                         }
 
                         @Override
