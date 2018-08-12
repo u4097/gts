@@ -10,6 +10,7 @@ import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.remote.ApiService;
+import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.injection.ApplicationContext;
 import ru.panmin.gtspro.injection.module.ApplicationModule;
 import ru.panmin.gtspro.utils.RxEventBus;
@@ -26,5 +27,6 @@ public interface ApplicationComponent {
     ApiService apiService();
     RxEventBus eventBus();
     RealmHelper realmHelper();
+    SocketHelper socketHelper();
 
 }

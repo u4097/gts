@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.data;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Calendar;
@@ -20,7 +21,9 @@ import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
+import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
 import ru.panmin.gtspro.data.remote.ApiService;
+import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.RxEventBus;
 import ru.panmin.gtspro.utils.TextUtils;
@@ -34,13 +37,21 @@ public class DataManager {
     private final ApiService apiService;
     private final RxEventBus rxEventBus;
     private final RealmHelper realmHelper;
+    private final SocketHelper socketHelper;
 
     @Inject
-    DataManager(PreferencesHelper preferencesHelper, ApiService apiService, RxEventBus rxEventBus, RealmHelper realmHelper) {
+    DataManager(
+            PreferencesHelper preferencesHelper,
+            ApiService apiService,
+            RxEventBus rxEventBus,
+            RealmHelper realmHelper,
+            SocketHelper socketHelper
+    ) {
         this.preferencesHelper = preferencesHelper;
         this.apiService = apiService;
         this.rxEventBus = rxEventBus;
         this.realmHelper = realmHelper;
+        this.socketHelper = socketHelper;
     }
 
     public void clear() {
@@ -224,6 +235,10 @@ public class DataManager {
         return apiService.addressProgram();
     }
 
+    public Single<AddressProgramResponse> addressProgramWithoutSku() {
+        return apiService.addressProgramWithoutSku();
+    }
+
 
     /* DATABASE */
     public void clearDataBase() {
@@ -260,6 +275,36 @@ public class DataManager {
     @Nullable
     public Promo getPromoById(String id) {
         return realmHelper.getPromoById(id);
+    }
+
+
+    /* SOCKET */
+    public void createWithConnect() {
+        socketHelper.createWithConnect();
+    }
+
+    public void createWithoutConnect() {
+        socketHelper.createWithConnect();
+    }
+
+    public <T extends BaseWsRequest> void createAndSendRequest(@NonNull T request) {
+        socketHelper.createAndSendRequest(request);
+    }
+
+    public void connect() {
+        socketHelper.connect();
+    }
+
+    public void close() {
+        socketHelper.close();
+    }
+
+    public boolean isConnected() {
+        return socketHelper.isConnected();
+    }
+
+    public <T extends BaseWsRequest> void send(T request) {
+        socketHelper.send(request);
     }
 
 }

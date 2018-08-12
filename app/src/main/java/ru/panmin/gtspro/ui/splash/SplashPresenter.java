@@ -36,7 +36,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
             if (isOnline) {
                 Calendar calendar = Calendar.getInstance();
                 RxUtils.dispose(disposable);
-                disposable = dataManager.addressProgram()
+                disposable = dataManager.addressProgramWithoutSku()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(

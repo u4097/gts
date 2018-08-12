@@ -7,8 +7,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.remote.ApiService;
+import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.injection.ApplicationContext;
 
 @Module
@@ -41,6 +43,12 @@ public class ApplicationModule {
     @Singleton
     RealmHelper provideRealmHelper(@ApplicationContext Context context) {
         return new RealmHelper(context);
+    }
+
+    @Provides
+    @Singleton
+    SocketHelper provideSocketHelper(@ApplicationContext Context context) {
+        return new SocketHelper(new PreferencesHelper(context));
     }
 
 }

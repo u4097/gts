@@ -15,6 +15,7 @@
         android:background="?attr/colorPrimary"
         android:fitsSystemWindows="true"
         android:gravity="center"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24px"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
@@ -24,8 +25,8 @@
         android:layout_height="?attr/actionBarSize"
         android:fitsSystemWindows="true"
         android:gravity="center"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
+        android:paddingLeft="52dp"
+        android:paddingRight="52dp"
         android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="17sp"

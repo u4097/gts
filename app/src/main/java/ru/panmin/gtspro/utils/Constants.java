@@ -2,10 +2,22 @@ package ru.panmin.gtspro.utils;
 
 public class Constants {
 
-    public static final String BASE_URL_FORMAT = "http://217.151.77.93:58080/api/v%d/";
-    public static final int API_VERSION = 0;
+    public static final String DOMAIN = "217.151.77.93:58080";
+    public static final String API_VERSION = "0";
+    public static final String URL_REST = String.format("http://%s/api/v%s/", DOMAIN, API_VERSION);
+    public static final String URL_WEB_SOCKET = String.format("ws://%s/ws/", DOMAIN);
+
+    public static final String HEADER_AUTHORIZATION = "Authorization";
+    public static final String TOKEN_TYPE_BEARER = "Bearer";
 
     public static final String DATE_TIME_FORMAT = "hh:MM:ss";
+
+    /* константы времени */
+    public static final int SECOND = 1000;
+    public static final int MINUTE = 60 * SECOND;
+    public static final int HOUR = 60 * MINUTE;
+    public static final int DAY = 24 * HOUR;
+    public static final int WEEK = 7 * DAY;
 
     public static final String ROLE_MERCHANDISER = "me";
     public static final String ROLE_SUPERVISOR = "sv";

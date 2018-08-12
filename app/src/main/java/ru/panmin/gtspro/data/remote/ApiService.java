@@ -2,7 +2,6 @@ package ru.panmin.gtspro.data.remote;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,10 +36,10 @@ import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
 import ru.panmin.gtspro.utils.Constants;
+import ru.panmin.gtspro.utils.TextUtils;
 
 public interface ApiService {
 
-    String HEADER_AUTHORIZATION = "Authorization";
 
     String TAG_REQUEST_LOG = "GTSProRequest";
     String TAG_RESPONSE_LOG = "GTSProResponse";
@@ -51,8 +50,11 @@ public interface ApiService {
     @GET("user_info/")
     Single<UserInfoResponse> userInfo();
 
-    @GET("address_program_without_sku/")
+    @GET("address_program/")
     Single<AddressProgramResponse> addressProgram();
+
+    @GET("address_program_without_sku/")
+    Single<AddressProgramResponse> addressProgramWithoutSku();
 
     class Creator {
 
@@ -214,7 +216,10 @@ public interface ApiService {
                 Request.Builder requestBuilder = original.newBuilder();
                 String token = preferencesHelper.getToken();
                 if (!TextUtils.isEmpty(token)) {
-                    requestBuilder.header(HEADER_AUTHORIZATION, String.format("Bearer %s", token));
+                    requestBuilder.header(
+                            Constants.HEADER_AUTHORIZATION,
+                            String.format("%s %s", Constants.TOKEN_TYPE_BEARER, token)
+                    );
                 }
                 requestBuilder.method(original.method(), original.body());
                 Request request = requestBuilder.build();
@@ -232,7 +237,7 @@ public interface ApiService {
             okBuilder.addInterceptor(new ChuckInterceptor(context));
 
             @SuppressLint("DefaultLocale") Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(String.format(Constants.BASE_URL_FORMAT, Constants.API_VERSION))
+                    .baseUrl(Constants.URL_REST)
                     .client(okBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
