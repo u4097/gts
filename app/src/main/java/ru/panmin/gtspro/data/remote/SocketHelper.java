@@ -124,6 +124,7 @@ public class SocketHelper {
 
                         @Override
                         public void onException(Exception e) {
+                            webSocketClient = null;
                             isConnected = false;
                         }
 
