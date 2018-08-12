@@ -17,6 +17,7 @@ import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
 import ru.panmin.gtspro.data.models.wsresponses.AddressProgramWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.BaseWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.ErrorWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.FormWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.UserInfoWsResponse;
 import ru.panmin.gtspro.utils.Constants;
@@ -74,36 +75,36 @@ public class SocketHelper {
 
                         @Override
                         public void onTextReceived(String message) {
-                            BaseWsResponse baseWsResponse = gson.fromJson(message, BaseWsResponse.class);
-                            if (baseWsResponse.isError()) {
 
-                            } else {
-                                switch (baseWsResponse.getType()) {
-                                    case Constants.WS_TYPE_USER_INFO:
-                                        UserInfoWsResponse userInfoWsResponse = gson.fromJson(message, UserInfoWsResponse.class);
-                                        preferencesHelper.setId(userInfoWsResponse.getData().getId());
-                                        preferencesHelper.setUserName(userInfoWsResponse.getData().getUsername());
-                                        preferencesHelper.setRole(userInfoWsResponse.getData().getRole());
-                                        switch (userInfoWsResponse.getData().getRole()) {
-                                            case Constants.ROLE_SUPERVISOR:
-                                                preferencesHelper.setSupervisorId(userInfoWsResponse.getData().getSupervisorId());
-                                                break;
-                                        }
-                                        rxEventBus.post(userInfoWsResponse);
-                                        break;
-                                    case Constants.WS_TYPE_ADDRESS_PROGRAM:
-                                        AddressProgramWsResponse addressProgramWsResponse = gson.fromJson(message, AddressProgramWsResponse.class);
-                                        preferencesHelper.setAutoCheckoutTime(addressProgramWsResponse.getData().getAutoCheckoutTime());
-                                        preferencesHelper.setTradePointRadius(addressProgramWsResponse.getData().getTradePointRadius());
-                                        realmHelper.setHotLine(addressProgramWsResponse.getData().getHotLine());
-                                        realmHelper.setTradePoints(addressProgramWsResponse.getData().getTradePoints());
-                                        rxEventBus.post(addressProgramWsResponse);
-                                        break;
-                                    case Constants.WS_TYPE_FORM:
-                                        FormWsResponse formWsResponse = gson.fromJson(message, FormWsResponse.class);
-                                        rxEventBus.post(formWsResponse);
-                                        break;
-                                }
+                            switch (gson.fromJson(message, BaseWsResponse.class).getType()) {
+                                case Constants.WS_TYPE_USER_INFO:
+                                    UserInfoWsResponse userInfoWsResponse = gson.fromJson(message, UserInfoWsResponse.class);
+                                    PreferencesHelper.setId(userInfoWsResponse.getData().getId());
+                                    preferencesHelper.setUserName(userInfoWsResponse.getData().getUsername());
+                                    preferencesHelper.setRole(userInfoWsResponse.getData().getRole());
+                                    switch (userInfoWsResponse.getData().getRole()) {
+                                        case Constants.ROLE_SUPERVISOR:
+                                            preferencesHelper.setSupervisorId(userInfoWsResponse.getData().getSupervisorId());
+                                            break;
+                                    }
+                                    rxEventBus.post(userInfoWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_ADDRESS_PROGRAM:
+                                    AddressProgramWsResponse addressProgramWsResponse = gson.fromJson(message, AddressProgramWsResponse.class);
+                                    preferencesHelper.setAutoCheckoutTime(addressProgramWsResponse.getData().getAutoCheckoutTime());
+                                    preferencesHelper.setTradePointRadius(addressProgramWsResponse.getData().getTradePointRadius());
+                                    realmHelper.setHotLine(addressProgramWsResponse.getData().getHotLine());
+                                    realmHelper.setTradePoints(addressProgramWsResponse.getData().getTradePoints());
+                                    rxEventBus.post(addressProgramWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_FORM:
+                                    FormWsResponse formWsResponse = gson.fromJson(message, FormWsResponse.class);
+                                    rxEventBus.post(formWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_ERROR:
+                                    ErrorWsResponse errorWsResponse = gson.fromJson(message, ErrorWsResponse.class);
+                                    rxEventBus.post(errorWsResponse);
+                                    break;
                             }
                         }
 

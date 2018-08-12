@@ -13,10 +13,11 @@ public class FormWsRequest extends BaseWsRequest {
     @SerializedName("data") private List<AnswerToQuestion> data = new ArrayList<>();
 
     public FormWsRequest() {
+        super(Constants.WS_TYPE_FORM);
     }
 
-    public FormWsRequest(String id, List<AnswerToQuestion> data) {
-        super(id, Constants.WS_TYPE_FORM);
+    public FormWsRequest(List<AnswerToQuestion> data) {
+        super(Constants.WS_TYPE_FORM);
         this.data = data;
     }
 

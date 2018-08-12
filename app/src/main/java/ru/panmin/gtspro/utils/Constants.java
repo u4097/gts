@@ -15,6 +15,7 @@ public class Constants {
     public static final String WS_TYPE_USER_INFO = "user_info";
     public static final String WS_TYPE_ADDRESS_PROGRAM = "address_program";
     public static final String WS_TYPE_FORM = "form";
+    public static final String WS_TYPE_FORM_FILLING_TIME = "form_filling_time";
     public static final String WS_TYPE_HOT_LINE = "hot_line";
     public static final String WS_TYPE_CLAIM = "claim";
     public static final String WS_TYPE_CLAIM_ANSWERED = "claim_answered";
@@ -23,7 +24,7 @@ public class Constants {
     public static final String WS_TYPE_VISIT_ACCEPTED = "visit_accepted";
     public static final String WS_TYPE_END_VISIT = "end_visit";
     public static final String WS_TYPE_MERCHANDISER_VISITS = "merchandiser_visits";
-    public static final String WS_TYPE_FORM_FILLING_TIME = "form_filling_time";
+    public static final String WS_TYPE_ERROR = "error";
 
     /* константы времени */
     public static final int SECOND = 1000;

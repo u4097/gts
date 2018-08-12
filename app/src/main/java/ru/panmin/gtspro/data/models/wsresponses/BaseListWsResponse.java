@@ -12,8 +12,8 @@ public class BaseListWsResponse<T> extends BaseWsResponse {
     public BaseListWsResponse() {
     }
 
-    public BaseListWsResponse(String id, String type, Integer statusCode, Boolean isError, String error, List<T> data) {
-        super(id, type, statusCode, isError, error);
+    public BaseListWsResponse(String id, String type, List<T> data) {
+        super(id, type);
         this.data = data;
     }
 

@@ -9,8 +9,8 @@ public class BaseObjectWsResponse<T> extends BaseWsResponse {
     public BaseObjectWsResponse() {
     }
 
-    public BaseObjectWsResponse(String id, String type, Integer statusCode, Boolean isError, String error, T data) {
-        super(id, type, statusCode, isError, error);
+    public BaseObjectWsResponse(String id, String type, T data) {
+        super(id, type);
         this.data = data;
     }
 

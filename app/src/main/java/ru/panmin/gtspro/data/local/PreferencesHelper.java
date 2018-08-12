@@ -73,6 +73,14 @@ public class PreferencesHelper {
         preferencesHelper.edit().putString(PREF_LANGUAGE, language).apply();
     }
 
+    public static String getId() {
+        return preferencesHelper.getString(PREF_ID, DEFAULT_PREF_ID);
+    }
+
+    public static void setId(String id) {
+        preferencesHelper.edit().putString(PREF_ID, id).apply();
+    }
+
     public void clear() {
         preferencesHelper.edit().clear().apply();
     }
@@ -109,14 +117,6 @@ public class PreferencesHelper {
 
     public void setToken(String token) {
         preferencesHelper.edit().putString(PREF_TOKEN, token).apply();
-    }
-
-    public String getId() {
-        return preferencesHelper.getString(PREF_ID, DEFAULT_PREF_ID);
-    }
-
-    public void setId(String id) {
-        preferencesHelper.edit().putString(PREF_ID, id).apply();
     }
 
     public String getUserName() {

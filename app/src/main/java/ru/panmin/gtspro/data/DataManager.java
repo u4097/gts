@@ -14,7 +14,9 @@ import io.realm.RealmList;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.AnswerToQuestion;
+import ru.panmin.gtspro.data.models.FormFillingTimeData;
 import ru.panmin.gtspro.data.models.HotLine;
+import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
@@ -24,7 +26,9 @@ import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
 import ru.panmin.gtspro.data.models.wsrequests.AddressProgramWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.FormFillingTimeWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.FormWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.HotLineWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.UserInfoWsRequest;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.data.remote.SocketHelper;
@@ -103,11 +107,11 @@ public class DataManager {
     }
 
     public String getId() {
-        return preferencesHelper.getId();
+        return PreferencesHelper.getId();
     }
 
     public void setId(String id) {
-        preferencesHelper.setId(id);
+        PreferencesHelper.setId(id);
     }
 
     public String getUserName() {
@@ -346,15 +350,23 @@ public class DataManager {
     }
 
     public void wsUserInfo() {
-        socketHelper.send(new UserInfoWsRequest(getId()));
+        socketHelper.send(new UserInfoWsRequest());
     }
 
     public void wsAddressProgram() {
-        socketHelper.send(new AddressProgramWsRequest(getId()));
+        socketHelper.send(new AddressProgramWsRequest());
     }
 
     public void wsForm(List<AnswerToQuestion> data) {
-        socketHelper.send(new FormWsRequest(getId(), data));
+        socketHelper.send(new FormWsRequest(data));
+    }
+
+    public void wsFormFillingTime(FormFillingTimeData data) {
+        socketHelper.send(new FormFillingTimeWsRequest(data));
+    }
+
+    public void wsHotLine(HotLineData data) {
+        socketHelper.send(new HotLineWsRequest(data));
     }
 
 }
