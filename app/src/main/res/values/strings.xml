@@ -78,8 +78,8 @@
     <string name="label_verbose_info">Подробная информация:</string>
     <string name="label_promo_description">Подробное описание:</string>
     <string name="label_promo_sku">SKU:</string>
-    <string name="label_date_start">Дата создания</string>
-    <string name="label_date_end">Дата выполнения</string>
+    <string name="label_date_start">Дата создания:</string>
+    <string name="label_date_end">Дата выполнения:</string>
     <string name="label_from">c %1$s</string>
     <string name="label_to">до %1$s</string>
     <string name="label_filter_title">Фильтр по:</string>

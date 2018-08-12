@@ -95,6 +95,12 @@
     </style>
 
 
+    <style name="MullerBold14">
+        <item name="android:fontFamily">@font/muller_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
     <style name="MullerRegular14">
         <item name="android:fontFamily">@font/muller_regular</item>

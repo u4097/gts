@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import com.pixplicity.multiviewpager.MultiViewPager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -33,17 +36,25 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
     @Inject
     ClaimInfoMePresenter claimInfoMePresenter;
 
-    @BindView(R.id.tvAuthor) TextView tvAuthor;
+    @BindView(R.id.tvAuthor)
+    TextView tvAuthor;
 
-    @BindView(R.id.vpPhoto) MultiViewPager vpPhoto;
+    @BindView(R.id.vpPhoto)
+    MultiViewPager vpPhoto;
 
-    @BindView(R.id.tvNumber) TextView tvNumber;
+    @BindView(R.id.tvNumber)
+    TextView tvNumber;
 
-    @BindView(R.id.tvClaimMessage) TextView tvText;
+    @BindView(R.id.tvClaimMessage)
+    TextView tvText;
 
-    @BindView(R.id.tvDateStart) TextView tvDateStart;
-    @BindView(R.id.tvDateFinish) TextView tvDateFinish;
+    @BindView(R.id.tvDateStart)
+    TextView tvDateStart;
+    @BindView(R.id.tvDateFinish)
+    TextView tvDateFinish;
 
+    @BindView(R.id.tvClaimType)
+    TextView tvType;
 
     private Claim claim = null;
     private Client client = null;
@@ -84,11 +95,11 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
         vpPhoto.setAdapter(new ClaimPhotoViewPagerAdapter(this, getPhotoList()));
     }
 
-    private List<PhotoSliderHelper> getPhotoList(){
+    private List<PhotoSliderHelper> getPhotoList() {
         List<PhotoSliderHelper> photoList = new ArrayList<>();
-        photoList.add(new PhotoSliderHelper("Photo 1",R.drawable.photo1));
-        photoList.add(new PhotoSliderHelper("Photo 2",R.drawable.photo2));
-        photoList.add(new PhotoSliderHelper("Photo 3",R.drawable.photo1));
+        photoList.add(new PhotoSliderHelper("Photo 1", R.drawable.photo1));
+        photoList.add(new PhotoSliderHelper("Photo 2", R.drawable.photo2));
+        photoList.add(new PhotoSliderHelper("Photo 3", R.drawable.photo1));
         return photoList;
     }
 
@@ -135,30 +146,39 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
                 setValue(tvNumber, claim.getNumber(), R.string.label_nuber);
             }
             if (claim.getText() != null) {
-                setValue(tvText,claim.getText(),R.string.label_message_claim);
+                setValue(tvText, claim.getText(), R.string.label_message_claim);
             }
 
             if (claim.getCreationDate() != null) {
-                setValue(tvDateStart,claim.getCreationDate(),R.string.label_date_start);
+                setValue(tvDateStart, getDateFormated(claim.getCreationDate()), R.string.label_date_start);
             }
             if (claim.getAppointDate() != null) {
-                setValue(tvDateFinish, claim.getAppointDate(),R.string.label_date_end);
+                setValue(tvDateFinish, getDateFormated(claim.getAppointDate()), R.string.label_date_end);
+            } else {
+                setValue(tvDateFinish, "-", R.string.label_date_end);
             }
-/*            if (claim.getAuthor() != null) {
-                setValue(tvAuthor, claim.getAuthor().toString(this), R.string.label_author);
-            }*/
-/*            if (claim.getBeginDate() != null && claim.getFinishDate() != null) {
-                setValue(tvPeriod, claim.getBeginDate() + " - " + claim.getFinishDate(), R.string.label_period);
-            }*/
-/*            if (claim.getDescription() != null) {
-                setValue(tvDescription, claim.getDescription().toString(this), R.string.label_promo_description);
-            }
-            if (claim.getSkuIds() != null) {
-                setValue(tvSku, claim.getSkuIds().toString(), R.string.label_promo_sku);
-            }*/
+
+            setValue(tvAuthor,"-",R.string.label_author);
+
+            setValue(tvType,"-",R.string.label_claim_type);
+
         }
 
         setStateData();
+    }
+
+    private String getDateFormated(String date) {
+        date = date.substring(0, 10);
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dateObj = null;
+        try {
+            dateObj = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String dateFormated = new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
+        return dateFormated;
     }
 
     @Override
