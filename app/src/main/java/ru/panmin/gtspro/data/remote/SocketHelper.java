@@ -17,9 +17,13 @@ import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
 import ru.panmin.gtspro.data.models.wsresponses.AddressProgramWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.BaseWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.ClaimAnsweredWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.ClaimWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.ErrorWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.FormWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.MerchandiserVisitsSwResponse;
 import ru.panmin.gtspro.data.models.wsresponses.UserInfoWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.VisitAcceptedWsResponse;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.GsonUtils;
 import ru.panmin.gtspro.utils.RxEventBus;
@@ -90,9 +94,14 @@ public class SocketHelper {
                                     rxEventBus.post(userInfoWsResponse);
                                     break;
                                 case Constants.WS_TYPE_ADDRESS_PROGRAM:
-                                    AddressProgramWsResponse addressProgramWsResponse = gson.fromJson(message, AddressProgramWsResponse.class);
-                                    preferencesHelper.setAutoCheckoutTime(addressProgramWsResponse.getData().getAutoCheckoutTime());
-                                    preferencesHelper.setTradePointRadius(addressProgramWsResponse.getData().getTradePointRadius());
+                                    AddressProgramWsResponse addressProgramWsResponse
+                                            = gson.fromJson(message, AddressProgramWsResponse.class);
+                                    preferencesHelper.setAutoCheckoutTime(
+                                            addressProgramWsResponse.getData().getAutoCheckoutTime()
+                                    );
+                                    preferencesHelper.setTradePointRadius(
+                                            addressProgramWsResponse.getData().getTradePointRadius()
+                                    );
                                     realmHelper.setHotLine(addressProgramWsResponse.getData().getHotLine());
                                     realmHelper.setTradePoints(addressProgramWsResponse.getData().getTradePoints());
                                     rxEventBus.post(addressProgramWsResponse);
@@ -100,6 +109,25 @@ public class SocketHelper {
                                 case Constants.WS_TYPE_FORM:
                                     FormWsResponse formWsResponse = gson.fromJson(message, FormWsResponse.class);
                                     rxEventBus.post(formWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_CLAIM:
+                                    ClaimWsResponse claimWsResponse = gson.fromJson(message, ClaimWsResponse.class);
+                                    rxEventBus.post(claimWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_CLAIM_ANSWERED:
+                                    ClaimAnsweredWsResponse claimAnsweredWsResponse
+                                            = gson.fromJson(message, ClaimAnsweredWsResponse.class);
+                                    rxEventBus.post(claimAnsweredWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_VISIT_ACCEPTED:
+                                    VisitAcceptedWsResponse visitAcceptedWsResponse
+                                            = gson.fromJson(message, VisitAcceptedWsResponse.class);
+                                    rxEventBus.post(visitAcceptedWsResponse);
+                                    break;
+                                case Constants.WS_TYPE_MERCHANDISER_VISITS:
+                                    MerchandiserVisitsSwResponse merchandiserVisitsSwResponse
+                                            = gson.fromJson(message, MerchandiserVisitsSwResponse.class);
+                                    rxEventBus.post(merchandiserVisitsSwResponse);
                                     break;
                                 case Constants.WS_TYPE_ERROR:
                                     ErrorWsResponse errorWsResponse = gson.fromJson(message, ErrorWsResponse.class);

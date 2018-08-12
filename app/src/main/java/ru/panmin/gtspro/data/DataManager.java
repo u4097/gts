@@ -14,11 +14,15 @@ import io.realm.RealmList;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.AnswerToQuestion;
+import ru.panmin.gtspro.data.models.ClaimData;
+import ru.panmin.gtspro.data.models.ClaimRedirectData;
+import ru.panmin.gtspro.data.models.EndVisitData;
 import ru.panmin.gtspro.data.models.FormFillingTimeData;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.StartVisitData;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
@@ -26,9 +30,13 @@ import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
 import ru.panmin.gtspro.data.models.wsrequests.AddressProgramWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.ClaimRedirectWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.ClaimWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.EndVisitWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.FormFillingTimeWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.FormWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.HotLineWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.StartVisitWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.UserInfoWsRequest;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.data.remote.SocketHelper;
@@ -367,6 +375,22 @@ public class DataManager {
 
     public void wsHotLine(HotLineData data) {
         socketHelper.send(new HotLineWsRequest(data));
+    }
+
+    public void wsClaim(ClaimData data) {
+        socketHelper.send(new ClaimWsRequest(data));
+    }
+
+    public void wsClaimRedirect(ClaimRedirectData data) {
+        socketHelper.send(new ClaimRedirectWsRequest(data));
+    }
+
+    public void wsStartVisit(StartVisitData data) {
+        socketHelper.send(new StartVisitWsRequest(data));
+    }
+
+    public void wsEndVisit(EndVisitData data) {
+        socketHelper.send(new EndVisitWsRequest(data));
     }
 
 }
