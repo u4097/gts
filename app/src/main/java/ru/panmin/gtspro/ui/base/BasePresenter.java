@@ -12,6 +12,7 @@ import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 import retrofit2.Response;
 import ru.panmin.gtspro.data.models.responses.BaseResponse;
+import ru.panmin.gtspro.utils.GsonUtils;
 import ru.panmin.gtspro.utils.RxUtils;
 import timber.log.Timber;
 
@@ -45,7 +46,7 @@ public abstract class BasePresenter<T extends MvpView> implements Presenter<T> {
             ResponseBody errorBody = response.errorBody();
             BaseResponse baseResponse = null;
             if (errorBody != null) {
-                Gson gson = new Gson();
+                Gson gson = GsonUtils.getGson();
                 try {
                     baseResponse = gson.fromJson(errorBody.string(), BaseResponse.class);
                 } catch (IOException e) {

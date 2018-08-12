@@ -51,7 +51,7 @@ public class Name extends RealmObject {
     }
 
     public String toString(Context context) {
-        switch (LocaleManager.getLanguage(context)) {
+        switch (LocaleManager.getLanguage()) {
             case Constants.LANGUAGE_RUSSIAN:
                 return TextUtils.isEmpty(ru) ? TextUtils.isEmpty(en) ? "" : en : ru;
             case Constants.LANGUAGE_ENGLISH:

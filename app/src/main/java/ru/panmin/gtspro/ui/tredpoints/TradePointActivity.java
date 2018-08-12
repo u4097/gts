@@ -112,7 +112,7 @@ public class TradePointActivity
     }
 
     private void setNewLanguage(String newLanguage) {
-        if (!TextUtils.equals(newLanguage, LocaleManager.getLanguage(this))) {
+        if (!TextUtils.equals(newLanguage, LocaleManager.getLanguage())) {
             LocaleManager.setNewLocale(this, newLanguage);
             startActivity(TradePointActivity.getStartIntent(this, true));
             finishActivity();
@@ -184,7 +184,7 @@ public class TradePointActivity
             drawer.openDrawer(Gravity.END, false);
         }
 
-        if (TextUtils.equals(Constants.LANGUAGE_RUSSIAN, LocaleManager.getLanguage(this))) {
+        if (TextUtils.equals(Constants.LANGUAGE_RUSSIAN, LocaleManager.getLanguage())) {
             buttonLanguageRu.setBackgroundResource(R.drawable.azure_button_background);
             buttonLanguageRu.setTextColor(ContextCompat.getColor(this, R.color.white));
         } else {
@@ -192,7 +192,7 @@ public class TradePointActivity
             buttonLanguageRu.setTextColor(ContextCompat.getColor(this, R.color.azure));
         }
 
-        if (TextUtils.equals(Constants.LANGUAGE_ENGLISH, LocaleManager.getLanguage(this))) {
+        if (TextUtils.equals(Constants.LANGUAGE_ENGLISH, LocaleManager.getLanguage())) {
             buttonLanguageEn.setBackgroundResource(R.drawable.azure_button_background);
             buttonLanguageEn.setTextColor(ContextCompat.getColor(this, R.color.white));
         } else {

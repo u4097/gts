@@ -2,6 +2,7 @@ package ru.panmin.gtspro.data.remote;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -16,8 +17,10 @@ import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
 import ru.panmin.gtspro.data.models.wsresponses.AddressProgramWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.BaseWsResponse;
+import ru.panmin.gtspro.data.models.wsresponses.FormWsResponse;
 import ru.panmin.gtspro.data.models.wsresponses.UserInfoWsResponse;
 import ru.panmin.gtspro.utils.Constants;
+import ru.panmin.gtspro.utils.GsonUtils;
 import ru.panmin.gtspro.utils.RxEventBus;
 import ru.panmin.gtspro.utils.TextUtils;
 import tech.gusavila92.websocketclient.WebSocketClient;
@@ -40,7 +43,7 @@ public class SocketHelper {
         this.preferencesHelper = preferencesHelper;
         this.realmHelper = realmHelper;
         this.rxEventBus = rxEventBus;
-        gson = new Gson();
+        gson = GsonUtils.getGson();
     }
 
     public void createWithConnect() {
@@ -96,24 +99,32 @@ public class SocketHelper {
                                         realmHelper.setTradePoints(addressProgramWsResponse.getData().getTradePoints());
                                         rxEventBus.post(addressProgramWsResponse);
                                         break;
+                                    case Constants.WS_TYPE_FORM:
+                                        FormWsResponse formWsResponse = gson.fromJson(message, FormWsResponse.class);
+                                        rxEventBus.post(formWsResponse);
+                                        break;
                                 }
                             }
                         }
 
                         @Override
                         public void onBinaryReceived(byte[] data) {
+                            Log.d("dvev", "fv  ");
                         }
 
                         @Override
                         public void onPingReceived(byte[] data) {
+                            Log.d("dvev", "fv  ");
                         }
 
                         @Override
                         public void onPongReceived(byte[] data) {
+                            Log.d("dvev", "fv  ");
                         }
 
                         @Override
                         public void onException(Exception e) {
+                            isConnected = false;
                         }
 
                         @Override
@@ -158,7 +169,12 @@ public class SocketHelper {
 
     public <T extends BaseWsRequest> void send(T request) {
         if (webSocketClient != null) {
-            webSocketClient.send(request.toJsonString());
+            if (isConnected()) {
+                webSocketClient.send(request.toJsonString());
+            } else {
+                close();
+                createAndSendRequest(request);
+            }
         } else {
             createAndSendRequest(request);
         }

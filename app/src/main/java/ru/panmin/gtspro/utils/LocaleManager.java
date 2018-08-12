@@ -13,23 +13,21 @@ import ru.panmin.gtspro.data.local.PreferencesHelper;
 public class LocaleManager {
 
     public static Context setLocale(Context context) {
-        return updateResources(context, getLanguage(context));
+        return updateResources(context, getLanguage());
     }
 
     public static void setNewLocale(Context context, String language) {
-        persistLanguage(context, language);
+        persistLanguage(language);
         updateResources(context, language);
     }
 
-    public static String getLanguage(Context context) {
-        PreferencesHelper preferencesHelper = new PreferencesHelper(context);
-        return preferencesHelper.getLanguage();
+    public static String getLanguage() {
+        return PreferencesHelper.getLanguage();
     }
 
     @SuppressLint("ApplySharedPref")
-    private static void persistLanguage(Context context, String language) {
-        PreferencesHelper preferencesHelper = new PreferencesHelper(context);
-        preferencesHelper.setLanguage(language);
+    private static void persistLanguage(String language) {
+        PreferencesHelper.setLanguage(language);
     }
 
     private static Context updateResources(Context context, String language) {

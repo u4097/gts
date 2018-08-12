@@ -1,7 +1,8 @@
 package ru.panmin.gtspro.data.models.wsrequests;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+
+import ru.panmin.gtspro.utils.GsonUtils;
 
 public class BaseWsRequest {
 
@@ -33,7 +34,7 @@ public class BaseWsRequest {
     }
 
     public String toJsonString() {
-        return new Gson().toJson(this);
+        return GsonUtils.getGson().toJson(this);
     }
 
 }

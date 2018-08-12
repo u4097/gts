@@ -13,6 +13,7 @@ import io.reactivex.Single;
 import io.realm.RealmList;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
+import ru.panmin.gtspro.data.models.AnswerToQuestion;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
@@ -21,7 +22,10 @@ import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
+import ru.panmin.gtspro.data.models.wsrequests.AddressProgramWsRequest;
 import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.FormWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.UserInfoWsRequest;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.utils.Constants;
@@ -55,6 +59,7 @@ public class DataManager {
     }
 
     public void clear() {
+        close();
         clearPreferences();
         clearDataBase();
     }
@@ -74,11 +79,11 @@ public class DataManager {
     }
 
     public String getLanguage() {
-        return preferencesHelper.getLanguage();
+        return PreferencesHelper.getLanguage();
     }
 
     public void setLanguage(String language) {
-        preferencesHelper.setLanguage(language);
+        PreferencesHelper.setLanguage(language);
     }
 
     public String getSortType() {
@@ -263,9 +268,7 @@ public class DataManager {
                 .map(addressProgramResponse -> {
                     setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
                     setTradePointRadius(addressProgramResponse.getTradePointRadius());
-                    setHotLine(addressProgramResponse.getHotLine());
-                    setTradePoints(addressProgramResponse.getTradePoints());
-                    return null;
+                    return addressProgramResponse;
                 });
     }
 
@@ -274,9 +277,7 @@ public class DataManager {
                 .map(addressProgramResponse -> {
                     setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
                     setTradePointRadius(addressProgramResponse.getTradePointRadius());
-                    setHotLine(addressProgramResponse.getHotLine());
-                    setTradePoints(addressProgramResponse.getTradePoints());
-                    return null;
+                    return addressProgramResponse;
                 });
     }
 
@@ -344,8 +345,16 @@ public class DataManager {
         return socketHelper.isConnected();
     }
 
-    public <T extends BaseWsRequest> void send(T request) {
-        socketHelper.send(request);
+    public void wsUserInfo() {
+        socketHelper.send(new UserInfoWsRequest(getId()));
+    }
+
+    public void wsAddressProgram() {
+        socketHelper.send(new AddressProgramWsRequest(getId()));
+    }
+
+    public void wsForm(List<AnswerToQuestion> data) {
+        socketHelper.send(new FormWsRequest(getId(), data));
     }
 
 }

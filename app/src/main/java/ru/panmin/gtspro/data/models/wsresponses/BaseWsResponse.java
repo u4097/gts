@@ -46,7 +46,7 @@ public class BaseWsResponse {
     }
 
     public Boolean isError() {
-        return isError;
+        return isError != null && isError;
     }
 
     public void setError(Boolean error) {

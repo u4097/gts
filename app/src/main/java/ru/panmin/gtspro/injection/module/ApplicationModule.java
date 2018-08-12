@@ -12,6 +12,7 @@ import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.injection.ApplicationContext;
+import ru.panmin.gtspro.utils.RxEventBus;
 
 @Module
 public class ApplicationModule {
@@ -48,7 +49,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     SocketHelper provideSocketHelper(@ApplicationContext Context context) {
-        return new SocketHelper(new PreferencesHelper(context));
+        return new SocketHelper(new PreferencesHelper(context), new RealmHelper(context), new RxEventBus());
     }
 
 }

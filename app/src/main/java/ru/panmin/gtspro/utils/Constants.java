@@ -2,7 +2,7 @@ package ru.panmin.gtspro.utils;
 
 public class Constants {
 
-    public static final String DOMAIN = "217.151.77.93:58080";
+    public static final String DOMAIN = "217.151.77.93:58081";
     public static final String API_VERSION = "0";
     public static final String URL_REST = String.format("http://%s/api/v%s/", DOMAIN, API_VERSION);
     public static final String URL_WEB_SOCKET = String.format("ws://%s/ws/", DOMAIN);
@@ -14,6 +14,16 @@ public class Constants {
 
     public static final String WS_TYPE_USER_INFO = "user_info";
     public static final String WS_TYPE_ADDRESS_PROGRAM = "address_program";
+    public static final String WS_TYPE_FORM = "form";
+    public static final String WS_TYPE_HOT_LINE = "hot_line";
+    public static final String WS_TYPE_CLAIM = "claim";
+    public static final String WS_TYPE_CLAIM_ANSWERED = "claim_answered";
+    public static final String WS_TYPE_CLAIM_REDIRECT = "claim_redirect";
+    public static final String WS_TYPE_START_VISIT = "start_visit";
+    public static final String WS_TYPE_VISIT_ACCEPTED = "visit_accepted";
+    public static final String WS_TYPE_END_VISIT = "end_visit";
+    public static final String WS_TYPE_MERCHANDISER_VISITS = "merchandiser_visits";
+    public static final String WS_TYPE_FORM_FILLING_TIME = "form_filling_time";
 
     /* константы времени */
     public static final int SECOND = 1000;
