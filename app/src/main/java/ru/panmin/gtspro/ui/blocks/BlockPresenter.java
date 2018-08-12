@@ -3,11 +3,12 @@ package ru.panmin.gtspro.ui.blocks;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
+import ru.panmin.gtspro.data.models.Client;
+import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
-import timber.log.Timber;
 
-public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
+public class BlockPresenter extends ToolbarPresenter<BlockMvpView> {
 
     private final DataManager dataManager;
     private BlockType.Type currentBlock = BlockType.Type.CLAIMS;
@@ -30,7 +31,7 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
         if (blockType != BlockType.Type.PROMO) {
             getMvpView().setBlockTitle("Блок " + blockType + " в разработке");
         } else {
-           getMvpView().setBlockTitle("Промо");
+            getMvpView().setBlockTitle("Промо");
         }
 
         currentBlock = blockType;
@@ -44,8 +45,16 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView>  {
     }
 
     public void getTradePoint(String tradePointId) {
-        getMvpView().setTradePoint(dataManager.getTradePointById(tradePointId));
+        TradePoint tradePoint = dataManager.getTradePointById(tradePointId);
+        if (tradePoint != null) {
+            getMvpView().setTradePoint(tradePoint);
+        }
     }
+
+    public Client getClientById(String clientId) {
+        return dataManager.getClientById(clientId);
+    }
+
 
 
     public void initViews() {

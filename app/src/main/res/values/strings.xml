@@ -83,7 +83,7 @@
     <string name="label_from">c %1$s</string>
     <string name="label_to">до %1$s</string>
     <string name="label_filter_title">Фильтр по:</string>
-    <string name="label_nuber_claim">Номер:</string>
+    <string name="label_nuber">Номер:</string>
     <string name="label_claim_type">Тип претензии:</string>
     <string name="label_message_claim">Текст обращения:</string>
     <string name="label_chat_claim">Чат</string>

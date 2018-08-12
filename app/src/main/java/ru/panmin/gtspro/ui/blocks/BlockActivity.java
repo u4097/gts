@@ -14,8 +14,10 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import io.realm.RealmList;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
@@ -98,6 +100,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
     private TradePoint tradePoint = null;
+    private RealmList<Claim> claims;
 
 
     public BlockActivity() {
@@ -162,8 +165,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     @Override
     public void initViews(String fullName, String role) {
         initFilter();
-//        this.userRole = role;
-        this.userRole = Constants.ROLE_SUPERVISOR;
+        this.userRole = role;
+//        this.userRole = Constants.ROLE_SUPERVISOR;
         blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
         initBlocks();
 
@@ -171,6 +174,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
 
 
     private Map<BlockType.Type, Holder> tradePointBlockViews;
+    private Map<String, Client> clients = new HashMap<>();
 
     public void initBlocks() {
         BlockViewModel blockViewModel = new BlockViewModel();
@@ -293,6 +297,12 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
+        if (tradePoint != null) {
+            this.claims = tradePoint.getClaims();
+            for (Claim claim : claims) {
+                this.clients.put(claim.getClientId(), blockPresenter.getClientById(claim.getClientId()));
+            }
+        }
         setTitle(tradePoint.getSignboard().toString(this));
         BlockType.Type blockType = blockPresenter.getCurrentBlock();
         initBlockData(blockType);
@@ -342,7 +352,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                 case Constants.ROLE_MERCHANDISER:
                     claimMeAdapter = new ClaimMeAdapter();
                     claimMeAdapter.setInfoClickListener(this);
-                    claimMeAdapter.setData(tradePoint.getClaims());
+
+                    claimMeAdapter.setData(this.claims, this.clients);
                     rvBlock.setAdapter(claimMeAdapter);
                     break;
                 case Constants.ROLE_SUPERVISOR:
@@ -373,4 +384,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         blockPresenter.selectNewSortType(sortType);
     }
 
+    @Override
+    public void setClaim(RealmList<Claim> claims) {
+        this.claims = claims;
+    }
 }

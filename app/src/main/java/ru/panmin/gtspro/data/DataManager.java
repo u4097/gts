@@ -1,6 +1,9 @@
 package ru.panmin.gtspro.data;
 
 import android.support.annotation.Nullable;
+
+import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.utils.TextUtils;
 
 import java.util.Calendar;
@@ -23,7 +26,6 @@ import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
 import ru.panmin.gtspro.data.remote.ApiService;
 import ru.panmin.gtspro.utils.Constants;
-import ru.panmin.gtspro.utils.LocaleManager;
 import ru.panmin.gtspro.utils.RxEventBus;
 
 @Singleton
@@ -261,6 +263,17 @@ public class DataManager {
     @Nullable
     public Promo getPromoById(String id) {
         return realmHelper.getPromoById(id);
+    }
+
+
+    @Nullable
+    public Claim getClaimById(String id) {
+        return realmHelper.getClaimById(id);
+    }
+
+    @Nullable
+    public Client getClientById(String id) {
+        return realmHelper.getClientById(id);
     }
 
 }

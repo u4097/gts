@@ -10,28 +10,40 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import timber.log.Timber;
 
 public class ClaimMeAdapter extends RecyclerView.Adapter<ClaimMeAdapter.ClaimVH> {
 
     private List<Claim> claimList = new ArrayList<>();
     private ClaimClickListener infoClickListener;
+    private Client client;
+    private DataManager dataManager;
+    private Map<String, Client> clients;
+
 
     @Inject
     public ClaimMeAdapter() {
     }
 
-    public void setData(List<Claim> promoList) {
+    public void setData(List<Claim> claimList, Map<String,Client> clientMap) {
+        this.clients = clientMap;
         this.claimList.clear();
-        this.claimList.addAll(promoList);
+        this.claimList.addAll(claimList);
         notifyDataSetChanged();
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public void setInfoClickListener(ClaimClickListener infoClickListener) {
@@ -76,15 +88,18 @@ public class ClaimMeAdapter extends RecyclerView.Adapter<ClaimMeAdapter.ClaimVH>
         }
 
         public void bind(Claim claim) {
-            if (claim.getName() != null) {
-                tvTitle.setText(claim.getName().toString(itemView.getContext()));
-                Timber.d("promo title: %s", claim.getName().toString(itemView.getContext()));
-            }
-            if (claim.getClaimText() != null) {
-                tvSubtitle.setText(claim.getClaimText().toString(itemView.getContext()));
-                Timber.d("promo description: %s",claim.getClaimText().toString(itemView.getContext()));
-            }
 
+            if (claim.getClientId() != null) {
+                Timber.d("client id: %s",claim.getClientId());
+                client = clients.get(claim.getClientId());
+
+            }
+            if (client != null) {
+                tvTitle.setText(client.getName().toString(itemView.getContext()));
+            }
+            if (claim.getText() != null) {
+                tvSubtitle.setText(claim.getText());
+            }
             promoRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
         }
     }

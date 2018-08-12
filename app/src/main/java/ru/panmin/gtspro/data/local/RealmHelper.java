@@ -13,6 +13,8 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
@@ -106,6 +108,23 @@ public class RealmHelper {
         Promo promo = realm.where(Promo.class).equalTo("id", id).findFirst();
         realm.commitTransaction();
         return promo;
+    }
+
+    @Nullable
+    public Claim getClaimById(String id) {
+        realm.beginTransaction();
+        Claim claim = realm.where(Claim.class).equalTo("id", id).findFirst();
+        realm.commitTransaction();
+        return claim;
+    }
+
+
+    @Nullable
+    public Client getClientById(String id) {
+        realm.beginTransaction();
+        Client client = realm.where(Client.class).equalTo("id", id).findFirst();
+        realm.commitTransaction();
+        return client;
     }
 
 }

@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
@@ -27,7 +28,7 @@ import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeMvpView {
 
-    private static final String INTENT_KEY_PROMO_ID = "promo.id";
+    private static final String INTENT_KEY_CLAIM_ID = "promo.id";
 
     @Inject
     ClaimInfoMePresenter claimInfoMePresenter;
@@ -36,15 +37,23 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
 
     @BindView(R.id.vpPhoto) MultiViewPager vpPhoto;
 
+    @BindView(R.id.tvNumber) TextView tvNumber;
+
+    @BindView(R.id.tvClaimMessage) TextView tvText;
+
+    @BindView(R.id.tvDateStart) TextView tvDateStart;
+    @BindView(R.id.tvDateFinish) TextView tvDateFinish;
+
 
     private Claim claim = null;
+    private Client client = null;
 
     public ClaimInfoMeActivity() {
     }
 
     public static Intent getStartIntent(Context context, String promoId) {
         Intent intent = new Intent(context, ClaimInfoMeActivity.class);
-        intent.putExtra(INTENT_KEY_PROMO_ID, promoId);
+        intent.putExtra(INTENT_KEY_CLAIM_ID, promoId);
         return intent;
     }
 
@@ -65,7 +74,7 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
 
     @Override
     protected void initToolbar() {
-        claimInfoMePresenter.getClaim(getIntent().getStringExtra(INTENT_KEY_PROMO_ID));
+        claimInfoMePresenter.getClaim(getIntent().getStringExtra(INTENT_KEY_CLAIM_ID));
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
     }
@@ -102,16 +111,42 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
     protected void errorButtonClick() {
     }
 
+
+    @Override
+    public Claim getClaim() {
+        return this.claim;
+    }
+
+    @Override
+    public void setClient(Client client) {
+        if (client != null) {
+            this.client = client;
+            setTitle(client.getName().toString(this));
+        }
+    }
+
     @Override
     public void setClaim(Claim claim) {
         if (claim != null) {
             this.claim = claim;
-            if (claim.getName() != null) {
-                setTitle(claim.getName().toString(this));
+            if (this.client != null) {
             }
-            if (claim.getAuthor() != null) {
+            if (claim.getNumber() != null) {
+                setValue(tvNumber, claim.getNumber(), R.string.label_nuber);
+            }
+            if (claim.getText() != null) {
+                setValue(tvText,claim.getText(),R.string.label_message_claim);
+            }
+
+            if (claim.getCreationDate() != null) {
+                setValue(tvDateStart,claim.getCreationDate(),R.string.label_date_start);
+            }
+            if (claim.getAppointDate() != null) {
+                setValue(tvDateFinish, claim.getAppointDate(),R.string.label_date_end);
+            }
+/*            if (claim.getAuthor() != null) {
                 setValue(tvAuthor, claim.getAuthor().toString(this), R.string.label_author);
-            }
+            }*/
 /*            if (claim.getBeginDate() != null && claim.getFinishDate() != null) {
                 setValue(tvPeriod, claim.getBeginDate() + " - " + claim.getFinishDate(), R.string.label_period);
             }*/

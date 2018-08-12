@@ -9,13 +9,17 @@ public class Claim extends RealmObject {
 
     @PrimaryKey
     private String id;
-    @SerializedName("name") private Name name;
-    @SerializedName("claim_text") private Name claimText;
-    @SerializedName("message_text") private Name messageText;
-    @SerializedName("author") private Name author;
-    @SerializedName("begin_date") private String beginDate;
-    @SerializedName("finish_date") private String finishDate;
+    @SerializedName("number") private String number;
+    @SerializedName("trade_point_id") private String tradePointId;
+    @SerializedName("client_id") private String clientId;
     @SerializedName("type") private Type type;
+    @SerializedName("text") private String text;
+
+    @SerializedName("appoint_date") private String appointDate;
+    @SerializedName("creation_date") private String creationDate;
+    @SerializedName("answer_before_date") private String answerBeforeDate;
+//    @SerializedName("conversation") private String conversation;
+
 
 
     public Claim() {
@@ -29,43 +33,67 @@ public class Claim extends RealmObject {
         this.id = id;
     }
 
-
-    public Claim(String id, Name name, Name claimText, Name messageText, Name author, String beginDate, String finishDate, Type type) {
-        this.id = id;
-        this.name = name;
-        this.claimText = claimText;
-        this.messageText = messageText;
-        this.author = author;
-        this.beginDate = beginDate;
-        this.finishDate = finishDate;
-        this.type = type;
+    public String getNumber() {
+        return number;
     }
 
-    public Name getName() {
-        return name;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public Name getClaimText() {
-        return claimText;
+    public String getTradePointId() {
+        return tradePointId;
     }
 
-    public Name getMessageText() {
-        return messageText;
+    public void setTradePointId(String tradePointId) {
+        this.tradePointId = tradePointId;
     }
 
-    public Name getAuthor() {
-        return author;
+    public String getClientId() {
+        return clientId;
     }
 
-    public String getBeginDate() {
-        return beginDate;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public String getFinishDate() {
-        return finishDate;
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Type getType() {
         return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public String getAppointDate() {
+        return appointDate;
+    }
+
+    public void setAppointDate(String appointDate) {
+        this.appointDate = appointDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getAnswerBeforeDate() {
+        return answerBeforeDate;
+    }
+
+    public void setAnswerBeforeDate(String answerBeforeDate) {
+        this.answerBeforeDate = answerBeforeDate;
     }
 }

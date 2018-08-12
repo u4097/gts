@@ -106,12 +106,12 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
     public void setClaim(Claim claim) {
         if (claim != null) {
             this.claim = claim;
-            if (claim.getName() != null) {
+/*            if (claim.getName() != null) {
                 setTitle(claim.getName().toString(this));
             }
             if (claim.getAuthor() != null) {
                 setValue(tvAuthor, claim.getAuthor().toString(this), R.string.label_author);
-            }
+            }*/
 /*            if (claim.getBeginDate() != null && claim.getFinishDate() != null) {
                 setValue(tvPeriod, claim.getBeginDate() + " - " + claim.getFinishDate(), R.string.label_period);
             }*/
