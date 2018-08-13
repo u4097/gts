@@ -208,7 +208,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         switch (this.userRole) {
             case Constants.ROLE_MERCHANDISER:
                 startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
-                brgti
             case Constants.ROLE_SUPERVISOR:
                 startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
                 break;
