@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.data.models;
 
+
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmList;
@@ -9,7 +10,8 @@ import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop
 
 public class SkuListElement extends RealmObject {
 
-    @PrimaryKey private String id;
+    @PrimaryKey
+    private String id;
     @SerializedName("name") private Name name;
     @SerializedName("brand") private Brand brand;
     @SerializedName("category") private Category category;
@@ -21,7 +23,7 @@ public class SkuListElement extends RealmObject {
     public SkuListElement() {
     }
 
-    public SkuListElement(GroupAdapter.SkuForAdapter skuListElement) {
+    public SkuListElement(SkuForAdapter skuListElement) {
         id = skuListElement.getId();
         name = skuListElement.getName();
         brand = skuListElement.getBrand();

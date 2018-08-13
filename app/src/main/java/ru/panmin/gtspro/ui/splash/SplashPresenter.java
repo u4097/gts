@@ -36,14 +36,12 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
             if (isOnline) {
                 Calendar calendar = Calendar.getInstance();
                 RxUtils.dispose(disposable);
-                disposable = dataManager.addressProgram()
+                disposable = dataManager.addressProgramWithoutSku()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(
                                 addressProgramResponse -> {
                                     dataManager.setSyncTime(calendar);
-                                    dataManager.setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
-                                    dataManager.setTradePointRadius(addressProgramResponse.getTradePointRadius());
                                     dataManager.setHotLine(addressProgramResponse.getHotLine());
                                     dataManager.setTradePoints(addressProgramResponse.getTradePoints());
                                     getMvpView().openMainActivity();

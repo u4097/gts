@@ -1,15 +1,16 @@
 package ru.panmin.gtspro.ui.blocks.adapters;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -18,13 +19,14 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
 
-public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
+public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private List<Promo> promoList = new ArrayList<>();
     private InfoClickListener infoClickListener;
 
     @Inject
-    PromoAdapter() {
+    public PromoSvAdapter() {
     }
 
     public void setData(List<Promo> promoList) {
@@ -45,7 +47,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
     @NonNull
     @Override
     public PromoVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_promo, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_promo_sv, parent, false);
         return new PromoVH(v);
     }
 
@@ -62,24 +64,42 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoVH> {
 
         @BindView(R.id.tvTitle)
         TextView tvTitle;
-        @BindView(R.id.tvSubtitle)
-        TextView tvSubtitle;
-        @BindView(R.id.ivStatus)
-        AppCompatImageView ivStatus;
+        @BindView(R.id.tvDescription)
+        TextView tvDescription;
+        @BindView(R.id.tvDateStart)
+        TextView tvDateStart;
+        @BindView(R.id.tvDateEnd)
+        TextView tvDateEnd;
+        @BindView(R.id.tvAuthor)
+        TextView tvAuthor;
+        @BindView(R.id.tvAuthor_label)
+        TextView tvAuthor_label;
         @BindView(R.id.promoRoot)
         ViewGroup promoRoot;
 
-        PromoVH(View itemView) {
+        public PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Promo promo) {
+        public void bind(Promo promo) {
+            if (promo.getAuthor() != null) {
+                tvAuthor.setText(promo.getAuthor().toString(itemView.getContext()));
+            }
+            if (promo.getFinishDate() != null) {
+                tvDateEnd.setText(promo.getFinishDate());
+            }
+            if (promo.getBeginDate() != null) {
+                tvDateStart.setText(promo.getBeginDate());
+            }
+            if (promo.getDescription() != null) {
+                tvDescription.setText(promo.getDescription().toString(itemView.getContext()));
+            }
+
             tvTitle.setText(promo.getName().toString(itemView.getContext()));
-            tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
-
     }
+
 
 }

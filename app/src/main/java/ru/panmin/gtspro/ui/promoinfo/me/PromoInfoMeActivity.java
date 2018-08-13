@@ -1,11 +1,10 @@
-package ru.panmin.gtspro.ui.promoinfo;
+package ru.panmin.gtspro.ui.promoinfo.me;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
@@ -17,32 +16,28 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import ru.panmin.gtspro.utils.TextUtils;
 
-public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpView {
+public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeMvpView {
 
     private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
     @Inject
-    PromoInfoPresenter promoInfoPresenter;
+    PromoInfoMePresenter promoInfoPresenter;
 
-    @BindView(R.id.tvClients)
-    TextView tvClients;
-    @BindView(R.id.tvAuthor)
-    TextView tvAuthor;
-    @BindView(R.id.tvPeriod)
-    TextView tvPeriod;
-    @BindView(R.id.tvDescription)
-    TextView tvDescription;
-    @BindView(R.id.tvSku)
-    TextView tvSku;
+    @BindView(R.id.tvClients) TextView tvClients;
+    @BindView(R.id.tvAuthor) TextView tvAuthor;
+    @BindView(R.id.tvPeriod) TextView tvPeriod;
+    @BindView(R.id.tvDescription) TextView tvDescription;
+    @BindView(R.id.tvSku) TextView tvSku;
 
     private Promo promo = null;
 
-    public PromoInfoActivity() {
+    public PromoInfoMeActivity() {
     }
 
     public static Intent getStartIntent(Context context, String promoId) {
-        Intent intent = new Intent(context, PromoInfoActivity.class);
+        Intent intent = new Intent(context, PromoInfoMeActivity.class);
         intent.putExtra(INTENT_KEY_PROMO_ID, promoId);
         return intent;
     }
@@ -54,7 +49,7 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
 
     @Override
     protected int getDataView() {
-        return R.layout.activity_promo_info;
+        return R.layout.activity_promo_info_me;
     }
 
     @Override
@@ -65,7 +60,7 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
     @Override
     protected void initToolbar() {
         promoInfoPresenter.getPromo(getIntent().getStringExtra(INTENT_KEY_PROMO_ID));
-        setNavigationIcon(R.drawable.ic_back_arrow);
+        setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
     }
 
@@ -93,15 +88,27 @@ public class PromoInfoActivity extends ToolbarActivity implements PromoInfoMvpVi
 
     @Override
     public void setPromo(Promo promo) {
-//        this.promo = promo;
-//        setTitle(promo.getName().toString(this));
-        setTitle("Промо");
-
-/*        setValue(tvClients, promo.getClients().toString(), R.string.label_clients);
-        setValue(tvAuthor, promo.getAuthor(), R.string.label_author);
-        setValue(tvDescription, promo.getDescription(), R.string.label_promo_description);
-        setValue(tvPeriod, "16-19 сентября", R.string.label_author);
-        setValue(tvSku, promo.getSku(), R.string.label_promo_sku);*/
+        if (promo != null) {
+            this.promo = promo;
+            if (promo.getName() != null) {
+                setTitle(promo.getName().toString(this));
+            }
+            if (promo.getClient() != null) {
+                setValue(tvClients, promo.getClient().toString(this), R.string.label_clients);
+            }
+            if (promo.getAuthor() != null) {
+                setValue(tvAuthor, promo.getAuthor().toString(this), R.string.label_author);
+            }
+            if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
+                setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
+            }
+            if (promo.getDescription() != null) {
+                setValue(tvDescription, promo.getDescription().toString(this), R.string.label_promo_description);
+            }
+            if (promo.getSkuIds() != null) {
+                setValue(tvSku, promo.getSkuIds().toString(), R.string.label_promo_sku);
+            }
+        }
 
         setStateData();
     }

@@ -37,26 +37,25 @@ public class TradePointActivity
     @Inject
     TradePointPresenter tradePointPresenter;
 
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-    @BindView(R.id.menu_hamburger)
-    AppCompatImageView hamburger;
-    @BindView(R.id.avatarImageNavigationView)
-    AppCompatTextView avatarImageNavigationView;
-    @BindView(R.id.nameTextNavigationView)
-    AppCompatTextView nameTextNavigationView;
-    @BindView(R.id.statusTextNavigationView)
-    AppCompatTextView statusTextNavigationView;
-    @BindView(R.id.buttonLanguageRu)
-    AppCompatButton buttonLanguageRu;
-    @BindView(R.id.buttonLanguageEn)
-    AppCompatButton buttonLanguageEn;
-    @BindView(R.id.exitTextBottom)
-    VectorsSupportTextView exitTextBottom;
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+
+    @BindView(R.id.view_pager) ViewPager viewPager;
+
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
+
+    @BindView(R.id.menu_hamburger) AppCompatImageView hamburger;
+
+    @BindView(R.id.avatarImageNavigationView) AppCompatTextView avatarImageNavigationView;
+
+    @BindView(R.id.nameTextNavigationView) AppCompatTextView nameTextNavigationView;
+
+    @BindView(R.id.statusTextNavigationView) AppCompatTextView statusTextNavigationView;
+
+    @BindView(R.id.buttonLanguageRu) AppCompatButton buttonLanguageRu;
+
+    @BindView(R.id.buttonLanguageEn) AppCompatButton buttonLanguageEn;
+
+    @BindView(R.id.exitTextBottom) VectorsSupportTextView exitTextBottom;
 
     private TradePointPagerAdapter tradePointPagerAdapter = null;
 
@@ -123,7 +122,7 @@ public class TradePointActivity
     }
 
     private void setNewLanguage(String newLanguage) {
-        if (!TextUtils.equals(newLanguage, LocaleManager.getLanguage(this))) {
+        if (!TextUtils.equals(newLanguage, LocaleManager.getLanguage())) {
             LocaleManager.setNewLocale(this, newLanguage);
             startActivity(TradePointActivity.getStartIntent(this, true));
             finishActivity();
@@ -195,7 +194,7 @@ public class TradePointActivity
             drawer.openDrawer(Gravity.END, false);
         }
 
-        if (TextUtils.equals(Constants.LANGUAGE_RUSSIAN, LocaleManager.getLanguage(this))) {
+        if (TextUtils.equals(Constants.LANGUAGE_RUSSIAN, LocaleManager.getLanguage())) {
             buttonLanguageRu.setBackgroundResource(R.drawable.azure_button_background);
             buttonLanguageRu.setTextColor(ContextCompat.getColor(this, R.color.white));
         } else {
@@ -203,7 +202,7 @@ public class TradePointActivity
             buttonLanguageRu.setTextColor(ContextCompat.getColor(this, R.color.azure));
         }
 
-        if (TextUtils.equals(Constants.LANGUAGE_ENGLISH, LocaleManager.getLanguage(this))) {
+        if (TextUtils.equals(Constants.LANGUAGE_ENGLISH, LocaleManager.getLanguage())) {
             buttonLanguageEn.setBackgroundResource(R.drawable.azure_button_background);
             buttonLanguageEn.setTextColor(ContextCompat.getColor(this, R.color.white));
         } else {

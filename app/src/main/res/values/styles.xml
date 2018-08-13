@@ -44,6 +44,7 @@
         <item name="android:textSize">@dimen/text_size_xsmall</item>
     </style>
 
+
     <style name="Theme.Transparent" parent="NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/black80</item>
@@ -54,4 +55,70 @@
         <item name="android:textColorSecondary">@color/azure</item>
     </style>
 
+
+
+    <style name="MullerBold12">
+        <item name="android:fontFamily">@font/muller_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MullerMedium16">
+        <item name="android:fontFamily">@font/muller_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MullerMedium15">
+        <item name="android:fontFamily">@font/muller_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="MullerMedium12">
+        <item name="android:fontFamily">@font/muller_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MullerMedium13">
+        <item name="android:fontFamily">@font/muller_medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+
+    <style name="MullerRegular14">
+        <item name="android:fontFamily">@font/muller_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MullerRegular13">
+        <item name="android:fontFamily">@font/muller_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="HelveticaRegular15">
+        <item name="android:fontFamily">@font/helvetica_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <style name="HelveticaRegular13">
+        <item name="android:fontFamily">@font/helvetica_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="HelveticaRegular12">
+        <item name="android:fontFamily">@font/helvetica_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+>>>>>>> 4b5173cc82c3d94879b3048fc0ed3585ca738173
 </resources>

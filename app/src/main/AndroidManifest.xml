@@ -52,7 +52,8 @@
 
         <activity android:name=".ui.blocks.BlockActivity"/>
 
-        <activity android:name=".ui.promoinfo.PromoInfoActivity"/>
+        <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
+        <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity"/>
 
         <activity
             android:name=".ui.hotline.me.HotlineMeActivity"

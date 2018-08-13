@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 class AllAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
@@ -19,5 +21,9 @@ class AllAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    @Inject
+    public AllAdapter() {
     }
 }

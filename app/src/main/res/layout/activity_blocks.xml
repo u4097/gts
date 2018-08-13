@@ -19,12 +19,11 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/MullerMedium16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/blocks"
@@ -56,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabFilterPromoMe"
+            android:id="@+id/fab_filter"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginBottom="50dp"

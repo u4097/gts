@@ -17,7 +17,10 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
+
+import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
+
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser.MerchandiserActivity;
@@ -120,7 +123,15 @@ public class TradePointInfoSvActivity
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
 
+
         runButtonMe.setOnClickListener(view -> startActivity(HotlineSvActivity.getStartIntent(this, tradePoint.getId())));
+
+        runButtonMe.setOnClickListener(view -> {
+                    tradePointInfoSvPresenter.asd();
+                    //startActivity(BlockActivity.getStartIntent(this, tradePoint.getId()));
+          startActivity(HotlineSvActivity.getStartIntent(this, tradePoint.getId()));
+                }
+        );
 
         setStateData();
     }
