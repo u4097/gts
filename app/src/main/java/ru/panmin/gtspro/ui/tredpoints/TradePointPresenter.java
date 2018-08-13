@@ -20,10 +20,6 @@ public class TradePointPresenter extends ProgressPresenter<TradePointMvpView> {
         dataManager.createWithConnect();
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void initViews() {
         getMvpView().initViews(dataManager.getFullName(), dataManager.getRole());
     }

@@ -10,7 +10,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.base.BasePresenter;
-import ru.panmin.gtspro.utils.RxUtils;
 
 class SplashPresenter extends BasePresenter<SplashMvpView> {
 
@@ -26,17 +25,12 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     void init(boolean isOnline) {
         if (dataManager.isAuth() && dataManager.isNeedUpdateDB()) {
             dataManager.clearDataBase();
             if (isOnline) {
                 Calendar calendar = Calendar.getInstance();
-                RxUtils.dispose(disposable);
-                disposable = dataManager.addressProgramWithoutSku()
+                disposables.add(dataManager.addressProgramWithoutSku()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(
@@ -50,7 +44,8 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
                                 throwable -> {
                                     parseError(throwable);
                                 }
-                        );
+                        )
+                );
             } else {
                 getMvpView().showNoInternetDialog();
             }
@@ -67,7 +62,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
     }
 
     void onResume() {
-        if (timer == null && disposable == null) {
+        if (timer == null && disposables.isDisposed()) {
             openNextActivityAfterTimer();
         }
     }

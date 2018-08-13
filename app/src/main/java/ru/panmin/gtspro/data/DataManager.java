@@ -22,6 +22,7 @@ import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.Sku;
 import ru.panmin.gtspro.data.models.StartVisitData;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
@@ -291,6 +292,10 @@ public class DataManager {
                     setTradePointRadius(addressProgramResponse.getTradePointRadius());
                     return addressProgramResponse;
                 });
+    }
+
+    public Single<RealmList<Sku>> skuByTradePointId(String tradePointId) {
+        return apiService.skuByTradePointId(tradePointId);
     }
 
 

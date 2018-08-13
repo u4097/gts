@@ -14,13 +14,8 @@ class FormsPresenter extends ToolbarPresenter<FormsMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void getPromo(String promoId) {
         getMvpView().setPromo(dataManager.getPromoById(promoId));
-        ;
     }
 
 }
