@@ -91,6 +91,7 @@ public class BlockType {
     }
 
     public enum Type {
+        NONE,
         CLAIMS,
         PROMO,
         PHOTO_REPORT,

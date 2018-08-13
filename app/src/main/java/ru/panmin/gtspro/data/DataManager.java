@@ -17,6 +17,7 @@ import ru.panmin.gtspro.data.models.AnswerToQuestion;
 import ru.panmin.gtspro.data.models.ClaimData;
 import ru.panmin.gtspro.data.models.ClaimRedirectData;
 import ru.panmin.gtspro.data.models.EndVisitData;
+import ru.panmin.gtspro.data.models.Form;
 import ru.panmin.gtspro.data.models.FormFillingTimeData;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.HotLineData;
@@ -338,6 +339,11 @@ public class DataManager {
     @Nullable
     public Promo getPromoById(String id) {
         return realmHelper.getPromoById(id);
+    }
+
+    @Nullable
+    public Form getFormById(String formId) {
+        return realmHelper.getFormById(formId);
     }
 
 

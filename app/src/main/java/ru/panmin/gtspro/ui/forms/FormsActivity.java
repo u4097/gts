@@ -12,6 +12,7 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Form;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
+import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.OtherUtils;
 import ru.panmin.gtspro.utils.SpaceItemDecoration;
@@ -24,8 +25,6 @@ public class FormsActivity extends ToolbarActivity implements FormsMvpView, Form
     @Inject FormsAdapter formsAdapter;
 
     @BindView(R.id.recyclerViewForms) RecyclerView recyclerViewForms;
-
-    private Promo promo = null;
 
     public FormsActivity() {
     }
@@ -89,14 +88,13 @@ public class FormsActivity extends ToolbarActivity implements FormsMvpView, Form
 
     @Override
     public void setPromo(Promo promo) {
-        this.promo = promo;
         formsAdapter.setData(promo.getForms());
         setStateData();
     }
 
     @Override
     public void onFormClick(Form form) {
-
+        startActivity(QuestionGroupsActivity.getStartIntent(this, form.getId()));
     }
 
 }
