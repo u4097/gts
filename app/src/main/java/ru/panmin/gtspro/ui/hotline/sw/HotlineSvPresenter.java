@@ -13,12 +13,6 @@ public class HotlineSvPresenter extends ProgressPresenter<HotlineSvMvpView> {
     @Inject
     HotlineSvPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
-
-    }
-
-    @Override
-    protected void dispose() {
-
     }
 
     public void getClient(String tradePointId) {

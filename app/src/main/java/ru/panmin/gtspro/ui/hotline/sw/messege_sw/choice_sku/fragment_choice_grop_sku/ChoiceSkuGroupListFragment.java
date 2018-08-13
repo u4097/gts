@@ -29,6 +29,10 @@ public class ChoiceSkuGroupListFragment
         implements ChoiceSkuListMvpView,
         BaseSelectSkuInterface {
 
+    private static final String ARG_KEY_CLIENT_ID = "client.id";
+
+    private static final String ARG_KEY_TRADE_POINT_ID = "tradepoint.id";
+
     @Inject
     ChoiceSkuListPresenter choiceSkuListPresenter;
 
@@ -39,8 +43,16 @@ public class ChoiceSkuGroupListFragment
 
     GroupAdapter groupAdapter;
 
-    public static ChoiceSkuGroupListFragment createInstance() {
-        return new ChoiceSkuGroupListFragment();
+    public static ChoiceSkuGroupListFragment createInstance(String clientId, String tradePointId) {
+        ChoiceSkuGroupListFragment fragment = new ChoiceSkuGroupListFragment();
+        Bundle args = new Bundle();
+
+        args.putString(ARG_KEY_TRADE_POINT_ID, tradePointId);
+
+        args.putString(ARG_KEY_CLIENT_ID, clientId);
+
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -81,12 +93,13 @@ public class ChoiceSkuGroupListFragment
 
     @Override
     protected void initViews() {
-        initRecycler();
+        assert getArguments() != null;
+        String clientId = getArguments().getString(ARG_KEY_CLIENT_ID);
+        String tradePointId = getArguments().getString(ARG_KEY_TRADE_POINT_ID);
+        choiceSkuListPresenter.getSkuListElements(tradePointId, clientId);
     }
 
     private void initRecycler() {
-
-        // groupAdapter.setSku(skuListElements);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(groupAdapter);
     }
@@ -103,6 +116,7 @@ public class ChoiceSkuGroupListFragment
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (groupAdapter != null) {
+            assert savedInstanceState != null;
             groupAdapter.onSaveInstanceState(savedInstanceState);
         }
     }
@@ -131,5 +145,6 @@ public class ChoiceSkuGroupListFragment
             list.add(new GroupAdapter.GroupForAdapter(group.getName().toString(), sort.get(group)));
         }
         groupAdapter = new GroupAdapter(list);
+        initRecycler();
     }
 }

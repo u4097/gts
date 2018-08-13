@@ -249,12 +249,13 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
             Timber.e("tradePoint is null");
             return;
         }
-        if (blockType != BlockType.Type.PROMO) {
-            rvBlock.setVisibility(View.GONE);
-            setBlockTitle("Блок " + blockType + " в разработке");
-        } else {
+        if (blockType == BlockType.Type.PROMO) {
             setBlockTitle("Промо");
             rvBlock.setVisibility(View.VISIBLE);
+        } else {
+
+            rvBlock.setVisibility(View.GONE);
+            setBlockTitle("Блок " + blockType + " в разработке");
         }
         rvBlock.setLayoutManager(new LinearLayoutManager(this));
 

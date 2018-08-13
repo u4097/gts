@@ -20,19 +20,33 @@ public class ChoiseSkuActivity
         BaseSelectSkuInterface {
 
     private static final String INTENT_KEY_CLIENT_ID = "client.id";
+
+    private static final String INTENT_KEY_TRADEPOINT_ID = "tradepoint.id";
+
     @Inject
     ChoiseSkuPresenter choiseSkuPresenter;
+
+
     @BindView(R.id.closeSkuChoiceText)
     AppCompatTextView closeSkuChoiceText;
+
     @BindView(R.id.skuChoiceTab_layout)
     TabLayout skuChoiceTab_layout;
+
     @BindView(R.id.skuChoiceView_pager)
     ViewPager skuChoiceView_pager;
+
     private SkuChoicePagerAdapter skuChoicePagerAdapter = null;
 
-    public static Intent getStartIntent(Context context, String clientId) {
+    public ChoiseSkuActivity() {
+    }
+
+    public static Intent getStartIntent(Context context,
+                                        String clientId,
+                                        String tradePointId) {
         Intent intent = new Intent(context, ChoiseSkuActivity.class);
         intent.putExtra(INTENT_KEY_CLIENT_ID, clientId);
+        intent.putExtra(INTENT_KEY_TRADEPOINT_ID, tradePointId);
         return intent;
     }
 
@@ -73,6 +87,15 @@ public class ChoiseSkuActivity
     }
 
     private void initViewPager() {
+        skuChoicePagerAdapter =new SkuChoicePagerAdapter(getSupportFragmentManager());
+        String clientId = getIntent().getStringExtra(INTENT_KEY_CLIENT_ID);
+        String tradePointId = getIntent().getStringExtra(INTENT_KEY_TRADEPOINT_ID);
+        System.out.println(tradePointId);
+        System.out.println(clientId);
+        skuChoicePagerAdapter.setData(clientId, tradePointId);
+        skuChoiceView_pager.setAdapter(skuChoicePagerAdapter);
+        skuChoiceTab_layout.setupWithViewPager(skuChoiceView_pager);
+        skuChoiceView_pager.setOffscreenPageLimit(skuChoicePagerAdapter.getCount());
 
     }
 

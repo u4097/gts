@@ -33,6 +33,7 @@ public class MessageHotLineSwActivity
     @BindView(R.id.skuChoiceTextButton)
     AppCompatImageView skuChoiceTextButton;
     private String clientId;
+    private String tradePointId;
 
     public MessageHotLineSwActivity() {
     }
@@ -113,7 +114,10 @@ public class MessageHotLineSwActivity
     }
 
     private void initSkuMessageButton() {
-        skuChoiceTextButton.setOnClickListener(view -> startActivity(ChoiseSkuActivity.getStartIntent(this, clientId)));
+        skuChoiceTextButton.setOnClickListener(view -> startActivity(
+                ChoiseSkuActivity.getStartIntent(this,
+                        clientId,
+                        tradePointId)));
     }
 
     @Override
@@ -123,9 +127,10 @@ public class MessageHotLineSwActivity
 
 
     @Override
-    public void setClientSku(Client client) {
+    public void setClientSku(Client client, String tradePointId) {
         clientId = client.getId();
-        setTitle(client.getName().toString(this));
+        this.tradePointId = tradePointId;
+        setTitle(client.getName().toString());
         setStateData();
     }
 }

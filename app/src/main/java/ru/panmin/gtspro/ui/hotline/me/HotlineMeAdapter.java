@@ -39,7 +39,7 @@ public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void setClient(TradePoint tradePointById, Context context) {
         clients.clear();
         for (Client client : tradePointById.getClients()) {
-            if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString(context))) {
+            if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString())) {
                 clients.add(client);
             }
         }
@@ -109,8 +109,8 @@ public class HotlineMeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         public void bind(Client client) {
-            text_client_hot_line_item.setText(client.getName().toString(itemView.getContext()));
-            text_client_hot_line_item.setOnClickListener(view -> clientAdapterClickListener.clieintClick(client.getName().toString(itemView.getContext())));
+            text_client_hot_line_item.setText(client.getName().toString());
+            text_client_hot_line_item.setOnClickListener(view -> clientAdapterClickListener.clieintClick(client.getName().toString()));
         }
     }
 

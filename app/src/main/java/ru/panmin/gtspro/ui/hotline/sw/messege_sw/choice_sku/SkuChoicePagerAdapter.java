@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.base.BaseFragment;
@@ -23,6 +25,10 @@ public class SkuChoicePagerAdapter extends FragmentPagerAdapter {
     private static final int COUNT = 3;
 
     private List<BaseSelectSkuInterface> interfaces = new ArrayList<>();
+
+    private String clientId;
+
+    private String tradePointId;
 
     public SkuChoicePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -51,18 +57,19 @@ public class SkuChoicePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        BaseFragment fragment = null;
+       BaseFragment fragment =null;
         switch (position) {
             case PAGE_GROUP:
-                fragment = ChoiceSkuGroupListFragment.createInstance();
+                 fragment = ChoiceSkuGroupListFragment.createInstance(clientId,tradePointId);
                 break;
             case PAGE_LIST:
-                fragment = ChoiceSkuAllListFragment.createInstance();
+                 fragment =  ChoiceSkuAllListFragment.createInstance(clientId,tradePointId);
                 break;
             case PAGE_SELECTED:
-                fragment = SelectedSkuListFragment.createInstance();
+               fragment =  SelectedSkuListFragment.createInstance(clientId,tradePointId);
                 break;
         }
+
         interfaces.add((BaseSelectSkuInterface) fragment);
         return fragment;
     }
@@ -90,4 +97,9 @@ public class SkuChoicePagerAdapter extends FragmentPagerAdapter {
         }
     }
 
+    public void setData(String clientId, String tradePointId) {
+        this.clientId = clientId;
+        this.tradePointId = tradePointId;
+        notifyDataSetChanged();
+    }
 }

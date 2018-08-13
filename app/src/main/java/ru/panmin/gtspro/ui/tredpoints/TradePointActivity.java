@@ -37,26 +37,25 @@ public class TradePointActivity
     @Inject
     TradePointPresenter tradePointPresenter;
 
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-    @BindView(R.id.menu_hamburger)
-    AppCompatImageView hamburger;
-    @BindView(R.id.avatarImageNavigationView)
-    AppCompatTextView avatarImageNavigationView;
-    @BindView(R.id.nameTextNavigationView)
-    AppCompatTextView nameTextNavigationView;
-    @BindView(R.id.statusTextNavigationView)
-    AppCompatTextView statusTextNavigationView;
-    @BindView(R.id.buttonLanguageRu)
-    AppCompatButton buttonLanguageRu;
-    @BindView(R.id.buttonLanguageEn)
-    AppCompatButton buttonLanguageEn;
-    @BindView(R.id.exitTextBottom)
-    VectorsSupportTextView exitTextBottom;
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+
+    @BindView(R.id.view_pager) ViewPager viewPager;
+
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
+
+    @BindView(R.id.menu_hamburger) AppCompatImageView hamburger;
+
+    @BindView(R.id.avatarImageNavigationView) AppCompatTextView avatarImageNavigationView;
+
+    @BindView(R.id.nameTextNavigationView) AppCompatTextView nameTextNavigationView;
+
+    @BindView(R.id.statusTextNavigationView) AppCompatTextView statusTextNavigationView;
+
+    @BindView(R.id.buttonLanguageRu) AppCompatButton buttonLanguageRu;
+
+    @BindView(R.id.buttonLanguageEn) AppCompatButton buttonLanguageEn;
+
+    @BindView(R.id.exitTextBottom) VectorsSupportTextView exitTextBottom;
 
     private TradePointPagerAdapter tradePointPagerAdapter = null;
 

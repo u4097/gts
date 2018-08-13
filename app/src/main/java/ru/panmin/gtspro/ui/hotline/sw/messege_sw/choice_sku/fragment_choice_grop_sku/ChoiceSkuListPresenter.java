@@ -36,27 +36,30 @@ public class ChoiceSkuListPresenter extends ProgressPresenter<ChoiceSkuListMvpVi
                     if (TextUtils.equals(client.getId(), clientId)) {
                         HashMap<Group, List<SkuForAdapter>> sort = new HashMap<>();
                         List<Sku> skus = tradePoint.getSkus();
-                        for (Sku sku : skus) {
-                            if (TextUtils.equals(sku.getClient().getId(), clientId)) {
-                                for (SkuListElement skuListElement : sku.getSkuList()) {
-                                    if (sort.containsKey(skuListElement.getGroup())) {
-                                        List<SkuForAdapter> skuForAdapters = sort.get(skuListElement.getGroup());
-                                        skuForAdapters.add(new SkuForAdapter(skuListElement));
-                                        sort.put(skuListElement.getGroup(), skuForAdapters);
-                                    } else {
-                                        sort.put(
-                                                skuListElement.getGroup(),
-                                                new ArrayList<>(Collections.singletonList(
-                                                        new SkuForAdapter(skuListElement)
-                                                )
-                                                )
-                                        );
+                        if (skus != null && !skus.isEmpty()) {
+                            for (Sku sku : skus) {
+                                if (TextUtils.equals(sku.getClient().getId(), clientId)) {
+                                    for (SkuListElement skuListElement : sku.getSkuList()) {
+                                        if (sort.containsKey(skuListElement.getGroup())) {
+                                            List<SkuForAdapter> skuForAdapters = sort.get(skuListElement.getGroup());
+                                            skuForAdapters.add(new SkuForAdapter(skuListElement));
+                                            sort.put(skuListElement.getGroup(), skuForAdapters);
+                                        } else {
+                                            sort.put(
+                                                    skuListElement.getGroup(),
+                                                    new ArrayList<>(Collections.singletonList(
+                                                            new SkuForAdapter(skuListElement)
+                                                    )
+                                                    )
+                                            );
+                                        }
                                     }
                                 }
                             }
+                            getMvpView().showData(sort);
+                            break;
                         }
-                        getMvpView().showData(sort);
-                        break;
+
                     }
                 }
             }

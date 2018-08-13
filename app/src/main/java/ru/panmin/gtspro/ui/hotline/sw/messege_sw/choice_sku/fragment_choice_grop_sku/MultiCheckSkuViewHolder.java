@@ -25,7 +25,7 @@ class MultiCheckSkuViewHolder extends CheckableChildViewHolder {
         return list_item_multicheck_sku_name;
     }
 
-    public void bind() {
-        list_item_multicheck_sku_name.setText("skuName");
+    public void setSkuName(Object skuName) {
+        list_item_multicheck_sku_name.setText(skuName.toString());
     }
 }

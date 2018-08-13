@@ -1,6 +1,7 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -21,6 +22,11 @@ public class ChoiceSkuAllListFragment
         implements ChoiceSkuAllListMvpView,
         BaseSelectSkuInterface {
 
+
+    private static final String ARG_KEY_CLIENT_ID = "client.id";
+
+    private static final String ARG_KEY_TRADE_POINT_ID = "tradepoint.id";
+
     @Inject
     ChoiceSkuAllListPresenter choiceSkuAllListPresenter;
     @Inject
@@ -29,8 +35,16 @@ public class ChoiceSkuAllListFragment
     RecyclerView recyclerView;
     private BaseSelectSkuInterface skuInterface;
 
-    public static ChoiceSkuAllListFragment createInstance() {
-        return new ChoiceSkuAllListFragment();
+    public static ChoiceSkuAllListFragment createInstance(String clientId, String tradePointId) {
+        ChoiceSkuAllListFragment fragment = new ChoiceSkuAllListFragment();
+        Bundle args = new Bundle();
+
+        args.putString(ARG_KEY_TRADE_POINT_ID, tradePointId);
+
+        args.putString(ARG_KEY_CLIENT_ID, clientId);
+
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override

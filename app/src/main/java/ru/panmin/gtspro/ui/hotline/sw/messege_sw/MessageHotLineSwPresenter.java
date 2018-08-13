@@ -19,11 +19,6 @@ public class MessageHotLineSwPresenter extends ToolbarPresenter<MessegeHotLineSw
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-
-    }
-
     public void getClient(String clientId, String tradePointId) {
         TradePoint tradePoint = dataManager.getTradePointById(tradePointId);
         if (tradePoint != null) {
@@ -31,7 +26,7 @@ public class MessageHotLineSwPresenter extends ToolbarPresenter<MessegeHotLineSw
             if (clients != null && !clients.isEmpty()) {
                 for (Client client : clients) {
                     if (TextUtils.equals(client.getId(), clientId)) {
-                        getMvpView().setClientSku(client);
+                        getMvpView().setClientSku(client,tradePointId);
                         break;
                     }
                 }

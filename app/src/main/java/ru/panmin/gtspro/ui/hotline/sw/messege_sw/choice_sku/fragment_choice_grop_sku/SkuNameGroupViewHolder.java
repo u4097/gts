@@ -10,10 +10,11 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Group;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
-class SkuGroupViewHolder extends GroupViewHolder {
+class SkuNameGroupViewHolder extends GroupViewHolder {
 
     @BindView(R.id.list_item_sku_group_name)
     AppCompatTextView list_item_sku_group_name;
@@ -21,16 +22,13 @@ class SkuGroupViewHolder extends GroupViewHolder {
     @BindView(R.id.list_item_sku_group_icon)
     AppCompatTextView list_item_sku_group_icon;
 
-    public SkuGroupViewHolder(View itemView) {
+    public SkuNameGroupViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this.itemView);
     }
 
-    public void setGenreTitle(ExpandableGroup genre) {
-        if (genre instanceof Genre) {
-            list_item_sku_group_name.setText(genre.getTitle());
-        }
-
+    public void bind(ExpandableGroup group) {
+        list_item_sku_group_name.setText(group.getTitle());
     }
 
     @Override
@@ -58,4 +56,5 @@ class SkuGroupViewHolder extends GroupViewHolder {
         rotate.setFillAfter(true);
         list_item_sku_group_icon.setAnimation(rotate);
     }
+
 }

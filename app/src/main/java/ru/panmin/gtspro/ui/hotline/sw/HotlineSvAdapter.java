@@ -35,7 +35,7 @@ class HotlineSvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void setData(TradePoint tradePoint, Context context) {
         clients.clear();
         for (Client client : tradePoint.getClients()) {
-            if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString(context))) {
+            if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString())) {
                 clients.add(client);
             }
         }
@@ -105,7 +105,7 @@ class HotlineSvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bind(Client client) {
-            text_client_hot_line_item.setText(client.getName().toString(itemView.getContext()));
+            text_client_hot_line_item.setText(client.getName().toString());
             text_client_hot_line_item.setOnClickListener(view -> clientAdapterClickListener.clieintClick(client.getId()));
         }
     }

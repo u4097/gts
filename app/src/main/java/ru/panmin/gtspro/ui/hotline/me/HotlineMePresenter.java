@@ -13,12 +13,6 @@ public class HotlineMePresenter extends ProgressPresenter<HotlineMeMvpView> {
     @Inject
     HotlineMePresenter(DataManager dataManager) {
         this.dataManager = dataManager;
-
-    }
-
-    @Override
-    protected void dispose() {
-
     }
 
     public void getClient(String id) {

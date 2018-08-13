@@ -4,5 +4,5 @@ import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.ui.toolbar.ToolbarMvpView;
 
 public interface MessegeHotLineSwMvpView extends ToolbarMvpView {
-    void setClientSku(Client client);
+    void setClientSku(Client client, String tradePointId);
 }
