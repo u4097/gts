@@ -22,8 +22,4 @@ class TradePointInfoSvPresenter extends ToolbarPresenter<TradePointInfoSvMvpView
         getMvpView().setTradePoint(dataManager.getTradePointById(tradePointId));
     }
 
-    public void asd() {
-        dataManager.wsUserInfo();
-    }
-
 }

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -15,64 +15,53 @@
         <include
             android:id="@+id/blocks"
             layout="@layout/li_block"
-            tools:ignore="MissingConstraints"/>
+            android:layout_alignParentTop="true"
+            tools:ignore="IncludeLayoutParam,MissingConstraints"/>
 
         <TextView
             android:id="@+id/tvTitle"
             style="@style/MullerMedium16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/blocks"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="18dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_medium"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/blocks"
             tools:text="Промо"/>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvPromo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tvTitle"
             android:clipToPadding="false"
-            android:paddingTop="9dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
-
+            android:paddingTop="9dp"/>
 
         <android.support.v4.widget.ContentLoadingProgressBar
             android:id="@+id/vProgressBar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="@dimen/size_throbber_medium"
             android:layout_height="@dimen/size_throbber_medium"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:indeterminate="true"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:visibility="gone"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_filter"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
             app:backgroundTint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.977"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.986"
+            app:fabSize="normal"
             app:srcCompat="@drawable/ic_filter_promo"/>
-    </android.support.constraint.ConstraintLayout>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.ContentFrameLayout>
