@@ -15,8 +15,5 @@ public class SelectedSkuListPresenter
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
 
-    }
 }

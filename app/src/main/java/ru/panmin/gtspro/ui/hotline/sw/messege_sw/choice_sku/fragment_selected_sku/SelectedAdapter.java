@@ -6,12 +6,16 @@ import android.view.ViewGroup;
 
 import java.util.LinkedHashSet;
 
+import javax.inject.Inject;
+
 import ru.panmin.gtspro.data.models.SkuListElement;
 
 class SelectedAdapter extends RecyclerView.Adapter {
 
     private LinkedHashSet<SkuListElement> selectedSku = new LinkedHashSet<>();
 
+    @Inject
+    SelectedAdapter(){}
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

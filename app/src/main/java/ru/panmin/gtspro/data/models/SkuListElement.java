@@ -21,7 +21,7 @@ public class SkuListElement extends RealmObject {
     public SkuListElement() {
     }
 
-    public SkuListElement(GroupAdapter.SkuForAdapter skuListElement) {
+    public SkuListElement(SkuForAdapter skuListElement) {
         id = skuListElement.getId();
         name = skuListElement.getName();
         brand = skuListElement.getBrand();

@@ -14,10 +14,6 @@ class MerchandiserPresenter extends ToolbarPresenter<MerchandiserMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void getMerchandiser(String merchandiserName) {
         getMvpView().setMerchandiser(dataManager.getMerchandiserByName(merchandiserName));
     }

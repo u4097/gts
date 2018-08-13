@@ -1,8 +1,9 @@
 package ru.panmin.gtspro.data.models;
 
-import android.content.Context;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
 
 import com.google.gson.annotations.SerializedName;
 
@@ -54,8 +55,9 @@ public class Name extends RealmObject implements Parcelable {
         this.en = en;
     }
 
-    public String toString(Context context) {
-        switch (LocaleManager.getLanguage(context)) {
+    @Override
+    public String toString() {
+        switch (LocaleManager.getLanguage()) {
             case Constants.LANGUAGE_RUSSIAN:
                 return TextUtils.isEmpty(ru) ? TextUtils.isEmpty(en) ? "" : en : ru;
             case Constants.LANGUAGE_ENGLISH:

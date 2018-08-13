@@ -58,11 +58,27 @@ public class PreferencesHelper {
     private static final String PREF_TRADE_POINT_RADIUS = "trade.point.radius";
     private static final int DEFAULT_PREF_TRADE_POINT_RADIUS = 500;
 
-    private final SharedPreferences preferencesHelper;
+    private static SharedPreferences preferencesHelper;
 
     @Inject
     public PreferencesHelper(@ApplicationContext Context context) {
         preferencesHelper = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+    }
+
+    public static String getLanguage() {
+        return preferencesHelper.getString(PREF_LANGUAGE, DEFAULT_PREF_LANGUAGE);
+    }
+
+    public static void setLanguage(String language) {
+        preferencesHelper.edit().putString(PREF_LANGUAGE, language).apply();
+    }
+
+    public static String getId() {
+        return preferencesHelper.getString(PREF_ID, DEFAULT_PREF_ID);
+    }
+
+    public static void setId(String id) {
+        preferencesHelper.edit().putString(PREF_ID, id).apply();
     }
 
     public void clear() {
@@ -87,14 +103,6 @@ public class PreferencesHelper {
         preferencesHelper.edit().putStringSet(PREF_WAS_PERMISSION_DIALOGS, wasPermissionDialogs).apply();
     }
 
-    public String getLanguage() {
-        return preferencesHelper.getString(PREF_LANGUAGE, DEFAULT_PREF_LANGUAGE);
-    }
-
-    public void setLanguage(String language) {
-        preferencesHelper.edit().putString(PREF_LANGUAGE, language).apply();
-    }
-
     public String getSortType() {
         return preferencesHelper.getString(PREF_SORT_TYPE, DEFAULT_PREF_SORT_TYPE);
     }
@@ -109,14 +117,6 @@ public class PreferencesHelper {
 
     public void setToken(String token) {
         preferencesHelper.edit().putString(PREF_TOKEN, token).apply();
-    }
-
-    public String getId() {
-        return preferencesHelper.getString(PREF_ID, DEFAULT_PREF_ID);
-    }
-
-    public void setId(String id) {
-        preferencesHelper.edit().putString(PREF_ID, id).apply();
     }
 
     public String getUserName() {

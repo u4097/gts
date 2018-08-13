@@ -4,6 +4,7 @@ import dagger.Subcomponent;
 import ru.panmin.gtspro.injection.PerActivity;
 import ru.panmin.gtspro.injection.module.ActivityModule;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
+
 import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.MessageHotLineSwActivity;
@@ -11,8 +12,13 @@ import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.ChoiseSkuActivity;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku.ChoiceSkuAllListFragment;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku.ChoiceSkuGroupListFragment;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_selected_sku.SelectedSkuListFragment;
+
+import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
+import ru.panmin.gtspro.ui.forms.FormsActivity;
+
 import ru.panmin.gtspro.ui.login.LoginActivity;
-import ru.panmin.gtspro.ui.promoinfo.PromoInfoActivity;
+import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
+import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
@@ -35,11 +41,15 @@ public interface ActivityComponent {
     void inject(TradePointInfoSvActivity tradePointInfoSvActivity);
     void inject(MerchandiserActivity merchandiserActivity);
     void inject(BlockActivity blockActivity);
-    void inject(PromoInfoActivity promoInfoActivity);
     void inject(HotlineMeActivity hotlineMeActivity);
     void inject(HotlineSvActivity hotlineSvActivity);
     void inject(MessageHotLineSwActivity messageHotLineSwActivity);
     void inject(ChoiseSkuActivity choiseSkuActivity);
+
+    void inject(PromoInfoMeActivity promoInfoMeActivity);
+    void inject(PromoInfoSvActivity promoInfoSvActivity);
+    void inject(FormsActivity formsActivity);
+
 
     //fragment
     void inject(MeTradePointFragment meTradePointFragment);
@@ -49,4 +59,6 @@ public interface ActivityComponent {
     void inject(ChoiceSkuGroupListFragment choiceSkuGroupListFragment);
     void inject(ChoiceSkuAllListFragment choiceSkuAllListFragment);
     void inject(SelectedSkuListFragment selectedSkuListFragment);
+    void inject(BlockFilter blockFilter);
+
 }

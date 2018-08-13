@@ -105,12 +105,12 @@ public class MeTradePointFragment extends ProgressFragment implements MeTradePoi
 
     @Override
     public void setTradePoint(List<TradePoint> tradePoints, String sortType) {
-        adapter.setData(getActivity(), tradePoints, sortType);
+        adapter.setData(tradePoints, sortType);
     }
 
     @Override
     public void selectNewSortType(String sortType) {
-        adapter.selectNewSortType(getActivity(), sortType);
+        adapter.selectNewSortType(sortType);
     }
 
     @Override

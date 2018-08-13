@@ -15,7 +15,9 @@ public class TradePointPresenter extends ProgressPresenter<TradePointMvpView> {
     }
 
     @Override
-    protected void dispose() {
+    public void attachView(TradePointMvpView mvpView) {
+        super.attachView(mvpView);
+        dataManager.createWithConnect();
     }
 
     public void initViews() {

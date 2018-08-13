@@ -29,73 +29,59 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/MullerMedium15"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:ellipsize="end"
-            android:lines="1"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
-            app:layout_constraintEnd_toStartOf="@+id/tvDateFrom"
-            app:layout_constraintStart_toEndOf="@+id/ivStatus"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
             tools:text="Title"/>
 
         <TextView
             android:id="@+id/tvSubtitle"
-            android:layout_width="0dp"
+            style="@style/MullerRegular13"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:ellipsize="end"
-            android:lines="1"
-            android:textColor="@color/black"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="8dp"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvDateTo"
-            app:layout_constraintStart_toEndOf="@+id/ivStatus"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
 
             tools:text="Подзаголовок"/>
 
         <TextView
             android:id="@+id/tvDateFrom"
+            style="@style/MullerMedium13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+
             android:textColor="@color/grey"
-            android:textSize="@dimen/text_size_tiny"
+            app:layout_constraintEnd_toEndOf="parent"
 
-            app:layout_constraintBottom_toTopOf="@+id/tvDateTo"
-            app:layout_constraintLeft_toLeftOf="@+id/tvDateTo"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-
-            tools:text="C 16/09/2018 "/>
+            tools:text="с 16/09/2018 "/>
 
         <TextView
             android:id="@+id/tvDateTo"
+            style="@style/MullerMedium13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
             android:layout_marginTop="@dimen/spacing_small"
+
             android:textColor="@color/grey"
-            android:textSize="@dimen/text_size_tiny"
-
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDateFrom"
 
-            tools:text="До 16/09/2018"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvDateFrom"
+            tools:text="до 16/09/2018"/>
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

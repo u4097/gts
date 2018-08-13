@@ -11,6 +11,8 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.panmin.gtspro.R;
 
 

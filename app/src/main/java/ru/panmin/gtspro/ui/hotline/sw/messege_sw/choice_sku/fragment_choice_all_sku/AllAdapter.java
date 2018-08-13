@@ -4,7 +4,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 class AllAdapter extends RecyclerView.Adapter {
+
+    @Inject
+    AllAdapter(){}
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

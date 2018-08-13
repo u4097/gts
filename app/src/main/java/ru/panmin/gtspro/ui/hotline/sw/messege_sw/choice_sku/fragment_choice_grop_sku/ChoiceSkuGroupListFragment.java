@@ -128,7 +128,7 @@ public class ChoiceSkuGroupListFragment
     public void showData(HashMap<Group, List<SkuForAdapter>> sort) {
         List<GroupAdapter.GroupForAdapter> list = new ArrayList<>();
         for (Group group : sort.keySet()) {
-            list.add(new GroupAdapter.GroupForAdapter(group.getName().toString(this), sort.get(group)));
+            list.add(new GroupAdapter.GroupForAdapter(group.getName().toString(), sort.get(group)));
         }
         groupAdapter = new GroupAdapter(list);
     }
