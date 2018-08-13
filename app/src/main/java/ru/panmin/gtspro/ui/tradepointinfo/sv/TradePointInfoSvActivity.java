@@ -85,13 +85,13 @@ public class TradePointInfoSvActivity
         adapter.setMeClickListener(this);
         recycler.setAdapter(adapter);
 
-        address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
+        address.setText("Адрес:" + " " + tradePoint.getAddress().toString());
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
             if (i != tradePoint.getClients().size() - 1) {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
+                listClients.append(tradePoint.getClients().get(i).getName().toString()).append(", ");
             } else {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this));
+                listClients.append(tradePoint.getClients().get(i).getName().toString());
             }
         }
 
@@ -136,7 +136,7 @@ public class TradePointInfoSvActivity
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
-        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(tradePoint.getSignboard().toString());
         showInfo();
     }
 

@@ -39,6 +39,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/tvTitle"
             android:clipToPadding="false"
+            android:paddingBottom="8dp"
             android:paddingTop="9dp"/>
 
         <android.support.v4.widget.ContentLoadingProgressBar

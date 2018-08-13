@@ -23,6 +23,7 @@
     <TextView
         android:id="@+id/tCounterClaims"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnClaims"
         app:layout_constraintLeft_toRightOf="@+id/btnClaims"
         app:layout_constraintRight_toRightOf="@+id/btnClaims"
@@ -44,6 +45,7 @@
     <TextView
         android:id="@+id/tCounterPromo"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnPromo"
         app:layout_constraintEnd_toEndOf="@+id/btnPromo"
         app:layout_constraintStart_toEndOf="@+id/btnPromo"
@@ -65,6 +67,7 @@
     <TextView
         android:id="@+id/tCounterPhotoReport"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnPhotoReport"
         app:layout_constraintEnd_toEndOf="@+id/btnPhotoReport"
         app:layout_constraintStart_toEndOf="@+id/btnPhotoReport"
@@ -86,6 +89,7 @@
     <TextView
         android:id="@+id/tCounterReport"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnReport"
         app:layout_constraintEnd_toEndOf="@+id/btnReport"
         app:layout_constraintStart_toEndOf="@+id/btnReport"
@@ -110,6 +114,7 @@
     <TextView
         android:id="@+id/tCounterSku"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSku"
         app:layout_constraintEnd_toEndOf="@+id/btnSku"
         app:layout_constraintStart_toEndOf="@+id/btnSku"
@@ -132,6 +137,7 @@
     <TextView
         android:id="@+id/tCounterPlanogram"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnPlanogram"
         app:layout_constraintEnd_toEndOf="@+id/btnPlanogram"
         app:layout_constraintStart_toEndOf="@+id/btnPlanogram"
@@ -154,6 +160,7 @@
     <TextView
         android:id="@+id/tCounterHotLine"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnHotLine"
         app:layout_constraintEnd_toEndOf="@+id/btnHotLine"
         app:layout_constraintStart_toEndOf="@+id/btnHotLine"
@@ -176,6 +183,7 @@
     <TextView
         android:id="@+id/tCounterStatistics"
         style="@style/Gts.TextView.Badge"
+        android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnStatistics"
         app:layout_constraintEnd_toEndOf="@+id/btnStatistics"
         app:layout_constraintStart_toEndOf="@+id/btnStatistics"

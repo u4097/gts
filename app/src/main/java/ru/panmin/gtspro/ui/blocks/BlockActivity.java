@@ -236,7 +236,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
-        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(tradePoint.getSignboard().toString());
         BlockType.Type blockType = blockPresenter.getCurrentBlock();
         initBlockData(blockType);
         setStateData();

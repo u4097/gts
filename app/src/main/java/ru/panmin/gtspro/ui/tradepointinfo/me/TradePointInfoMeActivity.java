@@ -94,20 +94,20 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
-        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(tradePoint.getSignboard().toString());
         showInfo();
     }
 
     @SuppressLint("SetTextI18n")
     private void showInfo() {
-        address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
+        address.setText("Адрес:" + " " + tradePoint.getAddress().toString());
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
-            if (!TextUtils.isEmpty(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this))) {
+            if (!TextUtils.isEmpty(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString())) {
                 if (i != tradePoint.getClients().size() - 1) {
-                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this)).append(", ");
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString()).append(", ");
                 } else {
-                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this));
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString());
                 }
             }
         }

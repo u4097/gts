@@ -102,7 +102,7 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
     }
 
     private void initRecycler() {
-        clientsMeAdapter.setData(merchandiser, this);
+        clientsMeAdapter.setData(merchandiser);
         client_me_recycler.setAdapter(clientsMeAdapter);
         client_me_recycler.setLayoutManager(new LinearLayoutManager(this));
     }

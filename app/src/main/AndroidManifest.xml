@@ -38,22 +38,19 @@
             android:name=".ui.tredpoints.TradePointActivity"
             android:theme="@style/NoActionBar"/>
 
-        <activity
-            android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"
-            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"/>
 
-        <activity
-            android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"
-            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"/>
 
-        <activity
-            android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"
-            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"/>
 
         <activity android:name=".ui.blocks.BlockActivity"/>
 
         <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
+
         <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity"/>
+
+        <activity android:name=".ui.forms.FormsActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
