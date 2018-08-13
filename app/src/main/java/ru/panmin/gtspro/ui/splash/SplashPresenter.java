@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.panmin.gtspro.data.DataManager;
@@ -38,12 +39,31 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
                                     dataManager.setSyncTime(calendar);
                                     dataManager.setHotLine(addressProgramResponse.getHotLine());
                                     dataManager.setTradePoints(addressProgramResponse.getTradePoints());
-                                    getMvpView().openMainActivity();
-                                    getMvpView().finishActivity();
+                                    final int[] doneSkuLoads = {0};
+                                    disposables.add(
+                                            Observable.fromIterable(addressProgramResponse.getTradePoints())
+                                                    .observeOn(AndroidSchedulers.mainThread())
+                                                    .subscribeOn(Schedulers.io())
+                                                    .subscribe(tradePoint -> disposables.add(
+                                                            dataManager.skuByTradePointId(tradePoint.getId())
+                                                                    .observeOn(AndroidSchedulers.mainThread())
+                                                                    .subscribeOn(Schedulers.io())
+                                                                    .subscribe(
+                                                                            skuRealmList -> {
+                                                                                doneSkuLoads[0]++;
+                                                                                tradePoint.setSkus(skuRealmList);
+                                                                                dataManager.setTradePoint(tradePoint);
+                                                                                if (doneSkuLoads[0] >= addressProgramResponse.getTradePoints().size()) {
+                                                                                    getMvpView().openMainActivity();
+                                                                                    getMvpView().finishActivity();
+                                                                                }
+                                                                            },
+                                                                            this::parseError
+                                                                    )
+                                                    ))
+                                    );
                                 },
-                                throwable -> {
-                                    parseError(throwable);
-                                }
+                                this::parseError
                         )
                 );
             } else {

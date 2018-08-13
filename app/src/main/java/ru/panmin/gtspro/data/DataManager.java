@@ -308,6 +308,10 @@ public class DataManager {
         return realmHelper.getTradePoints();
     }
 
+    public void setTradePoint(TradePoint tradePoint) {
+        realmHelper.setTradePoint(tradePoint);
+    }
+
     public void setTradePoints(RealmList<TradePoint> tradePoints) {
         realmHelper.setTradePoints(tradePoints);
     }

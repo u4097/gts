@@ -64,6 +64,12 @@ public class RealmHelper {
         return tradePoints;
     }
 
+    public void setTradePoint(TradePoint tradePoint) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(tradePoint);
+        realm.commitTransaction();
+    }
+
     public void setTradePoints(RealmList<TradePoint> tradePoints) {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(tradePoints);
