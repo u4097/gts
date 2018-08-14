@@ -182,7 +182,9 @@ public class SocketHelper {
 
     public void connect() {
         if (webSocketClient != null) {
-            webSocketClient.connect();
+            if (!isConnected()) {
+                webSocketClient.connect();
+            }
         } else {
             createWithConnect();
         }

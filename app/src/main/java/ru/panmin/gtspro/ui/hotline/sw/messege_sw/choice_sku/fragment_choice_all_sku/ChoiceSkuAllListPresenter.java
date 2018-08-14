@@ -15,7 +15,5 @@ public class ChoiceSkuAllListPresenter extends ProgressPresenter<ChoiceSkuAllLis
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
+
 }

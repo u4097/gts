@@ -16,11 +16,6 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView> {
         this.dataManager = dataManager;
     }
 
-
-    @Override
-    protected void dispose() {
-    }
-
     public BlockType.Type getCurrentBlock() {
         return currentBlock;
     }

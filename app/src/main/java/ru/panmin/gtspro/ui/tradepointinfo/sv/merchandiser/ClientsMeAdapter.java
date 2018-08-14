@@ -1,6 +1,5 @@
 package ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -28,10 +27,10 @@ public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.Clie
     ClientsMeAdapter() {
     }
 
-    public void setData(Merchandiser merchandiser, Context context) {
+    public void setData(Merchandiser merchandiser) {
         clients.clear();
         for (Client client : merchandiser.getClients()) {
-            if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString(context))) {
+            if (client.getName() != null && !TextUtils.isEmpty(client.getName().toString())) {
                 clients.add(client);
             }
         }
@@ -69,10 +68,23 @@ public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.Clie
         }
 
         public void bind(Client client, int position) {
+<<<<<<< HEAD
             client_number_text.setText(String.valueOf(position + 1));
             client_name_text.setText(client.getName().toString(itemView.getContext()));
 
+=======
+            if (!TextUtils.isEmpty(client.getName().toString())) {
+                client_name_text.setVisibility(View.VISIBLE);
+                client_number_text.setVisibility(View.VISIBLE);
+                client_number_text.setText(String.valueOf(position + 1));
+                client_name_text.setText(client.getName().toString());
+            } else {
+                client_name_text.setVisibility(View.GONE);
+                client_number_text.setVisibility(View.GONE);
+            }
+>>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
 
         }
     }
+
 }

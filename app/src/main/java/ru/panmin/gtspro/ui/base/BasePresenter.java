@@ -7,18 +7,18 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 import retrofit2.Response;
 import ru.panmin.gtspro.data.models.responses.BaseResponse;
 import ru.panmin.gtspro.utils.GsonUtils;
-import ru.panmin.gtspro.utils.RxUtils;
 import timber.log.Timber;
 
 public abstract class BasePresenter<T extends MvpView> implements Presenter<T> {
 
-    protected Disposable disposable;
+    protected CompositeDisposable disposables = new CompositeDisposable();
+
     private T mMvpView = null;
 
     @Override
@@ -28,16 +28,13 @@ public abstract class BasePresenter<T extends MvpView> implements Presenter<T> {
 
     @Override
     public void detachView() {
-        RxUtils.dispose(disposable);
-        dispose();
+        disposables.clear();
         mMvpView = null;
     }
 
     protected T getMvpView() {
         return mMvpView;
     }
-
-    protected abstract void dispose();
 
     protected void parseError(Throwable throwable) {
         if (throwable instanceof HttpException) {

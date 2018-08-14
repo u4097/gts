@@ -1,16 +1,16 @@
-package ru.panmin.gtspro.ui.promoinfo.me;
+package ru.panmin.gtspro.ui.forms;
 
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 
-class PromoInfoMePresenter extends ToolbarPresenter<PromoInfoMeMvpView> {
+class FormsPresenter extends ToolbarPresenter<FormsMvpView> {
 
     private final DataManager dataManager;
 
     @Inject
-    PromoInfoMePresenter(DataManager dataManager) {
+    FormsPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 

@@ -16,10 +16,6 @@ class TradePointInfoMePresenter extends ToolbarPresenter<TradePointInfoMeMvpView
 
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void getTradePoint(String tradePointId) {
         getMvpView().setTradePoint(dataManager.getTradePointById(tradePointId));
     }

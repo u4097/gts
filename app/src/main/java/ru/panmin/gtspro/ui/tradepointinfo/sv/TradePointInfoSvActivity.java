@@ -17,10 +17,14 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.TradePoint;
+<<<<<<< HEAD
 
 import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 
+=======
+import ru.panmin.gtspro.ui.blocks.BlockActivity;
+>>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.merchandiser.MerchandiserActivity;
@@ -99,13 +103,13 @@ public class TradePointInfoSvActivity
         adapter.setMeClickListener(this);
         recycler.setAdapter(adapter);
 
-        address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
+        address.setText("Адрес:" + " " + tradePoint.getAddress().toString());
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
             if (i != tradePoint.getClients().size() - 1) {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this)).append(", ");
+                listClients.append(tradePoint.getClients().get(i).getName().toString()).append(", ");
             } else {
-                listClients.append(tradePoint.getClients().get(i).getName().toString(this));
+                listClients.append(tradePoint.getClients().get(i).getName().toString());
             }
         }
 
@@ -123,6 +127,7 @@ public class TradePointInfoSvActivity
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
 
+<<<<<<< HEAD
 
         runButtonMe.setOnClickListener(view -> startActivity(HotlineSvActivity.getStartIntent(this, tradePoint.getId())));
 
@@ -131,6 +136,9 @@ public class TradePointInfoSvActivity
                     //startActivity(BlockActivity.getStartIntent(this, tradePoint.getId()));
           startActivity(HotlineSvActivity.getStartIntent(this, tradePoint.getId()));
                 }
+=======
+        runButtonMe.setOnClickListener(view -> startActivity(BlockActivity.getStartIntent(this, tradePoint.getId()))
+>>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
         );
 
         setStateData();
@@ -157,7 +165,7 @@ public class TradePointInfoSvActivity
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
-        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(tradePoint.getSignboard().toString());
         showInfo();
     }
 

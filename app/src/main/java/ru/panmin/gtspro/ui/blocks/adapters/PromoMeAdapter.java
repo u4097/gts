@@ -81,12 +81,12 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
 
         public void bind(Promo promo) {
             if (promo.getName() != null) {
-                tvTitle.setText(promo.getName().toString(itemView.getContext()));
-                Timber.d("promo title: %s", promo.getName().toString(itemView.getContext()));
+                tvTitle.setText(promo.getName().toString());
+                Timber.d("promo title: %s", promo.getName().toString());
             }
             if (promo.getDescription() != null) {
-                tvSubtitle.setText(promo.getDescription().toString(itemView.getContext()));
-                Timber.d("promo description: %s", promo.getDescription().toString(itemView.getContext()));
+                tvSubtitle.setText(promo.getDescription().toString());
+                Timber.d("promo description: %s", promo.getDescription().toString());
             }
             if (promo.getBeginDate() != null) {
 //                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from,promo.getBeginDate()));
@@ -100,4 +100,5 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
     }
+
 }

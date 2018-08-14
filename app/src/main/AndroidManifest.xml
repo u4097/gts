@@ -38,23 +38,19 @@
             android:name=".ui.tredpoints.TradePointActivity"
             android:theme="@style/NoActionBar"/>
 
-        <activity
-            android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"
-            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"/>
 
-        <activity
-            android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"
-            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"/>
 
-        <activity
-            android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"
-            android:theme="@style/MainTheme"/>
+        <activity android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"/>
 
         <activity android:name=".ui.blocks.BlockActivity"/>
 
         <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
+
         <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity"/>
 
+<<<<<<< HEAD
         <activity
             android:name=".ui.hotline.me.HotlineMeActivity"
             android:theme="@style/Theme.Transparent" />
@@ -70,6 +66,9 @@
         <activity
             android:name=".ui.hotline.sw.messege_sw.choice_sku.ChoiseSkuActivity"
             android:theme="@style/Theme.Transparent" />
+=======
+        <activity android:name=".ui.forms.FormsActivity"/>
+>>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
 
         <meta-data
             android:name="com.google.android.gms.version"

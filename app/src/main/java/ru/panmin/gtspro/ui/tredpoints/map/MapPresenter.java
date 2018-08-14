@@ -14,10 +14,6 @@ public class MapPresenter extends ProgressPresenter<MapMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void afterInitViews() {
         dataManager.getTradePoints();
         getMvpView().setStateData();

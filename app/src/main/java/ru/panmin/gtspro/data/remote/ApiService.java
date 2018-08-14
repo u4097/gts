@@ -11,6 +11,7 @@ import com.readystatesoftware.chuck.ChuckInterceptor;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
+import io.realm.RealmList;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.internal.platform.Platform;
@@ -20,8 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import ru.panmin.gtspro.BuildConfig;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
+import ru.panmin.gtspro.data.models.Sku;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
@@ -47,6 +50,11 @@ public interface ApiService {
 
     @GET("address_program_without_sku/")
     Single<AddressProgramResponse> addressProgramWithoutSku();
+
+    @GET("address_program/sku/{trade_point_id}/")
+    Single<RealmList<Sku>> skuByTradePointId(
+            @Path("trade_point_id") String tradePointId
+    );
 
     class Creator {
 

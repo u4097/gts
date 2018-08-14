@@ -6,11 +6,11 @@ import java.util.Calendar;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.base.BasePresenter;
-import ru.panmin.gtspro.utils.RxUtils;
 
 class SplashPresenter extends BasePresenter<SplashMvpView> {
 
@@ -26,17 +26,12 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     void init(boolean isOnline) {
         if (dataManager.isAuth() && dataManager.isNeedUpdateDB()) {
             dataManager.clearDataBase();
             if (isOnline) {
                 Calendar calendar = Calendar.getInstance();
-                RxUtils.dispose(disposable);
-                disposable = dataManager.addressProgramWithoutSku()
+                disposables.add(dataManager.addressProgramWithoutSku()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(
@@ -44,13 +39,33 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
                                     dataManager.setSyncTime(calendar);
                                     dataManager.setHotLine(addressProgramResponse.getHotLine());
                                     dataManager.setTradePoints(addressProgramResponse.getTradePoints());
-                                    getMvpView().openMainActivity();
-                                    getMvpView().finishActivity();
+                                    final int[] doneSkuLoads = {0};
+                                    disposables.add(
+                                            Observable.fromIterable(addressProgramResponse.getTradePoints())
+                                                    .observeOn(AndroidSchedulers.mainThread())
+                                                    .subscribeOn(Schedulers.io())
+                                                    .subscribe(tradePoint -> disposables.add(
+                                                            dataManager.skuByTradePointId(tradePoint.getId())
+                                                                    .observeOn(AndroidSchedulers.mainThread())
+                                                                    .subscribeOn(Schedulers.io())
+                                                                    .subscribe(
+                                                                            skuRealmList -> {
+                                                                                doneSkuLoads[0]++;
+                                                                                tradePoint.setSkus(skuRealmList);
+                                                                                dataManager.setTradePoint(tradePoint);
+                                                                                if (doneSkuLoads[0] >= addressProgramResponse.getTradePoints().size()) {
+                                                                                    getMvpView().openMainActivity();
+                                                                                    getMvpView().finishActivity();
+                                                                                }
+                                                                            },
+                                                                            this::parseError
+                                                                    )
+                                                    ))
+                                    );
                                 },
-                                throwable -> {
-                                    parseError(throwable);
-                                }
-                        );
+                                this::parseError
+                        )
+                );
             } else {
                 getMvpView().showNoInternetDialog();
             }
@@ -67,7 +82,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
     }
 
     void onResume() {
-        if (timer == null && disposable == null) {
+        if (timer == null && disposables.isDisposed()) {
             openNextActivityAfterTimer();
         }
     }

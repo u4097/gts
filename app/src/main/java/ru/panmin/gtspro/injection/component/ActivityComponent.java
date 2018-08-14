@@ -14,7 +14,11 @@ import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_selected_sku.SelectedSkuListFragment;
 
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
+<<<<<<< HEAD
 
+=======
+import ru.panmin.gtspro.ui.forms.FormsActivity;
+>>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
@@ -58,6 +62,7 @@ public interface ActivityComponent {
     void inject(PromoInfoMeActivity promoInfoMeActivity);
 
     void inject(PromoInfoSvActivity promoInfoSvActivity);
+    void inject(FormsActivity formsActivity);
 
 
     //fragment

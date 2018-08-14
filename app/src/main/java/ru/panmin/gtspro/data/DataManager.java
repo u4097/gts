@@ -22,6 +22,7 @@ import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.Sku;
 import ru.panmin.gtspro.data.models.StartVisitData;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
@@ -293,6 +294,10 @@ public class DataManager {
                 });
     }
 
+    public Single<RealmList<Sku>> skuByTradePointId(String tradePointId) {
+        return apiService.skuByTradePointId(tradePointId);
+    }
+
 
     /* DATABASE */
     public void clearDataBase() {
@@ -301,6 +306,10 @@ public class DataManager {
 
     public List<TradePoint> getTradePoints() {
         return realmHelper.getTradePoints();
+    }
+
+    public void setTradePoint(TradePoint tradePoint) {
+        realmHelper.setTradePoint(tradePoint);
     }
 
     public void setTradePoints(RealmList<TradePoint> tradePoints) {
