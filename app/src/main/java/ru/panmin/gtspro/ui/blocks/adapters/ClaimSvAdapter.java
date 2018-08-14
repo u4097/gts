@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,20 +20,24 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import timber.log.Timber;
 
 public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH> {
 
     private List<Claim> claimList = new ArrayList<>();
     private ClaimClickListener infoClickListener;
+    private Client client;
+    private Map<String, Client> clients;
 
     @Inject
     public ClaimSvAdapter() {
     }
 
-    public void setData(List<Claim> promoList) {
+    public void setData(List<Claim> claimList, Map<String,Client> clientMap) {
         this.claimList.clear();
-        this.claimList.addAll(promoList);
+        this.clients = clientMap;
+        this.claimList.addAll(claimList);
         notifyDataSetChanged();
     }
 
@@ -63,17 +70,14 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
 
         @BindView(R.id.claimRoot)
         ViewGroup claimRoot;
-
-/*        @BindView(R.id.ivStatus)
-        AppCompatImageView ivStatus;
         @BindView(R.id.tvTitle)
         TextView tvTitle;
-        @BindView(R.id.tvSubtitle)
-        TextView tvSubtitle;
+        @BindView(R.id.tvDescription)
+        TextView tvDescription;
         @BindView(R.id.tvDateStart)
         TextView tvDateStart;
         @BindView(R.id.tvDateEnd)
-        TextView tvDateEnd;*/
+        TextView tvDateEnd;
 
         public ClaimVH(View itemView) {
             super(itemView);
@@ -81,23 +85,44 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
         }
 
         public void bind(Claim claim) {
-/*            if (claim.getName() != null) {
-                tvTitle.setText(claim.getName().toString(itemView.getContext()));
-                Timber.d("promo title: %s", claim.getName().toString(itemView.getContext()));
-            }
-            if (claim.getClaimText() != null) {
-                tvSubtitle.setText(claim.getClaimText().toString(itemView.getContext()));
-                Timber.d("promo description: %s",claim.getClaimText().toString(itemView.getContext()));
+
+            if (claim.getClientId() != null) {
+                Timber.d("client id: %s",claim.getClientId());
+                client = clients.get(claim.getClientId());
             }
 
-            if (claim.getBeginDate() != null) {
-                tvDateStart.setText(claim.getBeginDate());
+            if (client != null) {
+                tvTitle.setText(client.getName().toString(itemView.getContext()));
             }
-            if (claim.getFinishDate() != null) {
-                tvDateEnd.setText(claim.getFinishDate());
-            }*/
+            if (claim.getText() != null) {
+                tvDescription.setText(claim.getText());
+            }
+            if (claim.getCreationDate() != null) {
+                tvDateStart.setText(getDateFormated(claim.getCreationDate()));
+            }
+            if (claim.getAppointDate() != null) {
+                tvDateEnd.setText(getDateFormated(claim.getAppointDate()));
+            }
+
+            claimRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
+
 
             claimRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
         }
     }
+
+    private String getDateFormated(String date) {
+        date = date.substring(0, 10);
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dateObj = null;
+        try {
+            dateObj = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String dateFormated = new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
+        return dateFormated;
+    }
+
 }

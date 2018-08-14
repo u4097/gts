@@ -27,7 +27,6 @@ public class ClaimMeAdapter extends RecyclerView.Adapter<ClaimMeAdapter.ClaimVH>
     private List<Claim> claimList = new ArrayList<>();
     private ClaimClickListener infoClickListener;
     private Client client;
-    private DataManager dataManager;
     private Map<String, Client> clients;
 
 

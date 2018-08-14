@@ -302,8 +302,8 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
             for (Claim claim : claims) {
                 this.clients.put(claim.getClientId(), blockPresenter.getClientById(claim.getClientId()));
             }
+            setTitle(tradePoint.getSignboard().toString(this));
         }
-        setTitle(tradePoint.getSignboard().toString(this));
         BlockType.Type blockType = blockPresenter.getCurrentBlock();
         initBlockData(blockType);
         setStateData();
@@ -359,7 +359,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                 case Constants.ROLE_SUPERVISOR:
                     claimSvAdapter = new ClaimSvAdapter();
                     claimSvAdapter.setInfoClickListener(this);
-                    claimSvAdapter.setData(tradePoint.getClaims());
+                    claimSvAdapter.setData(this.claims, this.clients);
                     rvBlock.setAdapter(claimSvAdapter);
                     break;
                 default:
