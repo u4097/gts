@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.pixplicity.multiviewpager.MultiViewPager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,16 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
     @BindView(R.id.tvAuthor) TextView tvAuthor;
 
     @BindView(R.id.vpPhoto) MultiViewPager vpPhoto;
+
+    @BindView(R.id.tvNumber) TextView tvNumber;
+
+    @BindView(R.id.tvClaimMessage) TextView tvText;
+
+    @BindView(R.id.tvDateStart) TextView tvDateStart;
+
+    @BindView(R.id.tvDateFinish) TextView tvDateFinish;
+
+    @BindView(R.id.tvClaimType) TextView tvType;
 
 
     private Claim claim = null;
@@ -106,23 +118,34 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
 
     @Override
     public void setClaim(Claim claim) {
+        this.claim = claim;
         if (claim != null) {
-            this.claim = claim;
-/*            if (claim.getName() != null) {
-                setTitle(claim.getName().toString(this));
+            if (claim.getNumber() != null) {
+                setValue(tvNumber, claim.getNumber(), R.string.label_nuber);
             }
-            if (claim.getAuthor() != null) {
-                setValue(tvAuthor, claim.getAuthor().toString(this), R.string.label_author);
-            }*/
-/*            if (claim.getBeginDate() != null && claim.getFinishDate() != null) {
-                setValue(tvPeriod, claim.getBeginDate() + " - " + claim.getFinishDate(), R.string.label_period);
-            }*/
-/*            if (claim.getDescription() != null) {
-                setValue(tvDescription, claim.getDescription().toString(this), R.string.label_promo_description);
+
+            if (claim.getText() != null) {
+                setValue(tvText, claim.getText(), R.string.label_message_claim);
             }
-            if (claim.getSkuIds() != null) {
-                setValue(tvSku, claim.getSkuIds().toString(), R.string.label_promo_sku);
-            }*/
+
+            if (claim.getCreationDate() != null) {
+                setValue(tvDateStart, getDateFormated(claim.getCreationDate()), R.string.label_date_start);
+            }
+            if (claim.getAppointDate() != null) {
+                setValue(tvDateFinish, getDateFormated(claim.getAppointDate()), R.string.label_date_end);
+            } else {
+                setValue(tvDateFinish, "-", R.string.label_date_end);
+            }
+
+
+            if (claim.getType().getName() != null) {
+                setValue(tvType,claim.getType().getName().toString(),R.string.label_claim_type);
+            } else {
+                setValue(tvType,"-",R.string.label_claim_type);
+            }
+
+            setValue(tvAuthor,"-",R.string.label_author);
+
         }
 
         setStateData();
@@ -152,6 +175,21 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
             this.client = client;
             setTitle(client.getName().toString());
         }
+    }
+
+
+    private String getDateFormated(String date) {
+        date = date.substring(0, 10);
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dateObj = null;
+        try {
+            dateObj = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String dateFormated = new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
+        return dateFormated;
     }
 
 }

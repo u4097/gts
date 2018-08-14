@@ -145,6 +145,7 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
             if (claim.getNumber() != null) {
                 setValue(tvNumber, claim.getNumber(), R.string.label_nuber);
             }
+
             if (claim.getText() != null) {
                 setValue(tvText, claim.getText(), R.string.label_message_claim);
             }
