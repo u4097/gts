@@ -1,10 +1,18 @@
 package ru.panmin.gtspro.data.models;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ru.panmin.gtspro.utils.Constants;
+import timber.log.Timber;
 
 public class Promo extends RealmObject {
 
@@ -18,13 +26,13 @@ public class Promo extends RealmObject {
     @SerializedName("mechanics") private Mechanic mechanics;
     @SerializedName("type") private Type type;
     @SerializedName("sku_ids") private RealmList<SkuListElement> skuIds = new RealmList<>();
-    @SerializedName("forms") private RealmList<Form> forms = new RealmList<>();
+    @SerializedName("forms") private RealmList<FormOrReport> forms = new RealmList<>();
 
     public Promo() {
     }
 
     public Promo(String id, Name name, Name description, Name client, Name author, String beginDate, String finishDate, Mechanic mechanics,
-                 Type type, RealmList<SkuListElement> skuIds, RealmList<Form> forms) {
+                 Type type, RealmList<SkuListElement> skuIds, RealmList<FormOrReport> forms) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -110,11 +118,11 @@ public class Promo extends RealmObject {
         this.skuIds = skuIds;
     }
 
-    public RealmList<Form> getForms() {
+    public RealmList<FormOrReport> getForms() {
         return forms;
     }
 
-    public void setForms(RealmList<Form> forms) {
+    public void setForms(RealmList<FormOrReport> forms) {
         this.forms = forms;
     }
 
@@ -125,4 +133,43 @@ public class Promo extends RealmObject {
     public void setAuthor(Name author) {
         this.author = author;
     }
+
+    public Date getBeginDateAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(beginDate);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public Date getFinishDateAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(finishDate);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public String getBeginDateWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getBeginDateAsDate());
+    }
+
+    public String getFinishDateWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getFinishDateAsDate());
+    }
+
+    public String getBeginDateWithFormat(@NonNull String dateFormat) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        return simpleDateFormat.format(getBeginDateAsDate());
+    }
+
+    public String getFinishDateWithFormat(@NonNull String dateFormat) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        return simpleDateFormat.format(getFinishDateAsDate());
+    }
+
 }

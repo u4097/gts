@@ -11,9 +11,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.QuestionGroup;
-import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.OtherUtils;
@@ -60,7 +58,6 @@ public class QuestionGroupsActivity
     protected void initToolbar() {
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(R.string.form);
     }
 
     @Override

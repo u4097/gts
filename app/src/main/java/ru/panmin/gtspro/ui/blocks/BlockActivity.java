@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,11 +16,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
+import ru.panmin.gtspro.ui.blocks.adapters.PhotoReportMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.PhotoReportSvAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ReportMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ReportSvAdapter;
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
 import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
@@ -32,13 +38,19 @@ import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
 
-public class BlockActivity extends ToolbarActivity implements BlockMvpView, PromoMeAdapter.InfoClickListener, PromoSvAdapter.InfoClickListener {
+public class BlockActivity
+        extends ToolbarActivity
+        implements BlockMvpView,
+        PromoMeAdapter.InfoClickListener,
+        PromoSvAdapter.InfoClickListener,
+        PhotoReportMeAdapter.OnPhotoReportClickListener,
+        PhotoReportSvAdapter.OnPhotoReportClickListener,
+        ReportMeAdapter.OnReportClickListener,
+        ReportSvAdapter.OnReportClickListener {
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
     @Inject BlockPresenter blockPresenter;
-    @Inject PromoMeAdapter promoMeAdapter;
-    @Inject PromoSvAdapter promoSvAdapter;
 
     @BindView(R.id.btnClaims) FloatingActionButton btnClaims;
     @BindView(R.id.tCounterClaims) TextView tCounterClaims;
@@ -59,6 +71,15 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @BindView(R.id.rvPromo) RecyclerView rvBlock;
     @BindView(R.id.tvTitle) TextView tvTitle;
     @BindView(R.id.fab_filter) FloatingActionButton filter;
+
+    private PhotoReportMeAdapter photoReportMeAdapter;
+    private PhotoReportSvAdapter photoReportSvAdapter;
+
+    private PromoMeAdapter promoMeAdapter;
+    private PromoSvAdapter promoSvAdapter;
+
+    private ReportMeAdapter reportMeAdapter;
+    private ReportSvAdapter reportSvAdapter;
 
     private String userRole;
     private TradePoint tradePoint = null;
@@ -126,18 +147,11 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
 
     @Override
     public void initViews(String role, TradePoint tradePoint) {
-        this.userRole = role;
-        this.tradePoint = tradePoint;
-
-        setTitle(tradePoint.getSignboard().toString());
-
         rvBlock.setLayoutManager(new LinearLayoutManager(this));
 
-        promoMeAdapter.setInfoClickListener(this);
-        promoMeAdapter.setData(tradePoint.getPromos());
-
-        promoSvAdapter.setInfoClickListener(this);
-        promoSvAdapter.setData(tradePoint.getPromos());
+        this.userRole = role;
+        this.tradePoint = tradePoint;
+        setTitle(tradePoint.getSignboard().toString());
 
         initFilter();
         initBlocks();
@@ -208,6 +222,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
         switch (this.userRole) {
             case Constants.ROLE_MERCHANDISER:
                 startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
+                break;
             case Constants.ROLE_SUPERVISOR:
                 startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
                 break;
@@ -223,15 +238,24 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     public void initBlockData(BlockType.Type blockType) {
         if (currentBlock != blockType) {
             currentBlock = blockType;
+            clean();
             rvBlock.setVisibility(View.VISIBLE);
+            filter.setVisibility(View.GONE);
             switch (blockType) {
                 case PROMO:
+                    filter.setVisibility(View.VISIBLE);
                     setBlockTitle("Промо");
                     switch (this.userRole) {
                         case Constants.ROLE_MERCHANDISER:
+                            promoMeAdapter = new PromoMeAdapter();
+                            promoMeAdapter.setInfoClickListener(this);
+                            promoMeAdapter.setData(tradePoint.getPromos());
                             rvBlock.setAdapter(promoMeAdapter);
                             break;
                         case Constants.ROLE_SUPERVISOR:
+                            promoSvAdapter = new PromoSvAdapter();
+                            promoSvAdapter.setInfoClickListener(this);
+                            promoSvAdapter.setData(tradePoint.getPromos());
                             rvBlock.setAdapter(promoSvAdapter);
                             break;
                     }
@@ -240,10 +264,16 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
                     setBlockTitle("Фотоотчеты");
                     switch (this.userRole) {
                         case Constants.ROLE_MERCHANDISER:
-                            rvBlock.setAdapter(promoMeAdapter);
+                            photoReportMeAdapter = new PhotoReportMeAdapter();
+                            photoReportMeAdapter.setOnPhotoReportClickListener(this);
+                            photoReportMeAdapter.setData(tradePoint.getPhotoreports());
+                            rvBlock.setAdapter(photoReportMeAdapter);
                             break;
                         case Constants.ROLE_SUPERVISOR:
-                            rvBlock.setAdapter(promoSvAdapter);
+                            photoReportSvAdapter = new PhotoReportSvAdapter();
+                            photoReportSvAdapter.setOnPhotoReportClickListener(this);
+                            photoReportSvAdapter.setData(tradePoint.getPhotoreports());
+                            rvBlock.setAdapter(photoReportSvAdapter);
                             break;
                     }
                     break;
@@ -251,10 +281,16 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
                     setBlockTitle("Отчеты");
                     switch (this.userRole) {
                         case Constants.ROLE_MERCHANDISER:
-                            rvBlock.setAdapter(promoMeAdapter);
+                            reportMeAdapter = new ReportMeAdapter();
+                            reportMeAdapter.setOnReportClickListener(this);
+                            reportMeAdapter.setData(tradePoint.getReports());
+                            rvBlock.setAdapter(reportMeAdapter);
                             break;
                         case Constants.ROLE_SUPERVISOR:
-                            rvBlock.setAdapter(promoSvAdapter);
+                            reportSvAdapter = new ReportSvAdapter();
+                            reportSvAdapter.setOnReportClickListener(this);
+                            reportSvAdapter.setData(tradePoint.getReports());
+                            rvBlock.setAdapter(reportSvAdapter);
                             break;
                     }
                     break;
@@ -276,6 +312,54 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView, Prom
     @Override
     public void selectNewSortType(String sortType) {
         blockPresenter.selectNewSortType(sortType);
+    }
+
+    private void clean() {
+        rvBlock.setAdapter(null);
+
+        if (promoMeAdapter != null) {
+            promoMeAdapter.setInfoClickListener(null);
+            promoMeAdapter.setData(new ArrayList<>());
+            promoMeAdapter = null;
+        }
+
+        if (promoSvAdapter != null) {
+            promoSvAdapter.setInfoClickListener(null);
+            promoSvAdapter.setData(new ArrayList<>());
+            promoSvAdapter = null;
+        }
+
+        if (photoReportMeAdapter != null) {
+            photoReportMeAdapter.setOnPhotoReportClickListener(null);
+            photoReportMeAdapter.setData(new ArrayList<>());
+            photoReportMeAdapter = null;
+        }
+
+        if (photoReportSvAdapter != null) {
+            photoReportSvAdapter.setOnPhotoReportClickListener(null);
+            photoReportSvAdapter.setData(new ArrayList<>());
+            photoReportSvAdapter = null;
+        }
+
+        if (reportMeAdapter != null) {
+            reportMeAdapter.setOnReportClickListener(null);
+            reportMeAdapter.setData(new ArrayList<>());
+            reportMeAdapter = null;
+        }
+
+        if (reportSvAdapter != null) {
+            reportSvAdapter.setOnReportClickListener(null);
+            reportSvAdapter.setData(new ArrayList<>());
+            reportSvAdapter = null;
+        }
+    }
+
+    @Override
+    public void onPhotoReportClick(FormOrReport photoReport) {
+    }
+
+    @Override
+    public void onReportClick(FormOrReport report) {
     }
 
     class Holder {

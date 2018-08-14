@@ -51,4 +51,60 @@ public class Answer extends RealmObject {
         }
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Boolean getBooleanValue() {
+        return booleanValue;
+    }
+
+    public void setBooleanValue(Boolean booleanValue) {
+        this.booleanValue = booleanValue;
+    }
+
+    public Double getDoubleValue() {
+        return doubleValue;
+    }
+
+    public void setDoubleValue(Double doubleValue) {
+        this.doubleValue = doubleValue;
+    }
+
+    public Integer getIntegerValue() {
+        return integerValue;
+    }
+
+    public void setIntegerValue(Integer integerValue) {
+        this.integerValue = integerValue;
+    }
+
+    public String getStringValue() {
+        return stringValue;
+    }
+
+    public void setStringValue(String stringValue) {
+        this.stringValue = stringValue;
+    }
+
+    public RealmList<Integer> getIntegerList() {
+        return integerList;
+    }
+
+    public void setIntegerList(RealmList<Integer> integerList) {
+        this.integerList = integerList;
+    }
+
+    public RealmList<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(RealmList<Photo> photoList) {
+        this.photoList = photoList;
+    }
+
 }

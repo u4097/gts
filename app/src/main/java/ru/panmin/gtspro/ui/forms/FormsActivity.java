@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.data.models.Form;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
@@ -55,7 +55,7 @@ public class FormsActivity extends ToolbarActivity implements FormsMvpView, Form
     protected void initToolbar() {
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(R.string.form);
+        setTitle(R.string.formOrReport);
     }
 
     @Override
@@ -93,8 +93,8 @@ public class FormsActivity extends ToolbarActivity implements FormsMvpView, Form
     }
 
     @Override
-    public void onFormClick(Form form) {
-        startActivity(QuestionGroupsActivity.getStartIntent(this, form.getId()));
+    public void onFormClick(FormOrReport formOrReport) {
+        startActivity(QuestionGroupsActivity.getStartIntent(this, formOrReport.getId()));
     }
 
 }

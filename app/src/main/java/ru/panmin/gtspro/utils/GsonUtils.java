@@ -160,9 +160,33 @@ public class GsonUtils {
 
                     @Override
                     public void write(JsonWriter writer, Answer value) throws IOException {
+                        if (value == null) {
+                            writer.nullValue();
+                        } else if (value.getBooleanValue() != null) {
+                            writer.value(value.getBooleanValue());
+                        } else if (value.getDoubleValue() != null) {
+                            writer.value(value.getDoubleValue());
+                        } else if (value.getIntegerValue() != null) {
+                            writer.value(value.getIntegerValue());
+                        } else if (value.getStringValue() != null) {
+                            writer.value(value.getStringValue());
+                        } else if (value.getIntegerList() != null && !value.getIntegerList().isEmpty()) {
+                            writer.beginArray();
+                            for (Integer integer : value.getIntegerList()) {
+                                writer.value(integer);
+                            }
+                            writer.endArray();
+                        } else if (value.getPhotoList() != null && !value.getPhotoList().isEmpty()) {
+                            Gson newGson = new Gson();
+                            writer.beginArray();
+                            for (Photo photo : value.getPhotoList()) {
+                                writer.jsonValue(newGson.toJson(photo));
+                            }
+                            writer.endArray();
+                        }
                     }
                 })
-                .setDateFormat(Constants.DATE_TIME_FORMAT)
+                .setDateFormat(Constants.DATE_FORMAT)
                 .create();
     }
 

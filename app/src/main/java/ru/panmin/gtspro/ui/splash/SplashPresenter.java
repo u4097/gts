@@ -21,6 +21,8 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
 
     private CountDownTimer timer;
 
+    private boolean isLoading = false;
+
     @Inject
     SplashPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
@@ -30,6 +32,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
         if (dataManager.isAuth() && dataManager.isNeedUpdateDB()) {
             dataManager.clearDataBase();
             if (isOnline) {
+                isLoading = true;
                 Calendar calendar = Calendar.getInstance();
                 disposables.add(dataManager.addressProgramWithoutSku()
                         .observeOn(AndroidSchedulers.mainThread())
@@ -54,6 +57,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
                                                                                 tradePoint.setSkus(skuRealmList);
                                                                                 dataManager.setTradePoint(tradePoint);
                                                                                 if (doneSkuLoads[0] >= addressProgramResponse.getTradePoints().size()) {
+                                                                                    isLoading = false;
                                                                                     getMvpView().openMainActivity();
                                                                                     getMvpView().finishActivity();
                                                                                 }
@@ -82,7 +86,7 @@ class SplashPresenter extends BasePresenter<SplashMvpView> {
     }
 
     void onResume() {
-        if (timer == null && disposables.isDisposed()) {
+        if (timer == null && !isLoading) {
             openNextActivityAfterTimer();
         }
     }

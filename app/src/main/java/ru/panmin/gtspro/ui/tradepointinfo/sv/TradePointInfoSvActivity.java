@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Merchandiser;
+import ru.panmin.gtspro.data.models.Time;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
@@ -96,10 +97,9 @@ public class TradePointInfoSvActivity
         }
 
         StringBuilder listTime = new StringBuilder();
-
-        for (int i = 0; i < tradePoint.getTimes().size(); i++) {
-            if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
-                listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());
+        for (Time time : tradePoint.getTimes()) {
+            if (time != null) {
+                listTime.append(time.toString());
             }
         }
         schedule.setText("График Визита:" + " " + "" + listTime);

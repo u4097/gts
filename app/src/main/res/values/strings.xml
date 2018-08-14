@@ -83,7 +83,7 @@
     <string name="label_from">c %1$s</string>
     <string name="label_to">до %1$s</string>
     <string name="label_filter_title">Фильтр по:</string>
-    <string name="form">Анкета</string>
+    <string name="formOrReport">Анкета</string>
 
     <plurals name="question_plurals">
         <item quantity="zero">Вопросов</item>

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import io.realm.RealmList;
 import ru.panmin.gtspro.data.DataManager;
-import ru.panmin.gtspro.data.models.Form;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.Question;
 import ru.panmin.gtspro.data.models.QuestionGroup;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
@@ -23,10 +23,10 @@ class QuestionGroupsPresenter extends ToolbarPresenter<QuestionGroupsMvpView> {
     }
 
     public void getForm(String formId) {
-        Form form = dataManager.getFormById(formId);
-        if (form != null) {
+        FormOrReport formOrReport = dataManager.getFormById(formId);
+        if (formOrReport != null) {
             List<QuestionGroup> questionGroups = new ArrayList<>();
-            RealmList<Question> questions = form.getQuestions();
+            RealmList<Question> questions = formOrReport.getQuestions();
             questions.sort("groupType");
             for (Question question : questions) {
                 boolean isFindQuestionGroup = false;
@@ -41,7 +41,7 @@ class QuestionGroupsPresenter extends ToolbarPresenter<QuestionGroupsMvpView> {
                     questionGroups.add(new QuestionGroup(question));
                 }
             }
-            getMvpView().setQuestionGroups(form.getName().toString(), questionGroups);
+            getMvpView().setQuestionGroups(formOrReport.getName().toString(), questionGroups);
         }
     }
 
