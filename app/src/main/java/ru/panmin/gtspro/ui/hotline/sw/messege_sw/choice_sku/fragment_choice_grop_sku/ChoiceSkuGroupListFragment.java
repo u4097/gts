@@ -27,7 +27,7 @@ import ru.panmin.gtspro.ui.progress.ProgressFragment;
 public class ChoiceSkuGroupListFragment
         extends ProgressFragment
         implements ChoiceSkuListMvpView,
-        BaseSelectSkuInterface/*,GroupAdapter.SkuClickListener */{
+        BaseSelectSkuInterface {
 
     private static final String ARG_KEY_CLIENT_ID = "client.id";
 
@@ -129,24 +129,14 @@ public class ChoiceSkuGroupListFragment
 
     @Override
     public void selectSku(int fromAction, SkuListElement skuListElement) {
-
+        skuInterface.selectSku(fromAction, skuListElement);
     }
 
     @Override
     public void deselectSku(int fromAction, SkuListElement skuListElement) {
-
+        skuInterface.deselectSku(fromAction, skuListElement);
     }
 
-
-    /*@Override
-    public void select(int childIndex) {
-
-    }
-
-    @Override
-    public void deselect(int childIndex) {
-
-    }*/
 
     @Override
     public void showData(HashMap<Group, List<SkuForAdapter>> sort) {
@@ -154,11 +144,9 @@ public class ChoiceSkuGroupListFragment
         for (Group group : sort.keySet()) {
             list.add(new GroupAdapter.GroupForAdapter(group.getName().toString(), sort.get(group)));
         }
-        groupAdapter = new GroupAdapter(list,skuInterface);
-       // groupAdapter.setClickListener(this);
+        groupAdapter = new GroupAdapter(list, this);
         initRecycler();
         setStateData();
     }
-
 
 }

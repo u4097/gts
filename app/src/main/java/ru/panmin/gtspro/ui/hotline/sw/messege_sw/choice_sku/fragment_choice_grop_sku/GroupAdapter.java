@@ -16,6 +16,7 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.SkuForAdapter;
 import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.BaseSelectSkuInterface;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.SkuChoicePagerAdapter;
 
 public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroupViewHolder, MultiCheckSkuViewHolder> {
 
@@ -36,7 +37,8 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
     }
 
     @Override
-    public void onBindCheckChildViewHolder(MultiCheckSkuViewHolder holder, int flatPosition, CheckedExpandableGroup group, int childIndex) {
+    public void onBindCheckChildViewHolder(MultiCheckSkuViewHolder holder, int flatPosition,
+                                           CheckedExpandableGroup group, int childIndex) {
         holder.setSkuName((SkuForAdapter) group.getItems().get(childIndex));
     }
 
@@ -48,7 +50,11 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
     }
 
     @Override
-    public void onBindGroupViewHolder(SkuNameGroupViewHolder holder, int flatPosition, ExpandableGroup group) {
+    public void onBindGroupViewHolder(
+            SkuNameGroupViewHolder holder,
+            int flatPosition,
+            ExpandableGroup group
+    ) {
         holder.bind(group);
     }
 
@@ -61,11 +67,18 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
         @Override
         public void onChildClicked(int childIndex, boolean checked) {
             if (checked) {
-               // skuClickListener.selectSku(childIndex, );
+                skuClickListener.selectSku(
+                        SkuChoicePagerAdapter.PAGE_GROUP,
+                        new SkuListElement((SkuForAdapter) getItems().get(childIndex)))
+                ;
             } else {
-               // skuClickListener.deselectSku(childIndex,);
+                skuClickListener.deselectSku(
+                        SkuChoicePagerAdapter.PAGE_GROUP,
+                        new SkuListElement((SkuForAdapter) getItems().get(childIndex))
+                );
             }
         }
 
     }
+
 }
