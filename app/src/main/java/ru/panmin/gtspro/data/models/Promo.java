@@ -162,14 +162,22 @@ public class Promo extends RealmObject {
         return simpleDateFormat.format(getFinishDateAsDate());
     }
 
+    @SuppressLint("SimpleDateFormat")
     public String getBeginDateWithFormat(@NonNull String dateFormat) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-        return simpleDateFormat.format(getBeginDateAsDate());
+        return getBeginDateWithFormat(new SimpleDateFormat(dateFormat));
     }
 
+    @SuppressLint("SimpleDateFormat")
     public String getFinishDateWithFormat(@NonNull String dateFormat) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-        return simpleDateFormat.format(getFinishDateAsDate());
+        return getFinishDateWithFormat(new SimpleDateFormat(dateFormat));
+    }
+
+    public String getBeginDateWithFormat() {
+        return getBeginDateWithFormat("dd/MM/yyyy");
+    }
+
+    public String getFinishDateWithFormat() {
+        return getFinishDateWithFormat("dd/MM/yyyy");
     }
 
 }

@@ -102,7 +102,7 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
                 setValue(tvAuthor, promo.getAuthor().toString(), R.string.label_author);
             }
             if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
-                setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
+                setValue(tvPeriod, promo.getBeginDateWithFormat() + " - " + promo.getFinishDateWithFormat(), R.string.label_period);
             }
             if (promo.getDescription() != null) {
                 setValue(tvDescription, promo.getDescription().toString(), R.string.label_promo_description);

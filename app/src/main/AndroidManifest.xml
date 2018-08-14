@@ -41,7 +41,6 @@
         <activity
             android:name=".ui.tredpoints.TradePointActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTask"
             android:theme="@style/NoActionBar"/>
 
         <activity

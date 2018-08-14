@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -21,7 +19,6 @@ import ru.panmin.gtspro.data.models.Promo;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private List<Promo> promoList = new ArrayList<>();
     private InfoClickListener infoClickListener;
 
@@ -62,22 +59,15 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
 
     class PromoVH extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tvTitle)
-        TextView tvTitle;
-        @BindView(R.id.tvDescription)
-        TextView tvDescription;
-        @BindView(R.id.tvDateStart)
-        TextView tvDateStart;
-        @BindView(R.id.tvDateEnd)
-        TextView tvDateEnd;
-        @BindView(R.id.tvAuthor)
-        TextView tvAuthor;
-        @BindView(R.id.tvAuthor_label)
-        TextView tvAuthor_label;
-        @BindView(R.id.promoRoot)
-        ViewGroup promoRoot;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvDescription) TextView tvDescription;
+        @BindView(R.id.tvDateStart) TextView tvDateStart;
+        @BindView(R.id.tvDateEnd) TextView tvDateEnd;
+        @BindView(R.id.tvAuthor) TextView tvAuthor;
+        @BindView(R.id.tvAuthor_label) TextView tvAuthor_label;
+        @BindView(R.id.promoRoot) ViewGroup promoRoot;
 
-        public PromoVH(View itemView) {
+        PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -87,10 +77,10 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
                 tvAuthor.setText(promo.getAuthor().toString());
             }
             if (promo.getFinishDate() != null) {
-                tvDateEnd.setText(promo.getFinishDate());
+                tvDateEnd.setText(promo.getFinishDateWithFormat());
             }
             if (promo.getBeginDate() != null) {
-                tvDateStart.setText(promo.getBeginDate());
+                tvDateStart.setText(promo.getBeginDateWithFormat());
             }
             if (promo.getDescription() != null) {
                 tvDescription.setText(promo.getDescription().toString());
