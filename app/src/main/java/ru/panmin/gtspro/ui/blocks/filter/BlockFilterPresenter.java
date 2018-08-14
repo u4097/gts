@@ -17,10 +17,6 @@ class BlockFilterPresenter extends BasePresenter<BlockFilterMvpView> {
 
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void initViews() {
         getMvpView().afterViews(dataManager.getSortType());
     }

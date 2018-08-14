@@ -15,6 +15,7 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.Client;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
@@ -72,6 +73,12 @@ public class RealmHelper {
         realm.commitTransaction();
     }
 
+    public void setTradePoint(TradePoint tradePoint) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(tradePoint);
+        realm.commitTransaction();
+    }
+
     @Nullable
     public TradePoint getTradePointById(String id) {
         realm.beginTransaction();
@@ -125,6 +132,19 @@ public class RealmHelper {
         Client client = realm.where(Client.class).equalTo("id", id).findFirst();
         realm.commitTransaction();
         return client;
+    }
+    public FormOrReport getFormById(String formId) {
+        realm.beginTransaction();
+        FormOrReport formOrReport = realm.where(FormOrReport.class).equalTo("id", formId).findFirst();
+        realm.commitTransaction();
+        return formOrReport;
+    }
+
+    public FormOrReport getReportById(String reportId) {
+        realm.beginTransaction();
+        FormOrReport formOrReport = realm.where(FormOrReport.class).equalTo("id", reportId).findFirst();
+        realm.commitTransaction();
+        return formOrReport;
     }
 
 }

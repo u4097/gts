@@ -11,13 +11,13 @@
         style="@style/MullerMedium16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/label_verbose_info"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Подробная информация:"/>
 
     <android.support.v7.widget.CardView
@@ -138,31 +138,29 @@
                 android:id="@+id/tvAuthor_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:textSize="13sp"
                 android:alpha=".5"
                 android:text="Сейчас выполняет:"
+                android:textColor="@color/black"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/vLine"
-                tools:text="Сейчас выполняет:"
-                />
+                tools:text="Сейчас выполняет:"/>
 
             <TextView
                 android:id="@+id/tvAuthorBottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toEndOf="@id/tvAuthor_label"
-                app:layout_constraintTop_toBottomOf="@id/vLine"
                 android:textColor="@color/azure"
                 android:textSize="13sp"
-                tools:text="Владислав Яковлевич"
-                android:layout_marginLeft="28dp" />
-
+                app:layout_constraintStart_toEndOf="@id/tvAuthor_label"
+                app:layout_constraintTop_toBottomOf="@id/vLine"
+                tools:text="Владислав Яковлевич"/>
 
 
         </android.support.constraint.ConstraintLayout>
@@ -171,20 +169,19 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:layout_width="0dp"
         style="@style/HelveticaRegular12"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:alpha=".5"
         android:text="Чтобы приступить к заданию вы
 должны быть в периметре 500м"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="16dp"
         android:textAlignment="center"
-        android:alpha=".5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnResume"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
     <android.support.v7.widget.AppCompatButton
@@ -192,18 +189,18 @@
         style="@style/MullerBold12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="80dp"
-        android:background="@drawable/bg_btn_round6"
-        android:paddingStart="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_btn_accent"
         android:paddingEnd="30dp"
+        android:paddingStart="30dp"
         android:text="Приступить"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

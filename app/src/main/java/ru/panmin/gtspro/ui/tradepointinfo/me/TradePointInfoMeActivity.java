@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +15,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Time;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
@@ -95,32 +95,30 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
     @Override
     public void setTradePoint(TradePoint tradePoint) {
         this.tradePoint = tradePoint;
-        setTitle(tradePoint.getSignboard().toString(this));
+        setTitle(tradePoint.getSignboard().toString());
         showInfo();
     }
 
     @SuppressLint("SetTextI18n")
     private void showInfo() {
-        address.setText("Адрес:" + " " + tradePoint.getAddress().toString(this));
+        address.setText("Адрес:" + " " + tradePoint.getAddress().toString());
         StringBuilder listClients = new StringBuilder();
         for (int i = 0; i < tradePoint.getClients().size(); i++) {
-            if (!TextUtils.isEmpty(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this))) {
+            if (!TextUtils.isEmpty(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString())) {
                 if (i != tradePoint.getClients().size() - 1) {
-                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this)).append(", ");
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString()).append(", ");
                 } else {
-                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString(this));
+                    listClients.append(Objects.requireNonNull(tradePoint.getClients().get(i)).getName().toString());
                 }
             }
         }
 
         StringBuilder listTime = new StringBuilder();
-
-        for (int i = 0; i < tradePoint.getTimes().size(); i++) {
-            if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
-                listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());
+        for (Time time : tradePoint.getTimes()) {
+            if (time != null) {
+                listTime.append(time.toString());
             }
         }
-
         schedule.setText("График Визита:" + " " + "" + listTime);
         client.setText("Клиенты:" + " " + listClients);
         claimsQuantity.setText(String.valueOf(tradePoint.getClaims().size()));

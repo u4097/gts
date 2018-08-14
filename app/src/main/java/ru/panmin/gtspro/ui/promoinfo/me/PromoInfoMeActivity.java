@@ -3,6 +3,7 @@ package ru.panmin.gtspro.ui.promoinfo.me;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatButton;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -15,22 +16,22 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import timber.log.Timber;
 
 public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeMvpView {
 
     private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
-    @Inject
-    PromoInfoMePresenter promoInfoPresenter;
+    @Inject PromoInfoMePresenter promoInfoPresenter;
 
     @BindView(R.id.tvClients) TextView tvClients;
     @BindView(R.id.tvAuthor) TextView tvAuthor;
     @BindView(R.id.tvPeriod) TextView tvPeriod;
     @BindView(R.id.tvDescription) TextView tvDescription;
     @BindView(R.id.tvSku) TextView tvSku;
+    @BindView(R.id.btnResume) AppCompatButton btnResume;
 
     private Promo promo = null;
 
@@ -92,23 +93,25 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
         if (promo != null) {
             this.promo = promo;
             if (promo.getName() != null) {
-                setTitle(promo.getName().toString(this));
+                setTitle(promo.getName().toString());
             }
             if (promo.getClient() != null) {
-                setValue(tvClients, promo.getClient().toString(this), R.string.label_clients);
+                setValue(tvClients, promo.getClient().toString(), R.string.label_clients);
             }
             if (promo.getAuthor() != null) {
-                setValue(tvAuthor, promo.getAuthor().toString(this), R.string.label_author);
+                setValue(tvAuthor, promo.getAuthor().toString(), R.string.label_author);
             }
             if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
                 setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
             }
             if (promo.getDescription() != null) {
-                setValue(tvDescription, promo.getDescription().toString(this), R.string.label_promo_description);
+                setValue(tvDescription, promo.getDescription().toString(), R.string.label_promo_description);
             }
             if (promo.getSkuIds() != null) {
                 setValue(tvSku, promo.getSkuIds().toString(), R.string.label_promo_sku);
             }
+
+            btnResume.setOnClickListener(view -> startActivity(FormsActivity.getStartIntent(this, promo.getId())));
         }
 
         setStateData();

@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
@@ -38,6 +39,7 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
 
 
     private Claim claim = null;
+    private Client client = null;
 
     public ClaimInfoSvActivity() {
     }
@@ -136,6 +138,19 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
             spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             tv.setText(spannable);
             tv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public Claim getClaim() {
+        return this.claim;
+    }
+
+    @Override
+    public void setClient(Client client) {
+        if (client != null) {
+            this.client = client;
+            setTitle(client.getName().toString());
         }
     }
 

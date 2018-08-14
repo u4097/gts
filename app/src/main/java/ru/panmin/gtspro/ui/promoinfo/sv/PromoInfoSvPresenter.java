@@ -14,10 +14,6 @@ class PromoInfoSvPresenter extends ToolbarPresenter<PromoInfoSvMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void getPromo(String promoId) {
         getMvpView().setPromo(dataManager.getPromoById(promoId));
     }

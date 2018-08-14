@@ -94,7 +94,7 @@ public class ClaimMeAdapter extends RecyclerView.Adapter<ClaimMeAdapter.ClaimVH>
 
             }
             if (client != null) {
-                tvTitle.setText(client.getName().toString(itemView.getContext()));
+                tvTitle.setText(client.getName().toString());
             }
             if (claim.getText() != null) {
                 tvSubtitle.setText(claim.getText());

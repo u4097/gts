@@ -6,10 +6,13 @@ import ru.panmin.gtspro.injection.module.ActivityModule;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
 import ru.panmin.gtspro.ui.claiminfo.sv.ClaimInfoSvActivity;
+import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.claiminfo.me.ClaimInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
+import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
+import ru.panmin.gtspro.ui.report.ReportActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
@@ -36,6 +39,9 @@ public interface ActivityComponent {
     void inject(PromoInfoSvActivity promoInfoSvActivity);
     void inject(ClaimInfoMeActivity claimInfoMeActivity);
     void inject(ClaimInfoSvActivity claimInfoSvActivity);
+    void inject(FormsActivity formsActivity);
+    void inject(QuestionGroupsActivity questionGroupsActivity);
+    void inject(ReportActivity reportActivity);
 
     //fragment
     void inject(MeTradePointFragment meTradePointFragment);
@@ -43,4 +49,5 @@ public interface ActivityComponent {
     void inject(SwTradePointFragment swTradePointFragment);
     void inject(BottomSheetFilter bottomSheetFilter);
     void inject(BlockFilter blockFilter);
+
 }

@@ -1,6 +1,5 @@
 package ru.panmin.gtspro.ui.tredpoints.me;
 
-import android.content.Context;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
@@ -35,7 +34,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
     MeAdapter() {
     }
 
-    public void setData(Context context, List<TradePoint> tradePoints, String sortType) {
+    public void setData(List<TradePoint> tradePoints, String sortType) {
         this.tradePoints.clear();
         this.tradePoints.addAll(tradePoints);
         if (location != null) {
@@ -43,7 +42,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
                 tradePoint.setDistance(OtherUtils.distance(location, tradePoint.getCoordinates()));
             }
         }
-        selectNewSortType(context, sortType);
+        selectNewSortType(sortType);
     }
 
     public void setInfoClickListener(InfoClickListener infoClickListener) {
@@ -67,7 +66,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
         return (tradePoints == null || tradePoints.isEmpty()) ? 0 : tradePoints.size();
     }
 
-    public void selectNewSortType(Context context, String sortType) {
+    public void selectNewSortType(String sortType) {
         switch (sortType) {
             case Constants.SORT_TYPE_TIME:
                 isDistanceSort = false;
@@ -83,8 +82,8 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
                 isDistanceSort = false;
                 Collections.sort(
                         tradePoints,
-                        (tradePoint1, tradePoint2) -> tradePoint1.getSignboard().toString(context)
-                                .compareTo(tradePoint2.getSignboard().toString(context))
+                        (tradePoint1, tradePoint2) -> tradePoint1.getSignboard().toString()
+                                .compareTo(tradePoint2.getSignboard().toString())
                 );
                 break;
         }
@@ -128,8 +127,8 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
         }
 
         void bind(TradePoint tradePoint) {
-            name.setText(tradePoint.getSignboard().toString(itemView.getContext()));
-            address.setText(tradePoint.getAddress().toString(itemView.getContext()));
+            name.setText(tradePoint.getSignboard().toString());
+            address.setText(tradePoint.getAddress().toString());
             info.setOnClickListener(view -> infoClickListener.showInfo(tradePoint));
         }
 

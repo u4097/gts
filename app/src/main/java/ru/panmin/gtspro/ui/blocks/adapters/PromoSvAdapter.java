@@ -21,10 +21,9 @@ import ru.panmin.gtspro.data.models.Promo;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private List<Promo> promoList = new ArrayList<>();
     private PromoClickListener infoClickListener;
-
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     @Inject
     public PromoSvAdapter() {
@@ -87,7 +86,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
 
         public void bind(Promo promo) {
             if (promo.getAuthor() != null) {
-                tvAuthor.setText(promo.getAuthor().toString(itemView.getContext()));
+                tvAuthor.setText(promo.getAuthor().toString());
             }
             if (promo.getFinishDate() != null) {
                 tvDateEnd.setText(promo.getFinishDate());
@@ -96,10 +95,10 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
                 tvDateStart.setText(promo.getBeginDate());
             }
             if (promo.getDescription() != null) {
-                tvDescription.setText(promo.getDescription().toString(itemView.getContext()));
+                tvDescription.setText(promo.getDescription().toString());
             }
 
-            tvTitle.setText(promo.getName().toString(itemView.getContext()));
+            tvTitle.setText(promo.getName().toString());
             promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
     }

@@ -2,7 +2,6 @@ package ru.panmin.gtspro.ui.blocks.filter;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
-import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -15,9 +14,10 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.blocks.BlockMvpView;
-import ru.panmin.gtspro.ui.tredpoints.TradePointMvpView;
 import ru.panmin.gtspro.utils.Constants;
-public class BlockFilter extends BottomSheetFragment implements BlockFilterMvpView { @Inject
+
+public class BlockFilter extends BottomSheetFragment implements BlockFilterMvpView {
+    @Inject
     BlockFilterPresenter presenter;
 
     @BindView(R.id.close_textView)
@@ -25,8 +25,10 @@ public class BlockFilter extends BottomSheetFragment implements BlockFilterMvpVi
     @BindView(R.id.radio_group_filter)
     RadioGroup radioGroup;
     @BindView(R.id.rbByVisitTime)
-    RadioButton rbByVisitTime; @BindView(R.id.rbByDistance)
-    RadioButton rbByDistance; @BindView(R.id.rbAlphabetically)
+    RadioButton rbByVisitTime;
+    @BindView(R.id.rbByDistance)
+    RadioButton rbByDistance;
+    @BindView(R.id.rbAlphabetically)
     RadioButton rbAlphabetically;
     private BlockMvpView blockMvpView;
 

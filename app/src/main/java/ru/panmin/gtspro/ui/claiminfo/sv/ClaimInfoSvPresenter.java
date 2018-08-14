@@ -15,15 +15,13 @@ class ClaimInfoSvPresenter extends ToolbarPresenter<ClaimInfoSvMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
 
     public void getClaim(String claimId) {
-        // TODO: 08/08/2018 Not implemented
-        Timber.d("Method getClaim not implemented.");
-//        getMvpView().setClaim(dataManager.getClaimById(claimId));
-        getMvpView().setClaim(null);
+        getMvpView().setClaim(dataManager.getClaimById(claimId));
+
+        if (getMvpView().getClaim() != null) {
+            getMvpView().setClient(dataManager.getClientById(getMvpView().getClaim().getClientId()));
+        }
     }
 
 }

@@ -2,9 +2,9 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <android.support.v7.widget.AppCompatTextView
@@ -72,8 +72,8 @@
             android:paddingLeft="16dp"
             android:paddingRight="0dp"
             android:paddingStart="16dp"
-            tools:text = "Промо 1"
-            android:text="Промо 1"/>
+            android:text="Промо 1"
+            tools:text="Промо 1"/>
 
         <View
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="0dp"
             android:paddingStart="16dp"
-            android:text= "Промо 2"/>
+            android:text="Промо 2"/>
 
         <View
             android:layout_width="match_parent"

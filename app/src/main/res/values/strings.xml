@@ -90,5 +90,15 @@
     <string name="label_assign_claim">Назначить</string>
     <string name="label_claim_photo">Фотоснимки:</string>
     <string name="label_run_now">Сейчас выполняет:</string>
+    <string name="formOrReport">Анкета</string>
+
+    <plurals name="question_plurals">
+        <item quantity="zero">Вопросов</item>
+        <item quantity="one">Вопрос</item>
+        <item quantity="two">Вопроса</item>
+        <item quantity="few">Вопроса</item>
+        <item quantity="many">Вопросов</item>
+        <item quantity="other">Вопросов</item>
+    </plurals>
 
 </resources>

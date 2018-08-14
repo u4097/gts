@@ -6,6 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.multidex.MultiDexApplication;
 
+import javax.inject.Inject;
+
+import ru.panmin.gtspro.data.local.PreferencesHelper;
+import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.injection.component.ApplicationComponent;
 import ru.panmin.gtspro.injection.component.DaggerApplicationComponent;
 import ru.panmin.gtspro.injection.module.ApplicationModule;
@@ -14,6 +18,8 @@ import timber.log.Timber;
 
 public class Application extends MultiDexApplication {
 
+    @Inject SocketHelper socketHelper;
+
     ApplicationComponent applicationComponent;
 
     public static Application get(Context context) {
@@ -21,8 +27,9 @@ public class Application extends MultiDexApplication {
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleManager.setLocale(base));
+    protected void attachBaseContext(Context context) {
+        new PreferencesHelper(context);
+        super.attachBaseContext(LocaleManager.setLocale(context));
     }
 
     @Override
@@ -37,6 +44,12 @@ public class Application extends MultiDexApplication {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+    }
+
+    @Override
+    public void onTerminate() {
+        socketHelper.close();
+        super.onTerminate();
     }
 
     public ApplicationComponent getComponent() {

@@ -132,7 +132,7 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
     public void setClient(Client client) {
         if (client != null) {
             this.client = client;
-            setTitle(client.getName().toString(this));
+            setTitle(client.getName().toString());
         }
     }
 
@@ -160,7 +160,7 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
 
 
             if (claim.getType().getName() != null) {
-                setValue(tvType,claim.getType().getName().toString(this),R.string.label_claim_type);
+                setValue(tvType,claim.getType().getName().toString(),R.string.label_claim_type);
             } else {
                 setValue(tvType,"-",R.string.label_claim_type);
             }

@@ -15,9 +15,6 @@ class ClaimInfoMePresenter extends ToolbarPresenter<ClaimInfoMeMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
 
     public void getClaim(String claimId) {
         // TODO: 08/08/2018 Not implemented

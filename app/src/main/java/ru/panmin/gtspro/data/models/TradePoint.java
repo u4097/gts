@@ -22,9 +22,9 @@ public class TradePoint extends RealmObject {
     @SerializedName("times") private RealmList<Time> times = new RealmList<>();
     @SerializedName("merchandisers") private RealmList<Merchandiser> merchandisers = new RealmList<>();
     @SerializedName("promos") private RealmList<Promo> promos = new RealmList<>();
-    @SerializedName("reports") private RealmList<Report> reports = new RealmList<>();
-    @SerializedName("photoreports") private RealmList<PhotoReport> photoreports = new RealmList<>();
-    //@SerializedName("skus") private RealmList<Sku> skus = new RealmList<>();
+    @SerializedName("reports") private RealmList<FormOrReport> reports = new RealmList<>();
+    @SerializedName("photoreports") private RealmList<FormOrReport> photoreports = new RealmList<>();
+    @SerializedName("skus") private RealmList<Sku> skus = new RealmList<>();
     @SerializedName("standards") private RealmList<Standard> standards = new RealmList<>();
     @SerializedName("claims") private RealmList<Claim> claims = new RealmList<>();
     @Ignore private double distance = 0.0d;
@@ -34,7 +34,7 @@ public class TradePoint extends RealmObject {
 
     public TradePoint(String id, Coordinates coordinates, Name signboard, Name address, Name tradeNetwork, String tradeNetworkId,
                       Name regionalOffice, RealmList<String> formats, String departmentId, RealmList<Client> clients, RealmList<Time> times,
-                      RealmList<Merchandiser> merchandisers, RealmList<Promo> promos, RealmList<Report> reports, RealmList<PhotoReport> photoreports,
+                      RealmList<Merchandiser> merchandisers, RealmList<Promo> promos, RealmList<FormOrReport> reports, RealmList<FormOrReport> photoreports,
                       RealmList<Sku> skus, RealmList<Standard> standards, RealmList<Claim> claims) {
         this.id = id;
         this.coordinates = coordinates;
@@ -51,7 +51,7 @@ public class TradePoint extends RealmObject {
         this.promos = promos;
         this.reports = reports;
         this.photoreports = photoreports;
-        //this.skus = skus;
+        this.skus = skus;
         this.standards = standards;
         this.claims = claims;
     }
@@ -160,29 +160,29 @@ public class TradePoint extends RealmObject {
         this.promos = promos;
     }
 
-    public RealmList<Report> getReports() {
+    public RealmList<FormOrReport> getReports() {
         return reports;
     }
 
-    public void setReports(RealmList<Report> reports) {
+    public void setReports(RealmList<FormOrReport> reports) {
         this.reports = reports;
     }
 
-    public RealmList<PhotoReport> getPhotoreports() {
+    public RealmList<FormOrReport> getPhotoreports() {
         return photoreports;
     }
 
-    public void setPhotoreports(RealmList<PhotoReport> photoreports) {
+    public void setPhotoreports(RealmList<FormOrReport> photoreports) {
         this.photoreports = photoreports;
     }
 
-    //public RealmList<Sku> getSkus() {
-    //    return skus;
-    //}
+    public RealmList<Sku> getSkus() {
+        return skus;
+    }
 
-    //public void setSkus(RealmList<Sku> skus) {
-    //    this.skus = skus;
-    //}
+    public void setSkus(RealmList<Sku> skus) {
+        this.skus = skus;
+    }
 
     public RealmList<Standard> getStandards() {
         return standards;

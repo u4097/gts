@@ -17,10 +17,6 @@ class BottomSheetFilterPresenter extends BasePresenter<BottomSheetFilterMvpView>
 
     }
 
-    @Override
-    protected void dispose() {
-    }
-
     public void initViews() {
         getMvpView().afterViews(dataManager.getSortType());
     }

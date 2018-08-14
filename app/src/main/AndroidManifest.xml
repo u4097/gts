@@ -5,9 +5,9 @@
     package="ru.panmin.gtspro"
     android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".Application"
@@ -22,45 +22,79 @@
 
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.login.LoginActivity"
-            android:theme="@style/NoActionBar"/>
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/NoActionBar" />
 
         <activity
             android:name=".ui.tredpoints.TradePointActivity"
-            android:theme="@style/NoActionBar"/>
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/NoActionBar" />
 
         <activity
             android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"
-            android:theme="@style/MainTheme"/>
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"
-            android:theme="@style/MainTheme"/>
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"
-            android:theme="@style/MainTheme"/>
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.blocks.BlockActivity"/>
+        <activity
+            android:name=".ui.blocks.BlockActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
-        <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity" />
+        <activity
+            android:name=".ui.promoinfo.me.PromoInfoMeActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.promoinfo.sv.PromoInfoSvActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
+
         <activity android:name=".ui.claiminfo.me.ClaimInfoMeActivity" />
         <activity android:name=".ui.claiminfo.sv.ClaimInfoSvActivity" />
+        <activity
+            android:name=".ui.forms.FormsActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.questiongroups.QuestionGroupsActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.report.ReportActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"
-            tools:replace="android:value"/>
+            tools:replace="android:value" />
 
     </application>
 

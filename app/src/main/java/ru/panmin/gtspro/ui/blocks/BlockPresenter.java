@@ -19,10 +19,6 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView> {
     }
 
 
-    @Override
-    protected void dispose() {
-    }
-
     public BlockType.Type getCurrentBlock() {
         return currentBlock;
     }
@@ -44,26 +40,21 @@ public class BlockPresenter extends ToolbarPresenter<BlockMvpView> {
         getMvpView().finishActivity();
     }
 
-    public void getTradePoint(String tradePointId) {
-        TradePoint tradePoint = dataManager.getTradePointById(tradePointId);
-        if (tradePoint != null) {
-            getMvpView().setTradePoint(tradePoint);
-        }
-    }
 
     public Client getClientById(String clientId) {
         return dataManager.getClientById(clientId);
     }
 
 
-
-    public void initViews() {
-        getMvpView().initViews(dataManager.getFullName(), dataManager.getRole());
+    public void initViews(String tradePointId) {
+        getMvpView().initViews(
+                dataManager.getRole(),
+                dataManager.getTradePointById(tradePointId)
+        );
     }
 
     public void selectNewSortType(String sortType) {
         // TODO: 07/08/2018 Not implemented.
-//            getMvpView().selectNewSortType(sortType);
     }
 
 }

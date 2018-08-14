@@ -1,11 +1,11 @@
 package ru.panmin.gtspro.data;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.utils.TextUtils;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,17 +16,38 @@ import io.reactivex.Single;
 import io.realm.RealmList;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
+import ru.panmin.gtspro.data.models.AnswerToQuestion;
+import ru.panmin.gtspro.data.models.ClaimData;
+import ru.panmin.gtspro.data.models.ClaimRedirectData;
+import ru.panmin.gtspro.data.models.EndVisitData;
+import ru.panmin.gtspro.data.models.FormFillingTimeData;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.HotLine;
+import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.Sku;
+import ru.panmin.gtspro.data.models.StartVisitData;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
 import ru.panmin.gtspro.data.models.responses.AddressProgramResponse;
 import ru.panmin.gtspro.data.models.responses.AuthResponse;
 import ru.panmin.gtspro.data.models.responses.UserInfoResponse;
+import ru.panmin.gtspro.data.models.wsrequests.AddressProgramWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.BaseWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.ClaimRedirectWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.ClaimWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.EndVisitWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.FormFillingTimeWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.FormWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.HotLineWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.StartVisitWsRequest;
+import ru.panmin.gtspro.data.models.wsrequests.UserInfoWsRequest;
 import ru.panmin.gtspro.data.remote.ApiService;
+import ru.panmin.gtspro.data.remote.SocketHelper;
 import ru.panmin.gtspro.utils.Constants;
 import ru.panmin.gtspro.utils.RxEventBus;
+import ru.panmin.gtspro.utils.TextUtils;
 
 @Singleton
 public class DataManager {
@@ -37,16 +58,25 @@ public class DataManager {
     private final ApiService apiService;
     private final RxEventBus rxEventBus;
     private final RealmHelper realmHelper;
+    private final SocketHelper socketHelper;
 
     @Inject
-    DataManager(PreferencesHelper preferencesHelper, ApiService apiService, RxEventBus rxEventBus, RealmHelper realmHelper) {
+    DataManager(
+            PreferencesHelper preferencesHelper,
+            ApiService apiService,
+            RxEventBus rxEventBus,
+            RealmHelper realmHelper,
+            SocketHelper socketHelper
+    ) {
         this.preferencesHelper = preferencesHelper;
         this.apiService = apiService;
         this.rxEventBus = rxEventBus;
         this.realmHelper = realmHelper;
+        this.socketHelper = socketHelper;
     }
 
     public void clear() {
+        close();
         clearPreferences();
         clearDataBase();
     }
@@ -66,11 +96,11 @@ public class DataManager {
     }
 
     public String getLanguage() {
-        return preferencesHelper.getLanguage();
+        return PreferencesHelper.getLanguage();
     }
 
     public void setLanguage(String language) {
-        preferencesHelper.setLanguage(language);
+        PreferencesHelper.setLanguage(language);
     }
 
     public String getSortType() {
@@ -90,11 +120,11 @@ public class DataManager {
     }
 
     public String getId() {
-        return preferencesHelper.getId();
+        return PreferencesHelper.getId();
     }
 
     public void setId(String id) {
-        preferencesHelper.setId(id);
+        PreferencesHelper.setId(id);
     }
 
     public String getUserName() {
@@ -216,15 +246,60 @@ public class DataManager {
 
     /* API */
     public Single<AuthResponse> auth(String userName, String password) {
-        return apiService.auth(new AuthRequest(userName, password));
+        return apiService.auth(new AuthRequest(userName, password))
+                .map(authResponse -> {
+                    setToken(authResponse.getToken());
+                    setId(authResponse.getId());
+                    setUserName(authResponse.getUsername());
+                    setRole(authResponse.getRole());
+                    switch (authResponse.getRole()) {
+                        case Constants.ROLE_SUPERVISOR:
+                            setSupervisorId(authResponse.getSupervisorId());
+                            break;
+                    }
+                    setFullNameRu(authResponse.getFullName().getRu());
+                    setFullNameEn(authResponse.getFullName().getEn());
+                    return authResponse;
+                });
     }
 
     public Single<UserInfoResponse> userInfo() {
-        return apiService.userInfo();
+        return apiService.userInfo()
+                .map(userInfoResponse -> {
+                    setId(userInfoResponse.getId());
+                    setUserName(userInfoResponse.getUsername());
+                    setRole(userInfoResponse.getRole());
+                    switch (userInfoResponse.getRole()) {
+                        case Constants.ROLE_SUPERVISOR:
+                            setSupervisorId(userInfoResponse.getSupervisorId());
+                            break;
+                    }
+                    setFullNameRu(userInfoResponse.getFullName().getRu());
+                    setFullNameEn(userInfoResponse.getFullName().getEn());
+                    return userInfoResponse;
+                });
     }
 
     public Single<AddressProgramResponse> addressProgram() {
-        return apiService.addressProgram();
+        return apiService.addressProgram()
+                .map(addressProgramResponse -> {
+                    setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
+                    setTradePointRadius(addressProgramResponse.getTradePointRadius());
+                    return addressProgramResponse;
+                });
+    }
+
+    public Single<AddressProgramResponse> addressProgramWithoutSku() {
+        return apiService.addressProgramWithoutSku()
+                .map(addressProgramResponse -> {
+                    setAutoCheckoutTime(addressProgramResponse.getAutoCheckoutTime());
+                    setTradePointRadius(addressProgramResponse.getTradePointRadius());
+                    return addressProgramResponse;
+                });
+    }
+
+    public Single<RealmList<Sku>> skuByTradePointId(String tradePointId) {
+        return apiService.skuByTradePointId(tradePointId);
     }
 
 
@@ -239,6 +314,10 @@ public class DataManager {
 
     public void setTradePoints(RealmList<TradePoint> tradePoints) {
         realmHelper.setTradePoints(tradePoints);
+    }
+
+    public void setTradePoint(TradePoint tradePoint) {
+        realmHelper.setTradePoint(tradePoint);
     }
 
     @Nullable
@@ -274,6 +353,77 @@ public class DataManager {
     @Nullable
     public Client getClientById(String id) {
         return realmHelper.getClientById(id);
+    }
+    @Nullable
+    public FormOrReport getFormById(String formId) {
+        return realmHelper.getFormById(formId);
+    }
+
+    @Nullable
+    public FormOrReport getReportById(String reportId) {
+        return realmHelper.getReportById(reportId);
+    }
+
+
+    /* SOCKET */
+    public void createWithConnect() {
+        socketHelper.createWithConnect();
+    }
+
+    public void createWithoutConnect() {
+        socketHelper.createWithConnect();
+    }
+
+    public <T extends BaseWsRequest> void createAndSendRequest(@NonNull T request) {
+        socketHelper.createAndSendRequest(request);
+    }
+
+    public void connect() {
+        socketHelper.connect();
+    }
+
+    public void close() {
+        socketHelper.close();
+    }
+
+    public boolean isConnected() {
+        return socketHelper.isConnected();
+    }
+
+    public void wsUserInfo() {
+        socketHelper.send(new UserInfoWsRequest());
+    }
+
+    public void wsAddressProgram() {
+        socketHelper.send(new AddressProgramWsRequest());
+    }
+
+    public void wsForm(List<AnswerToQuestion> data) {
+        socketHelper.send(new FormWsRequest(data));
+    }
+
+    public void wsFormFillingTime(FormFillingTimeData data) {
+        socketHelper.send(new FormFillingTimeWsRequest(data));
+    }
+
+    public void wsHotLine(HotLineData data) {
+        socketHelper.send(new HotLineWsRequest(data));
+    }
+
+    public void wsClaim(ClaimData data) {
+        socketHelper.send(new ClaimWsRequest(data));
+    }
+
+    public void wsClaimRedirect(ClaimRedirectData data) {
+        socketHelper.send(new ClaimRedirectWsRequest(data));
+    }
+
+    public void wsStartVisit(StartVisitData data) {
+        socketHelper.send(new StartVisitWsRequest(data));
+    }
+
+    public void wsEndVisit(EndVisitData data) {
+        socketHelper.send(new EndVisitWsRequest(data));
     }
 
 }

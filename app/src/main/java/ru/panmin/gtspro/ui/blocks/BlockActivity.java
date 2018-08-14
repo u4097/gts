@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,13 +19,18 @@ import io.realm.RealmList;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.Client;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimSvAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.PhotoReportMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.PhotoReportSvAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoSvAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ReportMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ReportSvAdapter;
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
 import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
@@ -38,14 +44,20 @@ import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
-import timber.log.Timber;
+
+import static ru.panmin.gtspro.ui.blocks.model.BlockType.Type.PHOTO_REPORT;
+import static ru.panmin.gtspro.ui.blocks.model.BlockType.Type.PROMO;
+import static ru.panmin.gtspro.ui.blocks.model.BlockType.Type.REPORT;
 
 public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         PromoMeAdapter.InfoClickListener,
         PromoSvAdapter.PromoClickListener,
         ClaimMeAdapter.ClaimClickListener,
-        ClaimSvAdapter.ClaimClickListener
-{
+        ClaimSvAdapter.ClaimClickListener,
+        PhotoReportMeAdapter.OnPhotoReportClickListener,
+        PhotoReportSvAdapter.OnPhotoReportClickListener,
+        ReportMeAdapter.OnReportClickListener,
+        ReportSvAdapter.OnReportClickListener {
 
     @BindView(R.id.btnClaims)
     FloatingActionButton btnClaims;
@@ -86,9 +98,9 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     @BindView(R.id.fab_filter)
     FloatingActionButton filter;
 
-    @Inject
-    BlockPresenter blockPresenter;
-
+    private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
+    private Map<BlockType.Type, Holder> tradePointBlockViews;
+    private Map<String, Client> clients = new HashMap<>();
 
     PromoMeAdapter promoMeAdapter;
     PromoSvAdapter promoSvAdapter;
@@ -98,10 +110,20 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     String userRole;
 
 
-    private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
     private TradePoint tradePoint = null;
     private RealmList<Claim> claims;
+    @Inject
+    BlockPresenter blockPresenter;
 
+    private PhotoReportMeAdapter photoReportMeAdapter;
+    private PhotoReportSvAdapter photoReportSvAdapter;
+
+
+    private ReportMeAdapter reportMeAdapter;
+    private ReportSvAdapter reportSvAdapter;
+
+
+    private BlockType.Type currentBlock = BlockType.Type.NONE;
 
     public BlockActivity() {
     }
@@ -124,7 +146,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
 
     @Override
     protected void initViews() {
-        blockPresenter.initViews();
+        blockPresenter.initViews(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
     }
 
     @Override
@@ -163,29 +185,36 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     }
 
     @Override
-    public void initViews(String fullName, String role) {
-        initFilter();
+    public void initViews(String role, TradePoint tradePoint) {
         this.userRole = role;
-//        this.userRole = Constants.ROLE_SUPERVISOR;
-        blockPresenter.getTradePoint(getIntent().getStringExtra(INTENT_KEY_TRADE_POINT_ID));
-        initBlocks();
+        this.tradePoint = tradePoint;
 
+        if (tradePoint != null) {
+            setTitle(tradePoint.getSignboard().toString());
+            this.claims = tradePoint.getClaims();
+            for (Claim claim : claims) {
+                this.clients.put(claim.getClientId(), blockPresenter.getClientById(claim.getClientId()));
+            }
+        }
+        rvBlock.setLayoutManager(new LinearLayoutManager(this));
+
+        initFilter();
+        initBlocks();
+        initBlockData(PROMO);
+        setStateData();
     }
 
-
-    private Map<BlockType.Type, Holder> tradePointBlockViews;
-    private Map<String, Client> clients = new HashMap<>();
 
     public void initBlocks() {
         BlockViewModel blockViewModel = new BlockViewModel();
         blockViewModel.loadData(this.tradePoint);
         BlocksModel model = blockViewModel.getBlocks();
 
-        tradePointBlockViews = new HashMap<>();
+        Map<BlockType.Type, Holder> tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS, new Holder(btnClaims, tCounterClaims));
-        tradePointBlockViews.put(BlockType.Type.PROMO, new Holder(btnPromo, tCounterPromo));
-        tradePointBlockViews.put(BlockType.Type.PHOTO_REPORT, new Holder(btnPhotoReport, tCounterPhotoReport));
-        tradePointBlockViews.put(BlockType.Type.REPORT, new Holder(btnReport, tCounterReport));
+        tradePointBlockViews.put(PROMO, new Holder(btnPromo, tCounterPromo));
+        tradePointBlockViews.put(PHOTO_REPORT, new Holder(btnPhotoReport, tCounterPhotoReport));
+        tradePointBlockViews.put(REPORT, new Holder(btnReport, tCounterReport));
         tradePointBlockViews.put(BlockType.Type.SKU, new Holder(btnSku, tCounterSku));
         tradePointBlockViews.put(BlockType.Type.PLANOGRAM, new Holder(btnPlanogram, tCounterPlanogram));
         tradePointBlockViews.put(BlockType.Type.HOT_LINE, new Holder(btnHotLine, tCounterHotLine));
@@ -198,6 +227,10 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
 
         for (Block block : model.getBlocks()
         ) {
+            for (Map.Entry<BlockType.Type, Holder> entry : tradePointBlockViews.entrySet()) {
+                entry.getValue().btn.setOnClickListener(view -> initBlockData(entry.getKey()));
+            }
+
             Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
                 TextView tvBadge = holder.getTvBadge();
@@ -209,36 +242,14 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                     tvBadge.setVisibility(View.VISIBLE);
                 }
 
-
                 FloatingActionButton btn = holder.getBtn();
                 btn.setBackgroundTintList(getResources().getColorStateList(R.color.btn_selector));
 
                 btn.setSelected(block.isSelected());
                 tvBadge.setSelected(block.isSelected());
-
             }
         }
-
     }
-
-    class Holder {
-        FloatingActionButton btn;
-        TextView tvBadge;
-
-        public Holder(FloatingActionButton btn, TextView tvBadge) {
-            this.btn = btn;
-            this.tvBadge = tvBadge;
-        }
-
-        public FloatingActionButton getBtn() {
-            return btn;
-        }
-
-        public TextView getTvBadge() {
-            return tvBadge;
-        }
-    }
-
 
     @Override
     protected void detachView() {
@@ -257,7 +268,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     @Override
     protected void errorButtonClick() {
     }
-
 
     @Override
     public void showPromo(Promo promo) {
@@ -283,8 +293,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                 startActivity(ClaimInfoSvActivity.getStartIntent(this, claim.getId()));
                 break;
             default:
-                Timber.d("Not implemented");
-//                startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
                 break;
         }
     }
@@ -294,82 +302,141 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         tvTitle.setText(title);
     }
 
-    @Override
-    public void setTradePoint(TradePoint tradePoint) {
-        this.tradePoint = tradePoint;
-        if (tradePoint != null) {
-            this.claims = tradePoint.getClaims();
-            for (Claim claim : claims) {
-                this.clients.put(claim.getClientId(), blockPresenter.getClientById(claim.getClientId()));
-            }
-            setTitle(tradePoint.getSignboard().toString(this));
-        }
-        BlockType.Type blockType = blockPresenter.getCurrentBlock();
-        initBlockData(blockType);
-        setStateData();
-    }
 
-    @Override
     public void initBlockData(BlockType.Type blockType) {
-        if (this.tradePoint == null) {
-            Timber.e("tradePoint is null");
-            return;
-        }
-        if (blockType == BlockType.Type.PROMO) {
+        if (currentBlock != blockType) {
+            currentBlock = blockType;
+            clean();
             rvBlock.setVisibility(View.VISIBLE);
-            setBlockTitle("Промо");
-        } else if (blockType == BlockType.Type.CLAIMS) {
-            rvBlock.setVisibility(View.VISIBLE);
-            setBlockTitle("Претензии");
-        } else {
-            setBlockTitle("Блок " + blockType + " в разработке");
-            rvBlock.setVisibility(View.GONE);
-        }
-        rvBlock.setLayoutManager(new LinearLayoutManager(this));
+            filter.setVisibility(View.GONE);
+            switch (blockType) {
+                case PROMO:
+                    filter.setVisibility(View.VISIBLE);
+                    setBlockTitle("Промо");
+                    switch (this.userRole) {
+                        case Constants.ROLE_MERCHANDISER:
+                            promoMeAdapter = new PromoMeAdapter();
+                            promoMeAdapter.setInfoClickListener(this);
+                            promoMeAdapter.setData(tradePoint.getPromos());
+                            rvBlock.setAdapter(promoMeAdapter);
+                            break;
+                        case Constants.ROLE_SUPERVISOR:
+                            promoSvAdapter = new PromoSvAdapter();
+                            promoSvAdapter.setInfoClickListener(this);
+                            promoSvAdapter.setData(tradePoint.getPromos());
+                            rvBlock.setAdapter(promoSvAdapter);
+                            break;
+                    }
+                    break;
+                case PHOTO_REPORT:
+                    setBlockTitle("Фотоотчеты");
+                    switch (this.userRole) {
+                        case Constants.ROLE_MERCHANDISER:
+                            photoReportMeAdapter = new PhotoReportMeAdapter();
+                            photoReportMeAdapter.setOnPhotoReportClickListener(this);
+                            photoReportMeAdapter.setData(tradePoint.getPhotoreports());
+                            rvBlock.setAdapter(photoReportMeAdapter);
+                            break;
+                        case Constants.ROLE_SUPERVISOR:
+                            photoReportSvAdapter = new PhotoReportSvAdapter();
+                            photoReportSvAdapter.setOnPhotoReportClickListener(this);
+                            photoReportSvAdapter.setData(tradePoint.getPhotoreports());
+                            rvBlock.setAdapter(photoReportSvAdapter);
+                            break;
+                    }
+                    break;
+                case REPORT:
+                    setBlockTitle("Отчеты");
+                    switch (this.userRole) {
+                        case Constants.ROLE_MERCHANDISER:
+                            reportMeAdapter = new ReportMeAdapter();
+                            reportMeAdapter.setOnReportClickListener(this);
+                            reportMeAdapter.setData(tradePoint.getReports());
+                            rvBlock.setAdapter(reportMeAdapter);
+                            break;
+                        case Constants.ROLE_SUPERVISOR:
+                            reportSvAdapter = new ReportSvAdapter();
+                            reportSvAdapter.setOnReportClickListener(this);
+                            reportSvAdapter.setData(tradePoint.getReports());
+                            rvBlock.setAdapter(reportSvAdapter);
+                            break;
+                    }
+                    break;
+                case CLAIMS:
+                    setBlockTitle("Претензии");
+                    switch (this.userRole) {
+                        case Constants.ROLE_MERCHANDISER:
+                            claimMeAdapter = new ClaimMeAdapter();
+                            claimMeAdapter.setInfoClickListener(this);
 
-        if (blockType == BlockType.Type.PROMO) {
-            switch (this.userRole) {
-                case Constants.ROLE_MERCHANDISER:
-                    promoMeAdapter = new PromoMeAdapter();
-                    promoMeAdapter.setInfoClickListener(this);
-                    promoMeAdapter.setData(tradePoint.getPromos());
-                    rvBlock.setAdapter(promoMeAdapter);
-                    break;
-                case Constants.ROLE_SUPERVISOR:
-                    promoSvAdapter = new PromoSvAdapter();
-                    promoSvAdapter.setInfoClickListener(this);
-                    promoSvAdapter.setData(tradePoint.getPromos());
-                    rvBlock.setAdapter(promoSvAdapter);
-                    break;
-                default:
-                    rvBlock.setVisibility(View.GONE);
-                    break;
+                            claimMeAdapter.setData(this.claims, this.clients);
+                            rvBlock.setAdapter(claimMeAdapter);
+                            break;
+                        case Constants.ROLE_SUPERVISOR:
+                            claimSvAdapter = new ClaimSvAdapter();
+                            claimSvAdapter.setInfoClickListener(this);
+                            claimSvAdapter.setData(this.claims, this.clients);
+                            rvBlock.setAdapter(claimSvAdapter);
+                            break;
+                        default:
+                            rvBlock.setVisibility(View.GONE);
+                            break;
+                    }
             }
+
         }
-
-        if (blockType == BlockType.Type.CLAIMS) {
-            switch (this.userRole) {
-                case Constants.ROLE_MERCHANDISER:
-                    claimMeAdapter = new ClaimMeAdapter();
-                    claimMeAdapter.setInfoClickListener(this);
-
-                    claimMeAdapter.setData(this.claims, this.clients);
-                    rvBlock.setAdapter(claimMeAdapter);
-                    break;
-                case Constants.ROLE_SUPERVISOR:
-                    claimSvAdapter = new ClaimSvAdapter();
-                    claimSvAdapter.setInfoClickListener(this);
-                    claimSvAdapter.setData(this.claims, this.clients);
-                    rvBlock.setAdapter(claimSvAdapter);
-                    break;
-                default:
-                    rvBlock.setVisibility(View.GONE);
-                    break;
-            }
-        }
-
-
     }
+
+
+    private void clean() {
+        rvBlock.setAdapter(null);
+
+        if (promoMeAdapter != null) {
+            promoMeAdapter.setInfoClickListener(null);
+            promoMeAdapter.setData(new ArrayList<>());
+            promoMeAdapter = null;
+        }
+
+        if (promoSvAdapter != null) {
+            promoSvAdapter.setInfoClickListener(null);
+            promoSvAdapter.setData(new ArrayList<>());
+            promoSvAdapter = null;
+        }
+
+        if (photoReportMeAdapter != null) {
+            photoReportMeAdapter.setOnPhotoReportClickListener(null);
+            photoReportMeAdapter.setData(new ArrayList<>());
+            photoReportMeAdapter = null;
+        }
+
+        if (photoReportSvAdapter != null) {
+            photoReportSvAdapter.setOnPhotoReportClickListener(null);
+            photoReportSvAdapter.setData(new ArrayList<>());
+            photoReportSvAdapter = null;
+        }
+
+        if (reportMeAdapter != null) {
+            reportMeAdapter.setOnReportClickListener(null);
+            reportMeAdapter.setData(new ArrayList<>());
+            reportMeAdapter = null;
+        }
+
+        if (reportSvAdapter != null) {
+            reportSvAdapter.setOnReportClickListener(null);
+            reportSvAdapter.setData(new ArrayList<>());
+            reportSvAdapter = null;
+        }
+    }
+
+
+    @Override
+    public void onPhotoReportClick(FormOrReport photoReport) {
+    }
+
+    @Override
+    public void onReportClick(FormOrReport report) {
+    }
+
 
     @Override
     public void openLoginActivity() {
@@ -377,7 +444,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
 
     @Override
     public void selectNewSortType(String sortType) {
@@ -388,4 +454,25 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     public void setClaim(RealmList<Claim> claims) {
         this.claims = claims;
     }
+
+    class Holder {
+
+        FloatingActionButton btn;
+        TextView tvBadge;
+
+        Holder(FloatingActionButton btn, TextView tvBadge) {
+            this.btn = btn;
+            this.tvBadge = tvBadge;
+        }
+
+        FloatingActionButton getBtn() {
+            return btn;
+        }
+
+        TextView getTvBadge() {
+            return tvBadge;
+        }
+
+    }
+
 }

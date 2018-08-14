@@ -8,7 +8,7 @@ import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 
-public class BlockViewModel  {
+public class BlockViewModel {
     BlocksModel blocksModel;
 
     public void loadData(TradePoint tradePoint) {

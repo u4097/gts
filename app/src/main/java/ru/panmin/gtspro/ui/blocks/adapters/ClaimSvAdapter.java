@@ -92,7 +92,7 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
             }
 
             if (client != null) {
-                tvTitle.setText(client.getName().toString(itemView.getContext()));
+                tvTitle.setText(client.getName().toString());
             }
             if (claim.getText() != null) {
                 tvDescription.setText(claim.getText());
