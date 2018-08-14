@@ -13,6 +13,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+import ru.panmin.gtspro.data.models.Form;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
@@ -112,6 +113,13 @@ public class RealmHelper {
         Promo promo = realm.where(Promo.class).equalTo("id", id).findFirst();
         realm.commitTransaction();
         return promo;
+    }
+
+    public Form getFormById(String formId) {
+        realm.beginTransaction();
+        Form form = realm.where(Form.class).equalTo("id", formId).findFirst();
+        realm.commitTransaction();
+        return form;
     }
 
 }

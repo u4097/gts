@@ -15,21 +15,21 @@
         android:paddingRight="16dp">
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textFormName"
+            android:id="@+id/textQuestionGroupName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/layoutFormCounter"
-            android:layout_toStartOf="@+id/layoutFormCounter"
+            android:layout_toLeftOf="@+id/layoutQuestionGroupCounter"
+            android:layout_toStartOf="@+id/layoutQuestionGroupCounter"
             android:padding="16dp"
             android:textColor="@color/black_three"
             android:textSize="17sp"
             tools:text="Обшие вопросы"/>
 
         <android.support.v7.widget.LinearLayoutCompat
-            android:id="@+id/layoutFormCounter"
+            android:id="@+id/layoutQuestionGroupCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -40,7 +40,7 @@
             android:padding="16dp">
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/textFormCount"
+                android:id="@+id/textQuestionGroupCount"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/form_counter_background"
@@ -50,7 +50,7 @@
                 tools:text="4"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/textFormCountPlurals"
+                android:id="@+id/textQuestionGroupCountPlurals"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"

@@ -115,8 +115,7 @@ public class ChoiceSkuGroupListFragment
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if (groupAdapter != null) {
-            assert savedInstanceState != null;
+        if (groupAdapter != null && savedInstanceState != null) {
             groupAdapter.onSaveInstanceState(savedInstanceState);
         }
     }
@@ -146,5 +145,6 @@ public class ChoiceSkuGroupListFragment
         }
         groupAdapter = new GroupAdapter(list);
         initRecycler();
+        setStateData();
     }
 }

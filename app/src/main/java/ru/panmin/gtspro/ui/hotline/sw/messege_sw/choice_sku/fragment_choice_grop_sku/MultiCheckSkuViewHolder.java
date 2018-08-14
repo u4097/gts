@@ -9,6 +9,7 @@ import com.thoughtbot.expandablecheckrecyclerview.viewholders.CheckableChildView
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.SkuForAdapter;
 
 class MultiCheckSkuViewHolder extends CheckableChildViewHolder {
 
@@ -17,7 +18,7 @@ class MultiCheckSkuViewHolder extends CheckableChildViewHolder {
 
     public MultiCheckSkuViewHolder(View v) {
         super(v);
-        ButterKnife.bind(this.itemView);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
@@ -25,7 +26,7 @@ class MultiCheckSkuViewHolder extends CheckableChildViewHolder {
         return list_item_multicheck_sku_name;
     }
 
-    public void setSkuName(Object skuName) {
-        list_item_multicheck_sku_name.setText(skuName.toString());
+    public void setSkuName(SkuForAdapter skuName) {
+        list_item_multicheck_sku_name.setText(skuName.getName().toString());
     }
 }

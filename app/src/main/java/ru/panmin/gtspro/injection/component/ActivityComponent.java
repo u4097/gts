@@ -19,6 +19,7 @@ import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
+import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
@@ -61,6 +62,7 @@ public interface ActivityComponent {
     void inject(PromoInfoSvActivity promoInfoSvActivity);
 
     void inject(FormsActivity formsActivity);
+    void inject(QuestionGroupsActivity questionGroupsActivity);
 
 
 

@@ -15,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.SkuForAdapter;
 
 public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroupViewHolder, MultiCheckSkuViewHolder> {
 
@@ -35,7 +36,7 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
         @Override
         public void onBindCheckChildViewHolder(MultiCheckSkuViewHolder holder, int flatPosition, CheckedExpandableGroup group, int childIndex) {
 
-            holder.setSkuName(group.getItems().get(childIndex));
+            holder.setSkuName((SkuForAdapter) group.getItems().get(childIndex));
         }
 
         @Override
@@ -58,6 +59,7 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
 
             @Override
             public void onChildClicked(int childIndex, boolean checked) {
+                // TODO: 13.08.2018 присвоить интерфейс адаптеру, навесить на клик 
             }
 
         }

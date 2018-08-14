@@ -68,6 +68,8 @@
             android:name=".ui.hotline.sw.messege_sw.choice_sku.ChoiseSkuActivity"
             android:theme="@style/Theme.Transparent" />
 
+        <activity android:name=".ui.questiongroups.QuestionGroupsActivity"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"

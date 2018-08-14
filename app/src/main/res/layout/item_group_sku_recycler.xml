@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/list_item_sku_group_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

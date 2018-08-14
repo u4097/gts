@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku;
 
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.view.animation.RotateAnimation;
@@ -20,11 +21,11 @@ class SkuNameGroupViewHolder extends GroupViewHolder {
     AppCompatTextView list_item_sku_group_name;
 
     @BindView(R.id.list_item_sku_group_icon)
-    AppCompatTextView list_item_sku_group_icon;
+    AppCompatImageView list_item_sku_group_icon;
 
     public SkuNameGroupViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this.itemView);
+        ButterKnife.bind(this, itemView);
     }
 
     public void bind(ExpandableGroup group) {

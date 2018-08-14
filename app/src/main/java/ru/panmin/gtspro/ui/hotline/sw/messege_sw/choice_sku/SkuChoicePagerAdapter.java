@@ -1,6 +1,6 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku;
 
-import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.base.BaseFragment;
