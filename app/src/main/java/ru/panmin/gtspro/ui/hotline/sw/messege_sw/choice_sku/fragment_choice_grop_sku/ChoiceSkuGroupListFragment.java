@@ -27,11 +27,11 @@ import ru.panmin.gtspro.ui.progress.ProgressFragment;
 public class ChoiceSkuGroupListFragment
         extends ProgressFragment
         implements ChoiceSkuListMvpView,
-        BaseSelectSkuInterface {
+        BaseSelectSkuInterface/*,GroupAdapter.SkuClickListener */{
 
-    private static final String INTENT_KEY_CLIENT_ID = "client.id";
+    private static final String ARG_KEY_CLIENT_ID = "client.id";
 
-    private static final String INTENT_KEY_TRADEPOINT_ID = "tradepoint.id";
+    private static final String ARG_KEY_TRADE_POINT_ID = "tradepoint.id";
 
     @Inject
     ChoiceSkuListPresenter choiceSkuListPresenter;
@@ -43,8 +43,16 @@ public class ChoiceSkuGroupListFragment
 
     GroupAdapter groupAdapter;
 
-    public static ChoiceSkuGroupListFragment createInstance() {
-        return new ChoiceSkuGroupListFragment();
+    public static ChoiceSkuGroupListFragment createInstance(String clientId, String tradePointId) {
+        ChoiceSkuGroupListFragment fragment = new ChoiceSkuGroupListFragment();
+        Bundle args = new Bundle();
+
+        args.putString(ARG_KEY_TRADE_POINT_ID, tradePointId);
+
+        args.putString(ARG_KEY_CLIENT_ID, clientId);
+
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -86,8 +94,8 @@ public class ChoiceSkuGroupListFragment
     @Override
     protected void initViews() {
         assert getArguments() != null;
-        String clientId = getArguments().getString(INTENT_KEY_CLIENT_ID);
-        String tradePointId = getArguments().getString(INTENT_KEY_TRADEPOINT_ID);
+        String clientId = getArguments().getString(ARG_KEY_CLIENT_ID);
+        String tradePointId = getArguments().getString(ARG_KEY_TRADE_POINT_ID);
         choiceSkuListPresenter.getSkuListElements(tradePointId, clientId);
     }
 
@@ -107,8 +115,7 @@ public class ChoiceSkuGroupListFragment
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if (groupAdapter != null) {
-            assert savedInstanceState != null;
+        if (groupAdapter != null && savedInstanceState != null) {
             groupAdapter.onSaveInstanceState(savedInstanceState);
         }
     }
@@ -130,13 +137,28 @@ public class ChoiceSkuGroupListFragment
 
     }
 
+
+    /*@Override
+    public void select(int childIndex) {
+
+    }
+
+    @Override
+    public void deselect(int childIndex) {
+
+    }*/
+
     @Override
     public void showData(HashMap<Group, List<SkuForAdapter>> sort) {
         List<GroupAdapter.GroupForAdapter> list = new ArrayList<>();
         for (Group group : sort.keySet()) {
-            list.add(new GroupAdapter.GroupForAdapter(group.getName().toString(getActivity()), sort.get(group)));
+            list.add(new GroupAdapter.GroupForAdapter(group.getName().toString(), sort.get(group)));
         }
-        groupAdapter = new GroupAdapter(list);
+        groupAdapter = new GroupAdapter(list,skuInterface);
+       // groupAdapter.setClickListener(this);
         initRecycler();
+        setStateData();
     }
+
+
 }

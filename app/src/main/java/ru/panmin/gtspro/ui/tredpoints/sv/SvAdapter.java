@@ -5,6 +5,7 @@ import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +29,11 @@ import ru.panmin.gtspro.utils.OtherUtils;
 public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
 
     private List<TradePoint> tradePoints = new ArrayList<>();
+
     private SvAdapter.InfoClickListener infoClickListener;
+
     private Location location = null;
+
     private boolean isDistanceSort = false;
 
     @Inject
@@ -110,18 +114,20 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
 
     interface InfoClickListener {
         void showInfo(TradePoint tradePoint);
+        void showPromo(String id);
     }
 
     class SvViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title_card)
-        TextView name;
-        @BindView(R.id.adres_card_sw)
-        TextView address;
-        @BindView(R.id.tv_claims_quantity)
-        AppCompatTextView claimsQuantity;
-        @BindView(R.id.btn_info)
-        AppCompatImageView info;
+        @BindView(R.id.title_card) TextView name;
+
+        @BindView(R.id.adres_card_sw) TextView address;
+
+        @BindView(R.id.tv_claims_quantity) AppCompatTextView claimsQuantity;
+
+        @BindView(R.id.btn_info) AppCompatImageView info;
+
+        @BindView(R.id.layoutCard) LinearLayoutCompat layoutCard;
 
         SvViewHolder(View itemView) {
             super(itemView);
@@ -134,6 +140,7 @@ public class SvAdapter extends RecyclerView.Adapter<SvAdapter.SvViewHolder> {
             address.setText(tradePoint.getAddress().toString());
             claimsQuantity.setText(String.format("%d", tradePoint.getClaims().size()));
             info.setOnClickListener(view -> infoClickListener.showInfo(tradePoint));
+            layoutCard.setOnClickListener(view->infoClickListener.showPromo(tradePoint.getId()));
         }
 
     }

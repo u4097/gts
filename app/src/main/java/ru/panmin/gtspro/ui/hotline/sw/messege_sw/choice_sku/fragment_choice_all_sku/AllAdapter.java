@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 class AllAdapter extends RecyclerView.Adapter {
+
+    @Inject
+    AllAdapter(){}
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -23,7 +26,5 @@ class AllAdapter extends RecyclerView.Adapter {
         return 0;
     }
 
-    @Inject
-    public AllAdapter() {
-    }
+
 }

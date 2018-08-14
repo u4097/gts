@@ -68,11 +68,11 @@ public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.Clie
         }
 
         public void bind(Client client, int position) {
-<<<<<<< HEAD
-            client_number_text.setText(String.valueOf(position + 1));
-            client_name_text.setText(client.getName().toString(itemView.getContext()));
 
-=======
+            client_number_text.setText(String.valueOf(position + 1));
+            client_name_text.setText(client.getName().toString());
+
+
             if (!TextUtils.isEmpty(client.getName().toString())) {
                 client_name_text.setVisibility(View.VISIBLE);
                 client_number_text.setVisibility(View.VISIBLE);
@@ -82,8 +82,6 @@ public class ClientsMeAdapter extends RecyclerView.Adapter<ClientsMeAdapter.Clie
                 client_name_text.setVisibility(View.GONE);
                 client_number_text.setVisibility(View.GONE);
             }
->>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
-
         }
     }
 

@@ -3,15 +3,11 @@
 <resources>
 
     <string name="app_name">GTS Pro</string>
-
     <string name="role_supervisor">"Супервайзер"</string>
     <string name="role_supervisor_short">"СВ"</string>
-
     <string name="role_merchandiser">"Мерчендайзер"</string>
     <string name="role_merchandiser_short">"МЕ"</string>
-
     <string name="role_unknown">"?"</string>
-
     <string name="empty">""</string>
     <string name="error">"Ошибка"</string>
     <string name="update">Обновить</string>
@@ -60,31 +56,13 @@
     <string name="schedule_text_tad">Время визита по графику:</string>
     <string name="list_of_attached_merchandisers_text_tag">Список мерчендайзеров</string>
     <string name="schedule_de_facto_text_tad">Фактическое время визита:</string>
-
-
-    <string name="label_verbose_info">Details</string>
-    <string name="label_claims">Claims</string>
-    <string name="label_promo">Promo</string>
-    <string name="label_photo_report">Photo Report</string>
-    <string name="label_report">Report</string>
-    <string name="label_sku">Sku</string>
-    <string name="label_planogram">Planogram</string>
-    <string name="label_hot_line">Hot Line</string>
-    <string name="label_statistics">Statistics</string>
-    <string name="action_logout">Logout</string>
-    <string name="label_clients">Clients:</string>
-    <string name="label_author">Author:</string>
-    <string name="label_period">Promo period:</string>
-    <string name="label_promo_description">Promo description:</string>
-    <string name="label_promo_sku">SKU</string>
     <string name="type_messege_hotline_teg">Тип сообщения</string>
     <string name="sku_choice_text_teg">Выбор SKU</string>
     <string name="сauses_choice_text_teg">Выбор причины</string>
     <string name="situation_choice_text_teg">Выбор ситуации</string>
     <string name="quantity_goods_text_teg">Введите кол-во товара</string>
     <string name="manufacturer_selection_text_teg">Выбор производителя</string>
-
-    <!--<string name="action_logout">Выход</string>
+    <string name="action_logout">Выход</string>
     <string name="label_claims">Претензии</string>
     <string name="label_clients">Клиенты:</string>
     <string name="label_author">Автор:</string>
@@ -104,10 +82,6 @@
     <string name="label_date_end">Дата выполнения</string>
     <string name="label_from">c %1$s</string>
     <string name="label_to">до %1$s</string>
-<<<<<<< HEAD
-    <string name="label_filter_title">Фильтр по:</string>-
-
-=======
     <string name="label_filter_title">Фильтр по:</string>
     <string name="form">Анкета</string>
 
@@ -119,6 +93,5 @@
         <item quantity="many">Вопросов</item>
         <item quantity="other">Вопросов</item>
     </plurals>
->>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
 
 </resources>

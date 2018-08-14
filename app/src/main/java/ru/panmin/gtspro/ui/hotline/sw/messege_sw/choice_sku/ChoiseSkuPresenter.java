@@ -14,8 +14,5 @@ public class ChoiseSkuPresenter extends ProgressPresenter<ChoiseSkuMvpView> {
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
 
-    }
 }

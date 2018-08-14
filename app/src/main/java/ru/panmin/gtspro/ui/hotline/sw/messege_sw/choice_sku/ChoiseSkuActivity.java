@@ -87,16 +87,14 @@ public class ChoiseSkuActivity
     }
 
     private void initViewPager() {
-        skuChoicePagerAdapter =new SkuChoicePagerAdapter(getSupportFragmentManager());
+        skuChoicePagerAdapter = new SkuChoicePagerAdapter(getSupportFragmentManager());
         String clientId = getIntent().getStringExtra(INTENT_KEY_CLIENT_ID);
         String tradePointId = getIntent().getStringExtra(INTENT_KEY_TRADEPOINT_ID);
-        System.out.println(tradePointId);
-        System.out.println(clientId);
         skuChoicePagerAdapter.setData(clientId, tradePointId);
         skuChoiceView_pager.setAdapter(skuChoicePagerAdapter);
         skuChoiceTab_layout.setupWithViewPager(skuChoiceView_pager);
         skuChoiceView_pager.setOffscreenPageLimit(skuChoicePagerAdapter.getCount());
-
+setStateData();
     }
 
     private void initCloseButton() {

@@ -24,7 +24,9 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
 
     private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
+
     @Inject PromoInfoMePresenter promoInfoPresenter;
+
 
     @BindView(R.id.tvClients) TextView tvClients;
     @BindView(R.id.tvAuthor) TextView tvAuthor;
@@ -32,6 +34,7 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
     @BindView(R.id.tvDescription) TextView tvDescription;
     @BindView(R.id.tvSku) TextView tvSku;
     @BindView(R.id.btnResume) AppCompatButton btnResume;
+
 
     private Promo promo = null;
 

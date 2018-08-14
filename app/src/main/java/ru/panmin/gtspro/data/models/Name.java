@@ -1,12 +1,10 @@
 package ru.panmin.gtspro.data.models;
 
-<<<<<<< HEAD
-import android.content.Context;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-=======
->>>>>>> 3c257dd2fed21a42919011d44aaa62a49ca0fc9a
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;

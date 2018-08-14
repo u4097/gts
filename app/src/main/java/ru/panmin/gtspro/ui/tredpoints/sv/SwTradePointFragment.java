@@ -14,6 +14,7 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
+import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.tradepointinfo.sv.TradePointInfoSvActivity;
@@ -114,6 +115,11 @@ public class SwTradePointFragment extends ProgressFragment implements SwTradePoi
     @Override
     public void showInfo(TradePoint tradePoint) {
         startActivity(TradePointInfoSvActivity.getStartIntent(getActivity(), tradePoint.getId()));
+    }
+
+    @Override
+    public void showPromo(String id) {
+        startActivity(BlockActivity.getStartIntent(getActivity(), id));
     }
 
 }

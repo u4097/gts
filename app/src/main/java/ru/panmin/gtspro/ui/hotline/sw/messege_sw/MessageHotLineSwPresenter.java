@@ -19,11 +19,6 @@ public class MessageHotLineSwPresenter extends ToolbarPresenter<MessegeHotLineSw
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-
-    }
-
     public void getClient(String clientId, String tradePointId) {
         TradePoint tradePoint = dataManager.getTradePointById(tradePointId);
         if (tradePoint != null) {

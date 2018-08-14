@@ -1,6 +1,6 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku;
 
-import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 import ru.panmin.gtspro.data.models.SkuListElement;
 import ru.panmin.gtspro.ui.base.BaseFragment;
@@ -23,10 +23,6 @@ public class SkuChoicePagerAdapter extends FragmentPagerAdapter {
     public static final int PAGE_SELECTED = 2;
 
     private static final int COUNT = 3;
-
-    private static final String ARG_KEY_CLIENT_ID = "client.id";
-
-    private static final String ARG_KEY_TRADE_POINT_ID = "tradepoint.id";
 
     private List<BaseSelectSkuInterface> interfaces = new ArrayList<>();
 
@@ -64,24 +60,16 @@ public class SkuChoicePagerAdapter extends FragmentPagerAdapter {
        BaseFragment fragment =null;
         switch (position) {
             case PAGE_GROUP:
-                 fragment = new ChoiceSkuGroupListFragment();
+                 fragment = ChoiceSkuGroupListFragment.createInstance(clientId,tradePointId);
                 break;
             case PAGE_LIST:
-                 fragment = new ChoiceSkuAllListFragment();
+                 fragment =  ChoiceSkuAllListFragment.createInstance(clientId,tradePointId);
                 break;
             case PAGE_SELECTED:
-               fragment = new SelectedSkuListFragment();
+               fragment =  SelectedSkuListFragment.createInstance(clientId,tradePointId);
                 break;
         }
 
-        Bundle args = new Bundle();
-
-        args.putString(ARG_KEY_TRADE_POINT_ID, tradePointId);
-
-        args.putString(ARG_KEY_CLIENT_ID, clientId);
-
-        assert fragment != null;
-        fragment.setArguments(args);
         interfaces.add((BaseSelectSkuInterface) fragment);
         return fragment;
     }

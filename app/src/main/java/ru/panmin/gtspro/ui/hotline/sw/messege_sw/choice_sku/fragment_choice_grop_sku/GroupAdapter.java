@@ -13,52 +13,59 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import java.util.List;
 
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.SkuForAdapter;
+import ru.panmin.gtspro.data.models.SkuListElement;
+import ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.BaseSelectSkuInterface;
 
 public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroupViewHolder, MultiCheckSkuViewHolder> {
 
 
-    public GroupAdapter(List<? extends MultiCheckExpandableGroup> groups) {
+    static private BaseSelectSkuInterface skuClickListener;
+
+
+    GroupAdapter(List<? extends MultiCheckExpandableGroup> groups, BaseSelectSkuInterface skuInterface) {
         super(groups);
+         skuClickListener =skuInterface;
     }
 
+    @Override
+    public MultiCheckSkuViewHolder onCreateCheckChildViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_sku_recycler, parent, false);
+        return new MultiCheckSkuViewHolder(v);
+    }
 
+    @Override
+    public void onBindCheckChildViewHolder(MultiCheckSkuViewHolder holder, int flatPosition, CheckedExpandableGroup group, int childIndex) {
+        holder.setSkuName((SkuForAdapter) group.getItems().get(childIndex));
+    }
 
-        @Override
-        public MultiCheckSkuViewHolder onCreateCheckChildViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_sku_recycler, parent, false);
-            return new MultiCheckSkuViewHolder(v);
-        }
+    @Override
+    public SkuNameGroupViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_group_sku_recycler, parent, false);
+        return new SkuNameGroupViewHolder(v);
+    }
 
-        @Override
-        public void onBindCheckChildViewHolder(MultiCheckSkuViewHolder holder, int flatPosition, CheckedExpandableGroup group, int childIndex) {
-
-            holder.setSkuName(group.getItems().get(childIndex));
-        }
-
-        @Override
-        public SkuNameGroupViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_group_sku_recycler, parent, false);
-            return new SkuNameGroupViewHolder(v);
-        }
-
-        @Override
-        public void onBindGroupViewHolder(SkuNameGroupViewHolder holder, int flatPosition, ExpandableGroup group) {
+    @Override
+    public void onBindGroupViewHolder(SkuNameGroupViewHolder holder, int flatPosition, ExpandableGroup group) {
         holder.bind(group);
+    }
+
+    public static class GroupForAdapter extends MultiCheckExpandableGroup {
+
+        GroupForAdapter(String title, List items) {
+            super(title, items);
         }
 
-        public static class GroupForAdapter extends MultiCheckExpandableGroup {
-
-            public GroupForAdapter(String title, List items) {
-                super(title, items);
+        @Override
+        public void onChildClicked(int childIndex, boolean checked) {
+            if (checked) {
+               // skuClickListener.selectSku(childIndex, );
+            } else {
+               // skuClickListener.deselectSku(childIndex,);
             }
-
-            @Override
-            public void onChildClicked(int childIndex, boolean checked) {
-            }
-
         }
-
 
     }
+}

@@ -26,9 +26,6 @@ public class ChoiceSkuListPresenter extends ProgressPresenter<ChoiceSkuListMvpVi
         this.dataManager = dataManager;
     }
 
-    @Override
-    protected void dispose() {
-    }
 
     void getSkuListElements(String tradePointId, String clientId) {
         TradePoint tradePoint = dataManager.getTradePointById(tradePointId);

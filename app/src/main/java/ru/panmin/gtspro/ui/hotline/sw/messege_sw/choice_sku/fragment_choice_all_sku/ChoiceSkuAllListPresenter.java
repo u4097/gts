@@ -15,5 +15,4 @@ public class ChoiceSkuAllListPresenter extends ProgressPresenter<ChoiceSkuAllLis
         this.dataManager = dataManager;
     }
 
-
 }

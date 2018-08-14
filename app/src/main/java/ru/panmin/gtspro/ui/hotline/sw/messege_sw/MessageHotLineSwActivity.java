@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ViewFlipper;
 
@@ -22,16 +23,19 @@ public class MessageHotLineSwActivity
 
     private static final String INTENT_KEY_CLIENT_ID = "client.id";
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
-    @Inject
-    MessageHotLineSwPresenter messageHotLineSwPresenter;
-    @BindView(R.id.buttonSkuTypeShort)
-    AppCompatButton buttonSkuTypeShort;
-    @BindView(R.id.buttonTtTypeShort)
-    AppCompatButton buttonTtTypeShort;
-    @BindView(R.id.viewFlipperType)
-    ViewFlipper viewFlipperType;
-    @BindView(R.id.skuChoiceTextButton)
-    AppCompatImageView skuChoiceTextButton;
+
+    @Inject MessageHotLineSwPresenter messageHotLineSwPresenter;
+
+    @BindView(R.id.buttonSkuTypeShort) AppCompatButton buttonSkuTypeShort;
+
+    @BindView(R.id.buttonTtTypeShort) AppCompatButton buttonTtTypeShort;
+
+    @BindView(R.id.viewFlipperType) ViewFlipper viewFlipperType;
+
+    @BindView(R.id.skuChoiceTextButton) AppCompatImageView skuChoiceTextButton;
+
+    @BindView(R.id.client_text_name) AppCompatTextView client_text_name;
+
     private String clientId;
     private String tradePointId;
 
@@ -130,7 +134,8 @@ public class MessageHotLineSwActivity
     public void setClientSku(Client client, String tradePointId) {
         clientId = client.getId();
         this.tradePointId = tradePointId;
-        setTitle(client.getName().toString(this));
+        client_text_name.setText(client.getName().toString());
+        setTitle("Сообщение на ГЛ");
         setStateData();
     }
 }

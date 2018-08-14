@@ -72,13 +72,13 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormViewHold
         @SuppressLint({"SetTextI18n", "DefaultLocale"})
         void bind(Form form) {
             textFormName.setText(form.getName().toString());
-            textFormCount.setText(String.format("%d", form.getCountQuestions()));
+            textFormCount.setText(String.format("%d", form.getQuestions().size()));
             textFormCountPlurals.setText(
                     textFormCountPlurals
                             .getContext()
                             .getResources()
                             .getQuantityString(
-                                    R.plurals.question_plurals, form.getCountQuestions()
+                                    R.plurals.question_plurals, form.getQuestions().size()
                             )
             );
             itemView.setOnClickListener(view -> onFormClickListener.onFormClick(form));
