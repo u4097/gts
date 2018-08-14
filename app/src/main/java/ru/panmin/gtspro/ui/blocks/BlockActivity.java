@@ -35,6 +35,7 @@ import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
+import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
 
@@ -356,10 +357,12 @@ public class BlockActivity
 
     @Override
     public void onPhotoReportClick(FormOrReport photoReport) {
+        startActivity(QuestionGroupsActivity.getStartIntent(this, photoReport.getId()));
     }
 
     @Override
     public void onReportClick(FormOrReport report) {
+        startActivity(QuestionGroupsActivity.getStartIntent(this, report.getId()));
     }
 
     class Holder {

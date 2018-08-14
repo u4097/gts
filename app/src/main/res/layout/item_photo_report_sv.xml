@@ -1,7 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:paddingBottom="18dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="16dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textReportName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_three"
+            android:textSize="15sp"
+            tools:text="ОАО Ригли"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textFilledInWith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:alpha="0.5"
+                android:text="@string/filled_in_with"
+                android:textColor="@color/black_three"
+                android:textSize="13sp"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textFilledInWithPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textFilledInWith"
+                android:layout_toRightOf="@+id/textFilledInWith"
+                android:textColor="@color/azure"
+                android:textSize="13sp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white_four"/>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                tools:ignore="RtlSymmetry">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="@string/create_date"
+                    android:textColor="@color/black_three"
+                    android:textSize="13sp"/>
+
+                <ru.panmin.gtspro.ui.customviews.VectorsSupportTextView
+                    android:id="@+id/textDateCreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:textColor="@color/black_three"
+                    android:textSize="12sp"
+                    app:drawableLeftCompat="@drawable/ic_date"
+                    tools:text="с 16/09/2018"/>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingStart="12dp"
+                tools:ignore="RtlSymmetry">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="@string/create_date"
+                    android:textColor="@color/black_three"
+                    android:textSize="13sp"/>
+
+                <ru.panmin.gtspro.ui.customviews.VectorsSupportTextView
+                    android:id="@+id/textDateCompletion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:textColor="@color/black_three"
+                    android:textSize="12sp"
+                    app:drawableLeftCompat="@drawable/ic_time"
+                    tools:text="с 16/09/2018"/>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textNowPerform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:alpha="0.5"
+                android:text="@string/now_perform"
+                android:textColor="@color/black_three"
+                android:textSize="13sp"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textNowPerformName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textNowPerform"
+                android:layout_toRightOf="@+id/textNowPerform"
+                android:textColor="@color/azure"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v7.widget.CardView>

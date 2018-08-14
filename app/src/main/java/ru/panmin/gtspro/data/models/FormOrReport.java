@@ -182,14 +182,22 @@ public class FormOrReport extends RealmObject {
         return simpleDateFormat.format(getDateFinishAsDate());
     }
 
+    @SuppressLint("SimpleDateFormat")
     public String getDateBeginWithFormat(@NonNull String dateFormat) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-        return simpleDateFormat.format(getDateBeginAsDate());
+        return getDateBeginWithFormat(new SimpleDateFormat(dateFormat));
     }
 
+    @SuppressLint("SimpleDateFormat")
     public String getDateFinishWithFormat(@NonNull String dateFormat) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-        return simpleDateFormat.format(getDateFinishAsDate());
+        return getDateFinishWithFormat(new SimpleDateFormat(dateFormat));
+    }
+
+    public String getDateBeginWithFormat() {
+        return getDateBeginWithFormat("dd/MM/yyyy");
+    }
+
+    public String getDateFinishWithFormat() {
+        return getDateFinishWithFormat("dd/MM/yyyy");
     }
 
 }

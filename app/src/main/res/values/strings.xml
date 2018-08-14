@@ -84,6 +84,9 @@
     <string name="label_to">до %1$s</string>
     <string name="label_filter_title">Фильтр по:</string>
     <string name="formOrReport">Анкета</string>
+    <string name="filled_in_with">Заполнено на:</string>
+    <string name="now_perform">Сейчас  выполняет:</string>
+    <string name="create_date">Дата создания</string>
 
     <plurals name="question_plurals">
         <item quantity="zero">Вопросов</item>
