@@ -1,6 +1,7 @@
 package ru.panmin.gtspro.ui.blocks.adapters;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.FormOrReport;
@@ -57,12 +59,29 @@ public class ReportMeAdapter extends RecyclerView.Adapter<ReportMeAdapter.Report
 
     class ReportViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.textReportName) AppCompatTextView textReportName;
+        @BindView(R.id.textReportDescription) AppCompatTextView textReportDescription;
+        @BindView(R.id.textFilledInWithPercent) AppCompatTextView textFilledInWithPercent;
+        @BindView(R.id.textReportDate) AppCompatTextView textReportDate;
+
         public ReportViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         public void bind(FormOrReport report) {
+            textReportName.setText(report.getName().toString());
+            textReportDescription.setText("???");
+            textFilledInWithPercent.setText(String.format("%s%%", report.getFilledPercent()));
+            textReportDate.setText(
+                    String.format(
+                            "%s %s\n%s %s",
+                            textReportDate.getContext().getString(R.string.from),
+                            report.getDateBeginWithFormat(),
+                            textReportDate.getContext().getString(R.string.to),
+                            report.getDateFinishWithFormat()
+                    )
+            );
             itemView.setOnClickListener(view -> onReportClickListener.onReportClick(report));
         }
 

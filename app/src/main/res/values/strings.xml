@@ -91,6 +91,12 @@
     <string name="label_claim_photo">Фотоснимки:</string>
     <string name="label_run_now">Сейчас выполняет:</string>
     <string name="formOrReport">Анкета</string>
+    <string name="filled_in_with">Заполнено на:</string>
+    <string name="now_perform">Сейчас  выполняет:</string>
+    <string name="create_date">Дата создания</string>
+    <string name="finish_date">Дата выполнения</string>
+    <string name="from">c</string>
+    <string name="to">до</string>
 
     <plurals name="question_plurals">
         <item quantity="zero">Вопросов</item>

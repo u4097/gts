@@ -11,18 +11,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.http.HEAD;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private List<Promo> promoList = new ArrayList<>();
     private PromoClickListener infoClickListener;
 
@@ -80,7 +79,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         @BindView(R.id.promoRoot)
         ViewGroup promoRoot;
 
-        public PromoVH(View itemView) {
+        PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -90,10 +89,13 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
                 tvAuthor.setText(promo.getAuthor().toString());
             }
             if (promo.getFinishDate() != null) {
-                tvDateEnd.setText(getDateFormated(promo.getFinishDate()));
+                tvDateEnd.setText(promo.getFinishDateWithFormat());
             }
             if (promo.getBeginDate() != null) {
-                tvDateStart.setText(getDateFormated(promo.getBeginDate()));
+                tvDateEnd.setText(promo.getFinishDateWithFormat());
+            }
+            if (promo.getBeginDate() != null) {
+                tvDateStart.setText(promo.getBeginDateWithFormat());
             }
             if (promo.getDescription() != null) {
                 tvDescription.setText(promo.getDescription().toString());
@@ -103,21 +105,5 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
             promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
     }
-
-
-    private String getDateFormated(String date) {
-        date = date.substring(0, 10);
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date dateObj = null;
-        try {
-            dateObj = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String dateFormated = new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
-        return dateFormated;
-    }
-
 
 }

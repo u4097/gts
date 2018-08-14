@@ -1,6 +1,8 @@
 package ru.panmin.gtspro.ui.blocks.adapters;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.FormOrReport;
+import ru.panmin.gtspro.ui.customviews.VectorsSupportTextView;
 
 public class PhotoReportSvAdapter extends RecyclerView.Adapter<PhotoReportSvAdapter.PhotoReportViewHolder> {
 
@@ -57,12 +61,24 @@ public class PhotoReportSvAdapter extends RecyclerView.Adapter<PhotoReportSvAdap
 
     class PhotoReportViewHolder extends RecyclerView.ViewHolder {
 
-        public PhotoReportViewHolder(View itemView) {
+        @BindView(R.id.textReportName) AppCompatTextView textReportName;
+        @BindView(R.id.textFilledInWithPercent) AppCompatTextView textFilledInWithPercent;
+        @BindView(R.id.textDateCreate) VectorsSupportTextView textDateCreate;
+        @BindView(R.id.textDateCompletion) VectorsSupportTextView textDateCompletion;
+        @BindView(R.id.textNowPerformName) AppCompatTextView textNowPerformName;
+
+        PhotoReportViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
+        @SuppressLint("SetTextI18n")
         public void bind(FormOrReport photoReport) {
+            textReportName.setText(photoReport.getName().toString());
+            textFilledInWithPercent.setText(String.format("%s%%", photoReport.getFilledPercent()));
+            textDateCreate.setText(photoReport.getDateBeginWithFormat());
+            textDateCompletion.setText(photoReport.getDateFinishWithFormat());
+            textNowPerformName.setText(photoReport.getClient() == null ? "" : photoReport.getClient().getName().toString());
             itemView.setOnClickListener(view -> onPhotoReportClickListener.onPhotoReportClick(photoReport));
         }
 

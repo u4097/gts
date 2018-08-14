@@ -1,7 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="4dp"
+    app:cardBackgroundColor="@color/white">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="16dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="16dp">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textReportDate"
+            android:layout_toStartOf="@+id/textReportDate"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textReportName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_three"
+                android:textSize="15sp"
+                tools:text="ОАО Ригли"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textReportDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:textColor="@color/black_three"
+                android:textSize="13sp"
+                tools:text="Отчет по стоку"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/textFilledInWith"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:alpha="0.5"
+                    android:text="@string/filled_in_with"
+                    android:textColor="@color/black_three"
+                    android:textSize="13sp"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/textFilledInWithPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/textFilledInWith"
+                    android:layout_toRightOf="@+id/textFilledInWith"
+                    android:textColor="@color/azure"
+                    android:textSize="13sp"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textReportDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:alpha="0.5"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textColor="@color/black_three"
+            android:textSize="13sp"
+            tools:text="с 16/09/2018">
+
+        </android.support.v7.widget.AppCompatTextView>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
