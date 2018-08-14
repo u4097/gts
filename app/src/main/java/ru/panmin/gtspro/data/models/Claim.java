@@ -1,9 +1,17 @@
 package ru.panmin.gtspro.data.models;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ru.panmin.gtspro.utils.Constants;
+import timber.log.Timber;
 
 public class Claim extends RealmObject {
 
@@ -96,4 +104,50 @@ public class Claim extends RealmObject {
     public void setAnswerBeforeDate(String answerBeforeDate) {
         this.answerBeforeDate = answerBeforeDate;
     }
+
+
+    public Date getCreationDateAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(creationDate);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public String getCreationDateWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getCreationDateAsDate());
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getCreationDateWithFormat(@NonNull String dateFormat) {
+        return getCreationDateWithFormat(new SimpleDateFormat(dateFormat));
+    }
+    public String getCreationDateWithFormat() { return getCreationDateWithFormat("dd/MM/yyyy");
+    }
+
+
+    public Date getAppointDateAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(appointDate);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public String getAppointDateWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getAppointDateAsDate());
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getAppointDateWithFormat(@NonNull String dateFormat) {
+        return getAppointDateWithFormat(new SimpleDateFormat(dateFormat));
+    }
+    public String getAppointDateWithFormat() { return getAppointDateWithFormat("dd/MM/yyyy");
+    }
+
+
 }

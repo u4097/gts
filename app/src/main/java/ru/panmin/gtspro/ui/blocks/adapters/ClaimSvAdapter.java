@@ -97,11 +97,11 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
             if (claim.getText() != null) {
                 tvDescription.setText(claim.getText());
             }
-            if (claim.getCreationDate() != null) {
-                tvDateStart.setText(getDateFormated(claim.getCreationDate()));
+            if (claim.getCreationDateWithFormat() != null) {
+                tvDateStart.setText(claim.getCreationDateWithFormat());
             }
-            if (claim.getAppointDate() != null) {
-                tvDateEnd.setText(getDateFormated(claim.getAppointDate()));
+            if (claim.getAppointDateWithFormat() != null) {
+                tvDateEnd.setText(claim.getAppointDateWithFormat());
             }
 
             claimRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
@@ -110,19 +110,4 @@ public class ClaimSvAdapter extends RecyclerView.Adapter<ClaimSvAdapter.ClaimVH>
             claimRoot.setOnClickListener(view -> infoClickListener.showClaim(claim));
         }
     }
-
-    private String getDateFormated(String date) {
-        date = date.substring(0, 10);
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date dateObj = null;
-        try {
-            dateObj = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String dateFormated = new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
-        return dateFormated;
-    }
-
 }

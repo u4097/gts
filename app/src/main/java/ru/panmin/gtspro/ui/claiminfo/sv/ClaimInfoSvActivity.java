@@ -128,11 +128,11 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
                 setValue(tvText, claim.getText(), R.string.label_message_claim);
             }
 
-            if (claim.getCreationDate() != null) {
-                setValue(tvDateStart, getDateFormated(claim.getCreationDate()), R.string.label_date_start);
+            if (claim.getCreationDateWithFormat() != null) {
+                setValue(tvDateStart, claim.getCreationDateWithFormat(), R.string.label_date_start);
             }
-            if (claim.getAppointDate() != null) {
-                setValue(tvDateFinish, getDateFormated(claim.getAppointDate()), R.string.label_date_end);
+            if (claim.getAppointDateWithFormat() != null) {
+                setValue(tvDateFinish, claim.getAppointDate(), R.string.label_date_end);
             } else {
                 setValue(tvDateFinish, "-", R.string.label_date_end);
             }
@@ -175,21 +175,6 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
             this.client = client;
             setTitle(client.getName().toString());
         }
-    }
-
-
-    private String getDateFormated(String date) {
-        date = date.substring(0, 10);
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date dateObj = null;
-        try {
-            dateObj = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String dateFormated = new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
-        return dateFormated;
     }
 
 }
