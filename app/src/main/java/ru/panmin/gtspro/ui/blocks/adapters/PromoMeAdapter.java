@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,11 +91,9 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
                 Timber.d("promo description: %s", promo.getDescription().toString());
             }
             if (promo.getBeginDate() != null) {
-//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from,promo.getBeginDate()));
                 Timber.d("promo begin date: %s", promo.getBeginDate());
             }
             if (promo.getFinishDate() != null) {
-//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_to,promo.getFinishDate()));
                 Timber.d("promo end date: %s", promo.getFinishDate());
             }
 
