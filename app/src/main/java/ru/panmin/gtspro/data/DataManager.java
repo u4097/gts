@@ -346,6 +346,11 @@ public class DataManager {
         return realmHelper.getFormById(formId);
     }
 
+    @Nullable
+    public FormOrReport getReportById(String reportId) {
+        return realmHelper.getReportById(reportId);
+    }
+
 
     /* SOCKET */
     public void createWithConnect() {

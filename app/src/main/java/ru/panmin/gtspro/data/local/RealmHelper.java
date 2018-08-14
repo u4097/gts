@@ -122,4 +122,11 @@ public class RealmHelper {
         return formOrReport;
     }
 
+    public FormOrReport getReportById(String reportId) {
+        realm.beginTransaction();
+        FormOrReport formOrReport = realm.where(FormOrReport.class).equalTo("id", reportId).findFirst();
+        realm.commitTransaction();
+        return formOrReport;
+    }
+
 }

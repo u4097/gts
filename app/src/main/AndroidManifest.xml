@@ -22,6 +22,8 @@
 
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -32,27 +34,60 @@
 
         <activity
             android:name=".ui.login.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:theme="@style/NoActionBar"/>
 
         <activity
             android:name=".ui.tredpoints.TradePointActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:theme="@style/NoActionBar"/>
 
-        <activity android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"/>
+        <activity
+            android:name=".ui.tradepointinfo.me.TradePointInfoMeActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"/>
+        <activity
+            android:name=".ui.tradepointinfo.sv.TradePointInfoSvActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"/>
+        <activity
+            android:name=".ui.tradepointinfo.sv.merchandiser.MerchandiserActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.blocks.BlockActivity"/>
+        <activity
+            android:name=".ui.blocks.BlockActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.promoinfo.me.PromoInfoMeActivity"/>
+        <activity
+            android:name=".ui.promoinfo.me.PromoInfoMeActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.promoinfo.sv.PromoInfoSvActivity"/>
+        <activity
+            android:name=".ui.promoinfo.sv.PromoInfoSvActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.forms.FormsActivity"/>
+        <activity
+            android:name=".ui.forms.FormsActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".ui.questiongroups.QuestionGroupsActivity"/>
+        <activity
+            android:name=".ui.questiongroups.QuestionGroupsActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
+
+        <activity
+            android:name=".ui.report.ReportActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
