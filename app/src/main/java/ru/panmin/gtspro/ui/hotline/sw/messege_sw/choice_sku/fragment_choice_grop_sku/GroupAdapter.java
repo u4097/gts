@@ -24,9 +24,11 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
     static private BaseSelectSkuInterface skuClickListener;
 
 
+
     GroupAdapter(List<? extends MultiCheckExpandableGroup> groups, BaseSelectSkuInterface skuInterface) {
         super(groups);
          skuClickListener =skuInterface;
+
     }
 
     @Override
@@ -69,13 +71,13 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
             if (checked) {
                 skuClickListener.selectSku(
                         SkuChoicePagerAdapter.PAGE_GROUP,
-                        new SkuListElement((SkuForAdapter) getItems().get(childIndex)))
-                ;
+                        new SkuListElement((SkuForAdapter) getItems().get(childIndex)));
+                checkChild(childIndex);
             } else {
                 skuClickListener.deselectSku(
                         SkuChoicePagerAdapter.PAGE_GROUP,
-                        new SkuListElement((SkuForAdapter) getItems().get(childIndex))
-                );
+                        new SkuListElement((SkuForAdapter) getItems().get(childIndex)));
+                        unCheckChild(childIndex);
             }
         }
 

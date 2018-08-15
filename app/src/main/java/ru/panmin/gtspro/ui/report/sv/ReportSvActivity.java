@@ -10,11 +10,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.FormOrReport;
-import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import timber.log.Timber;
 
 public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView {
 
@@ -76,7 +74,7 @@ public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView
         setTitle(report.getName().toString());
 
         if (report.getClient() != null) {
-            setValue(tvClients, report.getClient().toString(), R.string.label_clients);
+            setValue(tvClients, report.getClient().getName().toString(), R.string.label_clients);
         }
         //if (report.getAuthor() != null) {
         //    setValue(tvAuthor, report.getAuthor().toString(), R.string.label_author);

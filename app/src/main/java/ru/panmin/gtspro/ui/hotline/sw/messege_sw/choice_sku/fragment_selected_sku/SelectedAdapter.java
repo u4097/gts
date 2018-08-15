@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 
 import java.util.LinkedHashSet;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.SkuListElement;
 
@@ -32,7 +35,7 @@ class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedViewH
 
     @Override
     public void onBindViewHolder(@NonNull SelectedViewHolder holder, int position) {
-      holder.bind();
+        holder.bind((SkuListElement) selectedSku.toArray()[position]);
     }
 
 
@@ -53,11 +56,17 @@ class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedViewH
 
 
     public class SelectedViewHolder extends RecyclerView.ViewHolder {
-        public SelectedViewHolder(View itemView) {
+
+        @BindView(R.id.list_item_multicheck_sku_name)
+        CheckedTextView list_item_multicheck_sku_name;
+
+        SelectedViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        public void bind() {
+        public void bind(SkuListElement skuListElement) {
+            list_item_multicheck_sku_name.setText(skuListElement.getName().toString());
         }
     }
 }

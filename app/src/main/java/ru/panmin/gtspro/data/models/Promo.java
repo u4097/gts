@@ -1,10 +1,18 @@
 package ru.panmin.gtspro.data.models;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ru.panmin.gtspro.utils.Constants;
+import timber.log.Timber;
 
 public class Promo extends RealmObject {
 
@@ -125,4 +133,51 @@ public class Promo extends RealmObject {
     public void setAuthor(Name author) {
         this.author = author;
     }
+
+    public Date getBeginDateAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(beginDate);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public Date getFinishDateAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(finishDate);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public String getBeginDateWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getBeginDateAsDate());
+    }
+
+    public String getFinishDateWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getFinishDateAsDate());
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getBeginDateWithFormat(@NonNull String dateFormat) {
+        return getBeginDateWithFormat(new SimpleDateFormat(dateFormat));
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getFinishDateWithFormat(@NonNull String dateFormat) {
+        return getFinishDateWithFormat(new SimpleDateFormat(dateFormat));
+    }
+
+    public String getBeginDateWithFormat() {
+        return getBeginDateWithFormat("dd/MM/yyyy");
+    }
+
+    public String getFinishDateWithFormat() {
+        return getFinishDateWithFormat("dd/MM/yyyy");
+    }
+
 }

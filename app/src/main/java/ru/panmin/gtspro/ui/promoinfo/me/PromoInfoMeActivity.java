@@ -2,12 +2,7 @@ package ru.panmin.gtspro.ui.promoinfo.me;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatButton;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.view.View;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -18,15 +13,12 @@ import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import ru.panmin.gtspro.utils.TextUtils;
 
 public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeMvpView {
 
     private static final String INTENT_KEY_PROMO_ID = "promo.id";
 
-
     @Inject PromoInfoMePresenter promoInfoPresenter;
-
 
     @BindView(R.id.tvClients) TextView tvClients;
     @BindView(R.id.tvAuthor) TextView tvAuthor;
@@ -34,7 +26,6 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
     @BindView(R.id.tvDescription) TextView tvDescription;
     @BindView(R.id.tvSku) TextView tvSku;
     @BindView(R.id.btnResume) AppCompatButton btnResume;
-
 
     private Promo promo = null;
 
@@ -105,7 +96,7 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
                 setValue(tvAuthor, promo.getAuthor().toString(), R.string.label_author);
             }
             if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
-                setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
+                setValue(tvPeriod, promo.getBeginDateWithFormat() + " - " + promo.getFinishDateWithFormat(), R.string.label_period);
             }
             if (promo.getDescription() != null) {
                 setValue(tvDescription, promo.getDescription().toString(), R.string.label_promo_description);
@@ -118,19 +109,6 @@ public class PromoInfoMeActivity extends ToolbarActivity implements PromoInfoMeM
         }
 
         setStateData();
-    }
-
-    @Override
-    public void setValue(TextView tv, String text, Integer labelRes) {
-        if (TextUtils.isEmpty(text)) {
-            tv.setVisibility(View.GONE);
-        } else {
-            String label = getString(labelRes) + " ";
-            Spannable spannable = new SpannableString(label + text);
-            spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            tv.setText(spannable);
-            tv.setVisibility(View.VISIBLE);
-        }
     }
 
 }
