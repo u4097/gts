@@ -92,6 +92,7 @@ public class SelectedSkuListFragment
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(selectedAdapter);
+        setStateData();
     }
 
     @Override

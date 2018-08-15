@@ -16,23 +16,18 @@
         android:checkMark="@null"
         android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
         android:drawablePadding="20dp"
-        android:drawableRight="@null"
         android:gravity="end|center_vertical"
-        android:paddingStart="?android:attr/listPreferredItemPaddingLeft"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/black_three"
         android:background="?attr/selectableItemBackground"
         android:textSize="14sp"
         tools:text="Artist Name"
-        android:drawableEnd="@null"
         android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
-        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-        tools:ignore="RtlSymmetry" />
+       />
 
     <View
         android:id="@+id/separatorSkuChoice"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="1dp"
         android:background="@color/grey" />
 
 

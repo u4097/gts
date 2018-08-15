@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.FormOrReport;
 
+
 public class PhotoReportMeAdapter extends RecyclerView.Adapter<PhotoReportMeAdapter.PhotoReportViewHolder> {
 
     private List<FormOrReport> photoReports = new ArrayList<>();

@@ -41,7 +41,8 @@ class SkuNameGroupViewHolder extends GroupViewHolder {
     }
 
     private void animateExpand() {
-        list_item_sku_group_name.setCompoundDrawablesWithIntrinsicBounds(0,
+        list_item_sku_group_name.setCompoundDrawablesWithIntrinsicBounds(
+                0,
                 0,
                 R.drawable.ic_up_arrow,
                 0);

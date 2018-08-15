@@ -5,13 +5,20 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -41,10 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
-    @SuppressLint("UseSparseArrays")
-    private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
-    @Inject
-    SyncPresenter syncPresenter;
+    @SuppressLint("UseSparseArrays") private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
+    @Inject SyncPresenter syncPresenter;
     private ActivityComponent mActivityComponent;
     private long activityId;
 
@@ -219,6 +224,18 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
                     } else {
                     }
                 });
+    }
+
+    protected void setValue(TextView tv, String text, @StringRes int labelRes) {
+        if (TextUtils.isEmpty(text)) {
+            tv.setVisibility(View.GONE);
+        } else {
+            String label = String.format("%s ", getString(labelRes));
+            Spannable spannable = new SpannableString(String.format("%s%s", label, text));
+            spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv.setText(spannable);
+            tv.setVisibility(View.VISIBLE);
+        }
     }
 
 }

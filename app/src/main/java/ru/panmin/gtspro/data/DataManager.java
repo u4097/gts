@@ -17,8 +17,8 @@ import ru.panmin.gtspro.data.models.AnswerToQuestion;
 import ru.panmin.gtspro.data.models.ClaimData;
 import ru.panmin.gtspro.data.models.ClaimRedirectData;
 import ru.panmin.gtspro.data.models.EndVisitData;
-import ru.panmin.gtspro.data.models.Form;
 import ru.panmin.gtspro.data.models.FormFillingTimeData;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
@@ -309,12 +309,12 @@ public class DataManager {
         return realmHelper.getTradePoints();
     }
 
-    public void setTradePoint(TradePoint tradePoint) {
-        realmHelper.setTradePoint(tradePoint);
-    }
-
     public void setTradePoints(RealmList<TradePoint> tradePoints) {
         realmHelper.setTradePoints(tradePoints);
+    }
+
+    public void setTradePoint(TradePoint tradePoint) {
+        realmHelper.setTradePoint(tradePoint);
     }
 
     @Nullable
@@ -342,8 +342,13 @@ public class DataManager {
     }
 
     @Nullable
-    public Form getFormById(String formId) {
+    public FormOrReport getFormById(String formId) {
         return realmHelper.getFormById(formId);
+    }
+
+    @Nullable
+    public FormOrReport getReportById(String reportId) {
+        return realmHelper.getReportById(reportId);
     }
 
 

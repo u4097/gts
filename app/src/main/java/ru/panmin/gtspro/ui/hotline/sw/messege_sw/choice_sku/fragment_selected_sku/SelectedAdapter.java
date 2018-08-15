@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.SkuListElement;
 
-class SelectedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedViewHolder> {
 
     private LinkedHashSet<SkuListElement> selectedSku = new LinkedHashSet<>();
 
@@ -21,7 +21,7 @@ class SelectedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     SelectedAdapter(){}
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SelectedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(
                 parent.getContext()).
                 inflate(R.layout.item_sku_recycler,
@@ -31,9 +31,10 @@ class SelectedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull SelectedViewHolder holder, int position) {
+      holder.bind();
     }
+
 
     @Override
     public int getItemCount() {
@@ -50,9 +51,13 @@ class SelectedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    private class SelectedViewHolder extends RecyclerView.ViewHolder {
-        public SelectedViewHolder(View v) {
-            super(v);
+
+    public class SelectedViewHolder extends RecyclerView.ViewHolder {
+        public SelectedViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public void bind() {
         }
     }
 }

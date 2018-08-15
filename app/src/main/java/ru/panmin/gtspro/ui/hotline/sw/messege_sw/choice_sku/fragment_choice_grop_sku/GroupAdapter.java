@@ -39,7 +39,7 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
     @Override
     public void onBindCheckChildViewHolder(MultiCheckSkuViewHolder holder, int flatPosition,
                                            CheckedExpandableGroup group, int childIndex) {
-        holder.setSkuName((SkuForAdapter) group.getItems().get(childIndex));
+        holder.bind((SkuForAdapter) group.getItems().get(childIndex));
     }
 
     @Override

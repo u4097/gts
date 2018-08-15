@@ -13,7 +13,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmResults;
-import ru.panmin.gtspro.data.models.Form;
+import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
@@ -65,15 +65,15 @@ public class RealmHelper {
         return tradePoints;
     }
 
-    public void setTradePoint(TradePoint tradePoint) {
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(tradePoint);
-        realm.commitTransaction();
-    }
-
     public void setTradePoints(RealmList<TradePoint> tradePoints) {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(tradePoints);
+        realm.commitTransaction();
+    }
+
+    public void setTradePoint(TradePoint tradePoint) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(tradePoint);
         realm.commitTransaction();
     }
 
@@ -115,11 +115,18 @@ public class RealmHelper {
         return promo;
     }
 
-    public Form getFormById(String formId) {
+    public FormOrReport getFormById(String formId) {
         realm.beginTransaction();
-        Form form = realm.where(Form.class).equalTo("id", formId).findFirst();
+        FormOrReport formOrReport = realm.where(FormOrReport.class).equalTo("id", formId).findFirst();
         realm.commitTransaction();
-        return form;
+        return formOrReport;
+    }
+
+    public FormOrReport getReportById(String reportId) {
+        realm.beginTransaction();
+        FormOrReport formOrReport = realm.where(FormOrReport.class).equalTo("id", reportId).findFirst();
+        realm.commitTransaction();
+        return formOrReport;
     }
 
 }

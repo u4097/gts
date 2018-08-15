@@ -74,13 +74,13 @@ public class ReportMeActivity extends ToolbarActivity implements ReportMeMvpView
         setTitle(report.getName().toString());
 
         if (report.getClient() != null) {
-            setValue(tvClients, report.getClient().toString(), R.string.label_clients);
+          setValue(tvClients, report.getClient().toString(), R.string.label_clients);
         }
         //if (report.getAuthor() != null) {
         //    setValue(tvAuthor, report.getAuthor().toString(), R.string.label_author);
         //}
         if (report.getDateBegin() != null && report.getDateFinish() != null) {
-            setValue(tvPeriod, report.getDateBeginWithFormat() + " - " + report.getDateFinishWithFormat(), R.string.label_period);
+          setValue(tvPeriod, report.getDateBeginWithFormat() + " - " + report.getDateFinishWithFormat(), R.string.label_period);
         }
         //if (report.getDescription() != null) {
         //    setValue(tvDescription, report.getDescription().toString(), R.string.label_promo_description);

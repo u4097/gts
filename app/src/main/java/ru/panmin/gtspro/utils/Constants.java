@@ -1,5 +1,9 @@
 package ru.panmin.gtspro.utils;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
+
 public class Constants {
 
     public static final String DOMAIN = "217.151.77.93:58081";
@@ -10,7 +14,13 @@ public class Constants {
     public static final String HEADER_AUTHORIZATION = "Authorization";
     public static final String TOKEN_TYPE_BEARER = "Bearer";
 
-    public static final String DATE_TIME_FORMAT = "hh:MM:ss";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.ZZZZ";
+    @SuppressLint("SimpleDateFormat") public static final SimpleDateFormat SIMPLE_DATE_FORMAT
+            = new SimpleDateFormat(DATE_FORMAT);
+
+    public static final String TIME_FORMAT = "HH:mm";
+    @SuppressLint("SimpleDateFormat") public static final SimpleDateFormat SIMPLE_TIME_FORMAT
+            = new SimpleDateFormat(TIME_FORMAT);
 
     public static final String WS_TYPE_USER_INFO = "user_info";
     public static final String WS_TYPE_ADDRESS_PROGRAM = "address_program";
@@ -25,6 +35,7 @@ public class Constants {
     public static final String WS_TYPE_END_VISIT = "end_visit";
     public static final String WS_TYPE_MERCHANDISER_VISITS = "merchandiser_visits";
     public static final String WS_TYPE_ERROR = "error";
+    public static final String DATE_TIME_FORMAT = "hh:MM:ss";
 
     /* константы времени */
     public static final int SECOND = 1000;
@@ -45,5 +56,11 @@ public class Constants {
 
     private Constants() {
     }
+
+
+
+
+
+
 
 }
