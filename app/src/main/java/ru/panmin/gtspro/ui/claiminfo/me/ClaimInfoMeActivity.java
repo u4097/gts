@@ -28,6 +28,7 @@ import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import timber.log.Timber;
 
 public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeMvpView {
 
@@ -164,6 +165,10 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
                 setValue(tvType,claim.getType().getName().toString(),R.string.label_claim_type);
             } else {
                 setValue(tvType,"-",R.string.label_claim_type);
+            }
+
+            if (claim.getPhotos() != null) {
+                Timber.d("Photos: %s",claim.getPhotos().size());
             }
 
             setValue(tvAuthor,"-",R.string.label_author);

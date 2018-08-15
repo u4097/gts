@@ -6,8 +6,11 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import ru.panmin.gtspro.utils.Constants;
@@ -26,7 +29,8 @@ public class Claim extends RealmObject {
     @SerializedName("appoint_date") private String appointDate;
     @SerializedName("creation_date") private String creationDate;
     @SerializedName("answer_before_date") private String answerBeforeDate;
-//    @SerializedName("conversation") private String conversation;
+    @SerializedName("photos") private RealmList<Photo> photos;
+
 
 
 
@@ -105,6 +109,14 @@ public class Claim extends RealmObject {
         this.answerBeforeDate = answerBeforeDate;
     }
 
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(RealmList<Photo> photos) {
+        this.photos = photos;
+    }
 
     public Date getCreationDateAsDate() {
         Date date = new Date();

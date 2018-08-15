@@ -23,10 +23,12 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.Client;
+import ru.panmin.gtspro.data.models.Photo;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
+import timber.log.Timber;
 
 public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvMvpView {
 
@@ -142,6 +144,13 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
                 setValue(tvType,claim.getType().getName().toString(),R.string.label_claim_type);
             } else {
                 setValue(tvType,"-",R.string.label_claim_type);
+            }
+
+            if (claim.getPhotos() != null) {
+                for (Photo photo : claim.getPhotos()) {
+                    Timber.d("Photos url: %s", photo.getUrl());
+                    Timber.d("Photos comment: %s", photo.getComment());
+                }
             }
 
             setValue(tvAuthor,"-",R.string.label_author);

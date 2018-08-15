@@ -91,7 +91,6 @@ public class ClaimMeAdapter extends RecyclerView.Adapter<ClaimMeAdapter.ClaimVH>
             if (claim.getClientId() != null) {
                 Timber.d("client id: %s",claim.getClientId());
                 client = clients.get(claim.getClientId());
-
             }
             if (client != null) {
                 tvTitle.setText(client.getName().toString());
