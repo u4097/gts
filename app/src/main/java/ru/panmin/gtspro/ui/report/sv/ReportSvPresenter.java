@@ -1,16 +1,16 @@
-package ru.panmin.gtspro.ui.report;
+package ru.panmin.gtspro.ui.report.sv;
 
 import javax.inject.Inject;
 
 import ru.panmin.gtspro.data.DataManager;
 import ru.panmin.gtspro.ui.toolbar.ToolbarPresenter;
 
-public class ReportPresenter extends ToolbarPresenter<ReportMvpView> {
+class ReportSvPresenter extends ToolbarPresenter<ReportSvMvpView> {
 
     private final DataManager dataManager;
 
     @Inject
-    ReportPresenter(DataManager dataManager) {
+    ReportSvPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 

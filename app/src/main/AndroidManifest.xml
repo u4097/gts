@@ -84,7 +84,12 @@
             android:launchMode="singleTask"/>
 
         <activity
-            android:name=".ui.report.ReportActivity"
+            android:name=".ui.report.me.ReportMeActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
+
+        <activity
+            android:name=".ui.report.sv.ReportSvActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"/>
 

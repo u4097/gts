@@ -36,6 +36,8 @@ import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
+import ru.panmin.gtspro.ui.report.me.ReportMeActivity;
+import ru.panmin.gtspro.ui.report.sv.ReportSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
 
@@ -357,12 +359,26 @@ public class BlockActivity
 
     @Override
     public void onPhotoReportClick(FormOrReport photoReport) {
-        startActivity(QuestionGroupsActivity.getStartIntent(this, photoReport.getId()));
+        switch (this.userRole) {
+            case Constants.ROLE_MERCHANDISER:
+                startActivity(ReportMeActivity.getStartIntent(this, photoReport.getId()));
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                startActivity(ReportSvActivity.getStartIntent(this, photoReport.getId()));
+                break;
+        }
     }
 
     @Override
     public void onReportClick(FormOrReport report) {
-        startActivity(QuestionGroupsActivity.getStartIntent(this, report.getId()));
+        switch (this.userRole) {
+            case Constants.ROLE_MERCHANDISER:
+                startActivity(ReportMeActivity.getStartIntent(this, report.getId()));
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                startActivity(ReportSvActivity.getStartIntent(this, report.getId()));
+                break;
+        }
     }
 
     class Holder {

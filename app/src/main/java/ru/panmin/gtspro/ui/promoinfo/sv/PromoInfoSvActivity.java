@@ -119,17 +119,4 @@ public class PromoInfoSvActivity extends ToolbarActivity implements PromoInfoSvM
         setStateData();
     }
 
-    @Override
-    public void setValue(TextView tv, String text, Integer labelRes) {
-        if (TextUtils.isEmpty(text)) {
-            tv.setVisibility(View.GONE);
-        } else {
-            String label = getString(labelRes) + " ";
-            Spannable spannable = new SpannableString(label + text);
-            spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            tv.setText(spannable);
-            tv.setVisibility(View.VISIBLE);
-        }
-    }
-
 }

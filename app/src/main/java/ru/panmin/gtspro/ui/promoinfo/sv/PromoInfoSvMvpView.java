@@ -10,6 +10,4 @@ interface PromoInfoSvMvpView extends ToolbarMvpView {
 
     void setPromo(Promo promo);
 
-    void setValue(TextView tv, String text, @StringRes Integer label);
-
 }
