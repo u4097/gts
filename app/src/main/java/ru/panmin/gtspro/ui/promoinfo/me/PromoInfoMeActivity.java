@@ -2,13 +2,7 @@ package ru.panmin.gtspro.ui.promoinfo.me;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatButton;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.StyleSpan;
-import android.view.View;
 import android.widget.TextView;
 
 import javax.inject.Inject;

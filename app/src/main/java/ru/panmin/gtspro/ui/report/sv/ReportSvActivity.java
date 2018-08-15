@@ -10,11 +10,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.FormOrReport;
-import ru.panmin.gtspro.ui.forms.FormsActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
-import timber.log.Timber;
 
 public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView {
 

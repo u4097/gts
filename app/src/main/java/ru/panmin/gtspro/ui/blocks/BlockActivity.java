@@ -35,7 +35,6 @@ import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
-import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
 import ru.panmin.gtspro.ui.report.me.ReportMeActivity;
 import ru.panmin.gtspro.ui.report.sv.ReportSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
