@@ -13,6 +13,7 @@ import io.reactivex.Single;
 import io.realm.RealmList;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
+import ru.panmin.gtspro.data.models.Answer;
 import ru.panmin.gtspro.data.models.AnswerToQuestion;
 import ru.panmin.gtspro.data.models.ClaimData;
 import ru.panmin.gtspro.data.models.ClaimRedirectData;
@@ -355,6 +356,11 @@ public class DataManager {
     @Nullable
     public Question getQuestionById(String questionId) {
         return realmHelper.getQuestionById(questionId);
+    }
+
+    @Nullable
+    public Answer getAnswerById(String answerId) {
+        return realmHelper.getAnswerById(answerId);
     }
 
 

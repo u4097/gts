@@ -114,6 +114,7 @@ dependencies {
     //== glide ==//
     implementation "com.github.bumptech.glide:glide:${glideVersion}"
     annotationProcessor "com.github.bumptech.glide:compiler:${glideVersion}"
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
 
     //== multi picker ==//
     implementation "com.kbeanie:multipicker:${multiPickerVersion}"

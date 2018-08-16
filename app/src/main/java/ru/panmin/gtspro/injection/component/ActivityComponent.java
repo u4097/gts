@@ -6,6 +6,7 @@ import ru.panmin.gtspro.injection.module.ActivityModule;
 import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.blocks.filter.BlockFilter;
 import ru.panmin.gtspro.ui.forms.FormsActivity;
+import ru.panmin.gtspro.ui.fullscreenimage.FullscreenImageActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
@@ -42,6 +43,7 @@ public interface ActivityComponent {
     void inject(ReportMeActivity reportMeActivity);
     void inject(ReportSvActivity reportSvActivity);
     void inject(QuestionnaireActivity questionnaireActivity);
+    void inject(FullscreenImageActivity fullscreenImageActivity);
 
     //fragment
     void inject(MeTradePointFragment meTradePointFragment);
