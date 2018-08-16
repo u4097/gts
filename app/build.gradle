@@ -120,6 +120,7 @@ dependencies {
 
     //== material dialogs ==//
     implementation "com.afollestad.material-dialogs:core:${materialDialogsVersion}"
+    implementation "com.wdullaer:materialdatetimepicker:${materialDateTimePickerVersion}"
 
     //== material search view ==//
     implementation "com.miguelcatalan:materialsearchview:${materialSearchViewVersion}"

@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:id="@+id/layoutQuestionnaireQuestion"
+        android:layout_width="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textQuestionnaireQuestionRequired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="* "
+            android:textColor="@color/red"
+            android:textSize="18sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textQuestionnaireQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textQuestionnaireQuestionRequired"
+            android:layout_toEndOf="@+id/textQuestionnaireQuestionRequired"
+            android:textColor="@color/black_three"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/buttonQuestionnaireNo"
+        style="@style/AzureButton"
+        android:layout_width="72dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/layoutQuestionnaireQuestion"
+        android:layout_margin="8dp"
+        android:textSize="16sp"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/buttonQuestionnaireYes"
+        style="@style/AzureButton"
+        android:layout_width="72dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/layoutQuestionnaireQuestion"
+        android:layout_margin="8dp"
+        android:layout_toEndOf="@+id/buttonQuestionnaireNo"
+        android:layout_toRightOf="@id/buttonQuestionnaireNo"
+        android:textSize="16sp"/>
+
+</RelativeLayout>

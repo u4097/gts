@@ -90,6 +90,7 @@
     <string name="finish_date">Дата выполнения</string>
     <string name="from">c</string>
     <string name="to">до</string>
+    <string name="select_date">Выберите дату</string>
 
     <plurals name="question_plurals">
         <item quantity="zero">Вопросов</item>

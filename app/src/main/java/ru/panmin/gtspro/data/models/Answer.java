@@ -1,10 +1,17 @@
 package ru.panmin.gtspro.data.models;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ru.panmin.gtspro.utils.Constants;
+import timber.log.Timber;
 
 public class Answer extends RealmObject {
 
@@ -105,6 +112,29 @@ public class Answer extends RealmObject {
 
     public void setPhotoList(RealmList<Photo> photoList) {
         this.photoList = photoList;
+    }
+
+    public Date getStringValueAsDate() {
+        Date date = new Date();
+        try {
+            date = Constants.SIMPLE_DATE_FORMAT.parse(stringValue);
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+        return date;
+    }
+
+    public String getStringValueWithFormat(@NonNull SimpleDateFormat simpleDateFormat) {
+        return simpleDateFormat.format(getStringValueAsDate());
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getStringValueWithFormat(@NonNull String dateFormat) {
+        return getStringValueWithFormat(new SimpleDateFormat(dateFormat));
+    }
+
+    public String getStringValueWithFormat() {
+        return getStringValueWithFormat("dd/MM/yyyy");
     }
 
 }

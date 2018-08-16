@@ -62,6 +62,7 @@ public class QuestionnaireActivity
 
     @Override
     protected void initViews() {
+        recyclerViewQuestionnaire.setNestedScrollingEnabled(false);
         recyclerViewQuestionnaire.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewQuestionnaire.addItemDecoration(new SpaceItemDecoration(OtherUtils.dpToPx(8)));
         questionnaireAdapter.setAnswerQuestionListener(this);

@@ -33,6 +33,12 @@
         <item name="android:background">@drawable/white_button_background</item>
     </style>
 
+    <style name="StrawberryButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/strawberry_button_background</item>
+    </style>
+
     <style name="Gts.TextView.Badge" parent="Base.Theme.AppCompat">
         <item name="android:layout_width">@dimen/size_icon_large</item>
         <item name="android:layout_height">@dimen/size_icon_large</item>
