@@ -13,6 +13,7 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.QuestionGroup;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
+import ru.panmin.gtspro.ui.questionnaire.QuestionnaireActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.OtherUtils;
 import ru.panmin.gtspro.utils.SpaceItemDecoration;
@@ -97,6 +98,7 @@ public class QuestionGroupsActivity
 
     @Override
     public void onQuestionGroupClick(QuestionGroup questionGroup) {
+        startActivity(QuestionnaireActivity.getStartIntent(this, questionGroup.getQuestionIds()));
     }
 
 }
