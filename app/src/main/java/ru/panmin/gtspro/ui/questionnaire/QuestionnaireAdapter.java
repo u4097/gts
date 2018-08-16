@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Answer;
 import ru.panmin.gtspro.data.models.Option;
+import ru.panmin.gtspro.data.models.Photo;
 import ru.panmin.gtspro.data.models.Question;
 import ru.panmin.gtspro.utils.MultiChoiceAdapter;
 import ru.panmin.gtspro.utils.SingleChoiceAdapter;
@@ -316,7 +317,6 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                 optionMultiChoiceAdapter.setItems(question.getOptions());
             }
             recyclerViewQuestionnaireAnswers.setNestedScrollingEnabled(false);
-            recyclerViewQuestionnaireAnswers.setNestedScrollingEnabled(false);
             recyclerViewQuestionnaireAnswers.setLayoutManager(new LinearLayoutManager(recyclerViewQuestionnaireAnswers.getContext()));
             recyclerViewQuestionnaireAnswers.setAdapter(optionMultiChoiceAdapter);
         }
@@ -489,12 +489,111 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
     class QuestionType8ViewHolder extends BaseQuestionViewHolder {
 
+        @BindView(R.id.recyclerViewQuestionnairePhotos) RecyclerView recyclerViewQuestionnairePhotos;
+
+        private PhotoAdapter photoAdapter;
+
         QuestionType8ViewHolder(View itemView) {
             super(itemView);
+            photoAdapter = new PhotoAdapter();
         }
 
         @Override
         void afterBaseBind(Question question) {
+            if (photoAdapter.getItemCount() == 0) {
+                photoAdapter.setItems(question.getAnswer().getPhotoList());
+            }
+            recyclerViewQuestionnairePhotos.setLayoutManager(new LinearLayoutManager(recyclerViewQuestionnairePhotos.getContext()));
+            recyclerViewQuestionnairePhotos.setAdapter(photoAdapter);
+        }
+
+        public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+            private static final int VIEW_TYPE_HEADER = 0;
+            private static final int VIEW_TYPE_PHOTO = 1;
+
+            private static final int HEADER_POSITION = 0;
+            private static final int HEADER_WEIGHT = 1;
+
+            private List<Photo> photos = new ArrayList<>();
+
+            PhotoAdapter() {
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return position == HEADER_POSITION ? VIEW_TYPE_HEADER : VIEW_TYPE_PHOTO;
+            }
+
+            @Override
+            public int getItemCount() {
+                return ((photos == null || photos.isEmpty()) ? 0 : photos.size()) + HEADER_WEIGHT;
+            }
+
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+                View view;
+                switch (viewType) {
+                    case VIEW_TYPE_HEADER:
+                        view = layoutInflater.inflate(R.layout.item_photo_header_add, parent, false);
+                        return new HeaderAddPhotoViewHolder(view);
+                    case VIEW_TYPE_PHOTO:
+                        view = layoutInflater.inflate(R.layout.item_photo, parent, false);
+                        return new PhotoViewHolder(view);
+                    default:
+                        view = layoutInflater.inflate(R.layout.item_photo_header_add, parent, false);
+                        return new HeaderAddPhotoViewHolder(view);
+                }
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+                switch (getItemViewType(position)) {
+                    case VIEW_TYPE_HEADER:
+                        ((HeaderAddPhotoViewHolder) holder).bind();
+                        break;
+                    case VIEW_TYPE_PHOTO:
+                        ((PhotoViewHolder) holder).bind(getItem(position));
+                        break;
+                }
+            }
+
+            private Photo getItem(int position) {
+                return photos.get(position - HEADER_WEIGHT);
+            }
+
+            void setItems(List<Photo> photos) {
+                this.photos.clear();
+                this.photos.addAll(photos);
+                notifyDataSetChanged();
+            }
+
+            class HeaderAddPhotoViewHolder extends RecyclerView.ViewHolder {
+
+                HeaderAddPhotoViewHolder(View itemView) {
+                    super(itemView);
+                    ButterKnife.bind(this, itemView);
+                }
+
+                void bind() {
+                }
+
+            }
+
+            class PhotoViewHolder extends RecyclerView.ViewHolder {
+
+                PhotoViewHolder(View itemView) {
+                    super(itemView);
+                    ButterKnife.bind(this, itemView);
+                }
+
+                void bind(Photo photo) {
+                }
+
+            }
+
         }
 
     }
