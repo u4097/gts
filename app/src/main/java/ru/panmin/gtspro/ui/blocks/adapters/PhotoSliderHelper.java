@@ -3,20 +3,20 @@ package ru.panmin.gtspro.ui.blocks.adapters;
 import android.support.annotation.DrawableRes;
 
 public class PhotoSliderHelper {
-    private String name;
+    private String comment;
 
     //optional @DrawableRes
     @DrawableRes
     private int resId;
 
-    public PhotoSliderHelper(String name, int resId) {
-        this.name = name;
-        this.resId = resId;
+    public PhotoSliderHelper(String comment, int url) {
+        this.comment = comment;
+        this.resId = url;
     }
 
     @Override
     public String toString() {
-        return name;
+        return comment;
     }
 
     //getters and setters

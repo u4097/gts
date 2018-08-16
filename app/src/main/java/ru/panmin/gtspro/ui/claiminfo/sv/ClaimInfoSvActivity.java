@@ -93,9 +93,17 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
 
     private List<PhotoSliderHelper> getPhotoList(){
         List<PhotoSliderHelper> photoList = new ArrayList<>();
-        photoList.add(new PhotoSliderHelper("Photo 1",R.drawable.photo1));
-        photoList.add(new PhotoSliderHelper("Photo 2",R.drawable.photo2));
-        photoList.add(new PhotoSliderHelper("Photo 3",R.drawable.photo1));
+
+        if (this.claim.getPhotos() != null) {
+            for (Photo photo : claim.getPhotos()) {
+                Timber.d("Photos url: %s", photo.getUrl());
+                Timber.d("Photos comment: %s", photo.getComment());
+                photoList.add(new PhotoSliderHelper("Photo 1",R.drawable.photo1));
+                photoList.add(new PhotoSliderHelper("Photo 2",R.drawable.photo2));
+                photoList.add(new PhotoSliderHelper("Photo 3",R.drawable.photo1));
+            }
+        }
+
         return photoList;
     }
 
@@ -144,13 +152,6 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
                 setValue(tvType,claim.getType().getName().toString(),R.string.label_claim_type);
             } else {
                 setValue(tvType,"-",R.string.label_claim_type);
-            }
-
-            if (claim.getPhotos() != null) {
-                for (Photo photo : claim.getPhotos()) {
-                    Timber.d("Photos url: %s", photo.getUrl());
-                    Timber.d("Photos comment: %s", photo.getComment());
-                }
             }
 
             setValue(tvAuthor,"-",R.string.label_author);
