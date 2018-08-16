@@ -169,7 +169,7 @@
 
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnResume"
+        android:id="@+id/btnChat"
         style="@style/MullerBold12"
         android:layout_width="128dp"
         android:layout_height="48dp"

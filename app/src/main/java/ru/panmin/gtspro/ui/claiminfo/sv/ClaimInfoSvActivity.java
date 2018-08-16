@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.pixplicity.multiviewpager.MultiViewPager;
@@ -26,6 +27,7 @@ import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.Photo;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
+import ru.panmin.gtspro.ui.claiminfo.me.ChatActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import timber.log.Timber;
@@ -50,6 +52,8 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
     @BindView(R.id.tvDateFinish) TextView tvDateFinish;
 
     @BindView(R.id.tvClaimType) TextView tvType;
+
+    @BindView(R.id.btnChat) Button btnChat;
 
 
     private Claim claim = null;
@@ -89,6 +93,7 @@ public class ClaimInfoSvActivity extends ToolbarActivity implements ClaimInfoSvM
     @Override
     protected void initViews() {
         vpPhoto.setAdapter(new ClaimPhotoViewPagerAdapter(this, getPhotoList()));
+        btnChat.setOnClickListener(v -> startActivity(ChatActivity.getStartIntent(this, "")));
     }
 
     private List<PhotoSliderHelper> getPhotoList(){

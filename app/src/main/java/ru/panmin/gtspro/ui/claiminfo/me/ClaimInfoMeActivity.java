@@ -8,15 +8,13 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.pixplicity.multiviewpager.MultiViewPager;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -24,6 +22,7 @@ import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.Client;
+import ru.panmin.gtspro.data.models.Photo;
 import ru.panmin.gtspro.ui.blocks.adapters.ClaimPhotoViewPagerAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoSliderHelper;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
@@ -57,15 +56,18 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
     @BindView(R.id.tvClaimType)
     TextView tvType;
 
+    @BindView(R.id.btnChat)
+    Button btnChat;
+
     private Claim claim = null;
     private Client client = null;
 
     public ClaimInfoMeActivity() {
     }
 
-    public static Intent getStartIntent(Context context, String promoId) {
+    public static Intent getStartIntent(Context context, String claimId) {
         Intent intent = new Intent(context, ClaimInfoMeActivity.class);
-        intent.putExtra(INTENT_KEY_CLAIM_ID, promoId);
+        intent.putExtra(INTENT_KEY_CLAIM_ID, claimId);
         return intent;
     }
 
@@ -91,16 +93,27 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
         setNavigationOnClickListener(view -> finishActivity());
     }
 
+
+
     @Override
     protected void initViews() {
         vpPhoto.setAdapter(new ClaimPhotoViewPagerAdapter(this, getPhotoList()));
+        btnChat.setOnClickListener(v -> ChatActivity.getStartIntent(this, "") );
     }
 
     private List<PhotoSliderHelper> getPhotoList() {
         List<PhotoSliderHelper> photoList = new ArrayList<>();
-        photoList.add(new PhotoSliderHelper("Photo 1", R.drawable.photo1));
-        photoList.add(new PhotoSliderHelper("Photo 2", R.drawable.photo2));
-        photoList.add(new PhotoSliderHelper("Photo 3", R.drawable.photo1));
+
+        if (this.claim.getPhotos() != null) {
+            for (Photo photo : claim.getPhotos()) {
+                Timber.d("Photos url: %s", photo.getUrl());
+                Timber.d("Photos comment: %s", photo.getComment());
+                photoList.add(new PhotoSliderHelper("Photo 1",R.drawable.photo1));
+                photoList.add(new PhotoSliderHelper("Photo 2",R.drawable.photo2));
+                photoList.add(new PhotoSliderHelper("Photo 3",R.drawable.photo1));
+            }
+        }
+
         return photoList;
     }
 
@@ -162,16 +175,16 @@ public class ClaimInfoMeActivity extends ToolbarActivity implements ClaimInfoMeM
 
 
             if (claim.getType().getName() != null) {
-                setValue(tvType,claim.getType().getName().toString(),R.string.label_claim_type);
+                setValue(tvType, claim.getType().getName().toString(), R.string.label_claim_type);
             } else {
-                setValue(tvType,"-",R.string.label_claim_type);
+                setValue(tvType, "-", R.string.label_claim_type);
             }
 
             if (claim.getPhotos() != null) {
-                Timber.d("Photos: %s",claim.getPhotos().size());
+                Timber.d("Photos: %s", claim.getPhotos().size());
             }
 
-            setValue(tvAuthor,"-",R.string.label_author);
+            setValue(tvAuthor, "-", R.string.label_author);
 
         }
 

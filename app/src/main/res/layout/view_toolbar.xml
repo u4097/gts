@@ -21,6 +21,7 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textToolbarTitle"
+        style="@style/MullerMedium17"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:fitsSystemWindows="true"
