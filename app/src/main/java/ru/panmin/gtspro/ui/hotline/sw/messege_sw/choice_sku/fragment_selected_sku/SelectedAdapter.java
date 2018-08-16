@@ -20,8 +20,17 @@ class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedViewH
 
     private LinkedHashSet<SkuListElement> selectedSku = new LinkedHashSet<>();
 
+    private SelectedAdapter.ChekListener chekListener;
+
     @Inject
-    SelectedAdapter(){}
+    SelectedAdapter(){
+    }
+
+    public void setChekListener(ChekListener chekListener){
+        this.chekListener = chekListener;
+    }
+
+
     @NonNull
     @Override
     public SelectedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,7 +64,10 @@ class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedViewH
     }
 
 
-    public class SelectedViewHolder extends RecyclerView.ViewHolder {
+    interface ChekListener{
+        void chekSku();
+    }
+     class SelectedViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.list_item_multicheck_sku_name)
         CheckedTextView list_item_multicheck_sku_name;
@@ -67,6 +79,7 @@ class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedViewH
 
         public void bind(SkuListElement skuListElement) {
             list_item_multicheck_sku_name.setText(skuListElement.getName().toString());
+
         }
     }
 }

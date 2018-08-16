@@ -1,9 +1,11 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_all_sku;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.ArraySet;
 
 import java.util.Objects;
 
@@ -29,6 +31,7 @@ public class ChoiceSkuAllListFragment
 
     @Inject
     ChoiceSkuAllListPresenter choiceSkuAllListPresenter;
+
     @Inject
     AllAdapter allAdapter;
     @BindView(R.id.baseRecycler)
@@ -86,12 +89,16 @@ public class ChoiceSkuAllListFragment
 
     @Override
     protected void initViews() {
-        initRecycler();
+        assert getArguments() != null;
+        String clientId = getArguments().getString(ARG_KEY_CLIENT_ID);
+        String tradePointId = getArguments().getString(ARG_KEY_TRADE_POINT_ID);
+        choiceSkuAllListPresenter.getSkuListElements(tradePointId, clientId);
     }
 
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(allAdapter);
+        setStateData();
     }
 
     @Override
@@ -102,11 +109,20 @@ public class ChoiceSkuAllListFragment
 
     @Override
     public void selectSku(int fromAction, SkuListElement skuListElement) {
-
+        skuInterface.selectSku(fromAction, skuListElement);
     }
 
     @Override
     public void deselectSku(int fromAction, SkuListElement skuListElement) {
+        skuInterface.deselectSku(fromAction, skuListElement);
+    }
 
+    @SuppressLint("NewApi")
+    @Override
+    public void showData(ArraySet<SkuListElement> skuListElements) {
+        allAdapter.setData(skuListElements);
+
+
+        initRecycler();
     }
 }

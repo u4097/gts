@@ -102,6 +102,7 @@ public class ChoiceSkuGroupListFragment
     private void initRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(groupAdapter);
+        setStateData();
     }
 
     @Override

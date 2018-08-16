@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SkuForAdapter implements Parcelable {
 
@@ -16,6 +17,7 @@ public class SkuForAdapter implements Parcelable {
     private SubBrand subBrand;
     private List<String> ean = new ArrayList<>();
     private List<String> plu = new ArrayList<>();
+    private boolean cheked= false;
 
     public SkuForAdapter() {
     }
@@ -29,6 +31,36 @@ public class SkuForAdapter implements Parcelable {
         subBrand = skuListElement.getSubBrand();
         ean = skuListElement.getEan();
         plu = skuListElement.getPlu();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkuForAdapter)) return false;
+        SkuForAdapter that = (SkuForAdapter) o;
+        return isCheked() == that.isCheked() &&
+                Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getBrand(), that.getBrand()) &&
+                Objects.equals(getCategory(), that.getCategory()) &&
+                Objects.equals(getGroup(), that.getGroup()) &&
+                Objects.equals(getSubBrand(), that.getSubBrand()) &&
+                Objects.equals(getEan(), that.getEan()) &&
+                Objects.equals(getPlu(), that.getPlu());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getName(), getBrand(), getCategory(), getGroup(), getSubBrand(), getEan(), getPlu(), isCheked());
+    }
+
+    public boolean isCheked() {
+        return cheked;
+    }
+
+    public void setCheked(boolean cheked) {
+        this.cheked = cheked;
     }
 
     public String getId() {
@@ -103,14 +135,15 @@ public class SkuForAdapter implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeParcelable(name, flags);
-        dest.writeParcelable(brand, flags);
-        dest.writeParcelable(category, flags);
-        dest.writeParcelable(group, flags);
-        dest.writeParcelable(subBrand, flags);
+        dest.writeString(this.id);
+        dest.writeParcelable(this.name, flags);
+        dest.writeParcelable(this.brand, flags);
+        dest.writeParcelable(this.category, flags);
+        dest.writeParcelable(this.group, flags);
+        dest.writeParcelable(this.subBrand, flags);
         dest.writeStringList(this.ean);
         dest.writeStringList(this.plu);
+        dest.writeByte(this.cheked ? (byte) 1 : (byte) 0);
     }
 
     protected SkuForAdapter(Parcel in) {
@@ -122,9 +155,10 @@ public class SkuForAdapter implements Parcelable {
         this.subBrand = in.readParcelable(SubBrand.class.getClassLoader());
         this.ean = in.createStringArrayList();
         this.plu = in.createStringArrayList();
+        this.cheked = in.readByte() != 0;
     }
 
-    public  final Creator<SkuForAdapter> CREATOR = new Creator<SkuForAdapter>() {
+    public static final Creator<SkuForAdapter> CREATOR = new Creator<SkuForAdapter>() {
         @Override
         public SkuForAdapter createFromParcel(Parcel source) {
             return new SkuForAdapter(source);
@@ -135,5 +169,4 @@ public class SkuForAdapter implements Parcelable {
             return new SkuForAdapter[size];
         }
     };
-
 }

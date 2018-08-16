@@ -20,6 +20,7 @@ import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
 import ru.panmin.gtspro.ui.promoinfo.sv.PromoInfoSvActivity;
 import ru.panmin.gtspro.ui.questiongroups.QuestionGroupsActivity;
+import ru.panmin.gtspro.ui.questionnaire.QuestionnaireActivity;
 import ru.panmin.gtspro.ui.report.me.ReportMeActivity;
 import ru.panmin.gtspro.ui.report.sv.ReportSvActivity;
 import ru.panmin.gtspro.ui.splash.SplashActivity;
@@ -70,6 +71,7 @@ public interface ActivityComponent {
     void inject(ReportMeActivity reportMeActivity);
 
     void inject(ReportSvActivity reportSvActivity);
+    void inject(QuestionnaireActivity questionnaireActivity);
 
 
     //fragment

@@ -23,6 +23,7 @@ import ru.panmin.gtspro.data.models.HotLine;
 import ru.panmin.gtspro.data.models.HotLineData;
 import ru.panmin.gtspro.data.models.Merchandiser;
 import ru.panmin.gtspro.data.models.Promo;
+import ru.panmin.gtspro.data.models.Question;
 import ru.panmin.gtspro.data.models.Sku;
 import ru.panmin.gtspro.data.models.StartVisitData;
 import ru.panmin.gtspro.data.models.TradePoint;
@@ -349,6 +350,11 @@ public class DataManager {
     @Nullable
     public FormOrReport getReportById(String reportId) {
         return realmHelper.getReportById(reportId);
+    }
+
+    @Nullable
+    public Question getQuestionById(String questionId) {
+        return realmHelper.getQuestionById(questionId);
     }
 
 

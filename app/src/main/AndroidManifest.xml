@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-
     <application
         android:name=".Application"
         android:allowBackup="false"
@@ -95,6 +94,11 @@
             android:launchMode="singleTask"/>
 
         <activity
+            android:name=".ui.questionnaire.QuestionnaireActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
+
+        <activity
             android:name=".ui.hotline.me.HotlineMeActivity"
             android:theme="@style/Theme.Transparent" />
 
@@ -116,6 +120,5 @@
             tools:replace="android:value"/>
 
     </application>
-
 
 </manifest>

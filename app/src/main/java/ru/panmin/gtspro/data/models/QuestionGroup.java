@@ -38,4 +38,11 @@ public class QuestionGroup {
         questions.add(question);
     }
 
+    public List<String> getQuestionIds() {
+        List<String> questionIds = new ArrayList<>();
+        for (Question question : questions) {
+            questionIds.add(question.getId());
+        }
+        return questionIds;
+    }
 }

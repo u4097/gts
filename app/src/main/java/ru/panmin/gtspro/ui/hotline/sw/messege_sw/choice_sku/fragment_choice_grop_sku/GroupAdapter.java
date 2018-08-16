@@ -68,16 +68,15 @@ public class GroupAdapter extends CheckableChildRecyclerViewAdapter<SkuNameGroup
 
         @Override
         public void onChildClicked(int childIndex, boolean checked) {
-            if (checked) {
-                skuClickListener.selectSku(
-                        SkuChoicePagerAdapter.PAGE_GROUP,
-                        new SkuListElement((SkuForAdapter) getItems().get(childIndex)));
+            SkuForAdapter skuForAdapter = (SkuForAdapter) getItems().get(childIndex);
+            skuForAdapter.setCheked(!skuForAdapter.isCheked());
+            if (skuForAdapter.isCheked()) {
+                skuClickListener.selectSku(SkuChoicePagerAdapter.PAGE_GROUP, new SkuListElement(skuForAdapter));
                 checkChild(childIndex);
+
             } else {
-                skuClickListener.deselectSku(
-                        SkuChoicePagerAdapter.PAGE_GROUP,
-                        new SkuListElement((SkuForAdapter) getItems().get(childIndex)));
-                        unCheckChild(childIndex);
+                skuClickListener.deselectSku(SkuChoicePagerAdapter.PAGE_GROUP, new SkuListElement(skuForAdapter));
+                unCheckChild(childIndex);
             }
         }
 

@@ -14,14 +14,14 @@
         android:layout_height="?android:attr/listPreferredItemHeightSmall"
         android:layout_gravity="end"
         android:checkMark="@null"
-        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+        android:drawableLeft="@drawable/ic_checkbocks"
         android:drawablePadding="20dp"
         android:gravity="end|center_vertical"
         android:textColor="@color/black_three"
         android:background="?attr/selectableItemBackground"
         android:textSize="14sp"
         tools:text="Artist Name"
-        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+        android:drawableStart="@drawable/ic_checkbocks"
        />
 
     <View

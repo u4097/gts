@@ -1,5 +1,6 @@
 package ru.panmin.gtspro.ui.hotline.sw.messege_sw.choice_sku.fragment_choice_grop_sku;
 
+
 import android.view.View;
 import android.widget.Checkable;
 import android.widget.CheckedTextView;
@@ -11,7 +12,7 @@ import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.SkuForAdapter;
 
-class MultiCheckSkuViewHolder extends CheckableChildViewHolder {
+class MultiCheckSkuViewHolder extends CheckableChildViewHolder  {
 
     @BindView(R.id.list_item_multicheck_sku_name)
     CheckedTextView list_item_multicheck_sku_name;
@@ -26,7 +27,23 @@ class MultiCheckSkuViewHolder extends CheckableChildViewHolder {
         return list_item_multicheck_sku_name;
     }
 
+
     public void bind(SkuForAdapter skuName) {
+        if (skuName.isCheked()){
+            list_item_multicheck_sku_name.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_checkbox_selected,
+                    0,
+                    0,
+                    0);
+        }else {
+            list_item_multicheck_sku_name.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_checkbocks,
+                    0,
+                    0,
+                    0);
+        }
         list_item_multicheck_sku_name.setText(skuName.getName().toString());
     }
+
+
 }
