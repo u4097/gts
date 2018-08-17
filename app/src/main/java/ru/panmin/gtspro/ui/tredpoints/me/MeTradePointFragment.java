@@ -14,6 +14,7 @@ import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BaseActivity;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
+import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.progress.ProgressFragment;
 import ru.panmin.gtspro.ui.tradepointinfo.me.TradePointInfoMeActivity;
@@ -21,11 +22,15 @@ import ru.panmin.gtspro.ui.tredpoints.filter.BottomSheetFilter;
 
 public class MeTradePointFragment extends ProgressFragment implements MeTradePointMvpView, MeAdapter.InfoClickListener {
 
-    @Inject MeTradePointPresenter presenter;
-    @Inject MeAdapter adapter;
+    @Inject
+    MeTradePointPresenter presenter;
+    @Inject
+    MeAdapter adapter;
 
-    @BindView(R.id.recycler_trade_point) RecyclerView recyclerView;
-    @BindView(R.id.floating_filter) FloatingActionButton filter;
+    @BindView(R.id.recycler_trade_point)
+    RecyclerView recyclerView;
+    @BindView(R.id.floating_filter)
+    FloatingActionButton filter;
 
     public static MeTradePointFragment createInstance() {
         return new MeTradePointFragment();
@@ -112,6 +117,11 @@ public class MeTradePointFragment extends ProgressFragment implements MeTradePoi
     @Override
     public void showInfo(TradePoint tradePoint) {
         startActivity(TradePointInfoMeActivity.getStartIntent(getActivity(), tradePoint.getId()));
+    }
+
+    @Override
+    public void showPromo(String id) {
+        startActivity(BlockActivity.getStartIntent(getActivity(), id));
     }
 
 }

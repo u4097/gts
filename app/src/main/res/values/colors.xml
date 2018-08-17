@@ -32,5 +32,7 @@
     <color name="black_20">#33000000</color>
     <color name="black_three">#1f1f1f</color>
     <color name="strawberry">#f32425</color>
+    <color name="greyish">#a7a7a7</color>
+
 
 </resources>

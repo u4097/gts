@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentItemSpinnerText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_button_background"
+    android:drawableEnd="@drawable/ic_spinner_arrow"
+    android:drawableRight="@drawable/ic_spinner_arrow"
+    android:gravity="center_horizontal"
+    android:paddingEnd="18dp"
+    android:paddingRight="18dp"
+    android:textColor="@color/black_three"
+    android:textSize="15sp"
+    tools:ignore="RtlSymmetry"
+    tools:text="OOS"/>

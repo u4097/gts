@@ -23,7 +23,7 @@ class QuestionnairePresenter extends ToolbarPresenter<QuestionnaireMvpView> {
         List<Question> questions = new ArrayList<>();
         for (String questionId : questionsIds) {
             Question question = dataManager.getQuestionById(questionId);
-            if (question!=null){
+            if (question != null) {
                 questions.add(question);
             }
         }

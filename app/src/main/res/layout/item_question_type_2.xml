@@ -3,16 +3,16 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <RelativeLayout
         android:id="@+id/layoutQuestionnaireQuestion"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="8dp"
-        android:layout_height="wrap_content">
+        android:paddingTop="8dp">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/textQuestionnaireQuestionRequired"
@@ -28,8 +28,8 @@
             android:id="@+id/textQuestionnaireQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/textQuestionnaireQuestionRequired"
             android:layout_toEndOf="@+id/textQuestionnaireQuestionRequired"
+            android:layout_toRightOf="@+id/textQuestionnaireQuestionRequired"
             android:textColor="@color/black_three"
             android:textSize="15sp"/>
 
@@ -40,9 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:inputType="numberDecimal"
         android:background="@drawable/question_answer_background"
         android:gravity="center_vertical|start"
+        android:inputType="numberDecimal"
         android:minHeight="40dp"
         android:padding="8dp"/>
 

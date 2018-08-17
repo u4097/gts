@@ -19,6 +19,7 @@ import ru.panmin.gtspro.data.models.Promo;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
+
     private List<Promo> promoList = new ArrayList<>();
     private InfoClickListener infoClickListener;
 
@@ -59,15 +60,22 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
 
     class PromoVH extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tvTitle) TextView tvTitle;
-        @BindView(R.id.tvDescription) TextView tvDescription;
-        @BindView(R.id.tvDateStart) TextView tvDateStart;
-        @BindView(R.id.tvDateEnd) TextView tvDateEnd;
-        @BindView(R.id.tvAuthor) TextView tvAuthor;
-        @BindView(R.id.tvAuthor_label) TextView tvAuthor_label;
-        @BindView(R.id.promoRoot) ViewGroup promoRoot;
+        @BindView(R.id.tvTitle)
+        TextView tvTitle;
+        @BindView(R.id.tvDescription)
+        TextView tvDescription;
+        @BindView(R.id.tvDateStart)
+        TextView tvDateStart;
+        @BindView(R.id.tvDateEnd)
+        TextView tvDateEnd;
+        @BindView(R.id.tvAuthor)
+        TextView tvAuthor;
+        @BindView(R.id.tvAuthor_label)
+        TextView tvAuthor_label;
+        @BindView(R.id.promoRoot)
+        ViewGroup promoRoot;
 
-        PromoVH(View itemView) {
+        public PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -77,10 +85,10 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
                 tvAuthor.setText(promo.getAuthor().toString());
             }
             if (promo.getFinishDate() != null) {
-                tvDateEnd.setText(promo.getFinishDateWithFormat());
+                tvDateEnd.setText(promo.getFinishDate());
             }
             if (promo.getBeginDate() != null) {
-                tvDateStart.setText(promo.getBeginDateWithFormat());
+                tvDateStart.setText(promo.getBeginDate());
             }
             if (promo.getDescription() != null) {
                 tvDescription.setText(promo.getDescription().toString());
@@ -90,6 +98,5 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
     }
-
 
 }

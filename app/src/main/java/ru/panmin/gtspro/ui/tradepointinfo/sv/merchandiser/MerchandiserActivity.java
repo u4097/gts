@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Merchandiser;
-import ru.panmin.gtspro.data.models.Time;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
@@ -19,7 +18,8 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     private static final String INTENT_KEY_MERCHANDISER_NAME = "merchandiser.name";
 
-    @Inject MerchandiserPresenter merchandiserPresenter;
+    @Inject
+    MerchandiserPresenter merchandiserPresenter;
     @Inject
     ClientsMeAdapter clientsMeAdapter;
     @BindView(R.id.client_me_recycler)
@@ -94,9 +94,9 @@ public class MerchandiserActivity extends ToolbarActivity implements Merchandise
 
     private void initTime() {
         StringBuilder listTime = new StringBuilder();
-        for (Time time : merchandiser.getTimes()) {
-            if (time != null) {
-                listTime.append(time.toString());
+        for (int i = 0; i < merchandiser.getTimes().size(); i++) {
+            if (merchandiser.getTimes().get(i).getBegin() != null || merchandiser.getTimes().get(i).getEnd() != null) {
+                listTime.append(merchandiser.getTimes().get(i).getBegin()).append(" - ").append(merchandiser.getTimes().get(i).getEnd());
             }
         }
         schedule_de_ure_text_data.setText(listTime);

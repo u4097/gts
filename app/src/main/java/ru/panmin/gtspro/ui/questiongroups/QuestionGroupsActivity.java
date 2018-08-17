@@ -59,6 +59,7 @@ public class QuestionGroupsActivity
     protected void initToolbar() {
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
+        setTitle(R.string.form);
     }
 
     @Override

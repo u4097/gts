@@ -74,7 +74,7 @@ public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView
         setTitle(report.getName().toString());
 
         if (report.getClient() != null) {
-            setValue(tvClients, report.getClient().toString(), R.string.label_clients);
+            setValue(tvClients, report.getClient().getName().toString(), R.string.label_clients);
         }
         //if (report.getAuthor() != null) {
         //    setValue(tvAuthor, report.getAuthor().toString(), R.string.label_author);

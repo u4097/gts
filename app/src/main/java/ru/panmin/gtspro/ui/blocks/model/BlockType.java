@@ -8,9 +8,12 @@ import ru.panmin.gtspro.R;
 public class BlockType {
 
     public Type blockType;
-    @StringRes Integer titleRes;
-    @DrawableRes Integer svIconRes;
-    @DrawableRes Integer meIconRes;
+    @StringRes
+    Integer titleRes;
+    @DrawableRes
+    Integer svIconRes;
+    @DrawableRes
+    Integer meIconRes;
 
 
     public BlockType(Type blockType) {

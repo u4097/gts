@@ -20,6 +20,19 @@ public class SkuListElement extends RealmObject {
     public SkuListElement() {
     }
 
+    public SkuListElement(SkuForAdapter skuListElement) {
+        id = skuListElement.getId();
+        name = skuListElement.getName();
+        brand = skuListElement.getBrand();
+        category = skuListElement.getCategory();
+        group = skuListElement.getGroup();
+        subBrand = skuListElement.getSubBrand();
+        ean = new RealmList<>();
+        ean.addAll(skuListElement.getEan());
+        plu = new RealmList<>();
+        plu.addAll(skuListElement.getPlu());
+    }
+
     public SkuListElement(String id, Name name, Brand brand, Category category, Group group, SubBrand subBrand, RealmList<String> ean, RealmList<String> plu) {
         this.id = id;
         this.name = name;

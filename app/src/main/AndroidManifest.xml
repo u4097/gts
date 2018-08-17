@@ -101,8 +101,31 @@
         <activity
             android:name=".ui.fullscreenimage.FullscreenImageActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"/>
+
+        <activity
+            android:name=".ui.hotline.me.HotlineMeActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/Theme.Transparent"/>
+
+        <activity
+            android:name=".ui.hotline.sw.HotlineSvActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Transparent"/>
+
+        <activity
+            android:name=".ui.hotline.sw.messege_sw.MessageHotLineSwActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/MainTheme"/>
+
+        <activity
+            android:name=".ui.hotline.sw.messege_sw.choice_sku.ChoiseSkuActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Transparent"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

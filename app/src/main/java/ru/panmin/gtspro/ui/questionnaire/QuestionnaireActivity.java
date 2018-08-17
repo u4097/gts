@@ -33,11 +33,9 @@ public class QuestionnaireActivity
 
     @Inject QuestionnairePresenter questionnairePresenter;
     @Inject QuestionnaireAdapter questionnaireAdapter;
-
-    private CameraImagePicker cameraImagePicker;
     String outputPath;
-
     @BindView(R.id.recyclerViewQuestionnaire) RecyclerView recyclerViewQuestionnaire;
+    private CameraImagePicker cameraImagePicker;
 
     public QuestionnaireActivity() {
     }

@@ -20,7 +20,7 @@ import ru.panmin.gtspro.data.models.FormOrReport;
 
 public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormViewHolder> {
 
-    private List<FormOrReport> formOrReports = new ArrayList<>();
+    private List<FormOrReport> forms = new ArrayList<>();
     private OnFormClickListener onFormClickListener;
 
     @Inject
@@ -36,17 +36,17 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormViewHold
 
     @Override
     public void onBindViewHolder(@NonNull FormViewHolder holder, int position) {
-        holder.bind(formOrReports.get(position));
+        holder.bind(forms.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return (formOrReports == null || formOrReports.isEmpty()) ? 0 : formOrReports.size();
+        return (forms == null || forms.isEmpty()) ? 0 : forms.size();
     }
 
-    public void setData(List<FormOrReport> formOrReports) {
-        this.formOrReports.clear();
-        this.formOrReports.addAll(formOrReports);
+    public void setData(List<FormOrReport> forms) {
+        this.forms.clear();
+        this.forms.addAll(forms);
         notifyDataSetChanged();
     }
 
@@ -55,7 +55,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormViewHold
     }
 
     interface OnFormClickListener {
-        void onFormClick(FormOrReport formOrReport);
+        void onFormClick(FormOrReport form);
     }
 
     class FormViewHolder extends RecyclerView.ViewHolder {
@@ -70,18 +70,18 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormViewHold
         }
 
         @SuppressLint({"SetTextI18n", "DefaultLocale"})
-        void bind(FormOrReport formOrReport) {
-            textFormName.setText(formOrReport.getName().toString());
-            textFormCount.setText(String.format("%d", formOrReport.getQuestions().size()));
+        void bind(FormOrReport form) {
+            textFormName.setText(form.getName().toString());
+            textFormCount.setText(String.format("%d", form.getQuestions().size()));
             textFormCountPlurals.setText(
                     textFormCountPlurals
                             .getContext()
                             .getResources()
                             .getQuantityString(
-                                    R.plurals.question_plurals, formOrReport.getQuestions().size()
+                                    R.plurals.question_plurals, form.getQuestions().size()
                             )
             );
-            itemView.setOnClickListener(view -> onFormClickListener.onFormClick(formOrReport));
+            itemView.setOnClickListener(view -> onFormClickListener.onFormClick(form));
         }
 
     }

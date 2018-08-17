@@ -15,11 +15,15 @@ import ru.panmin.gtspro.utils.MessageUtils;
 
 public class LoginActivity extends BaseActivity implements LoginMvpView {
 
-    @Inject LoginPresenter loginPresenter;
+    @Inject
+    LoginPresenter loginPresenter;
 
-    @BindView(R.id.editTextUserName) VectorsSupportEditText editTextUserName;
-    @BindView(R.id.editTextPassword) VectorsSupportEditText editTextPassword;
-    @BindView(R.id.buttonEnter) AppCompatButton buttonEnter;
+    @BindView(R.id.editTextUserName)
+    VectorsSupportEditText editTextUserName;
+    @BindView(R.id.editTextPassword)
+    VectorsSupportEditText editTextPassword;
+    @BindView(R.id.buttonEnter)
+    AppCompatButton buttonEnter;
 
     public LoginActivity() {
     }

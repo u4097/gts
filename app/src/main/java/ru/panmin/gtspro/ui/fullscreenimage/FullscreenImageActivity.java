@@ -16,13 +16,10 @@ import ru.panmin.gtspro.ui.customviews.HackyViewPager;
 
 public class FullscreenImageActivity extends BaseActivity implements FullscreenImageMvpView {
 
-    @Inject FullscreenImagePresenter fullscreenImagePresenter;
-
-    @BindView(R.id.viewPagerFullScreen) HackyViewPager viewPagerFullScreen;
-
     private static final String INTENT_KEY_ANSWER_ID = "answer.id";
     private static final String INTENT_KEY_START_POSITION = "start.position";
-
+    @Inject FullscreenImagePresenter fullscreenImagePresenter;
+    @BindView(R.id.viewPagerFullScreen) HackyViewPager viewPagerFullScreen;
     private FullScreenImageAdapter fullScreenImageAdapter;
 
     public FullscreenImageActivity() {

@@ -3,6 +3,7 @@ package ru.panmin.gtspro.ui.tredpoints.me;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,13 +114,23 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
 
     interface InfoClickListener {
         void showInfo(TradePoint tradePoint);
+
+        void showPromo(String id);
     }
 
     class MeViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title_card) TextView name;
-        @BindView(R.id.adres_card_me) TextView address;
-        @BindView(R.id.btn_info) AppCompatImageView info;
+        @BindView(R.id.title_card)
+        TextView name;
+
+        @BindView(R.id.adres_card_me)
+        TextView address;
+
+        @BindView(R.id.btn_info)
+        AppCompatImageView info;
+
+        @BindView(R.id.layoutCardMe)
+        LinearLayoutCompat layoutCardMe;
 
         MeViewHolder(View itemView) {
             super(itemView);
@@ -130,6 +141,7 @@ class MeAdapter extends RecyclerView.Adapter<MeAdapter.MeViewHolder> {
             name.setText(tradePoint.getSignboard().toString());
             address.setText(tradePoint.getAddress().toString());
             info.setOnClickListener(view -> infoClickListener.showInfo(tradePoint));
+            layoutCardMe.setOnClickListener(view -> infoClickListener.showPromo(tradePoint.getId()));
         }
 
     }

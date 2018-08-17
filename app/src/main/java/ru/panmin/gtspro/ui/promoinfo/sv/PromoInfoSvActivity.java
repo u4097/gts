@@ -99,7 +99,7 @@ public class PromoInfoSvActivity extends ToolbarActivity implements PromoInfoSvM
                 tvAuthorBottom.setText(promo.getAuthor().toString());
             }
             if (promo.getBeginDate() != null && promo.getFinishDate() != null) {
-                setValue(tvPeriod, promo.getBeginDateWithFormat() + " - " + promo.getFinishDateWithFormat(), R.string.label_period);
+                setValue(tvPeriod, promo.getBeginDate() + " - " + promo.getFinishDate(), R.string.label_period);
             }
             if (promo.getDescription() != null) {
                 setValue(tvDescription, promo.getDescription().toString(), R.string.label_promo_description);

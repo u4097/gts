@@ -55,7 +55,7 @@ public class FormsActivity extends ToolbarActivity implements FormsMvpView, Form
     protected void initToolbar() {
         setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
         setNavigationOnClickListener(view -> finishActivity());
-        setTitle(R.string.formOrReport);
+        setTitle(R.string.form);
     }
 
     @Override
@@ -93,8 +93,8 @@ public class FormsActivity extends ToolbarActivity implements FormsMvpView, Form
     }
 
     @Override
-    public void onFormClick(FormOrReport formOrReport) {
-        startActivity(QuestionGroupsActivity.getStartIntent(this, formOrReport.getId()));
+    public void onFormClick(FormOrReport form) {
+        startActivity(QuestionGroupsActivity.getStartIntent(this, form.getId()));
     }
 
 }

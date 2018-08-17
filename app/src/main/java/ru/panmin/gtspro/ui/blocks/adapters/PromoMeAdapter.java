@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
+import timber.log.Timber;
 
 public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH> {
 
@@ -60,14 +61,20 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
 
     class PromoVH extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tvTitle) TextView tvTitle;
-        @BindView(R.id.tvSubtitle) TextView tvSubtitle;
-        @BindView(R.id.ivStatus) AppCompatImageView ivStatus;
-        @BindView(R.id.promoRoot) ViewGroup promoRoot;
-        @BindView(R.id.tvDateFrom) TextView tvDateFrom;
-        @BindView(R.id.tvDateTo) TextView tvDateTo;
+        @BindView(R.id.tvTitle)
+        TextView tvTitle;
+        @BindView(R.id.tvSubtitle)
+        TextView tvSubtitle;
+        @BindView(R.id.ivStatus)
+        AppCompatImageView ivStatus;
+        @BindView(R.id.promoRoot)
+        ViewGroup promoRoot;
+        @BindView(R.id.tvDateFrom)
+        TextView tvDateFrom;
+        @BindView(R.id.tvDateTo)
+        TextView tvDateTo;
 
-        PromoVH(View itemView) {
+        public PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -75,16 +82,21 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
         public void bind(Promo promo) {
             if (promo.getName() != null) {
                 tvTitle.setText(promo.getName().toString());
+                Timber.d("promo title: %s", promo.getName().toString());
             }
             if (promo.getDescription() != null) {
                 tvSubtitle.setText(promo.getDescription().toString());
+                Timber.d("promo description: %s", promo.getDescription().toString());
             }
             if (promo.getBeginDate() != null) {
-                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from, promo.getBeginDateWithFormat()));
+//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from,promo.getBeginDate()));
+                Timber.d("promo begin date: %s", promo.getBeginDate());
             }
             if (promo.getFinishDate() != null) {
-                tvDateFrom.setText(itemView.getResources().getString(R.string.label_to, promo.getFinishDateWithFormat()));
+//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_to,promo.getFinishDate()));
+                Timber.d("promo end date: %s", promo.getFinishDate());
             }
+
             promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
         }
     }

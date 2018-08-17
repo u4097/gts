@@ -31,6 +31,8 @@ import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
+import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
+import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.promoinfo.me.PromoInfoMeActivity;
@@ -280,7 +282,7 @@ public class BlockActivity
                     }
                     break;
                 case REPORT:
-                    setBlockTitle("Отчеты");
+                    setBlockTitle("Горячая линия");
                     switch (this.userRole) {
                         case Constants.ROLE_MERCHANDISER:
                             reportMeAdapter = new ReportMeAdapter();
@@ -293,6 +295,17 @@ public class BlockActivity
                             reportSvAdapter.setOnReportClickListener(this);
                             reportSvAdapter.setData(tradePoint.getReports());
                             rvBlock.setAdapter(reportSvAdapter);
+                            break;
+                    }
+                    break;
+                case HOT_LINE:
+                    setBlockTitle("Отчеты");
+                    switch (this.userRole) {
+                        case Constants.ROLE_MERCHANDISER:
+                            startActivity(HotlineMeActivity.getStartIntent(this, tradePoint.getId()));
+                            break;
+                        case Constants.ROLE_SUPERVISOR:
+                            startActivity(HotlineSvActivity.getStartIntent(this, tradePoint.getId()));
                             break;
                     }
                     break;

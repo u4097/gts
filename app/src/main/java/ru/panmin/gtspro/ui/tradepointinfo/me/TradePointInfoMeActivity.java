@@ -7,34 +7,40 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
-import ru.panmin.gtspro.data.models.Time;
 import ru.panmin.gtspro.data.models.TradePoint;
-import ru.panmin.gtspro.ui.blocks.BlockActivity;
+import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 
 public class TradePointInfoMeActivity extends ToolbarActivity implements TradePointInfoMeMvpView {
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
 
-    @Inject TradePointInfoMePresenter tradePointInfoMePresenter;
-    @BindView(R.id.address_text_info) AppCompatTextView address;
-    @BindView(R.id.schedule_text_info) AppCompatTextView schedule;
-    @BindView(R.id.client_text_info) AppCompatTextView client;
-    @BindView(R.id.claims_quantity_text) AppCompatTextView claimsQuantity;
-    @BindView(R.id.promotions_text) AppCompatTextView promotions;
-    @BindView(R.id.photo_report_text) AppCompatTextView photoReport;
-    @BindView(R.id.report_text) AppCompatTextView report;
-    @BindView(R.id.run_button_me) AppCompatButton runButtonMe;
+    @Inject
+    TradePointInfoMePresenter tradePointInfoMePresenter;
+    @BindView(R.id.address_text_info)
+    AppCompatTextView address;
+    @BindView(R.id.schedule_text_info)
+    AppCompatTextView schedule;
+    @BindView(R.id.client_text_info)
+    AppCompatTextView client;
+    @BindView(R.id.claims_quantity_text)
+    AppCompatTextView claimsQuantity;
+    @BindView(R.id.promotions_text)
+    AppCompatTextView promotions;
+    @BindView(R.id.photo_report_text)
+    AppCompatTextView photoReport;
+    @BindView(R.id.report_text)
+    AppCompatTextView report;
+    @BindView(R.id.run_button_me)
+    AppCompatButton runButtonMe;
 
     private TradePoint tradePoint = null;
 
@@ -114,11 +120,13 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         }
 
         StringBuilder listTime = new StringBuilder();
-        for (Time time : tradePoint.getTimes()) {
-            if (time != null) {
-                listTime.append(time.toString());
+
+        for (int i = 0; i < tradePoint.getTimes().size(); i++) {
+            if (tradePoint.getTimes().get(i).getBegin() != null || tradePoint.getTimes().get(i).getEnd() != null) {
+                listTime.append(tradePoint.getTimes().get(i).getBegin()).append(" - ").append(tradePoint.getTimes().get(i).getEnd());
             }
         }
+
         schedule.setText("График Визита:" + " " + "" + listTime);
         client.setText("Клиенты:" + " " + listClients);
         claimsQuantity.setText(String.valueOf(tradePoint.getClaims().size()));
@@ -126,7 +134,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
 
-        runButtonMe.setOnClickListener(view -> startActivity(BlockActivity.getStartIntent(this, tradePoint.getId())));
+        runButtonMe.setOnClickListener(view -> startActivity(HotlineMeActivity.getStartIntent(this, tradePoint.getId())));
 
         setStateData();
     }

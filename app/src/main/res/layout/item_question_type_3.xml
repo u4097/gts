@@ -9,10 +9,10 @@
     <RelativeLayout
         android:id="@+id/layoutQuestionnaireQuestion"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="8dp"
-        android:layout_height="wrap_content">
+        android:paddingTop="8dp">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/textQuestionnaireQuestionRequired"
@@ -28,12 +28,13 @@
             android:id="@+id/textQuestionnaireQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/textQuestionnaireQuestionRequired"
             android:layout_toEndOf="@+id/textQuestionnaireQuestionRequired"
+            android:layout_toRightOf="@+id/textQuestionnaireQuestionRequired"
             android:textColor="@color/black_three"
             android:textSize="15sp"/>
 
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewQuestionnaireAnswer"
         android:layout_width="match_parent"
