@@ -545,17 +545,18 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                     question.getRealm().beginTransaction();
                     Answer answer = question.getAnswer();
 
-                    answer.getPhotoList().remove(photo);
-                    if (answer.getPhotoList().isEmpty()){
-                        answer.deleteFromRealm();
-                        question.setAnswer(null);
-                    } else {
-                        answer = question.getRealm().copyToRealmOrUpdate(answer);
-                        question.setAnswer(answer);
+                    if (answer != null && !answer.getPhotoList().isEmpty()) {
+                        answer.getPhotoList().remove(photo);
+                        if (answer.getPhotoList().isEmpty()) {
+                            answer.deleteFromRealm();
+                            question.setAnswer(null);
+                        } else {
+                            answer = question.getRealm().copyToRealmOrUpdate(answer);
+                            question.setAnswer(answer);
+                        }
+                        question.getRealm().commitTransaction();
+                        notifyDataSetChanged();
                     }
-
-                    question.getRealm().commitTransaction();
-                    notifyDataSetChanged();
                 });
             }
             if (question.getAnswer() != null
