@@ -81,7 +81,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
 
         public void bind(Promo promo) {
             if (promo.getAuthor() != null) {
-                tvAuthor.setText(promo.getAuthor().toString());
+                tvTitle.setText(promo.getAuthor().toString());
             }
             if (promo.getFinishDate() != null) {
                 tvDateEnd.setText(promo.getFinishDateWithFormat());
@@ -93,7 +93,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
                 tvDescription.setText(promo.getDescription().toString());
             }
 
-            tvTitle.setText(promo.getName().toString());
+            tvAuthor.setText(promo.getName().toString());
             promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
 

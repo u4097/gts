@@ -72,7 +72,7 @@ public class PhotoReportMeAdapter extends RecyclerView.Adapter<PhotoReportMeAdap
 
         public void bind(FormOrReport photoReport) {
             textReportName.setText(photoReport.getName().toString());
-            textReportDescription.setText("???");
+            textReportDescription.setText(photoReport.getClient().getName().toString());
             textFilledInWithPercent.setText(String.format("%s%%", photoReport.getFilledPercent()));
             textReportDate.setText(
                     String.format(

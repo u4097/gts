@@ -71,7 +71,7 @@ public class ReportMeAdapter extends RecyclerView.Adapter<ReportMeAdapter.Report
 
         public void bind(FormOrReport report) {
             textReportName.setText(report.getName().toString());
-            textReportDescription.setText("???");
+            textReportDescription.setText(report.getClient().getName().toString());
             textFilledInWithPercent.setText(String.format("%s%%", report.getFilledPercent()));
             textReportDate.setText(
                     String.format(

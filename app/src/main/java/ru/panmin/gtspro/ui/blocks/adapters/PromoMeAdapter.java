@@ -86,10 +86,15 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
                 tvSubtitle.setText(promo.getDescription().toString());
             }
             if (promo.getBeginDate() != null) {
-                tvDateFrom.setText(promo.getBeginDateWithFormat());
-            }
-            if (promo.getFinishDate() != null) {
-                tvDateFrom.setText(promo.getFinishDateWithFormat());
+                tvDateFrom.setText(
+                        String.format(
+                                "%s %s\n%s %s",
+                                tvDateFrom.getContext().getString(R.string.from),
+                                promo.getBeginDateWithFormat(),
+                                tvDateFrom.getContext().getString(R.string.to),
+                                promo.getFinishDateWithFormat()
+                        )
+                );
             }
 
             promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));

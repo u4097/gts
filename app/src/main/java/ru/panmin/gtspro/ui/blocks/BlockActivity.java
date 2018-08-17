@@ -109,7 +109,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     String userRole;
     @Inject
     BlockPresenter blockPresenter;
-    private Map<BlockType.Type, Holder> tradePointBlockViews;
     private Map<String, Client> clients = new HashMap<>();
     private TradePoint tradePoint = null;
     private RealmList<Claim> claims;
@@ -120,6 +119,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
     private ReportMeAdapter reportMeAdapter;
     private ReportSvAdapter reportSvAdapter;
 
+    private Map<BlockType.Type, Holder> tradePointBlockViews = new HashMap<>();
 
     private BlockType.Type currentBlock = BlockType.Type.NONE;
 
@@ -172,7 +172,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
                         case R.id.action_logout:
-                            blockPresenter.logout();
+                            finishActivity();
                             return true;
                         default:
                             return false;
@@ -208,7 +208,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         blockViewModel.loadData(this.tradePoint);
         BlocksModel model = blockViewModel.getBlocks();
 
-        Map<BlockType.Type, Holder> tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS, new Holder(btnClaims, tCounterClaims));
         tradePointBlockViews.put(PROMO, new Holder(btnPromo, tCounterPromo));
         tradePointBlockViews.put(PHOTO_REPORT, new Holder(btnPhotoReport, tCounterPhotoReport));
@@ -218,9 +217,9 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         tradePointBlockViews.put(BlockType.Type.HOT_LINE, new Holder(btnHotLine, tCounterHotLine));
         tradePointBlockViews.put(BlockType.Type.STATISTICS, new Holder(btnStatistics, tCounterStatistics));
 
-        for (Map.Entry<BlockType.Type, Holder> entry :
-                tradePointBlockViews.entrySet()) {
-            entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
+        for (Map.Entry<BlockType.Type, Holder> entry : tradePointBlockViews.entrySet()) {
+            entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey())
+            );
         }
 
         for (Block block : model.getBlocks()
@@ -303,6 +302,12 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
 
     public void initBlockData(BlockType.Type blockType) {
         if (currentBlock != blockType) {
+            Holder holder = tradePointBlockViews.get(currentBlock);
+            if (holder != null) {
+                holder.deselect();
+            }
+            tradePointBlockViews.get(blockType).select();
+
             currentBlock = blockType;
             clean();
             rvBlock.setVisibility(View.VISIBLE);
@@ -500,6 +505,16 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
 
         TextView getTvBadge() {
             return tvBadge;
+        }
+
+        void select() {
+            btn.setSelected(true);
+            tvBadge.setSelected(true);
+        }
+
+        void deselect() {
+            btn.setSelected(false);
+            tvBadge.setSelected(false);
         }
 
     }
