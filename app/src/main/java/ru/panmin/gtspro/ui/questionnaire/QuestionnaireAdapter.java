@@ -343,9 +343,6 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
         public class OptionMultiChoiceAdapter extends MultiChoiceAdapter<Option> {
 
-            @BindView(R.id.imageOptionChecked) AppCompatImageView imageOptionChecked;
-            @BindView(R.id.textOptionName) AppCompatTextView textOptionName;
-
             OptionMultiChoiceAdapter() {
             }
 
@@ -364,6 +361,9 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
             }
 
             class OptionViewHolder extends RecyclerView.ViewHolder {
+
+                @BindView(R.id.imageOptionChecked) AppCompatImageView imageOptionChecked;
+                @BindView(R.id.textOptionName) AppCompatTextView textOptionName;
 
                 OptionViewHolder(View itemView) {
                     super(itemView);

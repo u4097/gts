@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.TradePoint;
+import ru.panmin.gtspro.ui.blocks.BlockActivity;
 import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.progress.EmptyBundle;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
@@ -134,7 +135,7 @@ public class TradePointInfoMeActivity extends ToolbarActivity implements TradePo
         photoReport.setText(String.valueOf(tradePoint.getPhotoreports().size()));
         report.setText(String.valueOf(tradePoint.getReports().size()));
 
-        runButtonMe.setOnClickListener(view -> startActivity(HotlineMeActivity.getStartIntent(this, tradePoint.getId())));
+        runButtonMe.setOnClickListener(view -> startActivity(BlockActivity.getStartIntent(this, tradePoint.getId())));
 
         setStateData();
     }
