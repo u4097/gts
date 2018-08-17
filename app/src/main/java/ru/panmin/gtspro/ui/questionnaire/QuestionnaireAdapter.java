@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +24,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Answer;
 import ru.panmin.gtspro.data.models.Option;
 import ru.panmin.gtspro.data.models.Photo;
 import ru.panmin.gtspro.data.models.Question;
+import ru.panmin.gtspro.ui.fullscreenimage.FullscreenImageActivity;
 import ru.panmin.gtspro.utils.MultiChoiceAdapter;
 import ru.panmin.gtspro.utils.SingleChoiceAdapter;
 
@@ -105,7 +109,23 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
     }
 
     interface AnswerQuestionListener {
+
+        void pickImage(AddNewPhotoListener addNewPhotoListener);
+
         void answerQuestion(Question question);
+
+    }
+
+    interface AddNewPhotoListener {
+
+        void addNewPhoto(String path);
+
+    }
+
+    interface PhotoClickListener {
+
+        void removePhoto(Photo photo);
+
     }
 
     abstract class BaseQuestionViewHolder extends RecyclerView.ViewHolder {
@@ -500,10 +520,53 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
         @Override
         void afterBaseBind(Question question) {
-            if (photoAdapter.getItemCount() == 0) {
-                photoAdapter.setItems(question.getAnswer().getPhotoList());
+            if (!photoAdapter.isHaveListener()) {
+                photoAdapter.setAddNewPhotoListener(path -> {
+                    question.getRealm().beginTransaction();
+                    Answer answer = question.getAnswer();
+                    if (answer == null) {
+                        RealmList<Photo> photos = new RealmList<>();
+                        Photo photo = new Photo(path);
+                        photo = question.getRealm().copyToRealmOrUpdate(photo);
+                        photos.add(photo);
+                        answer = new Answer(photos);
+                        answer = question.getRealm().copyToRealmOrUpdate(answer);
+                    } else {
+                        Photo photo = new Photo(path);
+                        photo = question.getRealm().copyToRealmOrUpdate(photo);
+                        answer.getPhotoList().add(photo);
+                        answer = question.getRealm().copyToRealmOrUpdate(answer);
+                    }
+                    question.setAnswer(answer);
+                    question.getRealm().commitTransaction();
+                    notifyDataSetChanged();
+                });
+                photoAdapter.setPhotoClickListener(photo -> {
+                    question.getRealm().beginTransaction();
+                    Answer answer = question.getAnswer();
+
+                    answer.getPhotoList().remove(photo);
+                    if (answer.getPhotoList().isEmpty()){
+                        answer.deleteFromRealm();
+                        question.setAnswer(null);
+                    } else {
+                        answer = question.getRealm().copyToRealmOrUpdate(answer);
+                        question.setAnswer(answer);
+                    }
+
+                    question.getRealm().commitTransaction();
+                    notifyDataSetChanged();
+                });
             }
-            recyclerViewQuestionnairePhotos.setLayoutManager(new LinearLayoutManager(recyclerViewQuestionnairePhotos.getContext()));
+            if (question.getAnswer() != null
+                    && question.getAnswer().getPhotoList() != null
+                    && photoAdapter.getItemCount() != question.getAnswer().getPhotoList().size() + 1) {
+                photoAdapter.setItems(question.getAnswer().getId(), question.getAnswer().getPhotoList());
+
+            }
+            recyclerViewQuestionnairePhotos.setLayoutManager(
+                    new LinearLayoutManager(recyclerViewQuestionnairePhotos.getContext(), LinearLayoutManager.HORIZONTAL, false)
+            );
             recyclerViewQuestionnairePhotos.setAdapter(photoAdapter);
         }
 
@@ -515,7 +578,11 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
             private static final int HEADER_POSITION = 0;
             private static final int HEADER_WEIGHT = 1;
 
+            private String answerId = "";
             private List<Photo> photos = new ArrayList<>();
+
+            private AddNewPhotoListener addNewPhotoListener;
+            private PhotoClickListener photoClickListener;
 
             PhotoAdapter() {
             }
@@ -555,7 +622,7 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                         ((HeaderAddPhotoViewHolder) holder).bind();
                         break;
                     case VIEW_TYPE_PHOTO:
-                        ((PhotoViewHolder) holder).bind(getItem(position));
+                        ((PhotoViewHolder) holder).bind(getItem(position), position - HEADER_WEIGHT);
                         break;
                 }
             }
@@ -564,10 +631,23 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                 return photos.get(position - HEADER_WEIGHT);
             }
 
-            void setItems(List<Photo> photos) {
+            void setItems(String answerId, List<Photo> photos) {
+                this.answerId = answerId;
                 this.photos.clear();
                 this.photos.addAll(photos);
                 notifyDataSetChanged();
+            }
+
+            void setAddNewPhotoListener(AddNewPhotoListener addNewPhotoListener) {
+                this.addNewPhotoListener = addNewPhotoListener;
+            }
+
+            void setPhotoClickListener(PhotoClickListener photoClickListener) {
+                this.photoClickListener = photoClickListener;
+            }
+
+            boolean isHaveListener() {
+                return addNewPhotoListener != null && photoClickListener != null;
             }
 
             class HeaderAddPhotoViewHolder extends RecyclerView.ViewHolder {
@@ -578,18 +658,33 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                 }
 
                 void bind() {
+                    itemView.setOnClickListener(view -> answerQuestionListener.pickImage(addNewPhotoListener));
                 }
 
             }
 
             class PhotoViewHolder extends RecyclerView.ViewHolder {
 
+                @BindView(R.id.imagePhoto) AppCompatImageView imagePhoto;
+                @BindView(R.id.imagePhotoComment) AppCompatImageView imagePhotoComment;
+                @BindView(R.id.imagePhotoRemove) AppCompatImageView imagePhotoRemove;
+
                 PhotoViewHolder(View itemView) {
                     super(itemView);
                     ButterKnife.bind(this, itemView);
                 }
 
-                void bind(Photo photo) {
+                void bind(Photo photo, int position) {
+                    Glide.with(imagePhoto)
+                            .load(photo.getUrl())
+                            .into(imagePhoto);
+
+                    imagePhotoComment.setOnClickListener(view -> {
+                    });
+                    imagePhotoRemove.setOnClickListener(view -> photoClickListener.removePhoto(photo));
+                    itemView.setOnClickListener(view -> itemView.getContext().startActivity(
+                            FullscreenImageActivity.getStartIntent(itemView.getContext(), answerId, position)
+                    ));
                 }
 
             }

@@ -2,8 +2,14 @@ package ru.panmin.gtspro.ui.questionnaire;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.kbeanie.multipicker.api.CameraImagePicker;
+import com.kbeanie.multipicker.api.Picker;
+import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
+import com.kbeanie.multipicker.api.entity.ChosenImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,9 @@ public class QuestionnaireActivity
     @Inject QuestionnairePresenter questionnairePresenter;
     @Inject QuestionnaireAdapter questionnaireAdapter;
 
+    private CameraImagePicker cameraImagePicker;
+    String outputPath;
+
     @BindView(R.id.recyclerViewQuestionnaire) RecyclerView recyclerViewQuestionnaire;
 
     public QuestionnaireActivity() {
@@ -37,6 +46,33 @@ public class QuestionnaireActivity
         Intent intent = new Intent(context, QuestionnaireActivity.class);
         intent.putStringArrayListExtra(INTENT_KEY_QUESTION_IDS, new ArrayList<>(questionIds));
         return intent;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("picker_path", outputPath);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("picker_path")) {
+                outputPath = savedInstanceState.getString("picker_path");
+            }
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == Picker.PICK_IMAGE_CAMERA) {
+                if (cameraImagePicker != null) {
+                    cameraImagePicker.submit(data);
+                }
+            }
+        }
     }
 
     @Override
@@ -62,6 +98,8 @@ public class QuestionnaireActivity
 
     @Override
     protected void initViews() {
+        cameraImagePicker = new CameraImagePicker(this);
+
         recyclerViewQuestionnaire.setNestedScrollingEnabled(false);
         recyclerViewQuestionnaire.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewQuestionnaire.addItemDecoration(new SpaceItemDecoration(OtherUtils.dpToPx(8)));
@@ -100,6 +138,23 @@ public class QuestionnaireActivity
 
     @Override
     public void answerQuestion(Question question) {
+    }
+
+    @Override
+    public void pickImage(QuestionnaireAdapter.AddNewPhotoListener addNewPhotoListener) {
+        cameraImagePicker.setImagePickerCallback(
+                new ImagePickerCallback() {
+                    @Override
+                    public void onImagesChosen(List<ChosenImage> images) {
+                        addNewPhotoListener.addNewPhoto(images.get(0).getOriginalPath());
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                    }
+                }
+        );
+        outputPath = cameraImagePicker.pickImage();
     }
 
 }
