@@ -19,9 +19,8 @@ import ru.panmin.gtspro.data.models.Promo;
 
 public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH> {
 
-
     private List<Promo> promoList = new ArrayList<>();
-    private InfoClickListener infoClickListener;
+    private PromoClickListener infoClickListener;
 
     @Inject
     public PromoSvAdapter() {
@@ -33,7 +32,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         notifyDataSetChanged();
     }
 
-    public void setInfoClickListener(InfoClickListener infoClickListener) {
+    public void setInfoClickListener(PromoClickListener infoClickListener) {
         this.infoClickListener = infoClickListener;
     }
 
@@ -54,8 +53,8 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         return (promoList == null || promoList.isEmpty()) ? 0 : promoList.size();
     }
 
-    public interface InfoClickListener {
-        void showInfo(Promo promo);
+    public interface PromoClickListener {
+        void showPromo(Promo promo);
     }
 
     class PromoVH extends RecyclerView.ViewHolder {
@@ -75,7 +74,7 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         @BindView(R.id.promoRoot)
         ViewGroup promoRoot;
 
-        public PromoVH(View itemView) {
+        PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -85,18 +84,19 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
                 tvAuthor.setText(promo.getAuthor().toString());
             }
             if (promo.getFinishDate() != null) {
-                tvDateEnd.setText(promo.getFinishDate());
+                tvDateEnd.setText(promo.getFinishDateWithFormat());
             }
             if (promo.getBeginDate() != null) {
-                tvDateStart.setText(promo.getBeginDate());
+                tvDateStart.setText(promo.getBeginDateWithFormat());
             }
             if (promo.getDescription() != null) {
                 tvDescription.setText(promo.getDescription().toString());
             }
 
             tvTitle.setText(promo.getName().toString());
-            promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
+            promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
+
     }
 
 }

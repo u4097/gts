@@ -73,6 +73,8 @@
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"/>
 
+        <activity android:name=".ui.claiminfo.me.ClaimInfoMeActivity"/>
+        <activity android:name=".ui.claiminfo.sv.ClaimInfoSvActivity"/>
         <activity
             android:name=".ui.forms.FormsActivity"
             android:configChanges="orientation|screenSize"
@@ -87,6 +89,9 @@
             android:name=".ui.report.me.ReportMeActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.claiminfo.me.ChatActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".ui.report.sv.ReportSvActivity"

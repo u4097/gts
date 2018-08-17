@@ -17,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.panmin.gtspro.R;
 import ru.panmin.gtspro.data.models.Promo;
-import timber.log.Timber;
 
 public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH> {
 
@@ -56,7 +55,7 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
     }
 
     public interface InfoClickListener {
-        void showInfo(Promo promo);
+        void showPromo(Promo promo);
     }
 
     class PromoVH extends RecyclerView.ViewHolder {
@@ -74,7 +73,7 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
         @BindView(R.id.tvDateTo)
         TextView tvDateTo;
 
-        public PromoVH(View itemView) {
+        PromoVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -82,22 +81,18 @@ public class PromoMeAdapter extends RecyclerView.Adapter<PromoMeAdapter.PromoVH>
         public void bind(Promo promo) {
             if (promo.getName() != null) {
                 tvTitle.setText(promo.getName().toString());
-                Timber.d("promo title: %s", promo.getName().toString());
             }
             if (promo.getDescription() != null) {
                 tvSubtitle.setText(promo.getDescription().toString());
-                Timber.d("promo description: %s", promo.getDescription().toString());
             }
             if (promo.getBeginDate() != null) {
-//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_from,promo.getBeginDate()));
-                Timber.d("promo begin date: %s", promo.getBeginDate());
+                tvDateFrom.setText(promo.getBeginDateWithFormat());
             }
             if (promo.getFinishDate() != null) {
-//                tvDateFrom.setText(itemView.getResources().getString(R.string.label_to,promo.getFinishDate()));
-                Timber.d("promo end date: %s", promo.getFinishDate());
+                tvDateFrom.setText(promo.getFinishDateWithFormat());
             }
 
-            promoRoot.setOnClickListener(view -> infoClickListener.showInfo(promo));
+            promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
     }
 

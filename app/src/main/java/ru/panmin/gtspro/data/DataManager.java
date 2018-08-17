@@ -15,8 +15,10 @@ import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.local.RealmHelper;
 import ru.panmin.gtspro.data.models.Answer;
 import ru.panmin.gtspro.data.models.AnswerToQuestion;
+import ru.panmin.gtspro.data.models.Claim;
 import ru.panmin.gtspro.data.models.ClaimData;
 import ru.panmin.gtspro.data.models.ClaimRedirectData;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.EndVisitData;
 import ru.panmin.gtspro.data.models.FormFillingTimeData;
 import ru.panmin.gtspro.data.models.FormOrReport;
@@ -341,6 +343,17 @@ public class DataManager {
     @Nullable
     public Promo getPromoById(String id) {
         return realmHelper.getPromoById(id);
+    }
+
+
+    @Nullable
+    public Claim getClaimById(String id) {
+        return realmHelper.getClaimById(id);
+    }
+
+    @Nullable
+    public Client getClientById(String id) {
+        return realmHelper.getClientById(id);
     }
 
     @Nullable

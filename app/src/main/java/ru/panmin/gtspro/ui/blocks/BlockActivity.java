@@ -15,11 +15,16 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import io.realm.RealmList;
 import ru.panmin.gtspro.R;
+import ru.panmin.gtspro.data.models.Claim;
+import ru.panmin.gtspro.data.models.Client;
 import ru.panmin.gtspro.data.models.FormOrReport;
 import ru.panmin.gtspro.data.models.Promo;
 import ru.panmin.gtspro.data.models.TradePoint;
 import ru.panmin.gtspro.ui.base.BottomSheetFragment;
+import ru.panmin.gtspro.ui.blocks.adapters.ClaimMeAdapter;
+import ru.panmin.gtspro.ui.blocks.adapters.ClaimSvAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoReportMeAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PhotoReportSvAdapter;
 import ru.panmin.gtspro.ui.blocks.adapters.PromoMeAdapter;
@@ -31,6 +36,8 @@ import ru.panmin.gtspro.ui.blocks.model.Block;
 import ru.panmin.gtspro.ui.blocks.model.BlockType;
 import ru.panmin.gtspro.ui.blocks.model.BlocksModel;
 import ru.panmin.gtspro.ui.blocks.viewmodel.BlockViewModel;
+import ru.panmin.gtspro.ui.claiminfo.me.ClaimInfoMeActivity;
+import ru.panmin.gtspro.ui.claiminfo.sv.ClaimInfoSvActivity;
 import ru.panmin.gtspro.ui.hotline.me.HotlineMeActivity;
 import ru.panmin.gtspro.ui.hotline.sw.HotlineSvActivity;
 import ru.panmin.gtspro.ui.login.LoginActivity;
@@ -42,51 +49,77 @@ import ru.panmin.gtspro.ui.report.sv.ReportSvActivity;
 import ru.panmin.gtspro.ui.toolbar.ToolbarActivity;
 import ru.panmin.gtspro.utils.Constants;
 
-public class BlockActivity
-        extends ToolbarActivity
-        implements BlockMvpView,
+import static ru.panmin.gtspro.ui.blocks.model.BlockType.Type.PHOTO_REPORT;
+import static ru.panmin.gtspro.ui.blocks.model.BlockType.Type.PROMO;
+import static ru.panmin.gtspro.ui.blocks.model.BlockType.Type.REPORT;
+
+public class BlockActivity extends ToolbarActivity implements BlockMvpView,
         PromoMeAdapter.InfoClickListener,
-        PromoSvAdapter.InfoClickListener,
+        PromoSvAdapter.PromoClickListener,
+        ClaimMeAdapter.ClaimClickListener,
+        ClaimSvAdapter.ClaimClickListener,
         PhotoReportMeAdapter.OnPhotoReportClickListener,
         PhotoReportSvAdapter.OnPhotoReportClickListener,
         ReportMeAdapter.OnReportClickListener,
         ReportSvAdapter.OnReportClickListener {
 
     private static final String INTENT_KEY_TRADE_POINT_ID = "trade.point.id";
-
-    @Inject BlockPresenter blockPresenter;
-
-    @BindView(R.id.btnClaims) FloatingActionButton btnClaims;
-    @BindView(R.id.tCounterClaims) TextView tCounterClaims;
-    @BindView(R.id.btnPromo) FloatingActionButton btnPromo;
-    @BindView(R.id.tCounterPromo) TextView tCounterPromo;
-    @BindView(R.id.btnPhotoReport) FloatingActionButton btnPhotoReport;
-    @BindView(R.id.tCounterPhotoReport) TextView tCounterPhotoReport;
-    @BindView(R.id.btnReport) FloatingActionButton btnReport;
-    @BindView(R.id.tCounterReport) TextView tCounterReport;
-    @BindView(R.id.btnSku) FloatingActionButton btnSku;
-    @BindView(R.id.tCounterSku) TextView tCounterSku;
-    @BindView(R.id.btnPlanogram) FloatingActionButton btnPlanogram;
-    @BindView(R.id.tCounterPlanogram) TextView tCounterPlanogram;
-    @BindView(R.id.btnHotLine) FloatingActionButton btnHotLine;
-    @BindView(R.id.tCounterHotLine) TextView tCounterHotLine;
-    @BindView(R.id.btnStatistics) FloatingActionButton btnStatistics;
-    @BindView(R.id.tCounterStatistics) TextView tCounterStatistics;
-    @BindView(R.id.rvPromo) RecyclerView rvBlock;
-    @BindView(R.id.tvTitle) TextView tvTitle;
-    @BindView(R.id.fab_filter) FloatingActionButton filter;
-
+    @BindView(R.id.btnClaims)
+    FloatingActionButton btnClaims;
+    @BindView(R.id.tCounterClaims)
+    TextView tCounterClaims;
+    @BindView(R.id.btnPromo)
+    FloatingActionButton btnPromo;
+    @BindView(R.id.tCounterPromo)
+    TextView tCounterPromo;
+    @BindView(R.id.btnPhotoReport)
+    FloatingActionButton btnPhotoReport;
+    @BindView(R.id.tCounterPhotoReport)
+    TextView tCounterPhotoReport;
+    @BindView(R.id.btnReport)
+    FloatingActionButton btnReport;
+    @BindView(R.id.tCounterReport)
+    TextView tCounterReport;
+    @BindView(R.id.btnSku)
+    FloatingActionButton btnSku;
+    @BindView(R.id.tCounterSku)
+    TextView tCounterSku;
+    @BindView(R.id.btnPlanogram)
+    FloatingActionButton btnPlanogram;
+    @BindView(R.id.tCounterPlanogram)
+    TextView tCounterPlanogram;
+    @BindView(R.id.btnHotLine)
+    FloatingActionButton btnHotLine;
+    @BindView(R.id.tCounterHotLine)
+    TextView tCounterHotLine;
+    @BindView(R.id.btnStatistics)
+    FloatingActionButton btnStatistics;
+    @BindView(R.id.tCounterStatistics)
+    TextView tCounterStatistics;
+    @BindView(R.id.rvPromo)
+    RecyclerView rvBlock;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.fab_filter)
+    FloatingActionButton filter;
+    PromoMeAdapter promoMeAdapter;
+    PromoSvAdapter promoSvAdapter;
+    ClaimMeAdapter claimMeAdapter;
+    ClaimSvAdapter claimSvAdapter;
+    String userRole;
+    @Inject
+    BlockPresenter blockPresenter;
+    private Map<BlockType.Type, Holder> tradePointBlockViews;
+    private Map<String, Client> clients = new HashMap<>();
+    private TradePoint tradePoint = null;
+    private RealmList<Claim> claims;
     private PhotoReportMeAdapter photoReportMeAdapter;
     private PhotoReportSvAdapter photoReportSvAdapter;
 
-    private PromoMeAdapter promoMeAdapter;
-    private PromoSvAdapter promoSvAdapter;
 
     private ReportMeAdapter reportMeAdapter;
     private ReportSvAdapter reportSvAdapter;
 
-    private String userRole;
-    private TradePoint tradePoint = null;
 
     private BlockType.Type currentBlock = BlockType.Type.NONE;
 
@@ -151,17 +184,24 @@ public class BlockActivity
 
     @Override
     public void initViews(String role, TradePoint tradePoint) {
-        rvBlock.setLayoutManager(new LinearLayoutManager(this));
-
         this.userRole = role;
         this.tradePoint = tradePoint;
-        setTitle(tradePoint.getSignboard().toString());
+
+        if (tradePoint != null) {
+            setTitle(tradePoint.getSignboard().toString());
+            this.claims = tradePoint.getClaims();
+            for (Claim claim : claims) {
+                this.clients.put(claim.getClientId(), blockPresenter.getClientById(claim.getClientId()));
+            }
+        }
+        rvBlock.setLayoutManager(new LinearLayoutManager(this));
 
         initFilter();
         initBlocks();
-        initBlockData(BlockType.Type.PROMO);
+        initBlockData(PROMO);
         setStateData();
     }
+
 
     public void initBlocks() {
         BlockViewModel blockViewModel = new BlockViewModel();
@@ -170,19 +210,25 @@ public class BlockActivity
 
         Map<BlockType.Type, Holder> tradePointBlockViews = new HashMap<>();
         tradePointBlockViews.put(BlockType.Type.CLAIMS, new Holder(btnClaims, tCounterClaims));
-        tradePointBlockViews.put(BlockType.Type.PROMO, new Holder(btnPromo, tCounterPromo));
-        tradePointBlockViews.put(BlockType.Type.PHOTO_REPORT, new Holder(btnPhotoReport, tCounterPhotoReport));
-        tradePointBlockViews.put(BlockType.Type.REPORT, new Holder(btnReport, tCounterReport));
+        tradePointBlockViews.put(PROMO, new Holder(btnPromo, tCounterPromo));
+        tradePointBlockViews.put(PHOTO_REPORT, new Holder(btnPhotoReport, tCounterPhotoReport));
+        tradePointBlockViews.put(REPORT, new Holder(btnReport, tCounterReport));
         tradePointBlockViews.put(BlockType.Type.SKU, new Holder(btnSku, tCounterSku));
         tradePointBlockViews.put(BlockType.Type.PLANOGRAM, new Holder(btnPlanogram, tCounterPlanogram));
         tradePointBlockViews.put(BlockType.Type.HOT_LINE, new Holder(btnHotLine, tCounterHotLine));
         tradePointBlockViews.put(BlockType.Type.STATISTICS, new Holder(btnStatistics, tCounterStatistics));
 
-        for (Map.Entry<BlockType.Type, Holder> entry : tradePointBlockViews.entrySet()) {
-            entry.getValue().btn.setOnClickListener(view -> initBlockData(entry.getKey()));
+        for (Map.Entry<BlockType.Type, Holder> entry :
+                tradePointBlockViews.entrySet()) {
+            entry.getValue().btn.setOnClickListener(view -> blockPresenter.onTradePointBlockClick(entry.getKey()));
         }
 
-        for (Block block : model.getBlocks()) {
+        for (Block block : model.getBlocks()
+                ) {
+            for (Map.Entry<BlockType.Type, Holder> entry : tradePointBlockViews.entrySet()) {
+                entry.getValue().btn.setOnClickListener(view -> initBlockData(entry.getKey()));
+            }
+
             Holder holder = tradePointBlockViews.get(block.getType());
             if (holder != null) {
                 TextView tvBadge = holder.getTvBadge();
@@ -222,13 +268,29 @@ public class BlockActivity
     }
 
     @Override
-    public void showInfo(Promo promo) {
+    public void showPromo(Promo promo) {
         switch (this.userRole) {
             case Constants.ROLE_MERCHANDISER:
                 startActivity(PromoInfoMeActivity.getStartIntent(this, promo.getId()));
                 break;
             case Constants.ROLE_SUPERVISOR:
                 startActivity(PromoInfoSvActivity.getStartIntent(this, promo.getId()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void showClaim(Claim claim) {
+        switch (this.userRole) {
+            case Constants.ROLE_MERCHANDISER:
+                startActivity(ClaimInfoMeActivity.getStartIntent(this, claim.getId()));
+                break;
+            case Constants.ROLE_SUPERVISOR:
+                startActivity(ClaimInfoSvActivity.getStartIntent(this, claim.getId()));
+                break;
+            default:
                 break;
         }
     }
@@ -238,7 +300,7 @@ public class BlockActivity
         tvTitle.setText(title);
     }
 
-    @Override
+
     public void initBlockData(BlockType.Type blockType) {
         if (currentBlock != blockType) {
             currentBlock = blockType;
@@ -309,25 +371,35 @@ public class BlockActivity
                             break;
                     }
                     break;
+                case CLAIMS:
+                    setBlockTitle("Претензии");
+                    switch (this.userRole) {
+                        case Constants.ROLE_MERCHANDISER:
+                            claimMeAdapter = new ClaimMeAdapter();
+                            claimMeAdapter.setInfoClickListener(this);
+
+                            claimMeAdapter.setData(this.claims, this.clients);
+                            rvBlock.setAdapter(claimMeAdapter);
+                            break;
+                        case Constants.ROLE_SUPERVISOR:
+                            claimSvAdapter = new ClaimSvAdapter();
+                            claimSvAdapter.setInfoClickListener(this);
+                            claimSvAdapter.setData(this.claims, this.clients);
+                            rvBlock.setAdapter(claimSvAdapter);
+                            break;
+                        default:
+                            rvBlock.setVisibility(View.GONE);
+                            break;
+                    }
                 default:
                     rvBlock.setVisibility(View.GONE);
                     setBlockTitle("Блок " + blockType + " в разработке");
                     break;
             }
+
         }
     }
 
-    @Override
-    public void openLoginActivity() {
-        Intent intent = LoginActivity.getStartIntent(this);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-
-    @Override
-    public void selectNewSortType(String sortType) {
-        blockPresenter.selectNewSortType(sortType);
-    }
 
     private void clean() {
         rvBlock.setAdapter(null);
@@ -369,6 +441,7 @@ public class BlockActivity
         }
     }
 
+
     @Override
     public void onPhotoReportClick(FormOrReport photoReport) {
         switch (this.userRole) {
@@ -391,6 +464,24 @@ public class BlockActivity
                 startActivity(ReportSvActivity.getStartIntent(this, report.getId()));
                 break;
         }
+    }
+
+
+    @Override
+    public void openLoginActivity() {
+        Intent intent = LoginActivity.getStartIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void selectNewSortType(String sortType) {
+        blockPresenter.selectNewSortType(sortType);
+    }
+
+    @Override
+    public void setClaim(RealmList<Claim> claims) {
+        this.claims = claims;
     }
 
     class Holder {

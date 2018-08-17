@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recive_message"
+    android:clipToPadding="false"
+    android:paddingBottom="16dp"
+    android:paddingHorizontal="16dp">
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        style="@style/MullerBold14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text=""
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Игорь Кузнецов"
+
+        />
+
+    <TextView
+        android:id="@+id/message_body"
+        style="@style/MullerRegular14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text=""
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        tools:text="Чтобы готово было в срок!"/>
+
+</android.support.constraint.ConstraintLayout>

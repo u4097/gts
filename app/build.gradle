@@ -135,6 +135,8 @@ dependencies {
     //==ExpandableRecyclerView==//
     implementation "com.thoughtbot:expandablecheckrecyclerview:${expandable_recyclerview_version}"
 
+    //== view pager for claim photos == //
+    implementation 'com.pixplicity.multiviewpager:library:1.0'
 
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"

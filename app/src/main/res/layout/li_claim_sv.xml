@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sw_card_vLine"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/medium_distance"
+    android:layout_marginRight="@dimen/medium_distance"
+    android:layout_marginTop="8dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/claimRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ivIndicatorUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/red"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ivIndicatorDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/red"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/HelveticaRegular15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="OOO Ринг"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/HelveticaRegular13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="обновить ценники"/>
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="42dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/grey_e3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            app:layout_constraintVertical_bias="0.0"/>
+
+        <TextView
+            android:id="@+id/tvDateStart_label"
+            style="@style/MullerMedium13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/label_date_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vLine"/>
+
+        <TextView
+            android:id="@+id/tvDateEnd_label"
+            style="@style/MullerMedium13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_date_end"
+            app:layout_constraintEnd_toEndOf="@+id/vLine"
+            app:layout_constraintStart_toEndOf="@+id/tvDateStart_label"
+            app:layout_constraintTop_toTopOf="@+id/tvDateStart_label"/>
+
+        <ImageView
+            android:id="@+id/ivDateStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDateStart_label"
+            app:srcCompat="@drawable/ic_date"/>
+
+        <TextView
+            android:id="@+id/tvDateStart"
+            style="@style/HelveticaRegular12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.3dp"
+            android:layout_marginStart="8.3dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@id/ivDateStart"
+            app:layout_constraintTop_toBottomOf="@id/tvDateStart_label"
+            tools:text="с 16/09/2018"/>
+
+        <ImageView
+            android:id="@+id/ivTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/tvDateEnd_label"
+            app:layout_constraintTop_toBottomOf="@id/tvDateStart_label"
+            app:srcCompat="@drawable/ic_time"/>
+
+        <TextView
+
+            android:id="@+id/tvDateEnd"
+            style="@style/HelveticaRegular12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.3dp"
+            android:layout_marginStart="8.3dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@id/ivTime"
+            app:layout_constraintTop_toBottomOf="@id/tvDateStart_label"
+            tools:text="с 18/09/2018"/>
+
+        <TextView
+            android:id="@+id/tvAuthor_label"
+            style="@style/MullerMedium13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="17dp"
+            android:alpha=".5"
+            android:text="@string/label_run_now"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivDateStart"
+            tools:text="Сейчас выполняет:"/>
+
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            style="@style/MullerMedium12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/azure"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvAuthor_label"
+            app:layout_constraintTop_toBottomOf="@id/ivDateStart"
+            tools:text="Владислав Яковлевич"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
