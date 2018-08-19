@@ -349,7 +349,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                     }
                     break;
                 case REPORT:
-                    setBlockTitle("Горячая линия");
+                    setBlockTitle("Отчеты");
                     switch (this.userRole) {
                         case Constants.ROLE_MERCHANDISER:
                             reportMeAdapter = new ReportMeAdapter();
@@ -366,7 +366,7 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                     }
                     break;
                 case HOT_LINE:
-                    setBlockTitle("Отчеты");
+                    setBlockTitle("Горячая линия");
                     switch (this.userRole) {
                         case Constants.ROLE_MERCHANDISER:
                             startActivity(HotlineMeActivity.getStartIntent(this, tradePoint.getId()));
@@ -382,7 +382,6 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
                         case Constants.ROLE_MERCHANDISER:
                             claimMeAdapter = new ClaimMeAdapter();
                             claimMeAdapter.setInfoClickListener(this);
-
                             claimMeAdapter.setData(this.claims, this.clients);
                             rvBlock.setAdapter(claimMeAdapter);
                             break;
@@ -444,8 +443,19 @@ public class BlockActivity extends ToolbarActivity implements BlockMvpView,
             reportSvAdapter.setData(new ArrayList<>());
             reportSvAdapter = null;
         }
-    }
 
+        if (claimMeAdapter != null) {
+            claimMeAdapter.setInfoClickListener(null);
+            claimMeAdapter.setData(new ArrayList<>(), new HashMap<>());
+            claimMeAdapter = null;
+        }
+
+        if (claimSvAdapter != null) {
+            claimSvAdapter.setInfoClickListener(null);
+            claimSvAdapter.setData(new ArrayList<>(), new HashMap<>());
+            claimSvAdapter = null;
+        }
+    }
 
     @Override
     public void onPhotoReportClick(FormOrReport photoReport) {

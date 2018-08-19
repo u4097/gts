@@ -124,6 +124,7 @@
             android:layout_marginLeft="8.3dp"
             android:layout_marginStart="8.3dp"
             android:layout_marginTop="8dp"
+            android:paddingBottom="16dp"
             app:layout_constraintStart_toEndOf="@id/ivDateStart"
             app:layout_constraintTop_toBottomOf="@id/tvDateStart_label"
             tools:text="с 16/09/2018"/>
@@ -145,40 +146,10 @@
             android:layout_marginLeft="8.3dp"
             android:layout_marginStart="8.3dp"
             android:layout_marginTop="8dp"
+            android:paddingBottom="16dp"
             app:layout_constraintStart_toEndOf="@id/ivTime"
             app:layout_constraintTop_toBottomOf="@id/tvDateStart_label"
             tools:text="с 18/09/2018"/>
-
-        <TextView
-            android:id="@+id/tvAuthor_label"
-            style="@style/MullerMedium13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="17dp"
-            android:alpha=".5"
-            android:text="Сейчас выполняет:"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivDateStart"
-            tools:text="Сейчас выполняет:"/>
-
-
-        <TextView
-            android:id="@+id/tvAuthor"
-            style="@style/MullerMedium12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="17dp"
-            android:textColor="@color/azure"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvAuthor_label"
-            app:layout_constraintTop_toBottomOf="@id/ivDateStart"
-            tools:text="Владислав Яковлевич"/>
 
     </android.support.constraint.ConstraintLayout>
 

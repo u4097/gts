@@ -140,9 +140,6 @@ dependencies {
 
     //== logger ==//
     implementation "com.jakewharton.timber:timber:${timberVersion}"
-    implementation("com.github.ihsanbal:LoggingInterceptor:${loggingInterceptorVersion}") {
-        exclude group: 'org.json', module: 'json'
-    }
     debugImplementation "com.readystatesoftware.chuck:library:${chuckVersion}"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:${chuckVersion}"
 }

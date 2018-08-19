@@ -20,11 +20,7 @@ public class ReportMeActivity extends ToolbarActivity implements ReportMeMvpView
 
     @Inject ReportMePresenter reportMePresenter;
 
-    @BindView(R.id.tvClients) TextView tvClients;
-    @BindView(R.id.tvAuthor) TextView tvAuthor;
-    @BindView(R.id.tvPeriod) TextView tvPeriod;
     @BindView(R.id.tvDescription) TextView tvDescription;
-    @BindView(R.id.tvSku) TextView tvSku;
     @BindView(R.id.btnResume) AppCompatButton btnResume;
 
     public ReportMeActivity() {
@@ -70,27 +66,9 @@ public class ReportMeActivity extends ToolbarActivity implements ReportMeMvpView
 
     @Override
     public void serReport(FormOrReport report) {
-        setTitle(report.getName().toString());
-
-        if (report.getClient() != null) {
-            setValue(tvClients, report.getClient().toString(), R.string.label_clients);
-        }
-        //if (report.getAuthor() != null) {
-        //    setValue(tvAuthor, report.getAuthor().toString(), R.string.label_author);
-        //}
-        if (report.getDateBegin() != null && report.getDateFinish() != null) {
-            setValue(tvPeriod, report.getDateBeginWithFormat() + " - " + report.getDateFinishWithFormat(), R.string.label_period);
-        }
-        //if (report.getDescription() != null) {
-        //    setValue(tvDescription, report.getDescription().toString(), R.string.label_promo_description);
-        //}
-        //if (report.getSkuIds() != null) {
-        //    setValue(tvSku, report.getSkuIds().toString(), R.string.label_promo_sku);
-        //}
-
+        setTitle(report.getClient().getName().toString());
+        tvDescription.setText(report.getName().toString());
         btnResume.setOnClickListener(view -> startActivity(QuestionGroupsActivity.getStartIntent(this, report.getId())));
-
-
         setStateData();
     }
 

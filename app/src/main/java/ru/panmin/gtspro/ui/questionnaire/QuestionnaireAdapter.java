@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -110,9 +112,17 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
     interface AnswerQuestionListener {
 
+        void pickDate(Calendar calendar, AddNewDateListener addNewDateListener);
+
         void pickImage(AddNewPhotoListener addNewPhotoListener);
 
         void answerQuestion(Question question);
+
+    }
+
+    interface AddNewDateListener {
+
+        void addNewDate(Date date);
 
     }
 
@@ -160,6 +170,17 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
         @Override
         void afterBaseBind(Question question) {
+            if (question.getAnswer() != null) {
+                if (question.getAnswer().getBooleanValue()) {
+                    buttonQuestionnaireNo.setBackgroundResource(R.drawable.azure_button_background);
+                    buttonQuestionnaireYes.setBackgroundResource(R.drawable.strawberry_button_background);
+                } else {
+
+                    buttonQuestionnaireYes.setBackgroundResource(R.drawable.azure_button_background);
+                    buttonQuestionnaireNo.setBackgroundResource(R.drawable.strawberry_button_background);
+                }
+            }
+
             buttonQuestionnaireNo.setOnClickListener(view -> {
                 buttonQuestionnaireYes.setBackgroundResource(R.drawable.azure_button_background);
                 buttonQuestionnaireNo.setBackgroundResource(R.drawable.strawberry_button_background);
@@ -176,7 +197,7 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                 answerQuestionListener.answerQuestion(question);
             });
 
-            buttonQuestionnaireNo.setOnClickListener(view -> {
+            buttonQuestionnaireYes.setOnClickListener(view -> {
                 buttonQuestionnaireNo.setBackgroundResource(R.drawable.azure_button_background);
                 buttonQuestionnaireYes.setBackgroundResource(R.drawable.strawberry_button_background);
 
@@ -454,7 +475,34 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
         @Override
         void afterBaseBind(Question question) {
-            textQuestionnaireDate.setText(R.string.select_date);
+            textQuestionnaireDate.setText(
+                    question.getAnswer() == null
+                            ?
+                            textQuestionnaireDate.getContext().getString(R.string.select_date)
+                            :
+                            question.getAnswer().getStringValueWithFormat()
+            );
+            textQuestionnaireDate.setOnClickListener(view -> {
+                        Calendar calendar = Calendar.getInstance();
+                        if (question.getAnswer() != null) {
+                            calendar.setTime(question.getAnswer().getStringValueAsDate());
+                        }
+                        answerQuestionListener.pickDate(calendar, date -> {
+                            question.getRealm().beginTransaction();
+                            Answer answer = question.getAnswer();
+                            if (answer == null) {
+                                answer = new Answer(date);
+                            } else {
+                                answer.setStringValue(date);
+                            }
+                            answer = question.getRealm().copyToRealmOrUpdate(answer);
+                            question.setAnswer(answer);
+                            question.getRealm().commitTransaction();
+                            textQuestionnaireDate.setText(question.getAnswer().getStringValueWithFormat());
+                            answerQuestionListener.answerQuestion(question);
+                        });
+                    }
+            );
         }
 
     }
@@ -469,6 +517,13 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
 
         @Override
         void afterBaseBind(Question question) {
+            editTextQuestionnaireAnswer.setText(
+                    question.getAnswer() == null
+                            ?
+                            editTextQuestionnaireAnswer.getContext().getString(R.string.empty)
+                            :
+                            question.getAnswer().getStringValue()
+            );
             editTextQuestionnaireAnswer.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -499,6 +554,8 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                     }
                     question.setAnswer(answer);
                     question.getRealm().commitTransaction();
+
+                    editTextQuestionnaireAnswer.setText(question.getAnswer().getStringValue());
 
                     answerQuestionListener.answerQuestion(question);
                 }
@@ -542,10 +599,9 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                     notifyDataSetChanged();
                 });
                 photoAdapter.setPhotoClickListener(photo -> {
-                    question.getRealm().beginTransaction();
                     Answer answer = question.getAnswer();
-
                     if (answer != null && !answer.getPhotoList().isEmpty()) {
+                        question.getRealm().beginTransaction();
                         answer.getPhotoList().remove(photo);
                         if (answer.getPhotoList().isEmpty()) {
                             answer.deleteFromRealm();
@@ -563,7 +619,8 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
                     && question.getAnswer().getPhotoList() != null
                     && photoAdapter.getItemCount() != question.getAnswer().getPhotoList().size() + 1) {
                 photoAdapter.setItems(question.getAnswer().getId(), question.getAnswer().getPhotoList());
-
+            } else {
+                photoAdapter.setItems("", new ArrayList<>());
             }
             recyclerViewQuestionnairePhotos.setLayoutManager(
                     new LinearLayoutManager(recyclerViewQuestionnairePhotos.getContext(), LinearLayoutManager.HORIZONTAL, false)

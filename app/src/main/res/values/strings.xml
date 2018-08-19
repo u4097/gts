@@ -102,6 +102,10 @@
     <string name="quantity_goods_text_teg">Введите кол-во товара</string>
     <string name="manufacturer_selection_text_teg">Выбор производителя</string>
     <string name="form">Анкета</string>
+    <string name="description">Описание:</string>
+    <string name="wanted">Внимание</string>
+    <string name="dialog_photo_permission_message">Для добавления фото, на Вашем устройстве, необходимо включить разрешения \"Камера\" и \"Память\" в настройках приложения</string>
+    <string name="ok">OK</string>
 
     <plurals name="question_plurals">
         <item quantity="zero">Вопросов</item>

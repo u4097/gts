@@ -20,12 +20,7 @@ public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView
 
     @Inject ReportSvPresenter reportSvPresenter;
 
-    @BindView(R.id.tvClients) TextView tvClients;
-    @BindView(R.id.tvAuthor) TextView tvAuthor;
-    @BindView(R.id.tvPeriod) TextView tvPeriod;
     @BindView(R.id.tvDescription) TextView tvDescription;
-    @BindView(R.id.tvSku) TextView tvSku;
-    @BindView(R.id.tvAuthorBottom) TextView tvAuthorBottom;
     @BindView(R.id.btnResume) AppCompatButton btnResume;
 
     public ReportSvActivity() {
@@ -39,7 +34,7 @@ public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView
 
     @Override
     protected int getDataView() {
-        return R.layout.activity_report;
+        return R.layout.activity_report_sv;
     }
 
 
@@ -71,27 +66,9 @@ public class ReportSvActivity extends ToolbarActivity implements ReportSvMvpView
 
     @Override
     public void serReport(FormOrReport report) {
-        setTitle(report.getName().toString());
-
-        if (report.getClient() != null) {
-            setValue(tvClients, report.getClient().getName().toString(), R.string.label_clients);
-        }
-        //if (report.getAuthor() != null) {
-        //    setValue(tvAuthor, report.getAuthor().toString(), R.string.label_author);
-        //    tvAuthorBottom.setText(report.getAuthor().toString());
-        //}
-        if (report.getDateBegin() != null && report.getDateFinish() != null) {
-            setValue(tvPeriod, report.getDateBeginWithFormat() + " - " + report.getDateFinishWithFormat(), R.string.label_period);
-        }
-        //if (report.getDescription() != null) {
-        //    setValue(tvDescription, report.getDescription().toString(), R.string.label_promo_description);
-        //}
-        //if (report.getSkuIds() != null) {
-        //    setValue(tvSku, report.getSkuIds().toString(), R.string.label_promo_sku);
-        //}
-
+        setTitle(report.getClient().getName().toString());
+        tvDescription.setText(report.getName().toString());
         btnResume.setOnClickListener(view -> startActivity(QuestionGroupsActivity.getStartIntent(this, report.getId())));
-
         setStateData();
     }
 

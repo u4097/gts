@@ -345,7 +345,6 @@ public class DataManager {
         return realmHelper.getPromoById(id);
     }
 
-
     @Nullable
     public Claim getClaimById(String id) {
         return realmHelper.getClaimById(id);

@@ -67,10 +67,6 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         TextView tvDateStart;
         @BindView(R.id.tvDateEnd)
         TextView tvDateEnd;
-        @BindView(R.id.tvAuthor)
-        TextView tvAuthor;
-        @BindView(R.id.tvAuthor_label)
-        TextView tvAuthor_label;
         @BindView(R.id.promoRoot)
         ViewGroup promoRoot;
 
@@ -80,8 +76,8 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
         }
 
         public void bind(Promo promo) {
-            if (promo.getAuthor() != null) {
-                tvTitle.setText(promo.getAuthor().toString());
+            if (promo.getName() != null) {
+                tvTitle.setText(promo.getName().toString());
             }
             if (promo.getFinishDate() != null) {
                 tvDateEnd.setText(promo.getFinishDateWithFormat());
@@ -89,11 +85,9 @@ public class PromoSvAdapter extends RecyclerView.Adapter<PromoSvAdapter.PromoVH>
             if (promo.getBeginDate() != null) {
                 tvDateStart.setText(promo.getBeginDateWithFormat());
             }
-            if (promo.getDescription() != null) {
-                tvDescription.setText(promo.getDescription().toString());
+            if (promo.getClient() != null) {
+                tvDescription.setText(promo.getClient().toString());
             }
-
-            tvAuthor.setText(promo.getName().toString());
             promoRoot.setOnClickListener(view -> infoClickListener.showPromo(promo));
         }
 

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.ihsanbal.logging.Level;
-import com.ihsanbal.logging.LoggingInterceptor;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -14,7 +12,6 @@ import io.reactivex.Single;
 import io.realm.RealmList;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.internal.platform.Platform;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,7 +19,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import ru.panmin.gtspro.BuildConfig;
 import ru.panmin.gtspro.data.local.PreferencesHelper;
 import ru.panmin.gtspro.data.models.Sku;
 import ru.panmin.gtspro.data.models.requests.AuthRequest;
@@ -34,10 +30,6 @@ import ru.panmin.gtspro.utils.GsonUtils;
 import ru.panmin.gtspro.utils.TextUtils;
 
 public interface ApiService {
-
-
-    String TAG_REQUEST_LOG = "GTSProRequest";
-    String TAG_RESPONSE_LOG = "GTSProResponse";
 
     @POST("auth/")
     Single<AuthResponse> auth(@Body AuthRequest authRequest);
@@ -81,14 +73,6 @@ public interface ApiService {
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
             });
-
-            okBuilder.addInterceptor(new LoggingInterceptor.Builder()
-                    .loggable(BuildConfig.DEBUG)
-                    .setLevel(Level.BASIC)
-                    .log(Platform.INFO)
-                    .request(TAG_REQUEST_LOG)
-                    .response(TAG_RESPONSE_LOG)
-                    .build());
 
             okBuilder.addInterceptor(new ChuckInterceptor(context));
 

@@ -42,4 +42,14 @@ public class DialogUtils {
                 .build();
     }
 
+    public static MaterialDialog createPhotoPermissionDialog(Context context, MaterialDialog.SingleButtonCallback positiveCallback) {
+        return new MaterialDialog.Builder(context)
+                .title(R.string.wanted)
+                .content(R.string.dialog_photo_permission_message)
+                .positiveText(R.string.ok)
+                .onPositive(positiveCallback)
+                .negativeText(R.string.cancel)
+                .build();
+    }
+
 }

@@ -37,8 +37,10 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textQuestionnaireDate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp"
+        android:background="@drawable/question_answer_background"
+        android:padding="8dp"/>
 
 </android.support.v7.widget.LinearLayoutCompat>

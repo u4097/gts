@@ -38,6 +38,11 @@ public class Answer extends RealmObject {
         this.integerValue = integerValue;
     }
 
+    @SuppressLint("SimpleDateFormat")
+    public Answer(Date date) {
+        this.stringValue = (new SimpleDateFormat(Constants.DATE_FORMAT)).format(date);
+    }
+
     public Answer(String stringValue) {
         this.stringValue = stringValue;
     }
@@ -94,6 +99,12 @@ public class Answer extends RealmObject {
         return stringValue;
     }
 
+    @SuppressLint("SimpleDateFormat")
+    public void setStringValue(Date date) {
+        this.stringValue = (new SimpleDateFormat(Constants.DATE_FORMAT)).format(date);
+        ;
+    }
+
     public void setStringValue(String stringValue) {
         this.stringValue = stringValue;
     }
@@ -136,5 +147,6 @@ public class Answer extends RealmObject {
     public String getStringValueWithFormat() {
         return getStringValueWithFormat("dd/MM/yyyy");
     }
+
 
 }

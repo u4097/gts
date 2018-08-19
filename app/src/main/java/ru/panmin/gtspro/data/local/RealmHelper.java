@@ -51,6 +51,10 @@ public class RealmHelper {
         }
     }
 
+    public Realm getRealm() {
+        return realm;
+    }
+
     public void clear() {
         realm.beginTransaction();
         realm.deleteAll();
